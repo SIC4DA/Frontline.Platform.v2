@@ -1,0 +1,40 @@
+{
+  "HomePage": {
+    "title": "Hello world!"
+  },
+  "auth": {
+    "proceedingAgreement": "By proceeding you acknowledge that you have read and agree to our",
+    "termsAndConditions": "Terms and Conditions",
+    "signUp": "Sign up",
+    "emailPlaceholder": "Enter your work email",
+    "passwordPlaceholder": "Enter your password",
+    "welcomeBack": "Welcome back",
+    "continue": "continue",
+    "signingIn": "Signing in",
+    "checkingEmail": "Checking email",
+    "emailRequired": "Email is required",
+    "invalidEmail": "Invalid email address",
+    "passwordRequired": "Password is required",
+    "checkEmail": "Check your email!",
+    "checkEmailDescription": "We’ve just sent you a verification link, please click it to confirm your email",
+    "setupAccount": "Let’s set you up",
+    "pfp": "Profile picture",
+    "uploadPhoto": "Upload photo",
+    "remove": "remove",
+    "uploadPhotoInstructions": "10 MB max, at least 400px by 400px allowed files *.png , *.jpeg",
+    "firstName": "First name",
+    "firstNamePlaceholder": "Enter your first name",
+    "lastName": "Last name",
+    "lastNamePlaceholder": "Enter your last name",
+    "companyName": "Company name",
+    "companyNamePlaceholder": "Enter your company name",
+    "password": "Password",
+    "signingUp": "Signing up",
+    "passwordMinLength": "Password must be at least 8 characters long",
+    "passwordRequiresUppercase": "Password must contain at least one uppercase letter",
+    "passwordRequiresNumber": "Password must contain at least one number",
+    "firstNameRequired": "First name is required",
+    "lastNameRequired": "Last name is required",
+    "companyNameRequired": "Company name is required"
+  }
+}
