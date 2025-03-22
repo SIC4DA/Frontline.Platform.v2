@@ -35,6 +35,9 @@
     "passwordRequiresNumber": "Password must contain at least one number",
     "firstNameRequired": "First name is required",
     "lastNameRequired": "Last name is required",
-    "companyNameRequired": "Company name is required"
+    "companyNameRequired": "Company name is required",
+    "alreadyHaveAccount": "Already have an account?",
+    "noAccount": "Don’t have an account?",
+    "login": "Login"
   }
 }
