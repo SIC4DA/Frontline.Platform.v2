@@ -1,8 +1,9 @@
 "use server";
 
-import { z } from "zod";
-import { authClient } from "@/lib/auth-client";
+import { auth } from "@/lib/auth";
+import { tryCatch } from "@/utils/tryCatch";
 import { getTranslations } from "next-intl/server";
+import { z } from "zod";
 
 // Define the return type for the login action
 export type LoginActionState = {
@@ -19,7 +20,7 @@ export type LoginActionState = {
 // Create the login action
 export async function loginAction(
   prevState: LoginActionState,
-  formData: FormData
+  formData: FormData,
 ): Promise<LoginActionState> {
   const t = await getTranslations("auth");
 
@@ -53,11 +54,15 @@ export async function loginAction(
     };
   }
 
-  const { error } = await authClient.signIn.email({
-    email,
-    password,
-    callbackURL: "/dashboard",
-  });
+  const { error } = await tryCatch(
+    auth.api.signInEmail({
+      body: {
+        email,
+        password,
+        callbackURL: "/dashboard",
+      },
+    }),
+  );
 
   if (error) {
     return {

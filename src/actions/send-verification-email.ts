@@ -1,8 +1,9 @@
 "use server";
 
-import { z } from "zod";
-import { authClient } from "@/lib/auth-client";
+import { auth } from "@/lib/auth";
+import { tryCatch } from "@/utils/tryCatch";
 import { getTranslations } from "next-intl/server";
+import { z } from "zod";
 
 export type EmailVerificationActionState = {
   status: "idle" | "success" | "error";
@@ -14,7 +15,7 @@ export type EmailVerificationActionState = {
 
 export async function sendVerificationEmailAction(
   prevState: EmailVerificationActionState,
-  formData: FormData
+  formData: FormData,
 ): Promise<EmailVerificationActionState> {
   const t = await getTranslations("auth");
 
@@ -40,10 +41,14 @@ export async function sendVerificationEmailAction(
     };
   }
 
-  const { error } = await authClient.sendVerificationEmail({
-    email,
-    callbackURL: `/check-email?email=${email}`,
-  });
+  const { error } = await tryCatch(
+    auth.api.sendVerificationEmail({
+      body: {
+        email,
+        callbackURL: `/check-email?email=${email}`,
+      },
+    }),
+  );
 
   if (error) {
     return {
