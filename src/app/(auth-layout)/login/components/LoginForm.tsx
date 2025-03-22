@@ -1,8 +1,10 @@
 "use client";
 
 import { loginAction } from "@/actions/login";
+import FormError from "@/components/shared/FormError";
 import { Button } from "@/components/ui/button";
 import { InputWithIcon } from "@/components/ui/InputWithIcon";
+import { cn } from "@/lib/utils";
 import { KeyRound, LoaderCircle, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useActionState } from "react";
@@ -19,12 +21,17 @@ function LoginForm() {
     <form action={formAction} className="w-full">
       {/* Form error message */}
       {state.errors?.form && (
-        <div className="rounded-md bg-red-50 p-4 mb-5">
-          <p className="text-sm text-red-700">
-            {state.errors.form[0] || "An error occurred, please try again"}
-          </p>
-        </div>
+        <FormError
+          errorMessage={
+            state.errors?.form?.[0] || "An error occurred, please try again"
+          }
+        />
       )}
+      <FormError
+        errorMessage={
+          state.errors?.form?.[0] || "An error occurred, please try again"
+        }
+      />
 
       <div className="flex flex-col gap-[26px]">
         <div>
@@ -40,10 +47,10 @@ function LoginForm() {
               />
             }
             placeholder={t("emailPlaceholder")}
-            className="h-11"
+            className={cn("h-11", state.errors?.email && "border-error")}
           />
           {state.errors?.email && (
-            <p className="mt-1 text-sm text-red-600">{state.errors.email[0]}</p>
+            <p className="text-error mt-1 text-sm">{state.errors.email[0]}</p>
           )}
         </div>
         <div>
@@ -59,10 +66,10 @@ function LoginForm() {
               />
             }
             placeholder={t("passwordPlaceholder")}
-            className="h-11"
+            className={cn("h-11", state.errors?.password && "border-error")}
           />
           {state.errors?.password && (
-            <p className="mt-1 text-sm text-red-600">
+            <p className="text-error mt-1 text-sm">
               {state.errors.password[0]}
             </p>
           )}
@@ -73,7 +80,7 @@ function LoginForm() {
       <Button
         size="lg"
         disabled={isPending}
-        className="capitalize w-full mt-4 text-base"
+        className="mt-4 w-full text-base capitalize"
       >
         {isPending ? (
           <>

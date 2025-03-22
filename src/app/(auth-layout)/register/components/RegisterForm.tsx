@@ -1,13 +1,15 @@
 "use client";
 
-import { InputWithIcon } from "@/components/ui/InputWithIcon";
-import { LoaderCircle, Mail } from "lucide-react";
-import React, { useActionState } from "react";
-import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
 import { sendVerificationEmailAction } from "@/actions/send-verification-email";
+import FormError from "@/components/shared/FormError";
+import { Button } from "@/components/ui/button";
+import { InputWithIcon } from "@/components/ui/InputWithIcon";
+import { cn } from "@/lib/utils";
+import { LoaderCircle, Mail } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useActionState } from "react";
 
-const RegisterForm = () => {
+const RegisterForm = ({ formError }: { formError?: string }) => {
   const t = useTranslations("auth");
   const [state, formAction, isPending] = useActionState(
     sendVerificationEmailAction,
@@ -15,11 +17,16 @@ const RegisterForm = () => {
       status: "idle",
       email: "",
       errors: {},
-    }
+    },
   );
 
   return (
     <form action={formAction} className="w-full">
+      {formError && (
+        <FormError
+          errorMessage={formError || "An error occurred, please try again"}
+        />
+      )}
       <div>
         <InputWithIcon
           type="email"
@@ -33,16 +40,16 @@ const RegisterForm = () => {
             />
           }
           placeholder={t("emailPlaceholder")}
-          className="h-11"
+          className={cn("h-11", state.errors?.email && "border-error")}
         />
         {state.errors?.email && (
-          <p className="mt-1 text-sm text-red-600">{state.errors.email[0]}</p>
+          <p className="text-error mt-1 text-sm">{state.errors.email[0]}</p>
         )}
       </div>
       <Button
         disabled={isPending}
         size="lg"
-        className="capitalize w-full mt-4 text-base"
+        className="mt-4 w-full text-base capitalize"
       >
         {isPending ? (
           <>
