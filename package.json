@@ -6,33 +6,68 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "auth:gen": "bunx @better-auth/cli generate --config ./src/lib/auth.ts --output=./src/core/db/schemas/auth.ts --y",
+    "db:push": "bun drizzle-kit push",
+    "db:generate": "bun drizzle-kit generate",
+    "db:migrate": "bun drizzle-kit migrate",
+    "db:studio": "bun drizzle-kit studio"
+  },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-organize-imports",
+      "prettier-plugin-tailwindcss"
+    ]
   },
   "dependencies": {
+    "@elysiajs/cors": "^1.2.0",
+    "@elysiajs/eden": "^1.2.0",
+    "@elysiajs/server-timing": "^1.2.1",
+    "@elysiajs/swagger": "^1.2.2",
+    "@google/generative-ai": "^0.24.0",
     "@radix-ui/react-slot": "^1.1.2",
     "@types/next": "^9.0.0",
+    "@typeschema/main": "^0.14.1",
     "better-auth": "^1.2.4",
+    "chalk": "^5.4.1",
     "class-variance-authority": "^0.7.1",
+    "cloudinary": "^2.6.0",
     "clsx": "^2.1.1",
+    "company-email-better-auth": "^0.1.8",
+    "company-email-validator": "^1.1.0",
+    "drizzle-orm": "^0.41.0",
+    "drizzle-typebox": "^0.3.0",
+    "elysia": "^1.2.25",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.477.0",
     "next": "15.2.1",
     "next-intl": "^3.26.5",
+    "nodemailer": "^6.10.0",
+    "pg": "^8.14.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "redis": "^4.7.0",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
+    "validator-better-auth": "^2.2.2",
     "zod": "^3.24.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@tanstack/eslint-plugin-query": "^5.68.0",
     "@types/node": "^20",
+    "@types/nodemailer": "^6.4.17",
+    "@types/pg": "^8.11.11",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "drizzle-kit": "^0.30.5",
     "eslint": "^9",
     "eslint-config-next": "15.2.1",
+    "prettier": "^3.5.3",
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5.8.2"
   }
 }

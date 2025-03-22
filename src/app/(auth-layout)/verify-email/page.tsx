@@ -1,5 +1,3 @@
-import Loader from "@/components/shared/Loader";
-import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 
 export default async function VerifyEmailPage({

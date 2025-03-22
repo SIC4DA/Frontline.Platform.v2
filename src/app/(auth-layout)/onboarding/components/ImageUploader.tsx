@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { FileUp } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState, useEffect } from "react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 interface ImageUploaderProps {
   defaultValue?: string;
@@ -43,15 +44,17 @@ const ImageUploader = ({ defaultValue }: ImageUploaderProps) => {
 
   return (
     <div className="grid grid-cols-[auto_1fr] items-center gap-5">
-      <div className="w-16 h-16 rounded-full overflow-hidden">
+      <div className="h-16 w-16 overflow-hidden rounded-full">
         {image ? (
-          <img
+          <Image
             src={image}
             alt="Profile"
-            className="w-full h-full object-cover"
+            width={64}
+            height={64}
+            className="h-full w-full object-cover"
           />
         ) : (
-          <div className="w-full h-full rounded-full bg-gradient-to-br from-[#4080F4] to-[#AFF300] border-border" />
+          <div className="border-border h-full w-full rounded-full bg-gradient-to-br from-[#4080F4] to-[#AFF300]" />
         )}
       </div>
       <div className="flex flex-col gap-3">
@@ -82,7 +85,7 @@ const ImageUploader = ({ defaultValue }: ImageUploaderProps) => {
             variant="outline"
             disabled={!image}
             type="button"
-            className="text-red-500 border-red-500 h-11 capitalize rounded-xl hover:text-red-500"
+            className="h-11 rounded-xl border-red-500 text-red-500 capitalize hover:text-red-500"
             onClick={() => setImage(null)}
           >
             {t("remove")}
@@ -90,8 +93,8 @@ const ImageUploader = ({ defaultValue }: ImageUploaderProps) => {
         </div>
         <p
           className={cn(
-            "text-xs text-foreground-secondary font-light",
-            isSizeErrorVisible && "text-red-500"
+            "text-foreground-secondary text-xs font-light",
+            isSizeErrorVisible && "text-red-500",
           )}
         >
           {t("uploadPhotoInstructions")}
