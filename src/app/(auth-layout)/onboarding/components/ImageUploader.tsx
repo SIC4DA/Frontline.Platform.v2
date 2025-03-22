@@ -16,8 +16,6 @@ const ImageUploader = ({ defaultValue }: ImageUploaderProps) => {
   const [image, setImage] = useState<string | null>(defaultValue || null);
   const [isSizeErrorVisible, setIsSizeErrorVisible] = useState(false);
 
-  console.log(typeof defaultValue);
-
   useEffect(() => {
     if (defaultValue) {
       setImage(defaultValue);
