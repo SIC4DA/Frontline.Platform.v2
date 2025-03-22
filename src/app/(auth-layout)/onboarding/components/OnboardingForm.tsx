@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useActionState } from "react";
 import { LoaderCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const formElements = [
   {
@@ -76,7 +77,7 @@ const OnboardingForm = ({ email }: { email: string }) => {
               name={element.id}
               defaultValue={state[element.id as keyof typeof state] as string}
               placeholder={t(element.placeholder)}
-              className="text-sm"
+              className={cn("text-sm", state.errors?.[element.id as keyof typeof state.errors] && "border-error")}
             />
             {state.errors?.[element.id as keyof typeof state.errors] && (
               <p className="mt-1 text-sm text-red-600">

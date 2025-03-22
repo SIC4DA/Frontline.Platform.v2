@@ -3,6 +3,9 @@ import { z } from "zod";
 const EnvSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]),
 
+  APP_ORIGIN: z.string(),
+  PUBLIC_APP_ORIGIN: z.string(),
+
   NEXT_BASE_URL: z.string(),
   NEXT_PUBLIC_BASE_URL: z.string(),
 

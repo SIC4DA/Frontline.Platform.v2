@@ -1,5 +1,6 @@
 "use server";
 
+import env from "@/config/env";
 import { auth } from "@/lib/auth";
 import { tryCatch } from "@/utils/tryCatch";
 import { getTranslations } from "next-intl/server";
@@ -45,10 +46,11 @@ export async function sendVerificationEmailAction(
     auth.api.sendVerificationEmail({
       body: {
         email,
-        callbackURL: `/check-email?email=${email}`,
+        callbackURL: `${env.APP_ORIGIN}/verify-email?email=${email}`,
       },
     }),
   );
+  
 
   if (error) {
     return {

@@ -1,9 +1,11 @@
+import { auth } from "@/lib/auth";
+import { tryCatch } from "@/utils/tryCatch";
 import { redirect } from "next/navigation";
 
 export default async function VerifyEmailPage({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   const { token, email } = await searchParams;
 
@@ -11,14 +13,18 @@ export default async function VerifyEmailPage({
     return redirect("/register");
   }
 
-  // const { error } = await authClient.verifyEmail({
-  //   token: token,
-  //   email: email,
-  // });
+  const { error } = await tryCatch(
+    auth.api.verifyEmail({
+      query: {
+        token,
+        email,
+      },
+    }),
+  );
 
-  // if (error) {
-  //   return redirect(`/register?error=${error.message}`);
-  // }
+  if (error) {
+    return redirect(`/register?error=${error.message}`);
+  }
 
   redirect(`/onboarding?email=${email}`);
 }
