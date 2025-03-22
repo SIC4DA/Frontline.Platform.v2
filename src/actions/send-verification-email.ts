@@ -4,6 +4,7 @@ import env from "@/config/env";
 import { auth } from "@/lib/auth";
 import { tryCatch } from "@/utils/tryCatch";
 import { getTranslations } from "next-intl/server";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 export type EmailVerificationActionState = {
@@ -50,7 +51,6 @@ export async function sendVerificationEmailAction(
       },
     }),
   );
-  
 
   if (error) {
     return {
@@ -64,8 +64,10 @@ export async function sendVerificationEmailAction(
     };
   }
 
-  return {
-    status: "success",
-    email,
-  };
+  redirect(`/check-email?email=${email}`);
+
+  // return {
+  //   status: "success",
+  //   email,
+  // };
 }

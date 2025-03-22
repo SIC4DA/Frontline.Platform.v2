@@ -1,8 +1,8 @@
 "use server";
 
-import { z } from "zod";
 import { authClient } from "@/lib/auth-client";
 import { getTranslations } from "next-intl/server";
+import { z } from "zod";
 
 // Define the return type for the register action
 export type RegisterActionState = {
@@ -25,7 +25,7 @@ export type RegisterActionState = {
 // Create the register action
 export async function registerAction(
   prevState: RegisterActionState,
-  formData: FormData
+  formData: FormData,
 ): Promise<RegisterActionState> {
   const t = await getTranslations("auth");
 

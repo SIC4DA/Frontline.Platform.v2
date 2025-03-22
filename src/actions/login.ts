@@ -3,6 +3,7 @@
 import { auth } from "@/lib/auth";
 import { tryCatch } from "@/utils/tryCatch";
 import { getTranslations } from "next-intl/server";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 // Define the return type for the login action
@@ -77,9 +78,11 @@ export async function loginAction(
     };
   }
 
-  return {
-    status: "success",
-    email,
-    password,
-  };
+  redirect("/dashboard");
+
+  // return {
+  //   status: "success",
+  //   email,
+  //   password,
+  // };
 }
