@@ -1,6 +1,6 @@
 import { InputWithIcon } from "@/components/ui/InputWithIcon";
 import { Mail } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 
 export default async function CheckEmailPage({
@@ -8,7 +8,7 @@ export default async function CheckEmailPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const t = useTranslations("auth");
+  const t = await getTranslations("auth");
   const { email } = await searchParams;
 
   if (!email) {
@@ -16,9 +16,9 @@ export default async function CheckEmailPage({
   }
 
   return (
-    <section className="w-full max-w-[495px] flex-col flex-grow flex items-center justify-center">
-      <h1 className="text-3xl mb-7">{t("checkEmail")}</h1>
-      <p className="text-base font-light text-foreground-secondary/90 mb-16 text-center max-w-md">
+    <section className="flex w-full max-w-[495px] flex-grow flex-col items-center justify-center">
+      <h1 className="mb-7 text-3xl">{t("checkEmail")}</h1>
+      <p className="text-foreground-secondary/90 mb-16 max-w-md text-center text-base font-light">
         {t("checkEmailDescription")}
       </p>
       <InputWithIcon
