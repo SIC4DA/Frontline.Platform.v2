@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 
 const options = [
   {
@@ -26,11 +25,11 @@ const options = [
 
 const OauthOptions = () => {
   return (
-    <div className="flex items-center justify-between gap-3 flex-wrap mt-14 w-full">
+    <div className="mt-14 flex w-full flex-wrap items-center justify-around gap-3 sm:justify-between">
       {options.map((option, i) => (
         <button
           key={i}
-          className="rounded-lg border border-border p-2 size-16 flex items-center justify-center bg-background cursor-pointer"
+          className="border-border bg-background flex size-16 cursor-pointer items-center justify-center rounded-lg border p-2"
           title={option.name}
         >
           <Image
