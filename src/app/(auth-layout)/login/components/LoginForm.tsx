@@ -27,11 +27,6 @@ function LoginForm() {
           }
         />
       )}
-      <FormError
-        errorMessage={
-          state.errors?.form?.[0] || "An error occurred, please try again"
-        }
-      />
 
       <div className="flex flex-col gap-[26px]">
         <div>

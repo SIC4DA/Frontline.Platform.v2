@@ -1,13 +1,13 @@
 "use client";
 
 import { registerAction } from "@/actions/register";
-import { useTranslations } from "next-intl";
-import ImageUploader from "./ImageUploader";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useActionState } from "react";
-import { LoaderCircle } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { LoaderCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useActionState } from "react";
+import ImageUploader from "./ImageUploader";
 
 const formElements = [
   {
@@ -68,7 +68,7 @@ const OnboardingForm = ({ email }: { email: string }) => {
       <fieldset className="flex flex-col gap-6">
         {formElements.map((element) => (
           <div key={element.id}>
-            <label className="text-sm mb-2" htmlFor={element.id}>
+            <label className="mb-2 text-sm" htmlFor={element.id}>
               {t(element.label)}
             </label>
             <Input
@@ -77,7 +77,11 @@ const OnboardingForm = ({ email }: { email: string }) => {
               name={element.id}
               defaultValue={state[element.id as keyof typeof state] as string}
               placeholder={t(element.placeholder)}
-              className={cn("text-sm", state.errors?.[element.id as keyof typeof state.errors] && "border-error")}
+              className={cn(
+                "text-sm",
+                state.errors?.[element.id as keyof typeof state.errors] &&
+                  "border-error",
+              )}
             />
             {state.errors?.[element.id as keyof typeof state.errors] && (
               <p className="mt-1 text-sm text-red-600">
@@ -102,7 +106,7 @@ const OnboardingForm = ({ email }: { email: string }) => {
       >
         {isPending ? (
           <>
-            <LoaderCircle size={21} className="animate-spin mr-2" />
+            <LoaderCircle size={21} className="mr-2 animate-spin" />
             {t("signingUp")}
           </>
         ) : (
