@@ -39,7 +39,6 @@ export async function registerAction(
       .min(8, { message: t("passwordMinLength") })
       .regex(/[A-Z]/, { message: t("passwordRequiresUppercase") })
       .regex(/[0-9]/, { message: t("passwordRequiresNumber") }),
-    profileImage: z.string().optional(),
   });
 
   // Extract form data
@@ -48,7 +47,6 @@ export async function registerAction(
   const companyName = formData.get("companyName") as string;
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
-  const profileImage = formData.get("profileImage") as string;
 
   // Validate form data
   const validationResult = registerSchema.safeParse({
@@ -56,7 +54,6 @@ export async function registerAction(
     lastName,
     companyName,
     password,
-    profileImage,
   });
 
   // If validation fails, return errors
@@ -68,7 +65,6 @@ export async function registerAction(
       lastName,
       companyName,
       password,
-      profileImage,
       errors: {
         firstName: errors.firstName,
         lastName: errors.lastName,
@@ -82,7 +78,6 @@ export async function registerAction(
     email,
     password,
     name: `${firstName} ${lastName}`,
-    ...(profileImage && { image: profileImage }),
   });
 
   if (error) {
@@ -92,7 +87,6 @@ export async function registerAction(
       lastName,
       companyName,
       password,
-      profileImage,
       errors: {
         form: [
           error.message || "An unexpected error occurred. Please try again.",
@@ -107,6 +101,5 @@ export async function registerAction(
     lastName,
     companyName,
     password,
-    profileImage,
   };
 }

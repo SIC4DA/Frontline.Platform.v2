@@ -44,7 +44,6 @@ const OnboardingForm = ({ email }: { email: string }) => {
     lastName: "",
     companyName: "",
     password: "",
-    profileImage: "",
   });
 
   const actionWithEmail = (formData: FormData) => {
@@ -84,7 +83,7 @@ const OnboardingForm = ({ email }: { email: string }) => {
               )}
             />
             {state.errors?.[element.id as keyof typeof state.errors] && (
-              <p className="mt-1 text-sm text-red-600">
+              <p className="mt-1 text-xs text-red-600">
                 {
                   (
                     state.errors[
