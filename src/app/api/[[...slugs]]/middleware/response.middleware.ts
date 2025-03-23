@@ -19,13 +19,15 @@ export const useSuccessResponseMiddleware = (app: ElysiaApp) => {
 
     const path = context.request.url;
     const message = "success";
-    const response = context.response;
+    let response = context.response;
     const timeStamp = new Date().toISOString();
     const status = context.set.status ?? 200;
 
     if (response instanceof Promise) {
       const resolvedResponse = await response;
       const data = await resolvedResponse.json();
+
+      console.log(data);
 
       if (!resolvedResponse.ok) {
         throw new ApiError(
@@ -34,6 +36,8 @@ export const useSuccessResponseMiddleware = (app: ElysiaApp) => {
           resolvedResponse.status,
         );
       }
+
+      response = data;
     }
 
     return {
