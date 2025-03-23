@@ -17,10 +17,6 @@ export const userOptions: BetterAuthOptions["user"] = {
     firstName: { type: "string", required: true },
     lastName: { type: "string", required: true },
     company: { type: "string", required: true },
-    jobTitle: { type: "string", required: true },
-    department: { type: "string", required: true },
-    companyUrl: { type: "string", required: true },
-    country: { type: "string", required: true },
   },
 };
 
