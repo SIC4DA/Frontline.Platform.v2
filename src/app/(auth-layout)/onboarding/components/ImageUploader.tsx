@@ -72,7 +72,7 @@ const ImageUploader = ({ defaultValue }: ImageUploaderProps) => {
             variant="outline"
             type="button"
             asChild
-            className="h-11 rounded-xl"
+            className="h-11 rounded-xl cursor-pointer"
           >
             <label htmlFor="file-input">
               <FileUp size={16} />
@@ -92,7 +92,7 @@ const ImageUploader = ({ defaultValue }: ImageUploaderProps) => {
         <p
           className={cn(
             "text-foreground-secondary text-xs font-light",
-            isSizeErrorVisible && "text-red-500",
+            isSizeErrorVisible && "text-red-500 font-medium",
           )}
         >
           {t("uploadPhotoInstructions")}
