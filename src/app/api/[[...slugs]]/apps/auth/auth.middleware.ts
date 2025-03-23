@@ -9,7 +9,7 @@ export const betterAuthMiddleware = new Elysia({ name: "better-auth" })
         const session = await auth.api.getSession({ headers });
 
         if (!session) {
-          return error(401, {
+          throw error(401, {
             message: "Unauthorized",
             data: null,
             errors: [
@@ -21,10 +21,7 @@ export const betterAuthMiddleware = new Elysia({ name: "better-auth" })
           });
         }
 
-        return {
-          user: session.user,
-          session: session.session,
-        };
+        return session;
       },
     },
   });
