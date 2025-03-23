@@ -1,6 +1,7 @@
 "use client";
 
 import { registerAction } from "@/actions/register";
+import FormError from "@/components/shared/FormError";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -55,11 +56,11 @@ const OnboardingForm = ({ email }: { email: string }) => {
     <form action={actionWithEmail} className="flex flex-col gap-10">
       {/* Form error message */}
       {state.errors?.form && (
-        <div className="rounded-md bg-red-50 p-4">
-          <p className="text-sm text-red-700">
-            {state.errors.form[0] || "An error occurred, please try again"}
-          </p>
-        </div>
+        <FormError
+          errorMessage={
+            state.errors?.form?.[0] || "An error occurred, please try again"
+          }
+        />
       )}
 
       <ImageUploader defaultValue={state.profileImage} />
