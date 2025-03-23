@@ -16,9 +16,13 @@
     "plugins": [
       {
         "name": "next"
+      },
+      {
+        "name": "@tsconfig/paths"
       }
     ],
     "paths": {
+      "@api/*": ["./src/app/api/[[...slugs]]/*"],
       "@/*": ["./src/*"]
     }
   },
