@@ -44,7 +44,7 @@ export async function sendVerificationEmailAction(
   }
 
   const { error } = await tryCatch(
-    auth.api.sendVerificationEmail({
+    auth.api.sendCompanyEmailVerification({
       body: {
         email,
         callbackURL: `${env.APP_ORIGIN}/verify-email?email=${email}`,
@@ -53,6 +53,8 @@ export async function sendVerificationEmailAction(
   );
 
   if (error) {
+    console.log(error);
+
     return {
       status: "error",
       email,

@@ -1,7 +1,10 @@
 "use server";
 
-import { authClient } from "@/lib/auth-client";
+import { apiClient } from "@/lib/api-client";
+import { auth } from "@/lib/auth";
+import { tryCatch } from "@/utils/tryCatch";
 import { getTranslations } from "next-intl/server";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 // Define the return type for the register action
@@ -38,6 +41,7 @@ export async function registerAction(
       .string()
       .min(8, { message: t("passwordMinLength") })
       .regex(/[A-Z]/, { message: t("passwordRequiresUppercase") })
+      .regex(/[a-z]/, { message: t("passwordRequiresLowercase") })
       .regex(/[0-9]/, { message: t("passwordRequiresNumber") }),
   });
 
@@ -47,6 +51,7 @@ export async function registerAction(
   const companyName = formData.get("companyName") as string;
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
+  const profileImage = formData.get("profileImage") as File;
 
   // Validate form data
   const validationResult = registerSchema.safeParse({
@@ -74,13 +79,36 @@ export async function registerAction(
     };
   }
 
-  const { error } = await authClient.signUp.email({
-    email,
-    password,
-    name: `${firstName} ${lastName}`,
+  const { error: imageError, data } = await apiClient.api.image.upload.post({
+    file: profileImage,
   });
 
+  if (imageError) {
+    console.log("imageError", imageError.message);
+    return {
+      status: "error",
+      errors: {
+        form: [imageError.message],
+      },
+    };
+  }
+
+  const { error } = await tryCatch(
+    auth.api.signUpEmail({
+      body: {
+        email,
+        password,
+        name: `${firstName} ${lastName}`,
+        company: companyName,
+        firstName,
+        lastName,
+        ...(data?.url && { imageUrl: data.url }),
+      },
+    }),
+  );
+
   if (error) {
+    console.log("error", error);
     return {
       status: "error",
       firstName,
@@ -95,11 +123,13 @@ export async function registerAction(
     };
   }
 
-  return {
-    status: "success",
-    firstName,
-    lastName,
-    companyName,
-    password,
-  };
+  redirect("/dashboard");
+
+  // return {
+  //   status: "success",
+  //   firstName,
+  //   lastName,
+  //   companyName,
+  //   password,
+  // };
 }

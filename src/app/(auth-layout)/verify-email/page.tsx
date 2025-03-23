@@ -14,10 +14,9 @@ export default async function VerifyEmailPage({
   }
 
   const { error } = await tryCatch(
-    auth.api.verifyEmail({
+    auth.api.verifyCompanyEmailVerification({
       query: {
         token,
-        email,
       },
     }),
   );
