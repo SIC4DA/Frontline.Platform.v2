@@ -1,5 +1,6 @@
 import { APIError } from "better-auth/api";
-import type { ValidatorOptions } from "validator-better-auth";
+
+import type { ValidatorOptions } from "../plugins/validator/types";
 
 import {
   forgetPasswordValidation,
@@ -27,11 +28,7 @@ export const validatorOptions: ValidatorOptions = {
         const verified = await ctx.context.adapter.findOne({
           model: "verification",
           where: [
-            {
-              field: "identifier",
-              value: tempVerification,
-              operator: "eq",
-            },
+            { field: "identifier", value: tempVerification, operator: "eq" },
           ],
         });
 
@@ -44,11 +41,7 @@ export const validatorOptions: ValidatorOptions = {
         await ctx.context.adapter.delete({
           model: "verification",
           where: [
-            {
-              field: "identifier",
-              value: tempVerification,
-              operator: "eq",
-            },
+            { field: "identifier", value: tempVerification, operator: "eq" },
           ],
         });
 

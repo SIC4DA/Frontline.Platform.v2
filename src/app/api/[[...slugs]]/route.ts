@@ -3,29 +3,32 @@ import serverTiming from "@elysiajs/server-timing";
 import swagger from "@elysiajs/swagger";
 import { Elysia } from "elysia";
 
-import { betterAuthMiddleware } from "./auth";
-import { fileRouter } from "./file";
+import { fileRouter } from "./apps/file";
+import { ApiError } from "./error/api.error";
+import { BadRequestError } from "./error/bad-request.error";
 import { healthCheck } from "./health-check";
+import {
+  useErrorMiddleware,
+  useSuccessResponseMiddleware,
+} from "./middleware/response.middleware";
 
 import env from "@/config/env";
-import { errorHandler } from "@/middlewares/error-handler";
 
-export const app = new Elysia({
+const app = new Elysia({
   name: "api",
   prefix: "/api",
   serve: { maxRequestBodySize: 1024 * 1024 * 10 },
 })
+  .error({ ApiError, BadRequestError })
   .use(serverTiming())
   .use(
     swagger({
       path: "/docs",
-      provider: "scalar",
-      excludeTags: ["default"],
       documentation: {
         info: {
-          title: "Elysia API",
+          title: "Frontline API",
           version: "1.0.0",
-          description: "Elysia API",
+          description: "API documentation for Frontline",
         },
       },
     }),
@@ -33,15 +36,21 @@ export const app = new Elysia({
   .use(
     cors({
       origin: env.NEXT_BASE_URL,
-      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-      credentials: true,
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      maxAge: 86400, // 1 day
       allowedHeaders: ["Content-Type", "Authorization"],
+      exposeHeaders: ["Content-Type", "Authorization"],
+      credentials: true,
     }),
   )
-  .onError(errorHandler)
+  .use(useSuccessResponseMiddleware)
+  .use(useErrorMiddleware)
   .use(healthCheck)
-  .use(betterAuthMiddleware)
   .use(fileRouter);
 
 export const GET = app.handle;
 export const POST = app.handle;
+export const PUT = app.handle;
+export const DELETE = app.handle;
+
+export type App = typeof app;

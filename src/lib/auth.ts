@@ -2,7 +2,6 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { admin, emailOTP, openAPI } from "better-auth/plugins";
 import { companyEmail } from "company-email-better-auth";
-import { validator } from "validator-better-auth";
 
 import {
   emailAndPasswordOptions,
@@ -14,6 +13,7 @@ import {
 import { companyEmailOptions } from "@/core/auth/options/company-email";
 import { emailOTPOptions } from "@/core/auth/options/email-otp";
 import { validatorOptions } from "@/core/auth/options/validator";
+import { validator } from "@/core/auth/plugins/validator";
 import { db } from "@/core/db";
 import * as schema from "@/core/db/schema";
 
