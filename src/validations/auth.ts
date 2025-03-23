@@ -28,7 +28,8 @@ export const signUpEmailValidation = t.Object({
     pattern: REGEX.EMAIL_REGEX,
   }),
   password: t.String({
-    error: "Password should be at least 8 characters long",
+    error:
+      "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number",
     minLength: 8,
     pattern: REGEX.PASSWORD_REGEX,
   }),
@@ -37,10 +38,12 @@ export const signUpEmailValidation = t.Object({
     minLength: 2,
     maxLength: 100,
   }),
-  imageUrl: t.String({
-    error: "Image URL should be a valid URL",
-    pattern: REGEX.URL_REGEX,
-  }),
+  imageUrl: t.Optional(
+    t.String({
+      error: "Image URL should be a valid URL",
+      pattern: REGEX.URL_REGEX,
+    }),
+  ),
   // department: t.String({
   //   error: "Department should be between 2 and 100 characters long",
   //   minLength: 2,
