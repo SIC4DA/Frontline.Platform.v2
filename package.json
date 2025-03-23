@@ -33,6 +33,7 @@
     "class-variance-authority": "^0.7.1",
     "cloudinary": "^2.6.0",
     "clsx": "^2.1.1",
+    "company-email-validator": "^1.1.0",
     "drizzle-orm": "^0.41.0",
     "drizzle-typebox": "^0.3.0",
     "elysia": "^1.2.25",
