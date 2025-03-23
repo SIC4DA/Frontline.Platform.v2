@@ -9,5 +9,6 @@
     "turbopack",
     "typebox",
     "typeschema"
-  ]
+  ],
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }
