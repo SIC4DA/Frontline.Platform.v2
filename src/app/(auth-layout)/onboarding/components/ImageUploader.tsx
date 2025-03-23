@@ -8,19 +8,19 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 interface ImageUploaderProps {
-  defaultValue?: string;
+  formStatus?: "idle" | "success" | "error";
 }
 
-const ImageUploader = ({ defaultValue }: ImageUploaderProps) => {
+const ImageUploader = ({ formStatus }: ImageUploaderProps) => {
   const t = useTranslations("auth");
-  const [image, setImage] = useState<string | null>(defaultValue || null);
+  const [image, setImage] = useState<string | null>(null);
   const [isSizeErrorVisible, setIsSizeErrorVisible] = useState(false);
 
   useEffect(() => {
-    if (defaultValue) {
-      setImage(defaultValue);
+    if (formStatus !== "idle") {
+      setImage(null);
     }
-  }, [defaultValue]);
+  }, [formStatus]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -72,7 +72,7 @@ const ImageUploader = ({ defaultValue }: ImageUploaderProps) => {
             variant="outline"
             type="button"
             asChild
-            className="h-11 rounded-xl cursor-pointer"
+            className="h-11 cursor-pointer rounded-xl"
           >
             <label htmlFor="file-input">
               <FileUp size={16} />
@@ -92,7 +92,7 @@ const ImageUploader = ({ defaultValue }: ImageUploaderProps) => {
         <p
           className={cn(
             "text-foreground-secondary text-xs font-light",
-            isSizeErrorVisible && "text-red-500 font-medium",
+            isSizeErrorVisible && "font-medium text-red-500",
           )}
         >
           {t("uploadPhotoInstructions")}

@@ -47,7 +47,7 @@ export async function sendVerificationEmailAction(
     auth.api.sendCompanyEmailVerification({
       body: {
         email,
-        callbackURL: `${env.APP_ORIGIN}/verify-email?email=${email}`,
+        callbackUrl: `${env.APP_ORIGIN}/verify-email?email=${email}`,
       },
     }),
   );

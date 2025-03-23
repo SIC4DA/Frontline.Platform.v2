@@ -79,18 +79,23 @@ export async function registerAction(
     };
   }
 
-  const { error: imageError, data } = await apiClient.api.image.upload.post({
-    file: profileImage,
-  });
+  let imageUrl: string | null = null;
+  if (profileImage.size > 0) {
+    const { error: imageError, data } = await apiClient.api.image.upload.post({
+      file: profileImage,
+    });
 
-  if (imageError) {
-    console.log("imageError", imageError.message);
-    return {
-      status: "error",
-      errors: {
-        form: [imageError.message],
-      },
-    };
+    imageUrl = data?.url || null;
+
+    if (imageError) {
+      console.log("imageError", imageError.message);
+      return {
+        status: "error",
+        errors: {
+          form: [imageError.message],
+        },
+      };
+    }
   }
 
   const { error } = await tryCatch(
@@ -102,7 +107,7 @@ export async function registerAction(
         company: companyName,
         firstName,
         lastName,
-        ...(data?.url && { imageUrl: data.url }),
+        ...(imageUrl && { imageUrl }),
       },
     }),
   );

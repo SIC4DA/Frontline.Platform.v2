@@ -63,7 +63,7 @@ const OnboardingForm = ({ email }: { email: string }) => {
         />
       )}
 
-      <ImageUploader defaultValue={state.profileImage} />
+      <ImageUploader formStatus={state.status} />
 
       <fieldset className="flex flex-col gap-6">
         {formElements.map((element) => (

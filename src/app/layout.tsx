@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import "../styles/globals.css";
 import { Providers } from "@/providers";
+import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
 import localFont from "next/font/local";
+import "../styles/globals.css";
 
 const helveticaNeue = localFont({
   src: [
@@ -53,7 +53,10 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={`${helveticaNeue.className} antialiased tracking-wider`}>
+      <body
+        className={`${helveticaNeue.className} tracking-wider antialiased`}
+        suppressHydrationWarning
+      >
         <Providers>{children}</Providers>
       </body>
     </html>
