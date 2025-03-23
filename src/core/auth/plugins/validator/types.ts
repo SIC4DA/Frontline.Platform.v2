@@ -12,7 +12,7 @@ export type MiddlewareOptions = {
     query?: TSchema;
     params?: TSchema;
   };
-  handler?: (ctx: MiddlewareHandlerContext) => void;
+  handler?: (ctx: MiddlewareHandlerContext) => Promise<void> | void;
 };
 
 export type ValidatorOptions = {

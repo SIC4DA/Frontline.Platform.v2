@@ -26,7 +26,7 @@ export const validator = ({ middlewares }: ValidatorOptions) =>
           ]);
 
           if (handler) {
-            return handler(ctx);
+            await handler(ctx);
           }
         } catch (error) {
           if (error instanceof APIError) {
