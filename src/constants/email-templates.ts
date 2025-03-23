@@ -81,7 +81,7 @@ export const emailTemplates = {
 <html>
   <body>
     <h1>Welcome, to Frontline</h1>
-    <p>Verify your email by clicking <a href="${url}?token=${token}">here</a></p>
+    <p>Verify your email by clicking <a href="${url}&token=${token}">here</a></p>
   </body>
 </html>`,
   }),
