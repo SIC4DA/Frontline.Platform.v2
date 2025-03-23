@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { nextCookies } from "better-auth/next-js";
 import { admin, emailOTP, openAPI } from "better-auth/plugins";
 
 import {
@@ -28,11 +29,23 @@ export const auth = betterAuth({
   session: sessionOptions,
   secondaryStorage: redisStorage,
   socialProviders: socialProvidersOptions,
+  databaseHooks: {
+    user: {
+      create: {
+        after: async (user, ctx) => {
+          await ctx?.context.internalAdapter.updateUser(user.id, {
+            emailVerified: true,
+          });
+        },
+      },
+    },
+  },
   plugins: [
     emailOTP(emailOTPOptions),
     admin({ defaultRole: "user" }),
     validator(validatorOptions),
     companyEmail(companyEmailOptions),
+    nextCookies(),
     openAPI(),
   ],
 });
