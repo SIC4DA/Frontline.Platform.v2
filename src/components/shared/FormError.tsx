@@ -1,12 +1,14 @@
-import { TriangleAlert } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const FormError = ({ errorMessage }: { errorMessage: string }) => {
+  const t = useTranslations("auth");
+
   return (
-    <div className="mb-5 grid grid-cols-[auto_1fr] items-center gap-5 rounded-4xl border-2 border-white bg-gradient-to-b from-[#FFEDEC] to-[#FDFDFD] px-10 py-3 shadow">
-      <div className="flex size-16 items-center justify-center rounded-full border-2 border-white shadow">
-        <TriangleAlert fill="#FF3A3D" stroke="#fff" size={30} />
-      </div>
-      <p>{errorMessage}</p>
+    <div className="bg-error/10 mb-5 items-center gap-5 rounded-[12px] px-10 py-3 shadow">
+      <p className="text-error">
+        {errorMessage} <br />
+        {t("checkDetails")}
+      </p>
     </div>
   );
 };
