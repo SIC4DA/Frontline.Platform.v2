@@ -28,33 +28,38 @@ export const signUpEmailValidation = t.Object({
     pattern: REGEX.EMAIL_REGEX,
   }),
   password: t.String({
-    error: "Password should be at least 6 characters long",
-    minLength: 6,
+    error: "Password should be at least 8 characters long",
+    minLength: 8,
+    pattern: REGEX.PASSWORD_REGEX,
   }),
   company: t.String({
-    error: "Company should be between 2 and 100 characters long",
+    error: "Company name should be between 2 and 100 characters long",
     minLength: 2,
     maxLength: 100,
   }),
-  department: t.String({
-    error: "Department should be between 2 and 100 characters long",
-    minLength: 2,
-    maxLength: 100,
-  }),
-  jobTitle: t.String({
-    error: "Job title should be between 2 and 100 characters long",
-    minLength: 2,
-    maxLength: 100,
-  }),
-  companyUrl: t.String({
-    error: "Company URL should be a valid URL",
+  imageUrl: t.String({
+    error: "Image URL should be a valid URL",
     pattern: REGEX.URL_REGEX,
   }),
-  country: t.String({
-    error: "Country should be between 2 and 100 characters long",
-    minLength: 2,
-    maxLength: 100,
-  }),
+  // department: t.String({
+  //   error: "Department should be between 2 and 100 characters long",
+  //   minLength: 2,
+  //   maxLength: 100,
+  // }),
+  // jobTitle: t.String({
+  //   error: "Job title should be between 2 and 100 characters long",
+  //   minLength: 2,
+  //   maxLength: 100,
+  // }),
+  // companyUrl: t.String({
+  //   error: "Company URL should be a valid URL",
+  //   pattern: REGEX.URL_REGEX,
+  // }),
+  // country: t.String({
+  //   error: "Country should be between 2 and 100 characters long",
+  //   minLength: 2,
+  //   maxLength: 100,
+  // }),
 });
 
 export const signInEmailValidation = t.Object({
