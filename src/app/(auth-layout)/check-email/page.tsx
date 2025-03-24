@@ -18,7 +18,7 @@ export default async function CheckEmailPage({
   return (
     <section className="flex w-full max-w-[495px] flex-grow flex-col items-center justify-center">
       <h1 className="mb-7 text-3xl">{t("checkEmail")}</h1>
-      <p className="text-foreground-secondary/90 mb-16 max-w-md text-center text-base font-light">
+      <p className="text-foreground-secondary/90 mb-16 max-w-md text-center text-base">
         {t("checkEmailDescription")}
       </p>
       <InputWithIcon

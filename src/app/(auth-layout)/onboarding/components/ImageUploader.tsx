@@ -91,7 +91,7 @@ const ImageUploader = ({ formStatus }: ImageUploaderProps) => {
         </div>
         <p
           className={cn(
-            "text-foreground-secondary text-xs font-light",
+            "text-foreground-secondary text-xs",
             isSizeErrorVisible && "font-medium text-red-500",
           )}
         >

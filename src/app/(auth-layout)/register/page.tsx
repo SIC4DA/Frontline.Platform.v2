@@ -16,7 +16,7 @@ export default async function RegisterPage({
       <h1 className="mb-16 text-3xl">{t("signUp")}</h1>
       <RegisterForm formError={error} />
       <OauthOptions />
-      <p className="mt-8 font-light">
+      <p className="mt-8">
         {t("alreadyHaveAccount")}
         <Link className="text-primary ms-1.5 underline" href="/login">
           {t("login")}

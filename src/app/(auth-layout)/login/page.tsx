@@ -11,7 +11,7 @@ export default function LoginPage() {
       <h1 className="mb-16 text-3xl">{t("welcomeBack")}</h1>
       <LoginForm />
       <OauthOptions />
-      <p className="mt-8 font-light">
+      <p className="mt-8">
         {t("noAccount")}
         <Link className="text-primary ms-1.5 underline" href="/register">
           {t("signUp")}
