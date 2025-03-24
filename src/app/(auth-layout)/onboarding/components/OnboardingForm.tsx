@@ -37,7 +37,7 @@ const formElements = [
   },
 ];
 
-const OnboardingForm = ({ email }: { email: string }) => {
+const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
   const t = useTranslations("auth");
   const [state, formAction, isPending] = useActionState(registerAction, {
     status: "idle",
@@ -49,6 +49,7 @@ const OnboardingForm = ({ email }: { email: string }) => {
 
   const actionWithEmail = (formData: FormData) => {
     formData.append("email", email);
+    formData.append("token", token);
     return formAction(formData);
   };
 

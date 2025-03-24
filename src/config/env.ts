@@ -21,12 +21,17 @@ const EnvSchema = z.object({
 
   LINKEDIN_CLIENT_ID: z.string(),
   LINKEDIN_CLIENT_SECRET: z.string(),
-  LINKEDIN_REDIRECT_URI: z.string(),
 
   MICROSOFT_CLIENT_ID: z.string(),
   MICROSOFT_CLIENT_SECRET: z.string(),
   MICROSOFT_TENANT: z.string(),
-  MICROSOFT_REDIRECT_URI: z.string(),
+
+  GOOGLE_CLIENT_ID: z.string(),
+  GOOGLE_CLIENT_SECRET: z.string(),
+
+  SLACK_CLIENT_ID: z.string(),
+  SLACK_CLIENT_SECRET: z.string(),
+  SLACK_SIGNING_SECRET: z.string(),
 
   GEMINI_API_KEY: z.string(),
 

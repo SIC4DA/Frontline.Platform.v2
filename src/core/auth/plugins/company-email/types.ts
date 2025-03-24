@@ -3,11 +3,7 @@ export type CompanyEmailOptions = {
   disableCleanup?: boolean;
   allowedEmails?: string[];
   generateToken?: () => Promise<string> | string;
-  storeCookieAfterVerification?: {
-    enabled: boolean;
-    cookieName?: string;
-    expires?: number;
-  };
+  registerTokenExpiry?: number;
   sendCompanyEmailVerification: (options: {
     email: string;
     url: string;

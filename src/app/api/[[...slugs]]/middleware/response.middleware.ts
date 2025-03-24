@@ -24,8 +24,10 @@ export const useSuccessResponseMiddleware = (app: ElysiaApp) => {
     const status = context.set.status ?? 200;
 
     try {
-      if (response instanceof Promise) {
+      if (response instanceof Promise || response instanceof Response) {
         const resolvedResponse = await response;
+        if (resolvedResponse.status.toString().startsWith("3")) return;
+
         const data = await resolvedResponse.json();
 
         if (!resolvedResponse.ok) {
@@ -39,6 +41,11 @@ export const useSuccessResponseMiddleware = (app: ElysiaApp) => {
         response = data;
       }
 
+      console.log(
+        `\x1b[32m${new Date().toLocaleString()}\x1b[0m \x1b[32m${message}\x1b[0m`,
+      );
+      console.dir(response, { depth: null, colors: true });
+
       return {
         status,
         message,
@@ -46,7 +53,8 @@ export const useSuccessResponseMiddleware = (app: ElysiaApp) => {
         path,
         timeStamp,
       };
-    } catch {
+    } catch (error) {
+      console.error(error);
       throw new ApiError("Invalid response", "INVALID_RESPONSE", 500);
     }
   });

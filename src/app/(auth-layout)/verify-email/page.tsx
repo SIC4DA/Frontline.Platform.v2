@@ -13,11 +13,11 @@ export default async function VerifyEmailPage({
     return redirect("/register");
   }
 
-  const { error } = await tryCatch(
+  const { error, data } = await tryCatch(
     auth.api.verifyCompanyEmailVerification({
       query: {
         token,
-        redirectTo: `/onboarding?email=${email}`,
+        redirectTo: "/onboarding",
       },
     }),
   );
@@ -26,5 +26,5 @@ export default async function VerifyEmailPage({
     return redirect(`/register?error=${error.message}`);
   }
 
-  // redirect(`/onboarding?email=${email}`);
+  redirect(`/onboarding?email=${email}&token=${data.token}`);
 }

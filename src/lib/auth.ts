@@ -1,9 +1,10 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-import { admin, emailOTP, openAPI } from "better-auth/plugins";
+import { admin, emailOTP, genericOAuth, openAPI } from "better-auth/plugins";
 
 import {
+  databaseHooksOptions,
   emailAndPasswordOptions,
   redisStorage,
   sessionOptions,
@@ -12,6 +13,7 @@ import {
 } from "@/core/auth/options/better-auth";
 import { companyEmailOptions } from "@/core/auth/options/company-email";
 import { emailOTPOptions } from "@/core/auth/options/email-otp";
+import { genericOAuthOptions } from "@/core/auth/options/generic-oauth";
 import { validatorOptions } from "@/core/auth/options/validator";
 import { companyEmail } from "@/core/auth/plugins/company-email";
 import { validator } from "@/core/auth/plugins/validator";
@@ -29,23 +31,14 @@ export const auth = betterAuth({
   session: sessionOptions,
   secondaryStorage: redisStorage,
   socialProviders: socialProvidersOptions,
-  databaseHooks: {
-    user: {
-      create: {
-        after: async (user, ctx) => {
-          await ctx?.context.internalAdapter.updateUser(user.id, {
-            emailVerified: true,
-          });
-        },
-      },
-    },
-  },
+  databaseHooks: databaseHooksOptions,
   plugins: [
     emailOTP(emailOTPOptions),
     admin({ defaultRole: "user" }),
     validator(validatorOptions),
     companyEmail(companyEmailOptions),
-    nextCookies(),
     openAPI(),
+    genericOAuth(genericOAuthOptions),
+    nextCookies(), // must be last
   ],
 });

@@ -10,14 +10,19 @@ import {
   signUpEmailValidation,
   verifyEmailValidation,
 } from "@/validations/auth";
+import { t } from "elysia";
 
 export const validatorOptions: ValidatorOptions = {
   middlewares: [
     {
       path: "/sign-up/email",
-      schemas: { body: signUpEmailValidation },
+      schemas: {
+        body: signUpEmailValidation,
+        query: t.Object({ token: t.String() }),
+      },
       async handler(ctx) {
-        const tempVerification = ctx.getCookie("temp-verification");
+        const tempVerification = ctx.query?.token;
+        console.log(tempVerification);
 
         if (!tempVerification) {
           throw new APIError("BAD_REQUEST", {
@@ -32,6 +37,8 @@ export const validatorOptions: ValidatorOptions = {
           ],
         });
 
+        console.log(verified);
+
         if (!verified) {
           throw new APIError("BAD_REQUEST", {
             message: "Invalid or expired verification token",
@@ -43,14 +50,6 @@ export const validatorOptions: ValidatorOptions = {
           where: [
             { field: "identifier", value: tempVerification, operator: "eq" },
           ],
-        });
-
-        ctx.setCookie("temp-verification", tempVerification, {
-          httpOnly: true,
-          secure: true,
-          sameSite: "strict",
-          path: "/",
-          expires: new Date(new Date().setSeconds(0)), // 0 seconds
         });
       },
     },

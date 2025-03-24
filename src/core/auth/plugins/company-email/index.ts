@@ -22,12 +22,8 @@ export const companyEmail = (
     disableCleanup = false,
     allowedEmails = [],
     generateToken = () => generateRandomString(32),
-    storeCookieAfterVerification = {
-      enabled: false,
-      cookieName: "temp-verification",
-      expires: 60 * 60 * 24,
-    },
     sendCompanyEmailVerification,
+    registerTokenExpiry = 60 * 60,
   }: CompanyEmailOptions = {} as CompanyEmailOptions,
 ) =>
   ({
@@ -99,7 +95,7 @@ export const companyEmail = (
         },
         async (ctx) => {
           try {
-            const { token, redirectTo } = ctx.query;
+            const { token } = ctx.query;
 
             const verification =
               await ctx.context.internalAdapter.findVerificationValue(token);
@@ -110,26 +106,13 @@ export const companyEmail = (
               });
             }
 
-            if (storeCookieAfterVerification.enabled) {
-              const generatedToken = await generateToken();
-              await ctx.context.internalAdapter.createVerificationValue({
-                identifier: generatedToken,
-                value: verification.value,
-                expiresAt: new Date(new Date().setHours(24)),
-              });
+            const generatedToken = await generateToken();
 
-              ctx.setCookie(
-                storeCookieAfterVerification.cookieName || "temp-verification",
-                generatedToken,
-                {
-                  httpOnly: true,
-                  secure: true,
-                  sameSite: "strict",
-                  path: "/",
-                  expires: new Date(new Date().setHours(24)), // 1 day
-                },
-              );
-            }
+            await ctx.context.internalAdapter.createVerificationValue({
+              identifier: generatedToken,
+              value: verification.value,
+              expiresAt: new Date(new Date().setSeconds(registerTokenExpiry)),
+            });
 
             if (!disableCleanup) {
               await ctx.context.internalAdapter.deleteVerificationValue(
@@ -137,11 +120,7 @@ export const companyEmail = (
               );
             }
 
-            if (redirectTo) {
-              ctx.redirect(redirectTo);
-            }
-
-            return { success: true };
+            return { success: true, token: generatedToken };
           } catch (error) {
             if (error instanceof APIError) {
               throw error;

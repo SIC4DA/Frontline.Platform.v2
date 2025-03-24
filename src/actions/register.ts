@@ -50,6 +50,7 @@ export async function registerAction(
   const lastName = formData.get("lastName") as string;
   const companyName = formData.get("companyName") as string;
   const email = formData.get("email") as string;
+  const token = formData.get("token") as string;
   const password = formData.get("password") as string;
   const profileImage = formData.get("profileImage") as File;
 
@@ -109,6 +110,9 @@ export async function registerAction(
         lastName,
         ...(imageUrl && { imageUrl }),
       },
+      query: {
+        token,
+      },
     }),
   );
 
@@ -128,7 +132,7 @@ export async function registerAction(
     };
   }
 
-  redirect("/dashboard");
+  redirect("/login");
 
   // return {
   //   status: "success",

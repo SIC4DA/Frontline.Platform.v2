@@ -28,6 +28,8 @@ export const validator = ({ middlewares }: ValidatorOptions) =>
 
             await handler?.(ctx);
           } catch (error) {
+            console.dir(error, { depth: null });
+
             if (error instanceof APIError) {
               throw error;
             }

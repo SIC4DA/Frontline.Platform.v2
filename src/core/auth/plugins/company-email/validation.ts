@@ -15,7 +15,6 @@ export const sendCompanyEmailVerificationValidation = z.object({
 
 export const verifyCompanyEmailValidation = z.object({
   token: z.string({ message: "Invalid token" }),
-  redirectTo: z.string({ message: "Invalid redirect path" }).optional(),
 });
 
 export const checkCompanyEmailValidation = z.object({

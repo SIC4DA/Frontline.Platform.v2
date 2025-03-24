@@ -7,9 +7,9 @@ import { redisClient } from "@/config/redis";
 
 export const emailAndPasswordOptions: BetterAuthOptions["emailAndPassword"] = {
   enabled: true,
-  autoSignIn: false,
+  autoSignIn: true,
   requireEmailVerification: true,
-  minPasswordLength: 6,
+  minPasswordLength: 8,
 };
 
 export const userOptions: BetterAuthOptions["user"] = {
@@ -57,8 +57,8 @@ export const socialProvidersOptions: BetterAuthOptions["socialProviders"] = {
         email: profile.email,
         name: profile.name,
         image: profile.picture,
-        country: profile.locale.country,
         emailVerified: profile.email_verified,
+        company: "",
       }),
   },
   microsoft: {
@@ -72,6 +72,36 @@ export const socialProvidersOptions: BetterAuthOptions["socialProviders"] = {
         name: profile.name,
         image: profile.picture,
         emailVerified: true,
+        firstName: "",
+        lastName: "",
+        company: "",
       }),
+  },
+  google: {
+    clientId: env.GOOGLE_CLIENT_ID,
+    clientSecret: env.GOOGLE_CLIENT_SECRET,
+    mapProfileToUser: (profile) =>
+      mapOAuthProfile({
+        id: profile.sub,
+        email: profile.email,
+        firstName: profile.given_name,
+        lastName: profile.family_name,
+        name: profile.name,
+        image: profile.picture,
+        emailVerified: profile.email_verified,
+        company: "",
+      }),
+  },
+};
+
+export const databaseHooksOptions: BetterAuthOptions["databaseHooks"] = {
+  user: {
+    create: {
+      after: async (user, ctx) => {
+        await ctx?.context.internalAdapter.updateUser(user.id, {
+          emailVerified: true,
+        });
+      },
+    },
   },
 };
