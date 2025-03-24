@@ -13,13 +13,14 @@ import {
 } from "./middleware/response.middleware";
 
 import env from "@/config/env";
+import { UnauthorizedError } from "./error/unauthorized";
 
 const app = new Elysia({
   name: "api",
   prefix: "/api",
   serve: { maxRequestBodySize: 1024 * 1024 * 10 },
 })
-  .error({ ApiError, BadRequestError })
+  .error({ ApiError, BadRequestError, UnauthorizedError })
   .use(serverTiming())
   .use(
     swagger({

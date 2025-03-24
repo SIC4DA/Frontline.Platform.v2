@@ -1,5 +1,6 @@
 import Elysia, { t } from "elysia";
 
+import { REGEX } from "@/constants/regex";
 import {
   deleteFileService,
   extractPublicId,
@@ -36,16 +37,6 @@ export const fileRouter = new Elysia({ name: "file", tags: ["File"] })
           maxItems: 1,
         }),
       }),
-      // response: formatResponseSchema(
-      //   t.Object({
-      //     url: t.String(),
-      //     publicId: t.String(),
-      //     width: t.Number(),
-      //     height: t.Number(),
-      //     created_at: t.String(),
-      //   }),
-      //   [400],
-      // ),
       detail: {
         summary: "Upload user image",
       },
@@ -71,9 +62,8 @@ export const fileRouter = new Elysia({ name: "file", tags: ["File"] })
     },
     {
       query: t.Object({
-        url: t.String({ error: "Image URL is required", format: "url" }),
+        url: t.String({ error: "Image URL is required", pattern: REGEX.URL }),
       }),
-      // response: formatResponseSchema(t.Null(), [400]),
       detail: {
         summary: "Delete user image",
       },

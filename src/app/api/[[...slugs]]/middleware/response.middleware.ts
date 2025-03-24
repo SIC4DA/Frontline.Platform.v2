@@ -23,30 +23,32 @@ export const useSuccessResponseMiddleware = (app: ElysiaApp) => {
     const timeStamp = new Date().toISOString();
     const status = context.set.status ?? 200;
 
-    if (response instanceof Promise) {
-      const resolvedResponse = await response;
-      const data = await resolvedResponse.json();
+    try {
+      if (response instanceof Promise) {
+        const resolvedResponse = await response;
+        const data = await resolvedResponse.json();
 
-      console.log(data);
+        if (!resolvedResponse.ok) {
+          throw new ApiError(
+            data.message || resolvedResponse.statusText || "Invalid response",
+            data.code || resolvedResponse.statusText,
+            resolvedResponse.status,
+          );
+        }
 
-      if (!resolvedResponse.ok) {
-        throw new ApiError(
-          data.message || resolvedResponse.statusText || "Invalid response",
-          data.code || resolvedResponse.statusText,
-          resolvedResponse.status,
-        );
+        response = data;
       }
 
-      response = data;
+      return {
+        status,
+        message,
+        data: response,
+        path,
+        timeStamp,
+      };
+    } catch {
+      throw new ApiError("Invalid response", "INVALID_RESPONSE", 500);
     }
-
-    return {
-      status,
-      message,
-      data: response,
-      path,
-      timeStamp,
-    };
   });
 };
 
