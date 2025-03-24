@@ -13,41 +13,46 @@ const standardValidate = async <T>(schema: TSchema, data: T) => {
 export const validator = ({ middlewares }: ValidatorOptions) =>
   ({
     id: "validator",
-    middlewares: middlewares.map(({ path, schemas, handler }) => ({
-      path,
-      middleware: createAuthMiddleware(async (ctx) => {
-        try {
-          const { body, query, params } = ctx;
+    hooks: {
+      before: middlewares.map(({ path, schemas, handler }) => ({
+        matcher: (ctx) => ctx.path === path,
+        handler: createAuthMiddleware(async (ctx) => {
+          try {
+            const { body, query, params } = ctx;
 
-          await Promise.all([
-            schemas.body && standardValidate(schemas.body, body),
-            schemas.query && standardValidate(schemas.query, query),
-            schemas.params && standardValidate(schemas.params, params),
-          ]);
+            await Promise.all([
+              schemas.body && standardValidate(schemas.body, body),
+              schemas.query && standardValidate(schemas.query, query),
+              schemas.params && standardValidate(schemas.params, params),
+            ]);
 
-          if (handler) {
-            await handler(ctx);
+            await handler?.(ctx);
+          } catch (error) {
+            if (error instanceof APIError) {
+              throw error;
+            }
+
+            if (error instanceof AssertError) {
+              const firstError = error.Errors().First();
+
+              const mapError = {
+                code:
+                  firstError?.message.toUpperCase().split(" ").join("_") ||
+                  "BAD_REQUEST",
+                message:
+                  (firstError?.schema.error as string) || "Invalid request",
+                path: firstError?.path,
+              };
+
+              throw new APIError("BAD_REQUEST", mapError);
+            }
+
+            throw new APIError("BAD_REQUEST", {
+              message: "Invalid request",
+              error: JSON.stringify(error),
+            });
           }
-        } catch (error) {
-          if (error instanceof APIError) {
-            throw error;
-          }
-
-          if (error instanceof AssertError) {
-            const firstError = error.Errors().First();
-
-            const mapError = {
-              code:
-                firstError?.message.toUpperCase().split(" ").join("_") ||
-                "BAD_REQUEST",
-              message:
-                (firstError?.schema.error as string) || "Invalid request",
-              path: firstError?.path,
-            };
-
-            throw new APIError("BAD_REQUEST", mapError);
-          }
-        }
-      }),
-    })),
-  }) as BetterAuthPlugin;
+        }),
+      })),
+    },
+  }) satisfies BetterAuthPlugin;
