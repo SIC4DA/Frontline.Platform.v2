@@ -16,8 +16,6 @@ export const sessionMiddleware = async (req: NextRequest) => {
     useSecureCookies: false,
   });
 
-  console.log(req.url);
-
   if (AUTH_PATHS.includes(req.nextUrl.pathname) && sessionCookie) {
     return NextResponse.redirect(new URL("/dashboard", req.nextUrl.origin));
   }
