@@ -25,13 +25,13 @@ export const signUpEmailValidation = t.Object({
   }),
   email: t.String({
     error: "Invalid email",
-    pattern: REGEX.EMAIL_REGEX,
+    pattern: REGEX.EMAIL,
   }),
   password: t.String({
     error:
       "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number",
     minLength: 8,
-    pattern: REGEX.PASSWORD_REGEX,
+    pattern: REGEX.PASSWORD,
   }),
   company: t.String({
     error: "Company name should be between 2 and 100 characters long",
@@ -41,7 +41,7 @@ export const signUpEmailValidation = t.Object({
   imageUrl: t.Optional(
     t.String({
       error: "Image URL should be a valid URL",
-      pattern: REGEX.URL_REGEX,
+      pattern: REGEX.URL,
     }),
   ),
   // department: t.String({
@@ -73,7 +73,7 @@ export const signInEmailValidation = t.Object({
 export const sendVerificationOtpValidation = t.Object({
   email: t.String({
     error: "Invalid email",
-    pattern: REGEX.EMAIL_REGEX,
+    pattern: REGEX.EMAIL,
   }),
   type: t.Enum(VerificationOtpType, {
     error:
@@ -84,7 +84,7 @@ export const sendVerificationOtpValidation = t.Object({
 export const verifyEmailValidation = t.Object({
   email: t.String({
     error: "Invalid email",
-    pattern: REGEX.EMAIL_REGEX,
+    pattern: REGEX.EMAIL,
   }),
   otp: t.String({ error: "Code is required", minLength: 6, maxLength: 6 }),
 });
@@ -92,20 +92,20 @@ export const verifyEmailValidation = t.Object({
 export const forgetPasswordValidation = t.Object({
   email: t.String({
     error: "Invalid email",
-    pattern: REGEX.EMAIL_REGEX,
+    pattern: REGEX.EMAIL,
   }),
 });
 
 export const resetPasswordValidation = t.Object({
   email: t.String({
     error: "Invalid email",
-    pattern: REGEX.EMAIL_REGEX,
+    pattern: REGEX.EMAIL,
   }),
   otp: t.String({ error: "Code is required", minLength: 6, maxLength: 6 }),
   password: t.String({
     error: "Password should be at least 6 characters long",
     minLength: 6,
-    pattern: REGEX.PASSWORD_REGEX,
+    pattern: REGEX.PASSWORD,
   }),
 });
 
