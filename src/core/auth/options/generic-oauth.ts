@@ -1,5 +1,6 @@
 import env from "@/config/env";
 import { genericOAuth } from "better-auth/plugins";
+import { mapOAuthProfile } from "../utils";
 
 export const genericOAuthOptions: Parameters<typeof genericOAuth>[0] = {
   config: [
@@ -9,7 +10,19 @@ export const genericOAuthOptions: Parameters<typeof genericOAuth>[0] = {
       clientSecret: env.SLACK_CLIENT_SECRET,
       authorizationUrl: "https://slack.com/oauth/v2/authorize",
       tokenUrl: "https://slack.com/api/oauth.v2.access",
-      scopes: ["users:read", "users:read.email"],
+      scopes: ["openid", "profile", "email"],
+      discoveryUrl: "https://slack.com/.well-known/openid-configuration",
+      mapProfileToUser: (profile) =>
+        mapOAuthProfile({
+          id: profile.sub,
+          firstName: profile.given_name,
+          lastName: profile.family_name,
+          email: profile.email,
+          name: profile.name,
+          image: profile.picture,
+          emailVerified: profile.email_verified,
+          company: "",
+        }),
     },
   ],
 };
