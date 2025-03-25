@@ -1,44 +1,47 @@
-// const EnvSchema = z.object({
-//   NODE_ENV: z.enum(["development", "production", "test"]),
+import { z } from "zod";
 
-//   APP_ORIGIN: z.string(),
-//   PUBLIC_APP_ORIGIN: z.string(),
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const EnvSchema = z.object({
+  NODE_ENV: z.enum(["development", "production", "test"]),
 
-//   NEXT_BASE_URL: z.string(),
-//   NEXT_PUBLIC_BASE_URL: z.string(),
+  APP_ORIGIN: z.string(),
+  PUBLIC_APP_ORIGIN: z.string(),
 
-//   DATABASE_URL: z.string(),
+  NEXT_BASE_URL: z.string(),
+  NEXT_PUBLIC_BASE_URL: z.string(),
 
-//   BETTER_AUTH_SECRET: z.string(),
-//   BETTER_AUTH_URL: z.string(),
+  DATABASE_URL: z.string(),
 
-//   SMTP_URL: z.string(),
-//   SMTP_FROM: z.string(),
+  BETTER_AUTH_SECRET: z.string(),
+  BETTER_AUTH_URL: z.string(),
 
-//   REDIS_URL: z.string(),
+  SMTP_URL: z.string(),
+  SMTP_FROM: z.string(),
 
-//   LINKEDIN_CLIENT_ID: z.string(),
-//   LINKEDIN_CLIENT_SECRET: z.string(),
+  REDIS_URL: z.string(),
 
-//   MICROSOFT_CLIENT_ID: z.string(),
-//   MICROSOFT_CLIENT_SECRET: z.string(),
-//   MICROSOFT_TENANT: z.string(),
+  LINKEDIN_CLIENT_ID: z.string(),
+  LINKEDIN_CLIENT_SECRET: z.string(),
 
-//   GOOGLE_CLIENT_ID: z.string(),
-//   GOOGLE_CLIENT_SECRET: z.string(),
+  MICROSOFT_CLIENT_ID: z.string(),
+  MICROSOFT_CLIENT_SECRET: z.string(),
+  MICROSOFT_TENANT: z.string(),
 
-//   SLACK_CLIENT_ID: z.string(),
-//   SLACK_CLIENT_SECRET: z.string(),
-//   SLACK_SIGNING_SECRET: z.string(),
+  GOOGLE_CLIENT_ID: z.string(),
+  GOOGLE_CLIENT_SECRET: z.string(),
 
-//   GEMINI_API_KEY: z.string(),
+  SLACK_CLIENT_ID: z.string(),
+  SLACK_CLIENT_SECRET: z.string(),
+  SLACK_SIGNING_SECRET: z.string(),
 
-//   CLOUDINARY_NAME: z.string(),
-//   CLOUDINARY_API_KEY: z.string(),
-//   CLOUDINARY_API_SECRET: z.string(),
-// });
+  GEMINI_API_KEY: z.string(),
 
-// const { error, data } = EnvSchema.safeParse(process.env);
+  CLOUDINARY_NAME: z.string(),
+  CLOUDINARY_API_KEY: z.string(),
+  CLOUDINARY_API_SECRET: z.string(),
+});
+
+// const { error, data } = EnvSchema.safeParse(process?.env);
 
 // if (error) {
 //   const errors = error.issues.map((err) => `${err.path} ${err.message}`);
@@ -47,5 +50,5 @@
 //   process.exit(1);
 // }
 
-const env = process.env as Record<string, string>;
+const env = process?.env as z.infer<typeof EnvSchema>;
 export default env;
