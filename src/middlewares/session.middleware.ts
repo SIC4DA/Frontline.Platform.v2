@@ -1,4 +1,5 @@
-import { getSessionCookie } from "better-auth/cookies";
+import { authClient } from "@/lib/auth-client";
+import { headers } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
 
 const AUTH_PATHS = [
@@ -10,17 +11,17 @@ const AUTH_PATHS = [
 ];
 
 export const sessionMiddleware = async (req: NextRequest) => {
-  const sessionCookie = getSessionCookie(req, {
-    cookieName: "session_token",
-    cookiePrefix: "better-auth",
-    useSecureCookies: false,
+  const { data: session } = await authClient.getSession({
+    fetchOptions: {
+      headers: await headers(),
+    },
   });
 
-  if (AUTH_PATHS.includes(req.nextUrl.pathname) && sessionCookie) {
+  if (AUTH_PATHS.includes(req.nextUrl.pathname) && session) {
     return NextResponse.redirect(new URL("/dashboard", req.nextUrl.origin));
   }
 
-  if (!AUTH_PATHS.includes(req.nextUrl.pathname) && !sessionCookie) {
+  if (!AUTH_PATHS.includes(req.nextUrl.pathname) && !session) {
     return NextResponse.redirect(new URL("/login", req.nextUrl.origin));
   }
 

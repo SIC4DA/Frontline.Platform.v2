@@ -1,12 +1,11 @@
-import Link from "next/link";
+
+import Logout from "@/components/shared/Logout";
 
 export default function DashboardPage() {
   return (
     <div>
       DashboardPage
-      <Link className="text-primary underline" href="/api/sign-out">
-        Sign Out
-      </Link>
+      <Logout />
     </div>
   );
 }
