@@ -1,54 +1,42 @@
-import { z } from "zod";
+type Env = {
+  NODE_ENV: "development" | "production" | "test";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const EnvSchema = z.object({
-  NODE_ENV: z.enum(["development", "production", "test"]),
+  APP_ORIGIN: string;
+  PUBLIC_APP_ORIGIN: string;
 
-  APP_ORIGIN: z.string(),
-  PUBLIC_APP_ORIGIN: z.string(),
+  NEXT_BASE_URL: string;
+  NEXT_PUBLIC_BASE_URL: string;
 
-  NEXT_BASE_URL: z.string(),
-  NEXT_PUBLIC_BASE_URL: z.string(),
+  DATABASE_URL: string;
 
-  DATABASE_URL: z.string(),
+  BETTER_AUTH_SECRET: string;
+  BETTER_AUTH_URL: string;
 
-  BETTER_AUTH_SECRET: z.string(),
-  BETTER_AUTH_URL: z.string(),
+  SMTP_URL: string;
+  SMTP_FROM: string;
 
-  SMTP_URL: z.string(),
-  SMTP_FROM: z.string(),
+  REDIS_URL: string;
 
-  REDIS_URL: z.string(),
+  LINKEDIN_CLIENT_ID: string;
+  LINKEDIN_CLIENT_SECRET: string;
 
-  LINKEDIN_CLIENT_ID: z.string(),
-  LINKEDIN_CLIENT_SECRET: z.string(),
+  MICROSOFT_CLIENT_ID: string;
+  MICROSOFT_CLIENT_SECRET: string;
+  MICROSOFT_TENANT: string;
 
-  MICROSOFT_CLIENT_ID: z.string(),
-  MICROSOFT_CLIENT_SECRET: z.string(),
-  MICROSOFT_TENANT: z.string(),
+  GOOGLE_CLIENT_ID: string;
+  GOOGLE_CLIENT_SECRET: string;
 
-  GOOGLE_CLIENT_ID: z.string(),
-  GOOGLE_CLIENT_SECRET: z.string(),
+  SLACK_CLIENT_ID: string;
+  SLACK_CLIENT_SECRET: string;
+  SLACK_SIGNING_SECRET: string;
 
-  SLACK_CLIENT_ID: z.string(),
-  SLACK_CLIENT_SECRET: z.string(),
-  SLACK_SIGNING_SECRET: z.string(),
+  GEMINI_API_KEY: string;
 
-  GEMINI_API_KEY: z.string(),
+  CLOUDINARY_NAME: string;
+  CLOUDINARY_API_KEY: string;
+  CLOUDINARY_API_SECRET: string;
+};
 
-  CLOUDINARY_NAME: z.string(),
-  CLOUDINARY_API_KEY: z.string(),
-  CLOUDINARY_API_SECRET: z.string(),
-});
-
-// const { error, data } = EnvSchema.safeParse(process?.env);
-
-// if (error) {
-//   const errors = error.issues.map((err) => `${err.path} ${err.message}`);
-
-//   console.error(`Config validation error: ${JSON.stringify(errors, null, 2)}`);
-//   process.exit(1);
-// }
-
-const env = process?.env as z.infer<typeof EnvSchema>;
+const env = process?.env as Env;
 export default env;
