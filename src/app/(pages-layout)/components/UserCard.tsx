@@ -3,6 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 
+import { useSession } from "@/hooks/api/useSession";
 import { cn } from "@/lib/utils";
 import { LoaderCircle, LogOut } from "lucide-react";
 import Image from "next/image";
@@ -11,7 +12,7 @@ import { useState } from "react";
 const UserCard = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const { data } = authClient.useSession.get();
+  const { data } = useSession();
 
   const signOut = async () => {
     setIsLoading(true);
