@@ -18,12 +18,15 @@ const UserSalesData = () => {
           </span>
         </p>
       </div>
-      <div className="mb-6 flex items-center gap-1 rounded-md bg-[#F5F5F5] px-6 py-2">
-        <Search size={20} className="text-foreground" />
+      <div className="mb-6 flex items-center gap-3 rounded-lg bg-[#F5F5F5] px-6 py-3">
+        <label htmlFor="search-sales">
+          <Search size={24} className="text-foreground" />
+        </label>
         <input
           type="text"
+          id="search-sales"
           placeholder={t("searchPlaceholder")}
-          className="placeholder:text-foreground-secondary text-foreground flex-grow bg-transparent"
+          className="placeholder:text-foreground-secondary py-1 text-foreground flex-grow bg-transparent focus:outline-0"
         />
       </div>
     </div>
