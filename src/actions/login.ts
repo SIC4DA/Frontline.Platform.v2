@@ -60,7 +60,7 @@ export async function loginAction(
       body: {
         email,
         password,
-        callbackURL: "/dashboard",
+        callbackURL: "/home",
       },
     }),
   );
@@ -78,7 +78,7 @@ export async function loginAction(
     };
   }
 
-  redirect("/dashboard");
+  redirect("/home");
 
   // return {
   //   status: "success",

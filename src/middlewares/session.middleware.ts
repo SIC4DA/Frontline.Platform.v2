@@ -18,7 +18,7 @@ export const sessionMiddleware = async (req: NextRequest) => {
   });
 
   if (AUTH_PATHS.includes(req.nextUrl.pathname) && session) {
-    return NextResponse.redirect(new URL("/dashboard", req.nextUrl.origin));
+    return NextResponse.redirect(new URL("/home", req.nextUrl.origin));
   }
 
   if (!AUTH_PATHS.includes(req.nextUrl.pathname) && !session) {

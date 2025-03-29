@@ -12,7 +12,7 @@ const SocialLink = ({ option }: { option: SocialLinkOption }) => {
     if (option.isOAuth2) {
       const { data } = await authClient.signIn.oauth2({
         providerId: option.provider,
-        callbackURL: "/dashboard",
+        callbackURL: "/home",
       });
       if (data?.url) {
         router.push(data.url);
@@ -23,7 +23,7 @@ const SocialLink = ({ option }: { option: SocialLinkOption }) => {
           SocialLinkOption["provider"],
           "slack"
         >,
-        callbackURL: "/dashboard",
+        callbackURL: "/home",
       });
       if (data?.url) {
         router.push(data.url);

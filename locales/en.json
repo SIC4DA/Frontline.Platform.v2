@@ -2,6 +2,10 @@
   "HomePage": {
     "title": "Hello world!"
   },
+  "errors": {
+    "requestError": "Something went wrong, please try again later",
+    "backToHome": "Back to home"
+  },
   "auth": {
     "proceedingAgreement": "By proceeding you acknowledge that you have read and agree to our",
     "termsAndConditions": "Terms and Conditions",
@@ -41,5 +45,17 @@
     "noAccount": "Don’t have an account?",
     "login": "Login",
     "checkDetails": "Please check your details and try again"
+  },
+  "sidebar": {
+    "home": "Home",
+    "frontlineAI": "Frontline AI",
+    "leaderboardAndBadges": "Leaderboard & Badges",
+    "settings": "Settings",
+    "today": "Today"
+  },
+  "home": {
+    "closedSales": "Closed Sales",
+    "conversionRate": "Conversion Rate",
+    "searchPlaceholder": "Search your sales"
   }
 }
