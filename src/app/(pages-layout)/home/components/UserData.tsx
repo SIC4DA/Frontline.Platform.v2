@@ -5,7 +5,7 @@ import type { User } from "@/lib/auth.types";
 
 const UserData = ({ user }: { user: User }) => {
   return (
-    <div className="mt-4 w-full px-7">
+    <div className="mt-4 w-full px-7 max-sm:px-2">
       <Button
         variant="default"
         className="flex self-end justify-self-end rounded-md p-4"

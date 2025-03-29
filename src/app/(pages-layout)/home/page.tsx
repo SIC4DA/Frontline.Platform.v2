@@ -12,14 +12,14 @@ export default async function HomePage() {
 
   if (!data?.user) {
     return (
-      <section className="flex min-h-dvh items-center justify-center px-8 py-3.5">
+      <section className="flex min-h-dvh items-center justify-center px-8 py-3.5 max-sm:px-2">
         <RequestError />
       </section>
     );
   }
 
   return (
-    <section className="px-8 py-3.5">
+    <section className="px-8 py-3.5 max-sm:px-1">
       <UserCover user={data.user} />
       <UserData user={data.user} />
       <UserSalesData />
