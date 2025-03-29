@@ -1,6 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { User } from "better-auth";
 import { BadgeCheck, Pencil } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import type { User } from "@/lib/auth.types";
 
 const UserData = ({ user }: { user: User }) => {
   return (

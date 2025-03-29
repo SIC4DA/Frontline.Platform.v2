@@ -11,6 +11,7 @@ import { useState } from "react";
 const UserCard = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const { data } = authClient.useSession.get();
 
   const signOut = async () => {
     setIsLoading(true);
@@ -44,9 +45,9 @@ const UserCard = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
         />
         {isSidebarActive && (
           <div>
-            <h4 className="text-sm font-medium">John Doe</h4>
+            <h4 className="text-sm font-medium">{data?.user.name}</h4>
             <p className="text-foreground-secondary text-xs">
-              john.doe@gmail.com
+              {data?.user.email}
             </p>
           </div>
         )}
