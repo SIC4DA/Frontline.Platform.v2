@@ -56,6 +56,10 @@
   "home": {
     "closedSales": "Closed Sales",
     "conversionRate": "Conversion Rate",
-    "searchPlaceholder": "Search your sales"
+    "searchPlaceholder": "Search your sales",
+    "contactPerson": "Contact Person",
+    "contract": "Contract",
+    "confidence": "Confidence",
+    "stage": "Stage"
   }
 }
