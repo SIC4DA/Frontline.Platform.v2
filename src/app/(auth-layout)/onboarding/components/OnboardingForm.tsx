@@ -103,6 +103,7 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
         size="lg"
         className="capitalize"
         type="submit"
+        variant="primary"
         disabled={isPending}
       >
         {isPending ? (

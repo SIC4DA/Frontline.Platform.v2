@@ -48,6 +48,7 @@ const RegisterForm = ({ formError }: { formError?: string }) => {
       </div>
       <Button
         disabled={isPending}
+        variant="primary"
         size="lg"
         className="mt-4 w-full text-base capitalize"
       >

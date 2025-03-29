@@ -74,6 +74,7 @@ function LoginForm() {
       {/* Submit button */}
       <Button
         size="lg"
+        variant="primary"
         disabled={isPending}
         className="mt-4 w-full text-base capitalize"
       >
