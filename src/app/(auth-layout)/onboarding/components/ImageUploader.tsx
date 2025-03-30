@@ -42,13 +42,13 @@ const ImageUploader = ({ formStatus }: ImageUploaderProps) => {
 
   return (
     <div className="grid grid-cols-[auto_1fr] items-center gap-5">
-      <div className="h-16 w-16 overflow-hidden rounded-full">
+      <div className="h-14 w-14 overflow-hidden rounded-full">
         {image ? (
           <Image
             src={image}
             alt="Profile"
-            width={64}
-            height={64}
+            width={56}
+            height={56}
             className="h-full w-full object-cover"
           />
         ) : (
@@ -56,8 +56,8 @@ const ImageUploader = ({ formStatus }: ImageUploaderProps) => {
         )}
       </div>
       <div className="flex flex-col gap-3">
-        <p className="text-[16px] font-medium">{t("pfp")}</p>
-        <div className="flex items-center gap-3">
+        <p className="text-sm font-medium">{t("pfp")}</p>
+        <div className="flex items-center gap-2">
           <input
             type="file"
             onChange={handleFileChange}
@@ -72,7 +72,7 @@ const ImageUploader = ({ formStatus }: ImageUploaderProps) => {
             variant="outline"
             type="button"
             asChild
-            className="h-11 cursor-pointer rounded-xl"
+            className="h-10 cursor-pointer rounded-[12px] text-sm"
           >
             <label htmlFor="file-input">
               <FileUp size={16} />
@@ -83,7 +83,7 @@ const ImageUploader = ({ formStatus }: ImageUploaderProps) => {
             variant="outline"
             disabled={!image}
             type="button"
-            className="h-11 rounded-xl border-red-500 text-red-500 capitalize hover:text-red-500"
+            className="h-10 rounded-[12px] border-red-500 text-sm text-red-500 capitalize hover:text-red-500"
             onClick={() => setImage(null)}
           >
             {t("remove")}

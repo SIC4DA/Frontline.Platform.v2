@@ -28,7 +28,7 @@ function LoginForm() {
         />
       )}
 
-      <div className="flex flex-col gap-[26px]">
+      <div className="flex flex-col gap-5">
         <div>
           <InputWithIcon
             type="email"
@@ -42,7 +42,10 @@ function LoginForm() {
               />
             }
             placeholder={t("emailPlaceholder")}
-            className={cn("h-11", state.errors?.email && "border-error")}
+            className={cn(
+              "h-10 text-sm",
+              state.errors?.email && "border-error",
+            )}
           />
           {state.errors?.email && (
             <p className="text-error mt-1 text-sm">{state.errors.email[0]}</p>
@@ -61,7 +64,10 @@ function LoginForm() {
               />
             }
             placeholder={t("passwordPlaceholder")}
-            className={cn("h-11", state.errors?.password && "border-error")}
+            className={cn(
+              "h-10 text-sm",
+              state.errors?.password && "border-error",
+            )}
           />
           {state.errors?.password && (
             <p className="text-error mt-1 text-sm">
@@ -73,7 +79,7 @@ function LoginForm() {
 
       {/* Submit button */}
       <Button
-        size="lg"
+        // size="lg"
         variant="primary"
         disabled={isPending}
         className="mt-4 w-full text-base capitalize"

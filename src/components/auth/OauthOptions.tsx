@@ -44,7 +44,7 @@ const options: SocialLinkOption[] = [
 
 const OauthOptions = () => {
   return (
-    <div className="mt-14 flex w-full flex-wrap items-center justify-around gap-3 sm:justify-between">
+    <div className="mt-12 flex w-full flex-wrap items-center justify-around gap-3 sm:justify-between">
       {options.map((option) => (
         <SocialLink key={option.name} option={option} />
       ))}

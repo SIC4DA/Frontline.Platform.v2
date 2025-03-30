@@ -54,7 +54,7 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
   };
 
   return (
-    <form action={actionWithEmail} className="flex flex-col gap-10">
+    <form action={actionWithEmail} className="flex flex-col gap-8">
       {/* Form error message */}
       {state.errors?.form && (
         <FormError
@@ -66,7 +66,7 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
 
       <ImageUploader formStatus={state.status} />
 
-      <fieldset className="flex flex-col gap-6">
+      <fieldset className="flex flex-col gap-5">
         {formElements.map((element) => (
           <div key={element.id}>
             <label className="mb-2 text-sm" htmlFor={element.id}>
@@ -79,7 +79,7 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
               defaultValue={state[element.id as keyof typeof state] as string}
               placeholder={t(element.placeholder)}
               className={cn(
-                "text-sm",
+                "text-sm  placeholder:text-sm",
                 state.errors?.[element.id as keyof typeof state.errors] &&
                   "border-error",
               )}
@@ -100,7 +100,6 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
       </fieldset>
 
       <Button
-        size="lg"
         className="capitalize"
         type="submit"
         variant="primary"

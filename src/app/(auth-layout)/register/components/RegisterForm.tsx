@@ -40,7 +40,7 @@ const RegisterForm = ({ formError }: { formError?: string }) => {
             />
           }
           placeholder={t("emailPlaceholder")}
-          className={cn("h-11", state.errors?.email && "border-error")}
+          className={cn("h-10 text-sm", state.errors?.email && "border-error")}
         />
         {state.errors?.email && (
           <p className="text-error mt-1 text-sm">{state.errors.email[0]}</p>
@@ -49,7 +49,7 @@ const RegisterForm = ({ formError }: { formError?: string }) => {
       <Button
         disabled={isPending}
         variant="primary"
-        size="lg"
+        // size="lg"
         className="mt-4 w-full text-base capitalize"
       >
         {isPending ? (

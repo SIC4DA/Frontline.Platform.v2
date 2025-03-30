@@ -8,7 +8,7 @@ const Header = () => {
         <Image
           src="/images/frontline-logo.webp"
           alt="logo"
-          width={185}
+          width={165}
           height={50}
           className="object-cover"
         />

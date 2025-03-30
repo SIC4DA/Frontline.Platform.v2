@@ -17,8 +17,8 @@ export default async function OnboardingPage({
   return (
     <section className="flex w-full max-w-[1294px] flex-grow items-center justify-center">
       <div className="border-border bg-background grid w-full grid-cols-2 rounded-xl border">
-        <div className="px-20 py-16">
-          <h1 className="mb-14 text-2xl font-medium">{t("setupAccount")}</h1>
+        <div className="px-18 py-14">
+          <h1 className="mb-14 text-[22px] font-medium">{t("setupAccount")}</h1>
           <OnboardingForm email={email} token={token} />
         </div>
         <div className="bg-background-secondary border-border border-l"></div>

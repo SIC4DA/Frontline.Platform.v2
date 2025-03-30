@@ -6,7 +6,7 @@ function Footer() {
 
   return (
     <footer className="w-full">
-      <p className="text-foreground-secondary mx-auto max-w-[430px] text-center">
+      <p className="text-foreground-secondary mx-auto max-w-[430px] text-center text-sm">
         <span>{t("proceedingAgreement")}</span>{" "}
         <Link className="capitalize underline" href="/terms-and-conditions">
           {t("termsAndConditions")}
