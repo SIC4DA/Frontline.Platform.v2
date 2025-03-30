@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 const Header = () => {
   return (
-    <header className="px-5 w-full">
-      <Link className="block w-fit mx-auto" href="/">
+    <header className="w-full px-5">
+      <Link className="mx-auto block w-fit" href="/">
         <Image
           src="/images/frontline-logo.webp"
           alt="logo"

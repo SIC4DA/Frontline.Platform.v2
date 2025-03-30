@@ -19,7 +19,7 @@ export default async function AuthLayout({
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      className="flex min-h-screen flex-col items-center p-5 gap-10"
+      className="flex min-h-screen flex-col items-center gap-10 p-5"
     >
       <Header />
       {children}

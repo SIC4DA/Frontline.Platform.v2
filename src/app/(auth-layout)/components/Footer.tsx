@@ -1,15 +1,14 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import React from "react";
 
 function Footer() {
   const t = useTranslations("auth");
 
   return (
     <footer className="w-full">
-      <p className="text-foreground-secondary max-w-[430px] mx-auto text-center">
+      <p className="text-foreground-secondary mx-auto max-w-[430px] text-center">
         <span>{t("proceedingAgreement")}</span>{" "}
-        <Link className="underline capitalize" href="/terms-and-conditions">
+        <Link className="capitalize underline" href="/terms-and-conditions">
           {t("termsAndConditions")}
         </Link>
       </p>

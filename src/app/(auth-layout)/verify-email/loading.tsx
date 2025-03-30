@@ -1,9 +1,8 @@
-import Loader from '@/components/shared/Loader';
-
+import Loader from "@/components/shared/Loader";
 
 export default function VerifyEmailLoading() {
   return (
-    <section className="w-full flex items-center justify-center flex-grow">
+    <section className="flex w-full flex-grow items-center justify-center">
       <Loader />
     </section>
   );

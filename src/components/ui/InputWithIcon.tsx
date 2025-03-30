@@ -1,9 +1,9 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 import { Input } from "./input";
-import { Eye, EyeOff } from "lucide-react";
 
 interface InputWithIconProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -26,7 +26,7 @@ export function InputWithIcon({
   return (
     <div className={cn("relative flex items-center", wrapperClassName)}>
       {startIcon && (
-        <div className="absolute left-3 flex h-full items-center text-muted-foreground">
+        <div className="text-muted-foreground absolute left-3 flex h-full items-center">
           {startIcon}
         </div>
       )}
@@ -35,12 +35,12 @@ export function InputWithIcon({
         className={cn(
           startIcon && "pl-10",
           (endIcon || isPasswordType) && "pr-10",
-          className
+          className,
         )}
         {...props}
       />
       {endIcon && !isPasswordType && (
-        <div className="absolute right-3 flex h-full items-center text-muted-foreground">
+        <div className="text-muted-foreground absolute right-3 flex h-full items-center">
           {endIcon}
         </div>
       )}
@@ -48,7 +48,7 @@ export function InputWithIcon({
         <button
           type="button"
           onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-3 flex h-full items-center text-muted-foreground"
+          className="text-muted-foreground absolute right-3 flex h-full items-center"
         >
           {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
         </button>
