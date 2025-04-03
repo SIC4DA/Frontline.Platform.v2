@@ -53,13 +53,19 @@ const UserCard = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
           </div>
         )}
       </div>
-      <button className="text-[#EF4444]" onClick={signOut} disabled={isLoading}>
-        {isLoading ? (
-          <LoaderCircle size={24} className="animate-spin" />
-        ) : (
-          <LogOut size={24} />
-        )}
-      </button>
+      {isSidebarActive && (
+        <button
+          className="text-[#EF4444]"
+          onClick={signOut}
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <LoaderCircle size={24} className="animate-spin" />
+          ) : (
+            <LogOut size={24} />
+          )}
+        </button>
+      )}
     </div>
   );
 };

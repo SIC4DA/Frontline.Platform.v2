@@ -48,7 +48,9 @@ const SidebarLinks = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
             !isSidebarActive && "justify-center gap-0",
           )}
         >
-          <span className="fill-foreground size-6">{link.icon}</span>
+          <span className="fill-foreground size-6 ">
+            {link.icon}
+          </span>
           <p
             className={cn(
               "hidden whitespace-nowrap opacity-0 duration-300",

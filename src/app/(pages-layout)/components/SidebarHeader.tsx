@@ -16,25 +16,20 @@ const SidebarHeader = ({
         !isSidebarActive && "flex-col gap-5",
       )}
     >
-      {isSidebarActive ? (
-        <Image
-          src="/images/frontline-logo.webp"
-          alt="logo"
-          width={135}
-          height={30}
-          className="aspect-auto w-[135px]"
-          priority
-        />
-      ) : (
-        <Image
-          src="/images/logo.webp"
-          alt="logo"
-          width={35}
-          height={35}
-          className="aspect-auto w-[35px] object-cover"
-          priority
-        />
-      )}
+      <Image
+        src={
+          isSidebarActive ? "/images/frontline-logo.webp" : "/images/logo.webp"
+        }
+        alt="logo"
+        width={isSidebarActive ? 135 : 35}
+        height={isSidebarActive ? 30 : 35}
+        className={cn(
+          "aspect-auto",
+          isSidebarActive && "w-[135px]",
+          !isSidebarActive && "w-[35px] object-cover",
+        )}
+        priority
+      />
       <button onClick={() => setIsSidebarActive(!isSidebarActive)}>
         <PanelLeft size={22} className="text-foreground-secondary" />
       </button>
