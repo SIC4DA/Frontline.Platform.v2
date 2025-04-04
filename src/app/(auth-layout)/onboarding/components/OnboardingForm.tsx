@@ -5,22 +5,24 @@ import FormError from "@/components/shared/FormError";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { useOnboardingStore } from "@/store/onboarding";
 import { LoaderCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 import { useActionState } from "react";
 import ImageUploader from "./ImageUploader";
 
 const formElements = [
   {
-    label: "firstName",
-    id: "firstName",
-    placeholder: "firstNamePlaceholder",
+    label: "fullName",
+    id: "fullName",
+    placeholder: "fullNamePlaceholder",
     type: "text",
   },
   {
-    label: "lastName",
-    id: "lastName",
-    placeholder: "lastNamePlaceholder",
+    label: "username",
+    id: "username",
+    placeholder: "usernamePlaceholder",
     type: "text",
   },
   {
@@ -41,16 +43,31 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
   const t = useTranslations("auth");
   const [state, formAction, isPending] = useActionState(registerAction, {
     status: "idle",
-    firstName: "",
-    lastName: "",
+    fullName: "",
+    username: "",
     companyName: "",
     password: "",
   });
+
+  const { 
+    setOnboardingState,
+    resetStore
+  } = useOnboardingStore();
+
+  useEffect(() => {
+    return () => { 
+      resetStore();
+    }
+  }, []);
 
   const actionWithEmail = (formData: FormData) => {
     formData.append("email", email);
     formData.append("token", token);
     return formAction(formData);
+  };
+
+  const handleInputChange = (id: string, value: string) => {
+    setOnboardingState({ [id]: value });
   };
 
   return (
@@ -67,36 +84,39 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
       <ImageUploader formStatus={state.status} />
 
       <fieldset className="flex flex-col gap-5">
-        {formElements.map((element) => (
-          <div key={element.id}>
-            <label className="mb-2 text-sm" htmlFor={element.id}>
-              {t(element.label)}
-            </label>
-            <Input
-              type={element.type}
-              id={element.id}
-              name={element.id}
-              defaultValue={state[element.id as keyof typeof state] as string}
-              placeholder={t(element.placeholder)}
-              className={cn(
-                "text-sm  placeholder:text-sm",
-                state.errors?.[element.id as keyof typeof state.errors] &&
-                  "border-error",
+        {formElements.map((element) => {
+          return (
+            <div key={element.id}>
+              <label className="mb-2 text-sm" htmlFor={element.id}>
+                {t(element.label)}
+              </label>
+              <Input
+                type={element.type}
+                id={element.id}
+                name={element.id}
+                defaultValue={state[element.id as keyof typeof state] as string}
+                onChange={(e) => handleInputChange(element.id, e.target.value)}
+                placeholder={t(element.placeholder)}
+                className={cn(
+                  "text-sm  placeholder:text-sm",
+                  state.errors?.[element.id as keyof typeof state.errors] &&
+                    "border-error",
+                )}
+              />
+              {state.errors?.[element.id as keyof typeof state.errors] && (
+                <p className="mt-1 text-xs text-red-600">
+                  {
+                    (
+                      state.errors[
+                        element.id as keyof typeof state.errors
+                      ] as string[]
+                    )?.[0]
+                  }
+                </p>
               )}
-            />
-            {state.errors?.[element.id as keyof typeof state.errors] && (
-              <p className="mt-1 text-xs text-red-600">
-                {
-                  (
-                    state.errors[
-                      element.id as keyof typeof state.errors
-                    ] as string[]
-                  )?.[0]
-                }
-              </p>
-            )}
-          </div>
-        ))}
+            </div>
+          );
+        })}
       </fieldset>
 
       <Button

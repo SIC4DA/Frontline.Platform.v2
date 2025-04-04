@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useOnboardingStore } from "@/store/onboarding";
 import { FileUp } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -13,14 +14,14 @@ interface ImageUploaderProps {
 
 const ImageUploader = ({ formStatus }: ImageUploaderProps) => {
   const t = useTranslations("auth");
-  const [image, setImage] = useState<string | null>(null);
   const [isSizeErrorVisible, setIsSizeErrorVisible] = useState(false);
+  const { profileImage, setOnboardingState } = useOnboardingStore();
 
   useEffect(() => {
     if (formStatus !== "idle") {
-      setImage(null);
+      setOnboardingState({ profileImage: null });
     }
-  }, [formStatus]);
+  }, [formStatus, setOnboardingState]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -34,7 +35,7 @@ const ImageUploader = ({ formStatus }: ImageUploaderProps) => {
       const reader = new FileReader();
       reader.onload = (event) => {
         const result = event.target?.result as string;
-        setImage(result);
+        setOnboardingState({ profileImage: result });
       };
       reader.readAsDataURL(file);
     }
@@ -43,21 +44,21 @@ const ImageUploader = ({ formStatus }: ImageUploaderProps) => {
   return (
     <div className="grid grid-cols-[auto_1fr] items-center gap-5">
       <div className="h-14 w-14 overflow-hidden rounded-full">
-        {image ? (
+        {profileImage ? (
           <Image
-            src={image}
+            src={profileImage}
             alt="Profile"
             width={56}
             height={56}
             className="h-full w-full object-cover"
           />
         ) : (
-          <div className="border-border h-full w-full rounded-full bg-gradient-to-br from-[#4080F4] to-[#AFF300]" />
+          <div className="border-border h-full w-full rounded-full bg-gradient-to-b from-[#3BBBF6] to-[#266DF0]" />
         )}
       </div>
       <div className="flex flex-col gap-3">
         <p className="text-sm font-medium">{t("pfp")}</p>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <input
             type="file"
             onChange={handleFileChange}
@@ -67,7 +68,7 @@ const ImageUploader = ({ formStatus }: ImageUploaderProps) => {
             hidden
           />
           {/* Hidden input to store the base64 image data */}
-          <input type="hidden" name="profileImage" value={image || ""} />
+          <input type="hidden" name="profileImage" value={profileImage || ""} />
           <Button
             variant="outline"
             type="button"
@@ -81,10 +82,10 @@ const ImageUploader = ({ formStatus }: ImageUploaderProps) => {
           </Button>
           <Button
             variant="outline"
-            disabled={!image}
+            disabled={!profileImage}
             type="button"
             className="h-10 rounded-[12px] border-red-500 text-sm text-red-500 capitalize hover:text-red-500"
-            onClick={() => setImage(null)}
+            onClick={() => setOnboardingState({ profileImage: null })}
           >
             {t("remove")}
           </Button>

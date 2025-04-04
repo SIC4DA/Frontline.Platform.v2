@@ -50,7 +50,8 @@
     "username": "Username",
     "usernamePlaceholder": "Enter your username",
     "yourName": "Your name",
-    "yourUsername": "yourusername"
+    "yourUsername": "yourusername",
+    "searchPlaceholder": "Search your sales"
   },
   "sidebar": {
     "home": "Home",

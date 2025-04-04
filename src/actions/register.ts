@@ -10,15 +10,15 @@ import { z } from "zod";
 // Define the return type for the register action
 export type RegisterActionState = {
   status: "idle" | "success" | "error";
-  firstName?: string;
-  lastName?: string;
+  fullName?: string;
+  username?: string;
   companyName?: string;
   password?: string;
   email?: string;
   profileImage?: string;
   errors?: {
-    firstName?: string[];
-    lastName?: string[];
+    fullName?: string[];
+    username?: string[];
     companyName?: string[];
     password?: string[];
     form?: string[];
@@ -34,8 +34,8 @@ export async function registerAction(
 
   // Define the register form schema with Zod
   const registerSchema = z.object({
-    firstName: z.string().min(1, { message: t("firstNameRequired") }),
-    lastName: z.string().min(1, { message: t("lastNameRequired") }),
+    fullName: z.string().min(1, { message: t("fullNameRequired") }),
+    username: z.string().min(1, { message: t("usernameRequired") }),
     companyName: z.string().min(1, { message: t("companyNameRequired") }),
     password: z
       .string()
@@ -46,8 +46,8 @@ export async function registerAction(
   });
 
   // Extract form data
-  const firstName = formData.get("firstName") as string;
-  const lastName = formData.get("lastName") as string;
+  const fullName = formData.get("fullName") as string;
+  const username = formData.get("username") as string;
   const companyName = formData.get("companyName") as string;
   const email = formData.get("email") as string;
   const token = formData.get("token") as string;
@@ -56,8 +56,8 @@ export async function registerAction(
 
   // Validate form data
   const validationResult = registerSchema.safeParse({
-    firstName,
-    lastName,
+    fullName,
+    username,
     companyName,
     password,
   });
@@ -67,13 +67,13 @@ export async function registerAction(
     const errors = validationResult.error.flatten().fieldErrors;
     return {
       status: "error",
-      firstName,
-      lastName,
+      fullName,
+      username,
       companyName,
       password,
       errors: {
-        firstName: errors.firstName,
-        lastName: errors.lastName,
+        fullName: errors.fullName,
+        username: errors.username,
         companyName: errors.companyName,
         password: errors.password,
       },
@@ -104,10 +104,9 @@ export async function registerAction(
       body: {
         email,
         password,
-        name: `${firstName} ${lastName}`,
+        name: fullName,
         company: companyName,
-        firstName,
-        lastName,
+        username,
         ...(imageUrl && { imageUrl }),
       },
       query: {
@@ -120,8 +119,8 @@ export async function registerAction(
     console.log("error", error);
     return {
       status: "error",
-      firstName,
-      lastName,
+      fullName,
+      username,
       companyName,
       password,
       errors: {
