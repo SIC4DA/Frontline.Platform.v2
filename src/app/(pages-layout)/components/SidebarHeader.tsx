@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
-import { PanelLeft } from "lucide-react";
+// import { PanelLeft } from "lucide-react";
 import Image from "next/image";
+import PanelLeft from "../../../../public/icons/PanelLeft";
 
 const SidebarHeader = ({
   isSidebarActive,
@@ -30,8 +31,11 @@ const SidebarHeader = ({
         )}
         priority
       />
-      <button onClick={() => setIsSidebarActive(!isSidebarActive)}>
-        <PanelLeft size={22} className="text-foreground-secondary" />
+      <button
+        className="stroke-foreground-secondary"
+        onClick={() => setIsSidebarActive(!isSidebarActive)}
+      >
+        <PanelLeft />
       </button>
     </div>
   );

@@ -2,10 +2,13 @@
 
 import useDebounce from "@/hooks/shared/useDebounce";
 import { cn } from "@/lib/utils";
-import { Bolt, House, Star, WandSparkles } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import MagicPen from "../../../../public/icons/MagicPen";
+import Setting from "../../../../public/icons/Setting";
+import Star from "../../../../public/icons/Star";
+import House from "../../../../public/icons/House";
 
 const links = [
   {
@@ -16,7 +19,7 @@ const links = [
   {
     label: "frontlineAI",
     href: "/frontline-ai",
-    icon: <WandSparkles />,
+    icon: <MagicPen />,
   },
   {
     label: "leaderboardAndBadges",
@@ -26,7 +29,7 @@ const links = [
   {
     label: "settings",
     href: "/settings",
-    icon: <Bolt />,
+    icon: <Setting />,
   },
 ];
 
@@ -43,14 +46,12 @@ const SidebarLinks = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
           key={link.label}
           href={link.href}
           className={cn(
-            "text-foreground-secondary hover:text-foreground flex items-center gap-4 px-4 py-2 text-sm font-medium duration-300",
-            isActive(link.href) && "text-foreground",
+            "text-foreground-secondary hover:text-foreground stroke-foreground-secondary hover:stroke-foreground flex items-center gap-4 px-4 py-2 text-sm font-medium duration-300",
+            isActive(link.href) && "text-foreground stroke-foreground",
             !isSidebarActive && "justify-center gap-0",
           )}
         >
-          <span className="fill-foreground size-6 ">
-            {link.icon}
-          </span>
+          <span className="size-6">{link.icon}</span>
           <p
             className={cn(
               "hidden whitespace-nowrap opacity-0 duration-300",

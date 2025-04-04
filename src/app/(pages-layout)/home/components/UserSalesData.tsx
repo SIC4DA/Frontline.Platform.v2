@@ -1,6 +1,7 @@
 import { Sale } from "@/types/sales";
-import { Search } from "lucide-react";
+// import { Search } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Search from "../../../../../public/icons/Search";
 import SalesCard from "./SalesCard";
 
 const sales = [
@@ -51,8 +52,8 @@ const UserSalesData = () => {
         </p>
       </div>
       <div className="mb-6 flex items-center gap-3 rounded-lg bg-[#F5F5F5] px-6 py-2">
-        <label htmlFor="search-sales">
-          <Search size={22} className="text-foreground" />
+        <label htmlFor="search-sales" className="stroke-foreground">
+          <Search />
         </label>
         <input
           type="text"

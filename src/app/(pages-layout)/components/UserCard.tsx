@@ -5,9 +5,10 @@ import { useRouter } from "next/navigation";
 
 import { useSession } from "@/hooks/api/useSession";
 import { cn } from "@/lib/utils";
-import { LoaderCircle, LogOut } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
+import Logout from "../../../../public/icons/Logout";
 
 const UserCard = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
   const router = useRouter();
@@ -55,14 +56,14 @@ const UserCard = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
       </div>
       {isSidebarActive && (
         <button
-          className="text-[#EF4444]"
+          className="stroke-[#EF4444] text-[#EF4444]"
           onClick={signOut}
           disabled={isLoading}
         >
           {isLoading ? (
             <LoaderCircle size={24} className="animate-spin" />
           ) : (
-            <LogOut size={24} />
+            <Logout />
           )}
         </button>
       )}
