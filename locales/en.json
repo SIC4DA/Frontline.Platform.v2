@@ -38,13 +38,19 @@
     "passwordRequiresUppercase": "Password must contain at least one uppercase letter",
     "passwordRequiresLowercase": "Password must contain at least one lowercase letter",
     "passwordRequiresNumber": "Password must contain at least one number",
-    "firstNameRequired": "First name is required",
-    "lastNameRequired": "Last name is required",
+    "fullNameRequired": "Full name is required",
+    "usernameRequired": "Username is required",
     "companyNameRequired": "Company name is required",
     "alreadyHaveAccount": "Already have an account?",
     "noAccount": "Don’t have an account?",
     "login": "Login",
-    "checkDetails": "Please check your details and try again"
+    "checkDetails": "Please check your details and try again",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "Enter your full name",
+    "username": "Username",
+    "usernamePlaceholder": "Enter your username",
+    "yourName": "Your name",
+    "yourUsername": "yourusername"
   },
   "sidebar": {
     "home": "Home",
