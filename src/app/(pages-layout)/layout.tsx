@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import Sidebar from "./components/Sidebar";
+import MobileToolbar from "./components/MobileToolbar";
 
 export default async function PagesLayout({
   children,
@@ -17,6 +18,7 @@ export default async function PagesLayout({
 
   return (
     <main className="flex">
+      <MobileToolbar />
       <Sidebar
         isSidebarActive={isSidebarActive}
         updateSidebarState={updateSidebarState}

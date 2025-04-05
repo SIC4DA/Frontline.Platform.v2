@@ -38,7 +38,7 @@ const UserSalesData = () => {
   const t = useTranslations("home");
 
   return (
-    <div className="mt-7 w-full px-7 max-2xl:mt-5 max-sm:px-2">
+    <div className="mt-7 w-full px-7 max-2xl:mt-5 max-md:px-4 max-sm:px-2">
       <div className="mb-8 flex items-center gap-4 max-2xl:text-sm">
         <p>
           <span className="text-foreground me-1 font-semibold">25</span>
@@ -64,7 +64,7 @@ const UserSalesData = () => {
       </div>
       <div
         style={{
-          gridTemplateColumns: "repeat(auto-fit, minmax(370px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
         }}
         className="grid gap-4"
       >

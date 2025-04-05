@@ -19,7 +19,7 @@ export default async function HomePage() {
   }
 
   return (
-    <section className="px-8 py-3.5 max-sm:px-1">
+    <section className="px-8 py-3.5 max-md:px-5 max-sm:px-4 max-sm:pb-24">
       <UserCover user={data.user} />
       <UserData user={data.user} />
       <UserSalesData />
