@@ -44,8 +44,8 @@ const MobileToolbar = () => {
           href={link.href}
           title={link.label}
           className={cn(
-            "stroke-foreground-secondary rounded-lg fill-none p-3 hover:bg-[#EDEDED]",
-            isActive(link.href) && "bg-[#EDEDED]",
+            "stroke-foreground-secondary hover:bg-background-secondary rounded-lg fill-none p-3",
+            isActive(link.href) && "bg-background-secondary",
           )}
         >
           <span className="size-6">
