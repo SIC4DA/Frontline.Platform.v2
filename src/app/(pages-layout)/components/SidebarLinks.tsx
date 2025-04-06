@@ -41,14 +41,15 @@ const SidebarLinks = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
   const debouncedSidebarActivity = useDebounce(isSidebarActive, 100);
 
   return (
-    <nav className="mb-14 flex flex-col gap-3">
+    <nav className="mb-14 flex flex-col items-center gap-3">
       {links.map((link) => (
         <Link
           key={link.label}
           href={link.href}
           className={cn(
-            "text-foreground-secondary hover:text-foreground stroke-foreground-secondary hover:bg-background-secondary hover:stroke-foreground flex items-center gap-4 fill-none px-4 py-2 text-sm font-medium duration-300",
-            isActive(link.href) && "text-foreground bg-background-secondary",
+            "text-foreground-secondary hover:text-foreground stroke-foreground-secondary hover:bg-background-secondary hover:stroke-foreground flex items-center gap-4 rounded-lg fill-none px-4 py-2 text-sm font-medium duration-300",
+            isActive(link.href) &&
+              "text-foreground bg-background-secondary w-fit",
             !isSidebarActive && "justify-center gap-0",
           )}
         >
