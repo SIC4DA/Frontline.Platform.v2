@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+
 const House = ({ isActive }: { isActive?: boolean }) => {
   return (
     <svg
@@ -5,11 +7,15 @@ const House = ({ isActive }: { isActive?: boolean }) => {
       height="24"
       viewBox="0 0 20 20"
       xmlns="http://www.w3.org/2000/svg"
-      className={`fill-${isActive ? "foreground" : "none"}`}
+      className={cn("fill-none", isActive && "fill-foreground")}
     >
       <path
         d="M11.8031 1.96704L11.8034 1.96722L17.0833 5.66132C17.5066 5.9577 17.9099 6.44567 18.2078 7.01623C18.5056 7.58677 18.6758 8.19723 18.6758 8.71671V14.9317C18.6758 16.9931 17.0022 18.6667 14.9408 18.6667H5.05916C2.99921 18.6667 1.32416 16.9853 1.32416 14.9225V8.59754C1.32416 8.1156 1.47809 7.53611 1.7494 6.98507C2.02057 6.43431 2.38772 5.95526 2.7725 5.65513L2.77261 5.65505L7.36373 2.07195C7.36397 2.07177 7.3642 2.07159 7.36443 2.07141C8.57544 1.13365 10.5436 1.08463 11.8031 1.96704ZM10 16.6875C10.6519 16.6875 11.1875 16.1521 11.1875 15.5V12.75C11.1875 12.0981 10.6519 11.5625 10 11.5625C9.34806 11.5625 8.8125 12.0981 8.8125 12.75V15.5C8.8125 16.1521 9.3481 16.6875 10 16.6875Z"
-        className={`stroke-${isActive ? "foreground" : "foreground-secondary"}`}
+        // className={`stroke-${isActive ? "foreground" : "foreground-secondary"}`}
+        className={cn(
+          "stroke-foreground-secondary",
+          isActive && "stroke-foreground",
+        )}
         strokeWidth="1.5"
       />
     </svg>
