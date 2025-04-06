@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import React from "react";
 import House from "../../../../public/icons/House";
 import MagicPen from "../../../../public/icons/MagicPen";
 import Setting from "../../../../public/icons/Setting";
@@ -43,12 +44,15 @@ const MobileToolbar = () => {
           href={link.href}
           title={link.label}
           className={cn(
-            "hover:bg-background-secondary stroke-foreground-secondary rounded-lg p-3",
-            isActive(link.href) &&
-              "bg-background-secondary text-foreground stroke-foreground",
+            "stroke-foreground-secondary rounded-lg fill-none p-3 hover:bg-[#EDEDED]",
+            isActive(link.href) && "bg-[#EDEDED]",
           )}
         >
-          <span>{link.icon}</span>
+          <span className="size-6">
+            {React.cloneElement(link.icon, {
+              isActive: isActive(link.href),
+            })}
+          </span>
         </Link>
       ))}
     </div>
