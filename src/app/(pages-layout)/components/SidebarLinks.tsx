@@ -53,9 +53,8 @@ const SidebarLinks = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
           href={link.href}
           className={cn(
             "text-foreground-secondary hover:text-foreground stroke-foreground-secondary hover:bg-background-secondary hover:stroke-foreground flex items-center gap-4 rounded-lg fill-none px-4 py-2 text-sm font-medium duration-300",
-            isActive(link.href) &&
-              "text-foreground bg-background-secondary w-fit",
-            !isSidebarActive && "justify-center gap-0 px-3",
+            isActive(link.href) && "text-foreground bg-background-secondary",
+            !isSidebarActive && "w-fit justify-center gap-0 px-3",
           )}
         >
           <span className="size-6">
