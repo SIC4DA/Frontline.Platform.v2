@@ -8,7 +8,7 @@ const UserCover = ({ user }: { user: User }) => {
       <Image
         draggable={false}
         src={user.image ?? "/images/danny.jpg"}
-        className="border-background max-md:left-4 absolute -bottom-14 left-7 aspect-square w-36 rounded-[47px] border-[5px] shadow-2xl duration-300 max-2xl:-bottom-10 max-2xl:w-24 max-2xl:rounded-[29px] max-sm:left-2"
+        className="border-background absolute -bottom-14 left-7 aspect-square w-36 rounded-[47px] border-[5px] shadow-2xl duration-300 max-2xl:-bottom-10 max-2xl:w-24 max-2xl:rounded-[29px] max-md:left-4 max-sm:left-2"
         alt="user Image"
         width={144}
         height={144}

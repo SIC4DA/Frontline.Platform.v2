@@ -8,8 +8,7 @@ import { cn } from "@/lib/utils";
 import { useOnboardingStore } from "@/store/onboarding";
 import { LoaderCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useEffect } from "react";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import ImageUploader from "./ImageUploader";
 
 const formElements = [
@@ -49,15 +48,12 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
     password: "",
   });
 
-  const { 
-    setOnboardingState,
-    resetStore
-  } = useOnboardingStore();
+  const { setOnboardingState, resetStore } = useOnboardingStore();
 
   useEffect(() => {
-    return () => { 
+    return () => {
       resetStore();
-    }
+    };
   }, []);
 
   const actionWithEmail = (formData: FormData) => {
@@ -98,7 +94,7 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
                 onChange={(e) => handleInputChange(element.id, e.target.value)}
                 placeholder={t(element.placeholder)}
                 className={cn(
-                  "text-sm  placeholder:text-sm",
+                  "text-sm placeholder:text-sm",
                   state.errors?.[element.id as keyof typeof state.errors] &&
                     "border-error",
                 )}

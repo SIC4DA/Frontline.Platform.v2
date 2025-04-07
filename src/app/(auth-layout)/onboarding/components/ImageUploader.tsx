@@ -58,7 +58,7 @@ const ImageUploader = ({ formStatus }: ImageUploaderProps) => {
       </div>
       <div className="flex flex-col gap-3">
         <p className="text-sm font-medium">{t("pfp")}</p>
-        <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex flex-wrap items-center gap-2">
           <input
             type="file"
             onChange={handleFileChange}

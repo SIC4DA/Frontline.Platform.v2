@@ -17,13 +17,13 @@ const HomeCard = () => {
   return (
     <div className="absolute top-1/2 -right-28 -translate-y-1/2">
       <div className="relative h-[200px] w-[600px] rounded-xl bg-gradient-to-b from-[#266DF0] to-[#89D9FF]">
-        <div className="border-background absolute -bottom-10 left-7 aspect-square w-24 rounded-[29px] border-[5px] overflow-hidden shadow-2xl duration-300">
+        <div className="border-background absolute -bottom-10 left-7 aspect-square w-24 overflow-hidden rounded-[29px] border-[5px] shadow-2xl duration-300">
           {profileImage ? (
-            <Image 
-              src={profileImage} 
-              alt="Profile" 
-              width={96} 
-              height={96} 
+            <Image
+              src={profileImage}
+              alt="Profile"
+              width={96}
+              height={96}
               className="h-full w-full object-cover"
             />
           ) : (
@@ -45,19 +45,18 @@ const HomeCard = () => {
         </div>
         <p className="text-sm">Hey there! I love frontline</p>
         <div className="mt-6 flex items-center gap-3 rounded-lg bg-[#F5F5F5] px-6 py-2">
-        <label htmlFor="search-sales" className="stroke-foreground">
-          <Search />
-        </label>
-        <input
-          type="text"
-          id="search-sales"
-          disabled
-          placeholder={t("searchPlaceholder")}
-          className="placeholder:text-foreground-secondary text-foreground flex-grow bg-transparent py-1 focus:outline-0 text-sm"
-        />
+          <label htmlFor="search-sales" className="stroke-foreground">
+            <Search />
+          </label>
+          <input
+            type="text"
+            id="search-sales"
+            disabled
+            placeholder={t("searchPlaceholder")}
+            className="placeholder:text-foreground-secondary text-foreground flex-grow bg-transparent py-1 text-sm focus:outline-0"
+          />
+        </div>
       </div>
-      </div>
-      
     </div>
   );
 };

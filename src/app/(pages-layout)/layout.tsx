@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
-import Sidebar from "./components/Sidebar";
 import MobileToolbar from "./components/MobileToolbar";
+import Sidebar from "./components/Sidebar";
 
 export default async function PagesLayout({
   children,
