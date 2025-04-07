@@ -6,9 +6,11 @@
     "elysiajs",
     "pgadmin",
     "pgdata",
+    "shoutout",
     "turbopack",
     "typebox",
-    "typeschema"
+    "typeschema",
+    "Usecases"
   ],
   "typescript.tsdk": "node_modules\\typescript\\lib"
 }
