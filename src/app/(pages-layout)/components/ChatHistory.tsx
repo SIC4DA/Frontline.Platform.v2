@@ -16,7 +16,9 @@ const ChatHistory = () => {
         className="flex items-center justify-between"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <h3 className="text-sm font-medium text-[#4B5563]">{t("today")}</h3>
+        <h3 className="text-sm font-medium text-[#4B5563] max-2xl:text-xs">
+          {t("today")}
+        </h3>
         <span>
           <ChevronDown
             style={{
@@ -41,9 +43,11 @@ const ChatHistory = () => {
             alt="google"
             width={20}
             height={20}
-            className="aspect-square"
+            className="aspect-square size-5"
           />
-          <p className="text-foreground text-sm font-medium">Google</p>
+          <p className="text-foreground text-sm font-medium max-2xl:text-xs">
+            Google
+          </p>
         </div>
       </div>
     </div>

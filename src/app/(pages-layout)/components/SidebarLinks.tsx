@@ -57,7 +57,7 @@ const SidebarLinks = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
             !isSidebarActive && "w-fit justify-center gap-0 px-3",
           )}
         >
-          <span className="size-6">
+          <span>
             {React.cloneElement(link.icon, {
               isActive: isActive(link.href),
             })}

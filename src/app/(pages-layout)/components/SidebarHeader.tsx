@@ -22,17 +22,17 @@ const SidebarHeader = ({
           isSidebarActive ? "/images/frontline-logo.webp" : "/images/logo.webp"
         }
         alt="logo"
-        width={isSidebarActive ? 135 : 35}
-        height={isSidebarActive ? 30 : 35}
+        width={isSidebarActive ? 135 : 30}
+        height={30}
         className={cn(
           "aspect-auto",
-          isSidebarActive && "w-[135px]",
-          !isSidebarActive && "w-[35px] object-cover",
+          isSidebarActive && "w-[135px] max-2xl:w-[110px]",
+          !isSidebarActive && "w-[30px] object-cover",
         )}
         priority
       />
       <button
-        className="stroke-foreground-secondary"
+        className="stroke-foreground-secondary w-[24px] max-2xl:w-[18px]"
         onClick={() => setIsSidebarActive(!isSidebarActive)}
       >
         <PanelLeft />

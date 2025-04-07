@@ -3,11 +3,12 @@ import { cn } from "@/lib/utils";
 const MagicPen = ({ isActive }: { isActive?: boolean }) => {
   return (
     <svg
-      width="24"
-      height="24"
+      // width="24"
+      // height="24"
       viewBox="0 0 22 22"
       // className={`fill-${isActive ? "foreground" : "none"}`}
       xmlns="http://www.w3.org/2000/svg"
+      className="size-6 max-2xl:size-5"
     >
       <path
         d="M3.20833 18.7917C3.96917 19.5525 5.1975 19.5525 5.95833 18.7917L17.875 6.875C18.6358 6.11417 18.6358 4.88583 17.875 4.125C17.1142 3.36417 15.8858 3.36417 15.125 4.125L3.20833 16.0417C2.4475 16.8025 2.4475 18.0308 3.20833 18.7917Z"

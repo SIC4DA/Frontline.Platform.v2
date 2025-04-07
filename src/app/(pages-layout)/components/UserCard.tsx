@@ -41,14 +41,16 @@ const UserCard = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
           width={32}
           height={32}
           className={cn(
-            "aspect-auto w-8 object-cover",
+            "aspect-auto w-8 object-cover max-2xl:w-6",
             !isSidebarActive && "w-6",
           )}
         />
         {isSidebarActive && (
           <div>
-            <h4 className="text-sm font-medium">{data?.user.name}</h4>
-            <p className="text-foreground-secondary text-xs">
+            <h4 className="text-sm font-medium max-2xl:text-xs">
+              {data?.user.name}
+            </h4>
+            <p className="text-foreground-secondary text-xs max-2xl:text-[10px]">
               {data?.user.email}
             </p>
           </div>
@@ -63,7 +65,9 @@ const UserCard = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
           {isLoading ? (
             <LoaderCircle size={24} className="animate-spin" />
           ) : (
-            <Logout />
+            <span className="size-6 max-2xl:size-5">
+              <Logout />
+            </span>
           )}
         </button>
       )}

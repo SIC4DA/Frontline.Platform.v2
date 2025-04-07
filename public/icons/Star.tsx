@@ -3,10 +3,13 @@ import { cn } from "@/lib/utils";
 const Star = ({ isActive }: { isActive?: boolean }) => {
   return (
     <svg
-      width="24"
-      height="24"
+      // width="24"
+      // height="24"
       viewBox="0 0 19 18"
-      className={cn("fill-none", isActive && "fill-foreground")}
+      className={cn(
+        "size-6 fill-none max-2xl:size-5",
+        isActive && "fill-foreground",
+      )}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
