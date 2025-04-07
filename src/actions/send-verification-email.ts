@@ -1,8 +1,11 @@
 "use server";
 
 import env from "@/config/env";
+import { db } from "@/core/db";
+import { user } from "@/core/db/schema";
 import { auth } from "@/lib/auth";
 import { tryCatch } from "@/utils/tryCatch";
+import { eq } from "drizzle-orm";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -39,6 +42,23 @@ export async function sendVerificationEmailAction(
       email,
       errors: {
         email: errors.email,
+      },
+    };
+  }
+
+  const userExists = await db.query.user.findFirst({
+    columns: {
+      email: true,
+    },
+    where: eq(user.email, email),
+  });
+
+  if (userExists?.email) {
+    return {
+      status: "error",
+      email,
+      errors: {
+        email: ["Email already exists. Please use a different email."],
       },
     };
   }
