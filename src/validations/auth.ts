@@ -1,115 +1,208 @@
-import { REGEX } from "@/constants/regex";
-import { t } from "elysia";
+import { z } from "zod";
 
-enum VerificationOtpType {
-  EmailVerification = "email-verification",
-  ForgetPassword = "forget-password",
-  SignIn = "sign-in",
-}
-
-export const signUpEmailValidation = t.Object({
-  name: t.String({
-    error: "Name should be between 2 and 100 characters long",
-    minLength: 2,
-    maxLength: 100,
-  }),
-  firstName: t.String({
-    error: "First name should be between 2 and 100 characters long",
-    minLength: 2,
-    maxLength: 100,
-  }),
-  lastName: t.String({
-    error: "Last name should be between 2 and 100 characters long",
-    minLength: 2,
-    maxLength: 100,
-  }),
-  email: t.String({
-    error: "Invalid email",
-    pattern: REGEX.EMAIL,
-  }),
-  password: t.String({
-    error:
-      "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number",
-    minLength: 8,
-    pattern: REGEX.PASSWORD,
-  }),
-  company: t.String({
-    error: "Company name should be between 2 and 100 characters long",
-    minLength: 2,
-    maxLength: 100,
-  }),
-  imageUrl: t.Optional(
-    t.String({
-      error: "Image URL should be a valid URL",
-      pattern: REGEX.URL,
+export const signUpEmailValidation = z.object({
+  name: z
+    .string({
+      required_error: "Name is required",
+      invalid_type_error: "Name should be a string",
+    })
+    .min(2, {
+      message: "Name should be between 2 and 100 characters long",
+    })
+    .max(100, {
+      message: "Name should be between 2 and 100 characters long",
     }),
+  firstName: z
+    .string({
+      required_error: "First name is required",
+      invalid_type_error: "First name should be a string",
+    })
+    .min(2, {
+      message: "First name should be between 2 and 100 characters long",
+    })
+    .max(100, {
+      message: "First name should be between 2 and 100 characters long",
+    }),
+  lastName: z
+    .string({
+      required_error: "Last name is required",
+      invalid_type_error: "Last name should be a string",
+    })
+    .min(2, {
+      message: "Last name should be between 2 and 100 characters long",
+    })
+    .max(100, {
+      message: "Last name should be between 2 and 100 characters long",
+    }),
+  email: z
+    .string({
+      required_error: "Email is required",
+      invalid_type_error: "Email should be a string",
+    })
+    .email({
+      message: "Invalid email",
+    }),
+  password: z
+    .string({
+      required_error: "Password is required",
+      invalid_type_error: "Password should be a string",
+    })
+    .min(8, {
+      message:
+        "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number",
+    })
+    .refine(
+      (value) => {
+        const hasUpperCase = /[A-Z]/.test(value);
+        const hasLowerCase = /[a-z]/.test(value);
+        const hasNumber = /[0-9]/.test(value);
+        return hasUpperCase && hasLowerCase && hasNumber;
+      },
+      {
+        message:
+          "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number",
+      },
+    ),
+  company: z
+    .string({
+      required_error: "Company name is required",
+      invalid_type_error: "Company name should be a string",
+    })
+    .min(2, {
+      message: "Company name should be between 2 and 100 characters long",
+    })
+    .max(100, {
+      message: "Company name should be between 2 and 100 characters long",
+    }),
+  imageUrl: z.optional(
+    z
+      .string({
+        invalid_type_error: "Image URL should be a string",
+      })
+      .url({
+        message: "Image URL should be a valid URL",
+      }),
   ),
-  // department: t.String({
-  //   error: "Department should be between 2 and 100 characters long",
-  //   minLength: 2,
-  //   maxLength: 100,
-  // }),
-  // jobTitle: t.String({
-  //   error: "Job title should be between 2 and 100 characters long",
-  //   minLength: 2,
-  //   maxLength: 100,
-  // }),
-  // companyUrl: t.String({
-  //   error: "Company URL should be a valid URL",
-  //   pattern: REGEX.URL_REGEX,
-  // }),
-  // country: t.String({
-  //   error: "Country should be between 2 and 100 characters long",
-  //   minLength: 2,
-  //   maxLength: 100,
-  // }),
 });
 
-export const signInEmailValidation = t.Object({
-  email: t.String({ error: "Invalid email" }),
-  password: t.String({ error: "Invalid password" }),
+export const signInEmailValidation = z.object({
+  email: z
+    .string({
+      required_error: "Email is required",
+      invalid_type_error: "Email should be a string",
+    })
+    .email({
+      message: "Invalid email",
+    }),
+  password: z
+    .string({
+      required_error: "Password is required",
+      invalid_type_error: "Password should be a string",
+    })
+    .min(8, {
+      message: "Password should be at least 8 characters long",
+    }),
 });
 
-export const sendVerificationOtpValidation = t.Object({
-  email: t.String({
-    error: "Invalid email",
-    pattern: REGEX.EMAIL,
-  }),
-  type: t.Enum(VerificationOtpType, {
-    error:
-      "Invalid type, must be 'email-verification', 'forget-password' or 'sign-in'",
-  }),
-});
-
-export const verifyEmailValidation = t.Object({
-  email: t.String({
-    error: "Invalid email",
-    pattern: REGEX.EMAIL,
-  }),
-  otp: t.String({ error: "Code is required", minLength: 6, maxLength: 6 }),
-});
-
-export const forgetPasswordValidation = t.Object({
-  email: t.String({
-    error: "Invalid email",
-    pattern: REGEX.EMAIL,
+export const sendVerificationOtpValidation = z.object({
+  email: z
+    .string({
+      required_error: "Email is required",
+      invalid_type_error: "Email should be a string",
+    })
+    .email({
+      message: "Invalid email",
+    }),
+  type: z.enum(["email-verification", "forget-password", "sign-in"], {
+    required_error: "Type is required",
+    invalid_type_error:
+      "Type should be one of 'email-verification', 'forget-password' or 'sign-in'",
   }),
 });
 
-export const resetPasswordValidation = t.Object({
-  email: t.String({
-    error: "Invalid email",
-    pattern: REGEX.EMAIL,
-  }),
-  otp: t.String({ error: "Code is required", minLength: 6, maxLength: 6 }),
-  password: t.String({
-    error: "Password should be at least 6 characters long",
-    minLength: 6,
-    pattern: REGEX.PASSWORD,
-  }),
+export const verifyEmailValidation = z.object({
+  email: z
+    .string({
+      required_error: "Email is required",
+      invalid_type_error: "Email should be a string",
+    })
+    .email({
+      message: "Invalid email",
+    }),
+  otp: z
+    .string({
+      required_error: "Code is required",
+      invalid_type_error: "Code should be a string",
+    })
+    .min(6, {
+      message: "Code should be at least 6 characters long",
+    })
+    .max(6, {
+      message: "Code should be at most 6 characters long",
+    }),
 });
 
-export const signInSocialValidation = t.Object({
-  provider: t.String({ error: "Provider is required" }),
-  callbackURL: t.String({ error: "Callback URL is required" }),
+export const forgetPasswordValidation = z.object({
+  email: z
+    .string({
+      required_error: "Email is required",
+      invalid_type_error: "Email should be a string",
+    })
+    .email({
+      message: "Invalid email",
+    }),
+});
+
+export const resetPasswordValidation = z.object({
+  email: z
+    .string({
+      required_error: "Email is required",
+      invalid_type_error: "Email should be a string",
+    })
+    .email({
+      message: "Invalid email",
+    }),
+  otp: z
+    .string({
+      required_error: "Code is required",
+      invalid_type_error: "Code should be a string",
+    })
+    .min(6, {
+      message: "Code should be at least 6 characters long",
+    })
+    .max(6, {
+      message: "Code should be at most 6 characters long",
+    }),
+  password: z
+    .string({
+      required_error: "Password is required",
+      invalid_type_error: "Password should be a string",
+    })
+    .min(8, {
+      message:
+        "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number",
+    })
+    .refine(
+      (value) => {
+        const hasUpperCase = /[A-Z]/.test(value);
+        const hasLowerCase = /[a-z]/.test(value);
+        const hasNumber = /[0-9]/.test(value);
+        return hasUpperCase && hasLowerCase && hasNumber;
+      },
+      {
+        message:
+          "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number",
+      },
+    ),
+});
+
+export const signInSocialValidation = z.object({
+  provider: z.string({
+    required_error: "Provider is required",
+    invalid_type_error: "Provider should be a string",
+  }),
+  callbackURL: z.string({
+    required_error: "Callback URL is required",
+    invalid_type_error: "Callback URL should be a string",
+  }),
 });

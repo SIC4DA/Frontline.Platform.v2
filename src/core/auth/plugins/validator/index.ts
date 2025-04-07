@@ -2,12 +2,18 @@ import { type BetterAuthPlugin } from "better-auth";
 import { APIError } from "better-auth/api";
 import { createAuthMiddleware } from "better-auth/plugins";
 
-import { AssertError, Value } from "@sinclair/typebox/value";
-import { type TSchema } from "elysia";
+import { ZodError, type ZodSchema } from "zod";
 import type { ValidatorOptions } from "./types";
 
-const standardValidate = async <T>(schema: TSchema, data: T) => {
-  Value.Parse(["Assert"], schema, data);
+const standardValidate = async <T>(schema: ZodSchema, data: T) => {
+  const result = schema.safeParse(data);
+
+  if (!result.success) {
+    throw new APIError("BAD_REQUEST", {
+      message: "Invalid request",
+      errors: result.error,
+    });
+  }
 };
 
 export const validator = ({ middlewares }: ValidatorOptions) =>
@@ -34,17 +40,16 @@ export const validator = ({ middlewares }: ValidatorOptions) =>
               throw error;
             }
 
-            if (error instanceof AssertError) {
-              const firstError = error.Errors().First();
-
-              const mapError = {
-                code:
-                  firstError?.message.toUpperCase().split(" ").join("_") ||
-                  "BAD_REQUEST",
-                message:
-                  (firstError?.schema.error as string) || "Invalid request",
-                path: firstError?.path,
-              };
+            if (error instanceof ZodError) {
+              const mapError = Object.entries(
+                error.flatten().fieldErrors,
+              ).reduce(
+                (acc, [key, value]) => {
+                  acc[key] = value?.join(",") ?? "";
+                  return acc;
+                },
+                {} as Record<string, string>,
+              );
 
               throw new APIError("BAD_REQUEST", mapError);
             }

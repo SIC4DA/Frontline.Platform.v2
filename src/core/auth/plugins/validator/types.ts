@@ -1,5 +1,5 @@
 import type { createAuthMiddleware } from "better-auth/plugins";
-import type { TSchema } from "elysia";
+import type { ZodSchema } from "zod";
 
 export type MiddlewareHandlerContext = Parameters<
   Parameters<typeof createAuthMiddleware>[0]
@@ -8,9 +8,9 @@ export type MiddlewareHandlerContext = Parameters<
 export type MiddlewareOptions = {
   path: string;
   schemas: {
-    body?: TSchema;
-    query?: TSchema;
-    params?: TSchema;
+    body?: ZodSchema;
+    query?: ZodSchema;
+    params?: ZodSchema;
   };
   handler?: (ctx: MiddlewareHandlerContext) => Promise<void> | void;
 };
