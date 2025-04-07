@@ -45,7 +45,7 @@ const ChatHistory = () => {
             height={20}
             className="aspect-square size-5"
           />
-          <p className="text-foreground text-sm font-medium max-2xl:text-xs">
+          <p className="text-foreground text-sm max-2xl:text-xs">
             Google
           </p>
         </div>
