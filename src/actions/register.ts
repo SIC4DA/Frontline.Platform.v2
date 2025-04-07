@@ -1,7 +1,7 @@
 "use server";
 
-import { apiClient } from "@/lib/api-client";
 import { auth } from "@/lib/auth";
+import { uploadFile } from "@/services/cloudnary";
 import { tryCatch } from "@/utils/tryCatch";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
@@ -80,13 +80,15 @@ export async function registerAction(
     };
   }
 
-  let imageUrl: string | null = null;
+  let imageUrl: string | undefined;
   if (profileImage.size > 0) {
-    const { error: imageError, data } = await apiClient.api.image.upload.post({
-      file: profileImage,
-    });
+    const { error: imageError, data } = await tryCatch(
+      uploadFile(profileImage, {
+        folder: "profile",
+      }),
+    );
 
-    imageUrl = data?.url || null;
+    imageUrl = data?.secure_url;
 
     if (imageError) {
       console.log("imageError", imageError.message);

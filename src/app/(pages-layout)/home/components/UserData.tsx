@@ -27,7 +27,7 @@ const UserData = ({ user }: { user: User }) => {
             stroke="#fff"
           />
           <p className="text-foreground-secondary text-sm max-2xl:text-xs">
-            @dantheman
+            @{user.username}
           </p>
         </div>
         <p className="max-2xl:text-sm">

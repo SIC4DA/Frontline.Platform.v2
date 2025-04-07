@@ -1,7 +1,7 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
-import { admin, emailOTP, genericOAuth, openAPI } from "better-auth/plugins";
+import { admin, genericOAuth, openAPI, username } from "better-auth/plugins";
 
 import {
   databaseHooksOptions,
@@ -12,7 +12,6 @@ import {
   userOptions,
 } from "@/core/auth/options/better-auth";
 import { companyEmailOptions } from "@/core/auth/options/company-email";
-import { emailOTPOptions } from "@/core/auth/options/email-otp";
 import { genericOAuthOptions } from "@/core/auth/options/generic-oauth";
 import { validatorOptions } from "@/core/auth/options/validator";
 import { companyEmail } from "@/core/auth/plugins/company-email";
@@ -33,8 +32,8 @@ export const auth = betterAuth({
   socialProviders: socialProvidersOptions,
   databaseHooks: databaseHooksOptions,
   plugins: [
-    emailOTP(emailOTPOptions),
-    admin({ defaultRole: "user" }),
+    admin(),
+    username(),
     validator(validatorOptions),
     companyEmail(companyEmailOptions),
     openAPI(),

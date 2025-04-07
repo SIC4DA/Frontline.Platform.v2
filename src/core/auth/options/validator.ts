@@ -1,16 +1,9 @@
 import { APIError } from "better-auth/api";
+import { z } from "zod";
 
 import type { ValidatorOptions } from "../plugins/validator/types";
 
-import {
-  forgetPasswordValidation,
-  resetPasswordValidation,
-  sendVerificationOtpValidation,
-  signInEmailValidation,
-  signUpEmailValidation,
-  verifyEmailValidation,
-} from "@/validations/auth";
-import { t } from "elysia";
+import { signUpEmailValidation } from "@/validations/auth";
 
 export const validatorOptions: ValidatorOptions = {
   middlewares: [
@@ -18,7 +11,7 @@ export const validatorOptions: ValidatorOptions = {
       path: "/sign-up/email",
       schemas: {
         body: signUpEmailValidation,
-        query: t.Object({ token: t.String() }),
+        query: z.object({ token: z.string() }),
       },
       async handler(ctx) {
         const tempVerification = ctx.query?.token;
@@ -52,26 +45,6 @@ export const validatorOptions: ValidatorOptions = {
           ],
         });
       },
-    },
-    {
-      path: "/sign-in/email",
-      schemas: { body: signInEmailValidation },
-    },
-    {
-      path: "/email-otp/send-verification-otp",
-      schemas: { body: sendVerificationOtpValidation },
-    },
-    {
-      path: "/email-otp/verify-verification-otp",
-      schemas: { body: verifyEmailValidation },
-    },
-    {
-      path: "/forget-password/email-otp",
-      schemas: { body: forgetPasswordValidation },
-    },
-    {
-      path: "/email-otp/reset-password",
-      schemas: { body: resetPasswordValidation },
     },
   ],
 };

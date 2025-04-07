@@ -2,16 +2,18 @@ import { type BetterAuthPlugin } from "better-auth";
 import { APIError } from "better-auth/api";
 import { createAuthMiddleware } from "better-auth/plugins";
 
-import { ZodError, type ZodSchema } from "zod";
+import { type ZodSchema } from "zod";
 import type { ValidatorOptions } from "./types";
 
 const standardValidate = async <T>(schema: ZodSchema, data: T) => {
   const result = schema.safeParse(data);
 
   if (!result.success) {
+    const firstError = result.error.issues[0];
+
     throw new APIError("BAD_REQUEST", {
-      message: "Invalid request",
-      errors: result.error,
+      message: firstError.message,
+      code: firstError.code,
     });
   }
 };
@@ -38,20 +40,6 @@ export const validator = ({ middlewares }: ValidatorOptions) =>
 
             if (error instanceof APIError) {
               throw error;
-            }
-
-            if (error instanceof ZodError) {
-              const mapError = Object.entries(
-                error.flatten().fieldErrors,
-              ).reduce(
-                (acc, [key, value]) => {
-                  acc[key] = value?.join(",") ?? "";
-                  return acc;
-                },
-                {} as Record<string, string>,
-              );
-
-              throw new APIError("BAD_REQUEST", mapError);
             }
 
             throw new APIError("BAD_REQUEST", {

@@ -8,12 +8,12 @@ export const extractPublicId = (url: string) => {
   return match[1];
 };
 
-export const uploadFileService = async (file: File, folder: string) => {
+export const uploadFile = async (file: File, options: { folder: string }) => {
   const base64 = Buffer.from(await file.arrayBuffer()).toString("base64");
   const dataUri = `data:${file.type};base64,${base64}`;
 
   const uploadedResponse = await cloudinary.uploader.upload(dataUri, {
-    folder,
+    folder: options.folder,
     resource_type: "auto",
     format: "jpg",
     transformation: {
@@ -29,7 +29,7 @@ export const uploadFileService = async (file: File, folder: string) => {
   return uploadedResponse;
 };
 
-export const deleteFileService = async (publicId: string) => {
+export const deleteFile = async (publicId: string) => {
   const deletedResponse = await cloudinary.uploader.destroy(publicId);
   return deletedResponse;
 };

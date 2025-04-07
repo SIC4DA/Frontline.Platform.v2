@@ -14,8 +14,6 @@ export const emailAndPasswordOptions: BetterAuthOptions["emailAndPassword"] = {
 
 export const userOptions: BetterAuthOptions["user"] = {
   additionalFields: {
-    firstName: { type: "string", required: true },
-    lastName: { type: "string", required: true },
     company: { type: "string", required: true },
   },
 };
