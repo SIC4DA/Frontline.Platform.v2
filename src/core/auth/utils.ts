@@ -1,9 +1,8 @@
 type OAuthProfile = Partial<{
   id: string;
-  firstName: string;
-  lastName: string;
   email: string;
   name: string;
+  username: string;
   image: string;
   company: string;
   emailVerified: boolean;
@@ -12,10 +11,9 @@ type OAuthProfile = Partial<{
 export const mapOAuthProfile = (
   profile: OAuthProfile = {
     id: "",
-    firstName: "",
-    lastName: "",
     email: "",
     name: "",
+    username: "",
     image: "",
     company: "",
     emailVerified: true,

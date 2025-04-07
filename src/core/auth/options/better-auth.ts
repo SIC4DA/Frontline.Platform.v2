@@ -50,13 +50,12 @@ export const socialProvidersOptions: BetterAuthOptions["socialProviders"] = {
     mapProfileToUser: (profile) =>
       mapOAuthProfile({
         id: profile.sub,
-        firstName: profile.given_name,
-        lastName: profile.family_name,
         email: profile.email,
+        username: profile.name,
         name: profile.name,
         image: profile.picture,
-        emailVerified: profile.email_verified,
         company: "",
+        emailVerified: true,
       }),
   },
   microsoft: {
@@ -69,10 +68,9 @@ export const socialProvidersOptions: BetterAuthOptions["socialProviders"] = {
         email: profile.email,
         name: profile.name,
         image: profile.picture,
-        emailVerified: true,
-        firstName: "",
-        lastName: "",
         company: "",
+        username: profile.name,
+        emailVerified: true,
       }),
   },
   google: {
@@ -82,12 +80,11 @@ export const socialProvidersOptions: BetterAuthOptions["socialProviders"] = {
       mapOAuthProfile({
         id: profile.sub,
         email: profile.email,
-        firstName: profile.given_name,
-        lastName: profile.family_name,
+        username: profile.name,
         name: profile.name,
         image: profile.picture,
-        emailVerified: profile.email_verified,
         company: "",
+        emailVerified: true,
       }),
   },
 };
