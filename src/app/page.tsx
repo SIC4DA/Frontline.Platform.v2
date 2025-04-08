@@ -7,12 +7,7 @@ export default function Home() {
 
   return (
     <div>
-      <Aperture
-        size={200}
-        strokeWidth={2}
-        stroke="white"
-        fill="oklch(0.723 0.219 149.579)"
-      />
+      <Aperture size={200} strokeWidth={2} stroke="white" fill="oklch(0.723 0.219 149.579)" />
       <Button>{t("title")}</Button>
     </div>
   );

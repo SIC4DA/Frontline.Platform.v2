@@ -41,12 +41,7 @@ const SidebarLinks = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
   const debouncedSidebarActivity = useDebounce(isSidebarActive, 100);
 
   return (
-    <nav
-      className={cn(
-        "mb-14 flex flex-col gap-3",
-        !isSidebarActive && "items-center",
-      )}
-    >
+    <nav className={cn("mb-14 flex flex-col gap-3", !isSidebarActive && "items-center")}>
       {links.map((link) => (
         <Link
           key={link.label}
@@ -55,8 +50,7 @@ const SidebarLinks = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
             "text-foreground-secondary hover:text-foreground stroke-foreground-secondary hover:bg-background-secondary hover:stroke-foreground flex items-center gap-4 rounded-lg fill-none px-4 py-2 text-sm font-medium duration-300",
             isActive(link.href) && "text-foreground bg-background-secondary",
             !isSidebarActive && "w-fit justify-center gap-0 px-3",
-          )}
-        >
+          )}>
           <span>
             {React.cloneElement(link.icon, {
               isActive: isActive(link.href),
@@ -67,8 +61,7 @@ const SidebarLinks = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
               "hidden whitespace-nowrap opacity-0 duration-300",
               isSidebarActive && "block",
               debouncedSidebarActivity && "opacity-100",
-            )}
-          >
+            )}>
             {t(link.label)}
           </p>
         </Link>

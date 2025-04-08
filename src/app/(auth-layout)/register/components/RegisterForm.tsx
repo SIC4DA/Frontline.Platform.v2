@@ -11,47 +11,31 @@ import { useActionState } from "react";
 
 const RegisterForm = ({ formError }: { formError?: string }) => {
   const t = useTranslations("auth");
-  const [state, formAction, isPending] = useActionState(
-    sendVerificationEmailAction,
-    {
-      status: "idle",
-      email: "",
-      errors: {},
-    },
-  );
+  const [state, formAction, isPending] = useActionState(sendVerificationEmailAction, {
+    status: "idle",
+    email: "",
+    errors: {},
+  });
 
   return (
     <form action={formAction} className="w-full">
-      {formError && (
-        <FormError
-          errorMessage={formError || "An error occurred, please try again"}
-        />
-      )}
+      {formError && <FormError errorMessage={formError || "An error occurred, please try again"} />}
       <div>
         <InputWithIcon
           type="email"
           name="email"
           defaultValue={state.email}
-          startIcon={
-            <Mail
-              strokeWidth={1.5}
-              className="text-foreground-secondary/90"
-              size={21}
-            />
-          }
+          startIcon={<Mail strokeWidth={1.5} className="text-foreground-secondary/90" size={21} />}
           placeholder={t("emailPlaceholder")}
           className={cn("h-10 text-sm", state.errors?.email && "border-error")}
         />
-        {state.errors?.email && (
-          <p className="text-error mt-1 text-sm">{state.errors.email[0]}</p>
-        )}
+        {state.errors?.email && <p className="text-error mt-1 text-sm">{state.errors.email[0]}</p>}
       </div>
       <Button
         disabled={isPending}
         variant="primary"
         // size="lg"
-        className="mt-4 w-full text-base capitalize"
-      >
+        className="mt-4 w-full text-base capitalize">
         {isPending ? (
           <>
             <LoaderCircle size={21} className="animate-spin" />

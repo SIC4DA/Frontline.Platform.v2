@@ -4,9 +4,5 @@ export type CompanyEmailOptions = {
   allowedEmails?: string[];
   generateToken?: () => Promise<string> | string;
   registerTokenExpiry?: number;
-  sendCompanyEmailVerification: (options: {
-    email: string;
-    url: string;
-    token: string;
-  }) => Promise<void>;
+  sendCompanyEmailVerification: (options: { email: string; url: string; token: string }) => Promise<void>;
 };

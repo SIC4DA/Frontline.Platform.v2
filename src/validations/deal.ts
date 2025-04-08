@@ -11,15 +11,7 @@ export const ContributorSchema = z.object({
   name: z.string(),
   title: z.string(),
   shoutout: z.string(),
-  stage: z.enum([
-    "Prospecting",
-    "Discovery",
-    "Demo",
-    "Negotiation",
-    "Contracting",
-    "Closing",
-    "Other",
-  ]),
+  stage: z.enum(["Prospecting", "Discovery", "Demo", "Negotiation", "Contracting", "Closing", "Other"]),
 });
 
 // Product Info Schema

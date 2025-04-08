@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "format": "bun prettier -w .",
     "auth:gen": "bunx @better-auth/cli generate --config ./src/lib/auth.ts --output=./src/core/db/schemas/auth.ts --y",
     "db:push": "bun drizzle-kit push",
     "db:generate": "bun drizzle-kit generate",
@@ -17,7 +18,12 @@
     "plugins": [
       "prettier-plugin-organize-imports",
       "prettier-plugin-tailwindcss"
-    ]
+    ],
+    "endOfLine": "crlf",
+    "bracketSpacing": true,
+    "bracketSameLine": true,
+    "printWidth": 120,
+    "trailingComma": "all"
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.3.7",

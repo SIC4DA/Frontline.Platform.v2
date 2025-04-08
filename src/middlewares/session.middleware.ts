@@ -2,13 +2,7 @@ import { authClient } from "@/lib/auth-client";
 import { headers } from "next/headers";
 import { NextResponse, type NextRequest } from "next/server";
 
-const AUTH_PATHS = [
-  "/register",
-  "/login",
-  "/onboarding",
-  "/verify-email",
-  "/check-email",
-];
+const AUTH_PATHS = ["/register", "/login", "/onboarding", "/verify-email", "/check-email"];
 
 export const sessionMiddleware = async (req: NextRequest) => {
   const { data: session } = await authClient.getSession({

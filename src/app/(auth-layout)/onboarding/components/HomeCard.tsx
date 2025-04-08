@@ -19,13 +19,7 @@ const HomeCard = () => {
       <div className="relative h-[200px] w-[600px] rounded-xl bg-gradient-to-b from-[#266DF0] to-[#89D9FF]">
         <div className="border-background absolute -bottom-10 left-7 aspect-square w-24 overflow-hidden rounded-[29px] border-[5px] shadow-2xl duration-300">
           {profileImage ? (
-            <Image
-              src={profileImage}
-              alt="Profile"
-              width={96}
-              height={96}
-              className="h-full w-full object-cover"
-            />
+            <Image src={profileImage} alt="Profile" width={96} height={96} className="h-full w-full object-cover" />
           ) : (
             <div className="h-full w-full bg-[#C4C4C4]" />
           )}
@@ -34,14 +28,10 @@ const HomeCard = () => {
       <div className="mt-14 px-8">
         <div className="mb-3">
           <div className="flex items-center gap-1">
-            <h1 className="-mt-0.5 text-lg font-medium capitalize">
-              {displayName}
-            </h1>
+            <h1 className="-mt-0.5 text-lg font-medium capitalize">{displayName}</h1>
             <BadgeCheck fill="#49adf4" className="size-[18px]" stroke="#fff" />
           </div>
-          <p className="text-foreground-secondary text-xs">
-            @{displayUsername}
-          </p>
+          <p className="text-foreground-secondary text-xs">@{displayUsername}</p>
         </div>
         <p className="text-sm">Hey there! I love frontline</p>
         <div className="mt-6 flex items-center gap-3 rounded-lg bg-[#F5F5F5] px-6 py-2">

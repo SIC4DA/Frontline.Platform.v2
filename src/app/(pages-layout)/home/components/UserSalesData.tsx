@@ -46,9 +46,7 @@ const UserSalesData = () => {
         </p>
         <p>
           <span className="text-foreground me-1 font-semibold">66%</span>
-          <span className="text-foreground-secondary">
-            {t("conversionRate")}
-          </span>
+          <span className="text-foreground-secondary">{t("conversionRate")}</span>
         </p>
       </div>
       <div className="mb-6 flex items-center gap-3 rounded-lg bg-[#F5F5F5] px-6 py-2">
@@ -66,8 +64,7 @@ const UserSalesData = () => {
         style={{
           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
         }}
-        className="grid gap-4"
-      >
+        className="grid gap-4">
         {sales.map((sale) => (
           <SalesCard key={sale.id} sale={sale} />
         ))}

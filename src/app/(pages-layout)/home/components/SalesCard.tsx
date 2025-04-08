@@ -48,19 +48,12 @@ const SalesCard = ({ sale }: { sale: Sale }) => {
       </div>
       <div className="flex flex-col gap-7">
         {salesData.map((data) => (
-          <div
-            className="flex items-center justify-between gap-1 text-sm"
-            key={data.title}
-          >
+          <div className="flex items-center justify-between gap-1 text-sm" key={data.title}>
             <div className="flex items-center gap-2">
               {data.icon}
-              <p className="text-foreground-secondary capitalize">
-                {data.title}
-              </p>
+              <p className="text-foreground-secondary capitalize">{data.title}</p>
             </div>
-            <div className="flex w-full max-w-32 items-center justify-center text-center font-medium">
-              {data.value}
-            </div>
+            <div className="flex w-full max-w-32 items-center justify-center text-center font-medium">{data.value}</div>
           </div>
         ))}
       </div>

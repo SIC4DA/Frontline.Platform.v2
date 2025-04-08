@@ -3,9 +3,7 @@ import { sessionMiddleware } from "./middlewares/session.middleware";
 
 const PUBLIC_PATHS = ["/"];
 
-export default async function middleware(
-  request: NextRequest,
-): Promise<NextResponse> {
+export default async function middleware(request: NextRequest): Promise<NextResponse> {
   const url = request.nextUrl;
 
   let response;
@@ -24,7 +22,5 @@ export default async function middleware(
 }
 
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|images).*)",
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|images).*)"],
 };

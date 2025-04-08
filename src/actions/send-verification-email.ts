@@ -79,9 +79,7 @@ export async function sendVerificationEmailAction(
       status: "error",
       email,
       errors: {
-        email: [
-          error.message || "An unexpected error occurred. Please try again.",
-        ],
+        email: [error.message || "An unexpected error occurred. Please try again."],
       },
     };
   }

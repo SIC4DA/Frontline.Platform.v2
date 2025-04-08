@@ -17,10 +17,7 @@ export type LoginActionState = {
   };
 };
 
-export async function loginAction(
-  prevState: LoginActionState,
-  formData: FormData,
-): Promise<LoginActionState> {
+export async function loginAction(prevState: LoginActionState, formData: FormData): Promise<LoginActionState> {
   const t = await getTranslations("auth");
 
   const loginSchema = z.object({
@@ -65,9 +62,7 @@ export async function loginAction(
       email,
       password,
       errors: {
-        form: [
-          error.message || "An unexpected error occurred. Please try again.",
-        ],
+        form: [error.message || "An unexpected error occurred. Please try again."],
       },
     };
   }

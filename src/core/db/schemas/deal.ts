@@ -1,12 +1,4 @@
-import {
-  date,
-  integer,
-  jsonb,
-  pgTable,
-  serial,
-  text,
-  varchar,
-} from "drizzle-orm/pg-core";
+import { date, integer, jsonb, pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
 
 export const frontlineDeals = pgTable("deals", {
   id: serial("id").primaryKey(),

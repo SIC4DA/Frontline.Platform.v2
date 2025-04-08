@@ -26,10 +26,7 @@ export type RegisterActionState = {
 };
 
 // Create the register action
-export async function registerAction(
-  prevState: RegisterActionState,
-  formData: FormData,
-): Promise<RegisterActionState> {
+export async function registerAction(prevState: RegisterActionState, formData: FormData): Promise<RegisterActionState> {
   const t = await getTranslations("auth");
 
   // Define the register form schema with Zod
@@ -126,9 +123,7 @@ export async function registerAction(
       companyName,
       password,
       errors: {
-        form: [
-          error.message || "An unexpected error occurred. Please try again.",
-        ],
+        form: [error.message || "An unexpected error occurred. Please try again."],
       },
     };
   }

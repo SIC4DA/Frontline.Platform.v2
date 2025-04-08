@@ -46,15 +46,7 @@ export const emailTemplates = {
   </body>
 </html>`,
   }),
-  resetPassword: ({
-    to,
-    name,
-    url,
-  }: {
-    to: string;
-    name: string;
-    url: string;
-  }) => ({
+  resetPassword: ({ to, name, url }: { to: string; name: string; url: string }) => ({
     to,
     subject: "Password reset",
     html: `<!DOCTYPE html>
@@ -66,15 +58,7 @@ export const emailTemplates = {
   </body>
 </html>`,
   }),
-  companyEmailVerification: ({
-    to,
-    url,
-    token,
-  }: {
-    to: string;
-    url: string;
-    token: string;
-  }) => {
+  companyEmailVerification: ({ to, url, token }: { to: string; url: string; token: string }) => {
     const urlObj = new URL(url);
 
     urlObj.searchParams.append("token", token);

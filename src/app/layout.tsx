@@ -24,10 +24,7 @@ export default async function RootLayout({
           src="//unpkg.com/react-scan/dist/auto.global.js"
         />
       </head> */}
-      <body
-        className={`${GeistSans.className} antialiased`}
-        suppressHydrationWarning
-      >
+      <body className={`${GeistSans.className} antialiased`} suppressHydrationWarning>
         <Providers>{children}</Providers>
       </body>
     </html>

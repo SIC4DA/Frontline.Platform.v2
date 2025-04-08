@@ -11,16 +11,9 @@ const SidebarHeader = ({
   setIsSidebarActive: (isSidebarActive: boolean) => void;
 }) => {
   return (
-    <div
-      className={cn(
-        "mb-10 flex items-center justify-between gap-1",
-        !isSidebarActive && "flex-col gap-5",
-      )}
-    >
+    <div className={cn("mb-10 flex items-center justify-between gap-1", !isSidebarActive && "flex-col gap-5")}>
       <Image
-        src={
-          isSidebarActive ? "/images/frontline-logo.webp" : "/images/logo.webp"
-        }
+        src={isSidebarActive ? "/images/frontline-logo.webp" : "/images/logo.webp"}
         alt="logo"
         width={isSidebarActive ? 135 : 30}
         height={30}
@@ -33,8 +26,7 @@ const SidebarHeader = ({
       />
       <button
         className="stroke-foreground-secondary w-[24px] max-2xl:w-[18px]"
-        onClick={() => setIsSidebarActive(!isSidebarActive)}
-      >
+        onClick={() => setIsSidebarActive(!isSidebarActive)}>
         <PanelLeft />
       </button>
     </div>

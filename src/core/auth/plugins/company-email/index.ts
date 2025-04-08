@@ -4,11 +4,7 @@ import { generateRandomString } from "better-auth/crypto";
 import { createAuthEndpoint } from "better-auth/plugins";
 import CompanyEmailValidator from "company-email-validator";
 
-import {
-  checkCompanyEmailMetadata,
-  sendEmailVerificationMetadata,
-  verifyEmailMetadata,
-} from "./metadata";
+import { checkCompanyEmailMetadata, sendEmailVerificationMetadata, verifyEmailMetadata } from "./metadata";
 import type { CompanyEmailOptions } from "./types";
 import {
   checkCompanyEmailValidation,
@@ -97,8 +93,7 @@ export const companyEmail = (
           try {
             const { token } = ctx.query;
 
-            const verification =
-              await ctx.context.internalAdapter.findVerificationValue(token);
+            const verification = await ctx.context.internalAdapter.findVerificationValue(token);
 
             if (!verification || verification.expiresAt < new Date()) {
               throw new APIError("BAD_REQUEST", {
@@ -115,9 +110,7 @@ export const companyEmail = (
             });
 
             if (!disableCleanup) {
-              await ctx.context.internalAdapter.deleteVerificationValue(
-                verification.id,
-              );
+              await ctx.context.internalAdapter.deleteVerificationValue(verification.id);
             }
 
             return { success: true, token: generatedToken };

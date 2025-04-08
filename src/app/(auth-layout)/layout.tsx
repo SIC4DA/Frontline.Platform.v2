@@ -2,11 +2,7 @@ import { headers } from "next/headers";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
-export default async function AuthLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function AuthLayout({ children }: { children: React.ReactNode }) {
   const headersList = await headers();
   const currentPathname = headersList.get("current-pathname");
 
@@ -19,8 +15,7 @@ export default async function AuthLayout({
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      className="flex min-h-screen flex-col items-center gap-10 p-5"
-    >
+      className="flex min-h-screen flex-col items-center gap-10 p-5">
       <Header />
       {children}
       {currentPathname !== "/onboarding" && <Footer />}

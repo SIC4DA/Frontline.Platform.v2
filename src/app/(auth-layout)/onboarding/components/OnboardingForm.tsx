@@ -70,11 +70,7 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
     <form action={actionWithEmail} className="flex flex-col gap-8">
       {/* Form error message */}
       {state.errors?.form && (
-        <FormError
-          errorMessage={
-            state.errors?.form?.[0] || "An error occurred, please try again"
-          }
-        />
+        <FormError errorMessage={state.errors?.form?.[0] || "An error occurred, please try again"} />
       )}
 
       <ImageUploader formStatus={state.status} />
@@ -95,19 +91,12 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
                 placeholder={t(element.placeholder)}
                 className={cn(
                   "text-sm placeholder:text-sm",
-                  state.errors?.[element.id as keyof typeof state.errors] &&
-                    "border-error",
+                  state.errors?.[element.id as keyof typeof state.errors] && "border-error",
                 )}
               />
               {state.errors?.[element.id as keyof typeof state.errors] && (
                 <p className="mt-1 text-xs text-red-600">
-                  {
-                    (
-                      state.errors[
-                        element.id as keyof typeof state.errors
-                      ] as string[]
-                    )?.[0]
-                  }
+                  {(state.errors[element.id as keyof typeof state.errors] as string[])?.[0]}
                 </p>
               )}
             </div>
@@ -115,12 +104,7 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
         })}
       </fieldset>
 
-      <Button
-        className="capitalize"
-        type="submit"
-        variant="primary"
-        disabled={isPending}
-      >
+      <Button className="capitalize" type="submit" variant="primary" disabled={isPending}>
         {isPending ? (
           <>
             <LoaderCircle size={21} className="mr-2 animate-spin" />

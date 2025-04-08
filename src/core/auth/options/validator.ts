@@ -25,9 +25,7 @@ export const validatorOptions: ValidatorOptions = {
 
         const verified = await ctx.context.adapter.findOne({
           model: "verification",
-          where: [
-            { field: "identifier", value: tempVerification, operator: "eq" },
-          ],
+          where: [{ field: "identifier", value: tempVerification, operator: "eq" }],
         });
 
         console.log(verified);
@@ -40,9 +38,7 @@ export const validatorOptions: ValidatorOptions = {
 
         await ctx.context.adapter.delete({
           model: "verification",
-          where: [
-            { field: "identifier", value: tempVerification, operator: "eq" },
-          ],
+          where: [{ field: "identifier", value: tempVerification, operator: "eq" }],
         });
       },
     },

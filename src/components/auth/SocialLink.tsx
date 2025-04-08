@@ -19,10 +19,7 @@ const SocialLink = ({ option }: { option: SocialLinkOption }) => {
       }
     } else {
       const { data } = await authClient.signIn.social({
-        provider: option.provider as Exclude<
-          SocialLinkOption["provider"],
-          "slack"
-        >,
+        provider: option.provider as Exclude<SocialLinkOption["provider"], "slack">,
         callbackURL: "/home",
       });
       if (data?.url) {
@@ -36,15 +33,8 @@ const SocialLink = ({ option }: { option: SocialLinkOption }) => {
       key={option.name}
       className="border-border bg-background flex size-16 cursor-pointer items-center justify-center rounded-lg border p-2"
       title={option.name}
-      onClick={signIn}
-    >
-      <Image
-        src={option.image}
-        alt={option.name}
-        width={24}
-        height={24}
-        className="object-cover"
-      />
+      onClick={signIn}>
+      <Image src={option.image} alt={option.name} width={24} height={24} className="object-cover" />
     </button>
   );
 };
