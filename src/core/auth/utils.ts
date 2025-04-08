@@ -18,4 +18,10 @@ export const mapOAuthProfile = (
     company: "",
     emailVerified: true,
   },
-) => profile;
+) => {
+  if (!profile.username || profile.username === profile.name) {
+    profile.username = profile.username?.split(" ").join("_").toLowerCase();
+  }
+
+  return profile;
+};
