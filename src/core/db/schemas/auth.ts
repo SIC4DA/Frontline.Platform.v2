@@ -15,6 +15,7 @@ export const user = pgTable("user", {
   username: text("username").unique(),
   displayUsername: text("display_username"),
   company: text("company").notNull(),
+  companyLogo: text("company_logo"),
 });
 
 export const account = pgTable("account", {
@@ -43,3 +44,4 @@ export const verification = pgTable("verification", {
   createdAt: timestamp("created_at"),
   updatedAt: timestamp("updated_at"),
 });
+
