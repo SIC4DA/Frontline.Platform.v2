@@ -3,43 +3,16 @@
 import { registerAction } from "@/actions/register";
 import FormError from "@/components/shared/FormError";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
 import { useOnboardingStore } from "@/store/onboarding";
 import { LoaderCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useActionState, useEffect } from "react";
+import FormFields from "./FormFields";
 import ImageUploader from "./ImageUploader";
-
-const formElements = [
-  {
-    label: "fullName",
-    id: "fullName",
-    placeholder: "fullNamePlaceholder",
-    type: "text",
-  },
-  {
-    label: "username",
-    id: "username",
-    placeholder: "usernamePlaceholder",
-    type: "text",
-  },
-  {
-    label: "companyName",
-    id: "companyName",
-    placeholder: "companyNamePlaceholder",
-    type: "text",
-  },
-  {
-    label: "password",
-    id: "password",
-    placeholder: "passwordPlaceholder",
-    type: "password",
-  },
-];
 
 const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
   const t = useTranslations("auth");
+  const { resetStore } = useOnboardingStore();
   const [state, formAction, isPending] = useActionState(registerAction, {
     status: "idle",
     fullName: "",
@@ -47,8 +20,6 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
     companyName: "",
     password: "",
   });
-
-  const { setOnboardingState, resetStore } = useOnboardingStore();
 
   useEffect(() => {
     return () => {
@@ -62,10 +33,6 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
     return formAction(formData);
   };
 
-  const handleInputChange = (id: string, value: string) => {
-    setOnboardingState({ [id]: value });
-  };
-
   return (
     <form action={actionWithEmail} className="flex flex-col gap-8">
       {/* Form error message */}
@@ -75,34 +42,7 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
 
       <ImageUploader formStatus={state.status} />
 
-      <fieldset className="flex flex-col gap-5">
-        {formElements.map((element) => {
-          return (
-            <div key={element.id}>
-              <label className="mb-2 text-sm" htmlFor={element.id}>
-                {t(element.label)}
-              </label>
-              <Input
-                type={element.type}
-                id={element.id}
-                name={element.id}
-                defaultValue={state[element.id as keyof typeof state] as string}
-                onChange={(e) => handleInputChange(element.id, e.target.value)}
-                placeholder={t(element.placeholder)}
-                className={cn(
-                  "text-sm placeholder:text-sm",
-                  state.errors?.[element.id as keyof typeof state.errors] && "border-error",
-                )}
-              />
-              {state.errors?.[element.id as keyof typeof state.errors] && (
-                <p className="mt-1 text-xs text-red-600">
-                  {(state.errors[element.id as keyof typeof state.errors] as string[])?.[0]}
-                </p>
-              )}
-            </div>
-          );
-        })}
-      </fieldset>
+      <FormFields state={state} />
 
       <Button className="capitalize" type="submit" variant="primary" disabled={isPending}>
         {isPending ? (

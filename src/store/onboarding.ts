@@ -7,6 +7,7 @@ interface OnboardingState {
   password: string;
   profileImage: string | null;
   setOnboardingState: (state: Partial<OnboardingState>) => void;
+  updateOnboardingState: (id: string, value: string) => void;
   resetStore: () => void;
 }
 
@@ -22,5 +23,6 @@ export const useOnboardingStore = create<OnboardingState>((set) => ({
   ...initialState,
 
   setOnboardingState: (state: Partial<OnboardingState>) => set(state),
+  updateOnboardingState: (id: string, value: string) => set({ [id]: value }),
   resetStore: () => set(initialState),
 }));
