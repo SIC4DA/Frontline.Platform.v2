@@ -1,6 +1,7 @@
 "use client";
 
 import CompanyAutoComplete from "@/app/(auth-layout)/onboarding/components/CompanyAutoComplete";
+import FormError from "@/components/shared/FormError";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -20,6 +21,9 @@ const AccountSetupForm = () => {
   return (
     <form action={formAction} className="bg-background border-border w-full rounded-lg border p-10 max-md:px-4">
       <h2 className="mb-16 text-lg font-medium max-sm:text-center">{t("letsSetupYourAccount")}</h2>
+      {state.errors?.form && (
+        <FormError errorMessage={state.errors?.form?.[0] || "An error occurred, please try again"} />
+      )}
       <fieldset className="mb-16 flex flex-col gap-5">
         <div>
           <label className="mb-2 text-sm" htmlFor="username">

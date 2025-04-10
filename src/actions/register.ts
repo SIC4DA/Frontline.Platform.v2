@@ -104,7 +104,7 @@ export async function registerAction(prevState: RegisterActionState, formData: F
         email,
         password,
         name: fullName,
-        company: companyName,
+        companyName,
         username,
         ...(imageUrl && { imageUrl }),
       },

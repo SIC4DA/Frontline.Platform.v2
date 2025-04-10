@@ -3,6 +3,7 @@
 import { auth } from "@/lib/auth";
 import { tryCatch } from "@/utils/tryCatch";
 import { getTranslations } from "next-intl/server";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -23,12 +24,14 @@ export async function accountSetupAction(prevState: AccountSetupState, formData:
   const loginSchema = z.object({
     username: z.string().min(1, { message: t("usernameRequired") }),
     companyName: z.string().min(1, { message: t("companyNameRequired") }),
+    companyLogo: z.string(),
   });
 
   const username = formData.get("username") as string;
   const companyName = formData.get("companyName") as string;
+  const companyLogo = formData.get("companyLogo") as string;
 
-  const validationResult = loginSchema.safeParse({ username, companyName });
+  const validationResult = loginSchema.safeParse({ username, companyName, companyLogo });
 
   if (!validationResult.success) {
     const errors = validationResult.error.flatten().fieldErrors;
@@ -45,10 +48,9 @@ export async function accountSetupAction(prevState: AccountSetupState, formData:
 
   const { error } = await tryCatch(
     auth.api.updateUser({
-      body: {
-        username,
-        companyName,
-      },
+      headers: await headers(),
+      // @ts-expect-error username & companyName is a valid key of loginSchema
+      body: validationResult.data,
     }),
   );
 

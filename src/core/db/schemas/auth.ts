@@ -14,7 +14,7 @@ export const user = pgTable("user", {
   banExpires: timestamp("ban_expires"),
   username: text("username").unique(),
   displayUsername: text("display_username"),
-  company: text("company").notNull(),
+  companyName: text("company_name").notNull(),
   companyLogo: text("company_logo"),
 });
 
@@ -44,3 +44,4 @@ export const verification = pgTable("verification", {
   createdAt: timestamp("created_at"),
   updatedAt: timestamp("updated_at"),
 });
+

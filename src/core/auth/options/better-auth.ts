@@ -14,7 +14,7 @@ export const emailAndPasswordOptions: BetterAuthOptions["emailAndPassword"] = {
 
 export const userOptions: BetterAuthOptions["user"] = {
   additionalFields: {
-    company: { type: "string", required: true },
+    companyName: { type: "string", required: true },
     companyLogo: { type: "string", required: false },
   },
 };
@@ -52,11 +52,8 @@ export const socialProvidersOptions: BetterAuthOptions["socialProviders"] = {
       mapOAuthProfile({
         id: profile.sub,
         email: profile.email,
-        username: profile.name,
         name: profile.name,
         image: profile.picture,
-        company: "",
-        emailVerified: true,
       }),
   },
   microsoft: {
@@ -69,9 +66,6 @@ export const socialProvidersOptions: BetterAuthOptions["socialProviders"] = {
         email: profile.email,
         name: profile.name,
         image: profile.picture,
-        company: "",
-        username: profile.name,
-        emailVerified: true,
       }),
   },
   google: {
@@ -81,11 +75,8 @@ export const socialProvidersOptions: BetterAuthOptions["socialProviders"] = {
       mapOAuthProfile({
         id: profile.sub,
         email: profile.email,
-        username: profile.name,
         name: profile.name,
         image: profile.picture,
-        company: "",
-        emailVerified: true,
       }),
   },
 };

@@ -52,7 +52,7 @@ export const signUpEmailValidation = z.object({
           "Password should be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number",
       },
     ),
-  company: z
+  companyName: z
     .string({
       required_error: "Company name is required",
       invalid_type_error: "Company name should be a string",

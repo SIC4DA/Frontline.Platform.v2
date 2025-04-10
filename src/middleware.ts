@@ -8,6 +8,7 @@ export default async function middleware(request: NextRequest): Promise<NextResp
   const url = request.nextUrl;
   const pathname = url.pathname;
   const response = NextResponse.next();
+
   response.headers.set("current-pathname", pathname);
   response.headers.set("current-url", url.toString());
 
@@ -19,7 +20,7 @@ export default async function middleware(request: NextRequest): Promise<NextResp
     },
   });
 
-  if (!AUTH_PATHS.includes(pathname) && session && !session?.user.username) {
+  if (!AUTH_PATHS.includes(pathname) && pathname !== "/account-setup" && session && !session?.user.username) {
     return NextResponse.redirect(new URL("/account-setup", request.nextUrl.origin));
   }
 

@@ -15,12 +15,9 @@ export const genericOAuthOptions: Parameters<typeof genericOAuth>[0] = {
       mapProfileToUser: (profile) =>
         mapOAuthProfile({
           id: profile.sub,
-          username: profile.name,
           email: profile.email,
           name: profile.name,
           image: profile.picture,
-          emailVerified: profile.email_verified,
-          company: "",
         }),
     },
   ],

@@ -4,24 +4,19 @@ type OAuthProfile = Partial<{
   name: string;
   username: string;
   image: string;
-  company: string;
+  companyName: string;
+  companyLogo: string;
   emailVerified: boolean;
 }>;
 
-export const mapOAuthProfile = (
-  profile: OAuthProfile = {
-    id: "",
-    email: "",
-    name: "",
-    username: "",
-    image: "",
-    company: "",
-    emailVerified: true,
-  },
-) => {
-  if (!profile.username || profile.username === profile.name) {
-    profile.username = profile.username?.split(" ").join("_").toLowerCase();
-  }
-
-  return profile;
-};
+export const mapOAuthProfile = (profile: OAuthProfile) => ({
+  id: "",
+  email: "",
+  name: "",
+  username: "",
+  image: "",
+  companyName: "",
+  companyLogo: "",
+  emailVerified: true,
+  ...profile,
+});

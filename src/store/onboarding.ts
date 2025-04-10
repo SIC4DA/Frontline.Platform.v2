@@ -21,7 +21,6 @@ const initialState = {
 
 export const useOnboardingStore = create<OnboardingState>((set) => ({
   ...initialState,
-
   setOnboardingState: (state: Partial<OnboardingState>) => set(state),
   updateOnboardingState: (id: string, value: string) => set({ [id]: value }),
   resetStore: () => set(initialState),
