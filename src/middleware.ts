@@ -1,23 +1,36 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sessionMiddleware } from "./middlewares/session.middleware";
+import { authClient } from "./lib/auth-client";
 
 const PUBLIC_PATHS = ["/"];
+const AUTH_PATHS = ["/register", "/login", "/onboarding", "/verify-email", "/check-email"];
 
 export default async function middleware(request: NextRequest): Promise<NextResponse> {
   const url = request.nextUrl;
-
-  let response;
-
-  if (!PUBLIC_PATHS.includes(url.pathname)) {
-    response = await sessionMiddleware(request);
-  }
-
-  if (!response) {
-    response = NextResponse.next();
-  }
-
-  response.headers.set("current-pathname", url.pathname);
+  const pathname = url.pathname;
+  const response = NextResponse.next();
+  response.headers.set("current-pathname", pathname);
   response.headers.set("current-url", url.toString());
+
+  if (PUBLIC_PATHS.includes(pathname)) return response;
+
+  const { data: session } = await authClient.getSession({
+    fetchOptions: {
+      headers: request.headers,
+    },
+  });
+
+  if (!AUTH_PATHS.includes(pathname) && session && !session?.user.username) {
+    return NextResponse.redirect(new URL("/account-setup", request.nextUrl.origin));
+  }
+
+  if (AUTH_PATHS.includes(pathname) && session) {
+    return NextResponse.redirect(new URL("/home", request.nextUrl.origin));
+  }
+
+  if (!AUTH_PATHS.includes(pathname) && !session) {
+    return NextResponse.redirect(new URL("/login", request.nextUrl.origin));
+  }
+
   return response;
 }
 
