@@ -46,6 +46,7 @@ const CompaniesPopover = ({
                 alt={brand.name}
                 width={34}
                 height={34}
+                loading="lazy"
                 className="aspect-square w-8 rounded-xl object-cover"
               />
               <p className="text-sm font-medium capitalize">{brand.name}</p>
