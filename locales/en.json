@@ -52,7 +52,9 @@
     "usernamePlaceholder": "Enter your username",
     "yourName": "Your name",
     "yourUsername": "yourusername",
-    "searchPlaceholder": "Search your sales"
+    "searchPlaceholder": "Search your sales",
+    "letsSetupYourAccount": "Let’s set you up",
+    "settingUp": "Setting up"
   },
   "sidebar": {
     "home": "Home",

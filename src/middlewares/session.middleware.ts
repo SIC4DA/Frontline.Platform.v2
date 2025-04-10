@@ -11,6 +11,10 @@ export const sessionMiddleware = async (req: NextRequest) => {
     },
   });
 
+  // if (!AUTH_PATHS.includes(req.nextUrl.pathname) && session && !session?.user.username) {
+  //   return NextResponse.redirect(new URL("/account-setup", req.nextUrl.origin));
+  // }
+
   if (AUTH_PATHS.includes(req.nextUrl.pathname) && session) {
     return NextResponse.redirect(new URL("/home", req.nextUrl.origin));
   }
