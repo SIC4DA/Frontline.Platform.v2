@@ -25,7 +25,7 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
     return () => {
       resetStore();
     };
-  }, []);
+  }, [resetStore]);
 
   const actionWithEmail = (formData: FormData) => {
     formData.append("email", email);

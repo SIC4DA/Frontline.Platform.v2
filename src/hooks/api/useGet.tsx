@@ -10,5 +10,5 @@ export const useGet = <T,>({ endpoint, queryKey, queryOptions, requestOptions }:
     queryFn: () => requestHandler<T>({ endpoint, method: "GET", requestOptions }),
   });
 
-  return { ...results } as UseQueryResult<T, Error>;
+  return results as UseQueryResult<T, Error>;
 };

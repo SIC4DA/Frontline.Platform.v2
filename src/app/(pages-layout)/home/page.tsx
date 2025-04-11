@@ -1,14 +1,15 @@
 import RequestError from "@/components/shared/RequestError";
 import { auth } from "@/lib/auth";
+import type { Session, User } from "@/lib/auth.types";
 import { headers } from "next/headers";
 import UserCover from "./components/UserCover";
 import UserData from "./components/UserData";
 import UserSalesData from "./components/UserSalesData";
 
 export default async function HomePage() {
-  const data = await auth.api.getSession({
+  const data = (await auth.api.getSession({
     headers: await headers(),
-  });
+  })) as { user: User; session: Session } | null;
 
   if (!data?.user) {
     return (
