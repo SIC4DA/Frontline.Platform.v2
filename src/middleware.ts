@@ -20,8 +20,12 @@ export default async function middleware(request: NextRequest): Promise<NextResp
     },
   });
 
-  if (!AUTH_PATHS.includes(pathname) && pathname !== "/account-setup" && session && !session?.user.username) {
+  if (!AUTH_PATHS.includes(pathname) && pathname !== "/account-setup" && session?.user && !session?.user?.username) {
     return NextResponse.redirect(new URL("/account-setup", request.nextUrl.origin));
+  }
+
+  if (pathname === "/account-setup" && session?.user?.username) {
+    return NextResponse.redirect(new URL("/home", request.nextUrl.origin));
   }
 
   if (AUTH_PATHS.includes(pathname) && session) {

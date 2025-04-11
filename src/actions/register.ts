@@ -46,6 +46,7 @@ export async function registerAction(prevState: RegisterActionState, formData: F
   const fullName = formData.get("fullName") as string;
   const username = formData.get("username") as string;
   const companyName = formData.get("companyName") as string;
+  const companyLogo = formData.get("companyLogo") as string;
   const email = formData.get("email") as string;
   const token = formData.get("token") as string;
   const password = formData.get("password") as string;
@@ -105,6 +106,7 @@ export async function registerAction(prevState: RegisterActionState, formData: F
         password,
         name: fullName,
         companyName,
+        companyLogo,
         username,
         ...(imageUrl && { imageUrl }),
       },
