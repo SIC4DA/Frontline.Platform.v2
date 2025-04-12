@@ -85,6 +85,7 @@
     "bioMaxLength": "Bio must be less than 150 characters",
     "fullNameRequired": "Full name is required",
     "usernameRequired": "Username is required",
-    "saving": "Saving"
+    "saving": "Saving",
+    "defaultBio": "Hey there! I love frontline"
   }
 }

@@ -10,7 +10,7 @@ import { EditUserState } from "../../actions/editUser";
 
 const EditUserFields = ({ user, state }: { user: User; state: EditUserState }) => {
   const t = useTranslations("home");
-  const [bio, setBio] = useState<string>("");
+  const [bio, setBio] = useState<string>(user.bio || t("defaultBio"));
 
   return (
     <fieldset className="mt-8 grid grid-cols-2 gap-4">
@@ -56,7 +56,6 @@ const EditUserFields = ({ user, state }: { user: User; state: EditUserState }) =
             name="bio"
             maxLength={150}
             value={bio}
-            defaultValue={user.bio || ""}
             onChange={(e) => setBio(e.target.value)}
             placeholder={t("bioPlaceholder")}
             className={cn(

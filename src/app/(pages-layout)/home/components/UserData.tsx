@@ -1,9 +1,12 @@
 import { BadgeCheck } from "lucide-react";
 
 import type { User } from "@/lib/auth.types";
+import { useTranslations } from "next-intl";
 import EditUserModal from "./edit-modal/EditUserModal";
 
 const UserData = ({ user }: { user: User }) => {
+  const t = useTranslations("home");
+
   return (
     <div className="mt-4 w-full px-7 max-md:px-4 max-sm:px-2">
       <EditUserModal user={user} />
@@ -18,7 +21,7 @@ const UserData = ({ user }: { user: User }) => {
           />
           <p className="text-foreground-secondary text-sm max-2xl:text-xs">@{user.username}</p>
         </div>
-        <p className="max-2xl:text-sm">Growth Partner & Friend and yeah iam the founder of frontline</p>
+        <p className="max-2xl:text-sm">{user.bio || t("defaultBio")}</p>
       </div>
     </div>
   );
