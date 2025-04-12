@@ -1,4 +1,4 @@
-import { Sale } from "@/types/sales";
+import { Sale } from "@/types/deal";
 import { CircleCheck, Crosshair, User, Wallet } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";

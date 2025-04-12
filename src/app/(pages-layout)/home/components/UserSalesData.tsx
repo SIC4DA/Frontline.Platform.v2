@@ -1,4 +1,4 @@
-import { Sale } from "@/types/sales";
+import { Sale } from "@/types/deal";
 // import { Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Search from "../../../../../public/icons/Search";
