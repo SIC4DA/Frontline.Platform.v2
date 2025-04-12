@@ -1,12 +1,15 @@
-import { date, index, integer, jsonb, pgTable, text, uuid, varchar } from "drizzle-orm/pg-core";
+import { date, index, integer, jsonb, pgTable, text, varchar } from "drizzle-orm/pg-core";
 
+import { randomUUID } from "node:crypto";
 import { user } from "./auth";
 import { chat } from "./chat";
 
 export const deal = pgTable(
   "deals",
   {
-    id: uuid("id").primaryKey().defaultRandom(),
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => randomUUID()),
     chatId: text("chat_id")
       .notNull()
       .references(() => chat.id, { onDelete: "cascade" }),
@@ -43,8 +46,8 @@ export const deal = pgTable(
     dealContributors: jsonb("deal_contributors").notNull(),
   },
   (deal) => [
-    index("chat_id_idx").on(deal.chatId),
-    index("user_id_idx").on(deal.userId),
-    index("company_name_idx").on(deal.companyName),
+    index("deal_chat_id_idx").on(deal.chatId),
+    index("deal_user_id_idx").on(deal.userId),
+    index("deal_company_name_idx").on(deal.companyName),
   ],
 );

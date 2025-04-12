@@ -1,11 +1,14 @@
-import { index, jsonb, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { index, jsonb, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
+import { randomUUID } from "node:crypto";
 import { user } from "./auth";
 
 export const message = pgTable(
   "message",
   {
-    id: uuid("id").primaryKey().defaultRandom(),
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => randomUUID()),
     userId: text("user_id").references(() => user.id, { onDelete: "cascade" }),
     chatId: text("chat_id").references(() => chat.id, { onDelete: "cascade" }),
     role: text("role").notNull(),
@@ -21,10 +24,12 @@ export const message = pgTable(
 export const chat = pgTable(
   "chat",
   {
-    id: uuid("id").primaryKey().defaultRandom(),
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => randomUUID()),
     userId: text("user_id").references(() => user.id, { onDelete: "cascade" }),
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
-  (chat) => [index("user_id_idx").on(chat.userId)],
+  (chat) => [index("chat_user_id_idx").on(chat.userId)],
 );
