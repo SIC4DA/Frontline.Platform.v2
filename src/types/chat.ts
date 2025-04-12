@@ -1,3 +1,6 @@
-import type { chat } from "@/core/db/schema";
+import { chat, message } from "@/core/db/schema";
 
-export type chat = typeof chat.$inferSelect;
+export type chat = typeof chat.$inferSelect & {
+  messages: (typeof message.$inferSelect)[];
+};
+

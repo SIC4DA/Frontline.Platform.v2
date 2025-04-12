@@ -22,6 +22,17 @@ export const message = pgTable(
   (message) => [index("chat_id_idx").on(message.chatId)],
 );
 
+export const messageRelations = relations(message, ({ one }) => ({
+  user: one(user, {
+    fields: [message.userId],
+    references: [user.id],
+  }),
+  chat: one(chat, {
+    fields: [message.chatId],
+    references: [chat.id],
+  }),
+}));
+
 export const chat = pgTable(
   "chat",
   {

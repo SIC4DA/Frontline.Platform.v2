@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/core/db";
-import { chat } from "@/core/db/schema";
+import { chat, message } from "@/core/db/schema";
 import { and, eq } from "drizzle-orm";
 import { getMe } from "./user";
 
@@ -10,25 +10,22 @@ export const getChat = async (id: string) => {
 
   const result = await db.query.chat.findFirst({
     where: and(eq(chat.id, id), eq(chat.userId, user?.id)),
-    with: {
-      messages: true,
-    },
+  });
+  const messages = await db.query.message.findMany({
+    where: eq(message.chatId, id),
   });
 
-  return result;
+  return { ...result, messages };
 };
 
 export const getChats = async () => {
   const user = await getMe();
 
-  const result = await db.query.chat.findMany({
-    with: {
-      messages: true,
-    },
+  const chats = await db.query.chat.findMany({
     where: eq(chat.userId, user.id),
   });
 
-  return result;
+  return chats;
 };
 
 export const createChat = async () => {
