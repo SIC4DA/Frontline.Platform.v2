@@ -12,7 +12,7 @@ export const getDeal = async (id: string) => {
     where: and(eq(deal.id, id), eq(deal.userId, user.id)),
   });
 
-  return result?.id;
+  return result;
 };
 
 export const getDeals = async () => {

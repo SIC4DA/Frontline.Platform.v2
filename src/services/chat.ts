@@ -11,11 +11,11 @@ export const getChat = async (id: string) => {
   const result = await db.query.chat.findFirst({
     where: and(eq(chat.id, id), eq(chat.userId, user?.id)),
     with: {
-      message: true,
+      messages: true,
     },
   });
 
-  return result?.id;
+  return result;
 };
 
 export const getChats = async () => {
@@ -23,12 +23,12 @@ export const getChats = async () => {
 
   const result = await db.query.chat.findMany({
     with: {
-      message: true,
+      messages: true,
     },
     where: eq(chat.userId, user.id),
   });
 
-  return result.map((item) => item.id);
+  return result;
 };
 
 export const createChat = async () => {
@@ -41,7 +41,7 @@ export const createChat = async () => {
 export const updateChat = async (id: string, data: Partial<Omit<typeof chat.$inferInsert, "id" | "userId">>) => {
   const user = await getMe();
 
-  await db
+  return db
     .update(chat)
     .set(data)
     .where(and(eq(chat.id, id), eq(chat.userId, user.id)));

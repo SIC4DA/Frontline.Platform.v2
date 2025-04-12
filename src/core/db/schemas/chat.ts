@@ -1,5 +1,6 @@
 import { index, jsonb, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
+import { relations } from "drizzle-orm";
 import { randomUUID } from "node:crypto";
 import { user } from "./auth";
 
@@ -33,3 +34,11 @@ export const chat = pgTable(
   },
   (chat) => [index("chat_user_id_idx").on(chat.userId)],
 );
+
+export const chatRelations = relations(chat, ({ one, many }) => ({
+  messages: many(message),
+  user: one(user, {
+    fields: [chat.userId],
+    references: [user.id],
+  }),
+}));
