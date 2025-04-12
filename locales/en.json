@@ -70,6 +70,21 @@
     "contactPerson": "Contact Person",
     "contract": "Contract",
     "confidence": "Confidence",
-    "stage": "Stage"
+    "stage": "Stage",
+    "editInformation": "Edit information",
+    "uploadPhoto": "Upload photo",
+    "remove": "Remove",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "Enter your full name",
+    "username": "Username",
+    "usernamePlaceholder": "Enter your username",
+    "bio": "Bio",
+    "bioPlaceholder": "Enter your bio",
+    "cancel": "Cancel",
+    "save": "Save",
+    "bioMaxLength": "Bio must be less than 150 characters",
+    "fullNameRequired": "Full name is required",
+    "usernameRequired": "Username is required",
+    "saving": "Saving"
   }
 }
