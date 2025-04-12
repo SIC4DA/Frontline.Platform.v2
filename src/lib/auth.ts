@@ -18,6 +18,7 @@ import { companyEmail } from "@/core/auth/plugins/company-email";
 import { validator } from "@/core/auth/plugins/validator";
 import { db } from "@/core/db";
 import * as schema from "@/core/db/schema";
+import { randomUUID } from "node:crypto";
 
 export const auth = betterAuth({
   appName: "Frontline",
@@ -25,6 +26,9 @@ export const auth = betterAuth({
     provider: "pg",
     schema,
   }),
+  advanced: {
+    generateId: () => randomUUID(),
+  },
   emailAndPassword: emailAndPasswordOptions,
   user: userOptions,
   session: sessionOptions,
