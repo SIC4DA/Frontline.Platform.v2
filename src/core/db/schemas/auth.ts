@@ -14,6 +14,7 @@ export const user = pgTable("user", {
   banExpires: timestamp("ban_expires"),
   username: text("username").unique(),
   displayUsername: text("display_username"),
+  bio: text("bio"),
   companyName: text("company_name").notNull(),
   companyLogo: text("company_logo"),
 });
