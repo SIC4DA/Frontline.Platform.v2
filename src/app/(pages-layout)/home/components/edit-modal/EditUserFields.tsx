@@ -56,6 +56,7 @@ const EditUserFields = ({ user, state }: { user: User; state: EditUserState }) =
             name="bio"
             maxLength={150}
             value={bio}
+            defaultValue={user.bio || ""}
             onChange={(e) => setBio(e.target.value)}
             placeholder={t("bioPlaceholder")}
             className={cn(

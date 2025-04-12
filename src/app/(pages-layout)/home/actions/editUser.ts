@@ -53,12 +53,14 @@ export async function editUserAction(prevState: EditUserState, formData: FormDat
     };
   }
 
+  const session = await auth.api.getSession({ headers: await headers() });
+
   const { error } = await tryCatch(
     auth.api.updateUser({
       headers: await headers(),
       body: {
         name: fullName,
-        username,
+        ...(username !== session?.user.username && { username }),
         bio,
       },
     }),

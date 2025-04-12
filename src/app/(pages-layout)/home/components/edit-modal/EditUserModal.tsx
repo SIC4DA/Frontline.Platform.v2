@@ -1,5 +1,6 @@
 "use client";
 
+import FormError from "@/components/shared/FormError";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -44,6 +45,9 @@ const EditUserModal = ({ user }: { user: User }) => {
       <DialogContent className="p-0 sm:max-w-[589px]" aria-describedby="edit-user-modal">
         <DialogHeader className="border-border flex flex-row items-center justify-between border-b p-6">
           <DialogTitle className="text-base font-normal capitalize">{t("editInformation")}</DialogTitle>
+          {state.errors?.form && (
+            <FormError errorMessage={state.errors?.form?.[0] || "An error occurred, please try again"} />
+          )}
           <DialogClose
             aria-label="Close"
             className="rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4">
