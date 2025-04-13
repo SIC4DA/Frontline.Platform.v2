@@ -14,7 +14,6 @@ export const genericOAuthOptions: Parameters<typeof genericOAuth>[0] = {
       discoveryUrl: "https://slack.com/.well-known/openid-configuration",
       mapProfileToUser: (profile) =>
         mapOAuthProfile({
-          id: profile.sub,
           email: profile.email,
           name: profile.name,
           image: profile.picture,
