@@ -1,4 +1,4 @@
-"user server";
+"use server";
 
 import { db } from "@/core/db";
 import { deal } from "@/core/db/schema";
