@@ -35,10 +35,10 @@ const Chat = ({ chatData }: { chatData: Chat }) => {
       await createMessage(chatData.id, messageData);
     },
   });
-  const debouncedMessages = useDebounce(messages, 200);
+  const debouncedMessages = useDebounce(messages, 100);
 
   const inputPlaceHolder =
-    messages.length > 0 ? (status === "streaming" ? "Loading..." : "Enter your message") : t("chatPlaceholder");
+    messages.length > 0 ? (status === "streaming" ? "Loading..." : t("enterYourMessage")) : t("chatPlaceholder");
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -49,7 +49,7 @@ const Chat = ({ chatData }: { chatData: Chat }) => {
           top: document.body.scrollHeight,
           behavior: "smooth",
         });
-      }, 300);
+      }, 200);
     }
 
     return () => clearTimeout(timeout);
