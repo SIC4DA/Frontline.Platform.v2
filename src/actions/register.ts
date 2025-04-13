@@ -78,6 +78,8 @@ export async function registerAction(prevState: RegisterActionState, formData: F
     };
   }
 
+  console.log({ profileImage });
+
   let imageUrl: string | undefined;
   if (profileImage.size > 0) {
     const { error: imageError, data } = await tryCatch(
@@ -85,8 +87,6 @@ export async function registerAction(prevState: RegisterActionState, formData: F
         folder: "profile",
       }),
     );
-
-    imageUrl = data?.secure_url;
 
     if (imageError) {
       console.log("imageError", imageError.message);
@@ -97,6 +97,8 @@ export async function registerAction(prevState: RegisterActionState, formData: F
         },
       };
     }
+
+    imageUrl = data?.secure_url;
   }
 
   const { error } = await tryCatch(
@@ -108,7 +110,7 @@ export async function registerAction(prevState: RegisterActionState, formData: F
         companyName,
         companyLogo,
         username,
-        ...(imageUrl && { imageUrl }),
+        ...(imageUrl && { image: imageUrl }),
       },
       query: {
         token,
