@@ -93,6 +93,10 @@
     "pleaseDoubleCheck": "Please double check the response.",
     "tos": "Terms and Conditions",
     "send": "Send",
-    "chatPlaceholder": "What company did you close?..."
+    "chatPlaceholder": "What company did you close?...",
+    "enterYourMessage": "Enter your message",
+    "stopListening": "Stop listening",
+    "startListening": "Start listening",
+    "toggleListening": "Toggle listening"
   }
 }
