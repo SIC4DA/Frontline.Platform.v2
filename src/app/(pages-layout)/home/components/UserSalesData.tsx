@@ -1,38 +1,6 @@
-import { Sale } from "@/types/deal";
-// import { Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Search from "../../../../../public/icons/Search";
 import SalesCard from "./SalesCard";
-
-const sales = [
-  {
-    id: 1,
-    company: "Google",
-    field: "Marketing Software",
-    contactPerson: "John Doe",
-    stage: "Prospecting",
-    contract: 100000,
-    confidence: 4,
-  },
-  {
-    id: 2,
-    company: "Google",
-    field: "Marketing Software",
-    stage: "Prospecting",
-    contactPerson: "John Doe",
-    contract: 100000,
-    confidence: 4,
-  },
-  {
-    id: 3,
-    company: "Google",
-    field: "Marketing Software",
-    contactPerson: "John Doe",
-    stage: "Prospecting",
-    contract: 100000,
-    confidence: 3,
-  },
-] as Sale[];
 
 const UserSalesData = () => {
   const t = useTranslations("home");
@@ -65,8 +33,8 @@ const UserSalesData = () => {
           gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
         }}
         className="grid gap-4">
-        {sales.map((sale) => (
-          <SalesCard key={sale.id} sale={sale} />
+        {Array.from({ length: 3 }).map((_, i) => (
+          <SalesCard key={i} />
         ))}
       </div>
     </div>

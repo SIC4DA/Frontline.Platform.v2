@@ -1,32 +1,32 @@
-import { Sale } from "@/types/deal";
+// import { Deal } from "@/types/deal";
 import { CircleCheck, Crosshair, User, Wallet } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import ConfidenceProgress from "./ConfidenceProgress";
 import StageChip from "./StageChip";
 
-const SalesCard = ({ sale }: { sale: Sale }) => {
+const SalesCard = () => {
   const t = useTranslations("home");
 
   const salesData = [
     {
       title: t("stage"),
-      value: <StageChip stage={sale.stage} />,
+      value: <StageChip stage={"prospecting"} />,
       icon: <Crosshair size={20} className="text-foreground-secondary" />,
     },
     {
       title: t("contactPerson"),
-      value: sale.contactPerson,
+      value: "John Doe",
       icon: <User size={20} className="text-foreground-secondary" />,
     },
     {
       title: t("contract"),
-      value: `$${sale.contract}`,
+      value: `$500,000`,
       icon: <Wallet size={20} className="text-foreground-secondary" />,
     },
     {
       title: t("confidence"),
-      value: <ConfidenceProgress confidence={sale.confidence} />,
+      value: <ConfidenceProgress confidence={4} />,
       icon: <CircleCheck size={20} className="text-foreground-secondary" />,
     },
   ];
@@ -42,8 +42,8 @@ const SalesCard = ({ sale }: { sale: Sale }) => {
           className="aspect-square w-8 object-cover"
         />
         <div>
-          <h4 className="text-sm font-medium capitalize">{sale.company}</h4>
-          <p className="text-foreground-secondary text-xs">{sale.field}</p>
+          <h4 className="text-sm font-medium capitalize">google</h4>
+          <p className="text-foreground-secondary text-xs">Marketing Software</p>
         </div>
       </div>
       <div className="flex flex-col gap-7">
