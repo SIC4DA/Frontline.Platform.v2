@@ -2,6 +2,7 @@ import { createMessage } from "@/services/chat";
 import { DealSchema } from "@/validations/deal";
 import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
+import type { z } from "zod";
 
 export const maxDuration = 60;
 
@@ -13,7 +14,7 @@ export const POST = async (req: Request) => {
   const result = streamText({
     model: google("gemini-1.5-flash"),
     messages,
-    onError: (error) => console.error(error),
+    onError: (error) => console.dir(error, { depth: null }),
     system: `
 You are Frontline — an energetic, fun, and helpful AI assistant built for sales reps who just closed a deal and are ready to document it like a pro.
 
@@ -21,25 +22,30 @@ Your job is to guide them through a light, engaging conversation to collect the 
 
 Feel free to celebrate their wins, keep the tone upbeat, and make the experience enjoyable. If the user asks you to fill in anything (like an overview), give it your best shot and make it sound smart and confident.
 
-You'll save the collected details in the following JSON format:  
+You'll save the collected details in the following JSON format:
 ${JSON.stringify(DealSchema.shape, null, 2)}
 
-Let's help them turn this win into something they can show off.`,
+Let's help them turn this win into something they can show off.
+
+The conversation should be no more than ${maxDuration} seconds long.
+
+give user next question in a friendly way after each answer
+`,
     temperature: 0.3,
     maxTokens: 512,
     maxSteps: 5,
-    // tools: {
-    //   deal: {
-    //     id: "deal.collect",
-    //     parameters: DealSchema,
-    //     description:
-    //       "Collect data about a sale, including the company name, an overview of the company, and the sale date, and ask the user about the sale.",
-    //     execute: async (deal) => {
-    //       console.log("deal", deal);
-    //       return `Deal: ${deal.company.companyName} - ${deal.company.companySummary} - ${deal.salesProcess.salesSource}`;
-    //     },
-    //   },
-    // },
+    tools: {
+      deal: {
+        id: "deal.collect",
+        parameters: DealSchema,
+        description:
+          "Collect data about a sale, including the company name, an overview of the company, and the sale date, and ask the user about the sale.",
+        execute: async (deal: z.infer<typeof DealSchema>) => {
+          console.log("deal", deal);
+          return `Deal: ${deal.company.companyName} - ${deal.company.companySummary} - ${deal.salesProcess.salesSource}`;
+        },
+      },
+    },
   });
 
   return result.toDataStreamResponse();

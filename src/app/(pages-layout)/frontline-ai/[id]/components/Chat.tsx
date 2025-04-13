@@ -30,8 +30,9 @@ const Chat = ({ chatData }: { chatData: Chat }) => {
     initialMessages: chatData.messages,
     body: { chatId: chatData.id },
     onFinish: async (message) => {
-      delete message.createdAt;
-      await createMessage(chatData.id, message);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { id, createdAt, ...messageData } = message;
+      await createMessage(chatData.id, messageData);
     },
   });
   const debouncedMessages = useDebounce(messages, 200);

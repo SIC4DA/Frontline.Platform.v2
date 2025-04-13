@@ -1,4 +1,4 @@
-import { date, index, integer, jsonb, pgTable, text } from "drizzle-orm/pg-core";
+import { date, index, integer, jsonb, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 import { relations } from "drizzle-orm";
 import { randomUUID } from "node:crypto";
@@ -22,7 +22,7 @@ export const deal = pgTable(
     companyName: text("company_name").notNull(),
     companySummary: text("company_summary").notNull(),
     companyIndustry: text("company_industry").notNull(),
-    employeeHeadcount: integer("employee_headcount"),
+    employeeHeadcount: integer("employee_headcount").notNull(),
     companyWebsite: text("company_website").notNull(),
 
     // Contract Info
@@ -45,6 +45,9 @@ export const deal = pgTable(
     salesCycleLength: text("sales_cycle_length").notNull(),
     // Store an array of Contributor objects as JSONB
     dealContributors: jsonb("deal_contributors").notNull(),
+
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+    updatedAt: timestamp("updated_at").notNull().defaultNow(),
   },
   (deal) => [
     index("deal_chat_id_idx").on(deal.chatId),
