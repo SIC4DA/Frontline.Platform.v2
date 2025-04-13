@@ -3,19 +3,41 @@
 import useDebounce from "@/hooks/shared/useDebounce";
 import type { Chat } from "@/types/chat";
 import { useChat } from "@ai-sdk/react";
+import ChatPlaceholder from "@public/icons/ChatPlaceholder";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useEffect } from "react";
-import ChatPlaceholder from "../../../../../../public/icons/ChatPlaceholder";
 import ChatInput from "./ChatInput";
 import MessagesList from "./MessagesList";
 
+const createMessage = async (chatId: string, message: unknown) => {
+  await fetch("/api/chat/create-message", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      chatId,
+      message,
+    }),
+  });
+};
+
 const Chat = ({ chatData }: { chatData: Chat }) => {
   const t = useTranslations("frontlineAi");
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
-    initialMessages: chatData?.messages,
+
+  const { messages, handleSubmit, input, handleInputChange, status } = useChat({
+    initialMessages: chatData.messages,
+    body: { chatId: chatData.id },
+    onFinish: async (message) => {
+      delete message.createdAt;
+      await createMessage(chatData.id, message);
+    },
   });
   const debouncedMessages = useDebounce(messages, 200);
+
+  const inputPlaceHolder =
+    messages.length > 0 ? (status === "streaming" ? "Loading..." : "Enter your message") : t("chatPlaceholder");
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -30,7 +52,7 @@ const Chat = ({ chatData }: { chatData: Chat }) => {
     }
 
     return () => clearTimeout(timeout);
-  }, [debouncedMessages]);
+  }, [chatData.id, debouncedMessages]);
 
   return (
     <>
@@ -43,7 +65,12 @@ const Chat = ({ chatData }: { chatData: Chat }) => {
       )}
       <form onSubmit={handleSubmit} className="bg-background sticky bottom-5 mx-auto w-full max-w-[1000px]">
         <div className="border-border flex items-center gap-4 rounded-3xl border bg-[#FAFAFA] px-5 py-3">
-          <ChatInput input={input} handleInputChange={handleInputChange} />
+          <ChatInput
+            placeholder={inputPlaceHolder}
+            isLoading={status === "streaming"}
+            input={input}
+            handleInputChange={handleInputChange}
+          />
         </div>
         <p className="text-foreground-secondary mt-5 text-center text-sm">
           {t("pleaseDoubleCheck")}

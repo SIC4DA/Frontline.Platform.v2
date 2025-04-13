@@ -19,7 +19,7 @@ export const ProductInfoSchema = z.object({
   productName: z.string(),
   productUsecases: z.string(),
   painPoints: z.string(),
-  keyStakeholders: z.array(StakeholderSchema),
+  keyStakeholders: z.array(StakeholderSchema).default([]),
 });
 
 // Contract Info Schema
@@ -45,7 +45,7 @@ export const CompanyInfoSchema = z.object({
 export const SalesProcessInfoSchema = z.object({
   salesSource: z.string(), // e.g. "Cold Email", "Referral"
   salesCycleLength: z.string(), // e.g. "15 months"
-  dealContributors: z.array(ContributorSchema),
+  dealContributors: z.array(ContributorSchema).default([]),
 });
 
 export const DealSchema = z.object({

@@ -19,7 +19,7 @@ export const getChat = async (id: string): Promise<Chat | null> => {
     where: eq(message.chatId, id),
   });
 
-  return { ...result, messages };
+  return { ...result, messages } as Chat;
 };
 
 export const getChats = async () => {
@@ -39,6 +39,18 @@ export const createChat = async () => {
   return result[0].id;
 };
 
+export const createMessage = async (chatId: string, data: Omit<typeof message.$inferInsert, "userId" | "chatId">) => {
+  const user = await getMe();
+
+  const result = await db
+    .insert(message)
+    .values({ ...data, userId: user.id, chatId })
+    .returning({ id: message.id })
+    .onConflictDoNothing();
+
+  return result[0].id;
+};
+
 export const updateChat = async (id: string, data: Partial<Omit<typeof chat.$inferInsert, "id" | "userId">>) => {
   const user = await getMe();
 
@@ -46,6 +58,22 @@ export const updateChat = async (id: string, data: Partial<Omit<typeof chat.$inf
     .update(chat)
     .set(data)
     .where(and(eq(chat.id, id), eq(chat.userId, user.id)));
+};
+
+export const updateChatMessages = async (
+  id: string,
+  messages: Omit<typeof message.$inferInsert, "userId" | "chatId">[],
+) => {
+  const user = await getMe();
+
+  await Promise.all(
+    messages.map(async (msg) => {
+      await db
+        .insert(message)
+        .values({ ...msg, chatId: id, userId: user.id })
+        .onConflictDoNothing();
+    }),
+  );
 };
 
 export const deleteChat = async (id: string) => {
