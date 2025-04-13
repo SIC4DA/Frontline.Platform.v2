@@ -1,6 +1,7 @@
 import { UIMessage } from "ai";
 import { motion } from "motion/react";
 import Image from "next/image";
+import Markdown from "react-markdown";
 
 const MessagesList = ({ messages }: { messages: UIMessage[] }) => {
   return (
@@ -13,29 +14,29 @@ const MessagesList = ({ messages }: { messages: UIMessage[] }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.1 }}
-              className="bg-background-secondary w-fit self-end rounded-full border border-[#E2E2E2] px-6 py-3">
+              className="bg-background-secondary w-fit self-end rounded-full border border-[#E2E2E2] px-6 py-3 max-md:px-3 max-md:py-1.5 max-md:text-sm">
               {message.content}
             </motion.div>
           );
         } else {
           return (
             <div key={message.id} className="grid grid-cols-[auto_1fr] gap-4">
-              <div className="flex size-11 items-center justify-center rounded-full bg-black">
+              <div className="flex size-11 items-center justify-center rounded-full bg-black max-md:size-9">
                 <Image
                   src="/images/logo.webp"
                   alt="logo"
                   width={24}
                   height={24}
-                  className="size-6 object-cover invert"
+                  className="size-6 object-cover invert max-md:size-4"
                 />
               </div>
-              <motion.p
+              <motion.div
                 initial={{ opacity: 0, filter: "blur(5px)" }}
                 animate={{ opacity: 1, filter: "blur(0px)" }}
                 transition={{ duration: 0.3 }}
-                className="text-foreground">
-                {message.content}
-              </motion.p>
+                className="text-foreground markdown-wrapper mt-2 max-md:text-sm">
+                <Markdown>{message.content}</Markdown>
+              </motion.div>
             </div>
           );
         }
