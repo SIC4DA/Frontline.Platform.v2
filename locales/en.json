@@ -87,5 +87,12 @@
     "usernameRequired": "Username is required",
     "saving": "Saving",
     "defaultBio": "Hey there! I love frontline"
+  },
+  "frontlineAi": {
+    "newChat": "New chat",
+    "pleaseDoubleCheck": "Please double check the response.",
+    "tos": "Terms and Conditions",
+    "send": "Send",
+    "chatPlaceholder": "What company did you close?..."
   }
 }
