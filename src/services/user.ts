@@ -45,4 +45,3 @@ export const deleteUser = async (data: { password?: string; token?: string; call
     body: data,
   });
 };
-

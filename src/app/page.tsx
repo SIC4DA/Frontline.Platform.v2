@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl";
 export default function Home() {
   const t = useTranslations("HomePage");
 
-  
   return (
     <div>
       <Aperture size={200} strokeWidth={2} stroke="white" fill="oklch(0.723 0.219 149.579)" />

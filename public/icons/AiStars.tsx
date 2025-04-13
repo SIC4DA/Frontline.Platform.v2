@@ -1,5 +1,3 @@
-import React from 'react'
-
 const AiStars = () => {
   return (
     <svg width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,6 +24,6 @@ const AiStars = () => {
       />
     </svg>
   );
-}
+};
 
-export default AiStars
+export default AiStars;

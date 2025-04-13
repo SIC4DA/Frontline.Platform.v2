@@ -1,6 +1,10 @@
 const ChatPlaceholder = () => {
   return (
-    <svg className="size-64 max-2xl:size-56 max-md:size-48" viewBox="0 0 186 186" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      className="size-64 max-2xl:size-56 max-md:size-48"
+      viewBox="0 0 186 186"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg">
       <g filter="url(#filter0_i_22_45)">
         <circle cx="93" cy="93" r="26" fill="#050813" />
       </g>

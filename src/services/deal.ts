@@ -54,4 +54,3 @@ export const deleteDeal = async (id: string) => {
 
   await db.delete(deal).where(and(eq(deal.id, id), eq(deal.userId, user.id)));
 };
-
