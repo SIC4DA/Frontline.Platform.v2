@@ -31,7 +31,11 @@ export const createDeal = async (data: Omit<typeof deal.$inferInsert, "id" | "us
   const result = await db
     .insert(deal)
     .values({ ...data, userId: user.id })
-    .returning({ id: deal.id });
+    .returning({ id: deal.id })
+    .onConflictDoUpdate({
+      target: deal.id,
+      set: { ...data, userId: user.id },
+    });
 
   return result[0].id;
 };

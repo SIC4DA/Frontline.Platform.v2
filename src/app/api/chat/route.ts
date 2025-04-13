@@ -1,4 +1,5 @@
 import { createMessage } from "@/services/chat";
+import { createDeal } from "@/services/deal";
 import { DealSchema } from "@/validations/deal";
 import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
@@ -40,9 +41,16 @@ give user next question in a friendly way after each answer
         parameters: DealSchema,
         description:
           "Collect data about a sale, including the company name, an overview of the company, and the sale date, and ask the user about the sale.",
-        execute: async (deal: z.infer<typeof DealSchema>) => {
-          console.log("deal", deal);
-          return `Deal: ${deal.company.companyName} - ${deal.company.companySummary} - ${deal.salesProcess.salesSource}`;
+        execute: async ({ company, contract, product, salesProcess }: z.infer<typeof DealSchema>) => {
+          await createDeal({
+            ...company,
+            ...contract,
+            ...product,
+            ...salesProcess,
+            chatId,
+          });
+
+          return `Deal: ${company.companyName} - ${company.companySummary} - ${salesProcess.salesSource}`;
         },
       },
     },

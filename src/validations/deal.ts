@@ -24,7 +24,7 @@ export const ContributorSchema = z
 export const ProductInfoSchema = z
   .object({
     productName: z.string().describe("Name of the product"),
-    productUsecases: z.string().describe("Usecases of the product"),
+    productUseCases: z.string().describe("UseCases of the product"),
     painPoints: z.string().describe("Pain points of the product"),
     keyStakeholders: z.array(StakeholderSchema).default([]).describe("Stakeholders of the product"),
   })
