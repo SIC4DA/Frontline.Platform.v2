@@ -47,6 +47,7 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --breakpoint-2xl: 100rem;
+  --shadow-white-inset: 0px 4px 1.7px -1px rgba(255, 255, 255, 0.3) inset;
 }
 
 :root {

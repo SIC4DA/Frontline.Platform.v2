@@ -12,7 +12,9 @@ export const message = pgTable(
       .$defaultFn(() => randomUUID()),
     userId: text("user_id").references(() => user.id, { onDelete: "cascade" }),
     chatId: text("chat_id").references(() => chat.id, { onDelete: "cascade" }),
-    role: text("role").notNull(),
+    role: text("role", {
+      enum: ["data", "user", "system", "assistant"],
+    }).notNull(),
     content: text("content").notNull(),
     parts: jsonb("parts").notNull(),
     revisionId: text("revision_id"),

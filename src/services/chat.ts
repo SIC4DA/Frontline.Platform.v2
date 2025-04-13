@@ -2,15 +2,19 @@
 
 import { db } from "@/core/db";
 import { chat, message } from "@/core/db/schema";
+import { Chat } from "@/types/chat";
 import { and, eq } from "drizzle-orm";
 import { getMe } from "./user";
 
-export const getChat = async (id: string) => {
+export const getChat = async (id: string): Promise<Chat | null> => {
   const user = await getMe();
 
   const result = await db.query.chat.findFirst({
-    where: and(eq(chat.id, id), eq(chat.userId, user?.id)),
+    where: and(eq(chat.id, id), eq(chat.userId, user.id)),
   });
+
+  if (!result) return null;
+
   const messages = await db.query.message.findMany({
     where: eq(message.chatId, id),
   });
@@ -49,4 +53,3 @@ export const deleteChat = async (id: string) => {
 
   await db.delete(chat).where(and(eq(chat.id, id), eq(chat.userId, user.id)));
 };
-

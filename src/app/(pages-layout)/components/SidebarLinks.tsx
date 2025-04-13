@@ -1,7 +1,7 @@
 "use client";
 
-import useDebounce from "@/hooks/shared/useDebounce";
 import { cn } from "@/lib/utils";
+import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -37,8 +37,7 @@ const links = [
 const SidebarLinks = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
   const t = useTranslations("sidebar");
   const pathname = usePathname();
-  const isActive = (href: string) => pathname === href;
-  const debouncedSidebarActivity = useDebounce(isSidebarActive, 100);
+  const isActive = (href: string) => pathname.includes(href);
 
   return (
     <nav className={cn("mb-14 flex flex-col gap-3", !isSidebarActive && "items-center")}>
@@ -56,14 +55,16 @@ const SidebarLinks = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
               isActive: isActive(link.href),
             })}
           </span>
-          <p
-            className={cn(
-              "hidden whitespace-nowrap opacity-0 duration-300",
-              isSidebarActive && "block",
-              debouncedSidebarActivity && "opacity-100",
-            )}>
-            {t(link.label)}
-          </p>
+          {isSidebarActive && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2, delay: 0.1 }}
+              layout
+              className="whitespace-nowrap duration-300">
+              {t(link.label)}
+            </motion.p>
+          )}
         </Link>
       ))}
     </nav>
