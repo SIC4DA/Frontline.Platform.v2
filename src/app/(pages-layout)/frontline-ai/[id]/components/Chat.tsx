@@ -65,14 +65,12 @@ const Chat = ({ chatData }: { chatData: Chat }) => {
         </div>
       )}
       <form onSubmit={handleSubmit} className="bg-background sticky bottom-5 mx-auto w-full max-w-[1000px]">
-        <div className="border-border flex items-center gap-4 rounded-3xl border bg-[#FAFAFA] px-5 py-3">
-          <ChatInput
-            placeholder={inputPlaceHolder}
-            isLoading={status === "streaming"}
-            input={input}
-            handleInputChange={handleInputChange}
-          />
-        </div>
+        <ChatInput
+          placeholder={inputPlaceHolder}
+          isLoading={status === "streaming"}
+          input={input}
+          handleInputChange={handleInputChange}
+        />
         <p className="text-foreground-secondary mt-5 text-center text-sm">
           {t("pleaseDoubleCheck")}
           {"  "}
