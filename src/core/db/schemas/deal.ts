@@ -6,7 +6,7 @@ import { user } from "./auth";
 import { chat } from "./chat";
 
 export const deal = pgTable(
-  "deals",
+  "deal",
   {
     id: text("id")
       .primaryKey()
@@ -19,32 +19,32 @@ export const deal = pgTable(
       .references(() => user.id, { onDelete: "cascade" }),
 
     // Company Info
-    companyName: text("company_name").notNull(),
-    companySummary: text("company_summary").notNull(),
-    companyIndustry: text("company_industry").notNull(),
-    employeeHeadcount: integer("employee_headcount").notNull(),
-    companyWebsite: text("company_website").notNull(),
+    companyName: text("company_name"),
+    companySummary: text("company_summary"),
+    companyIndustry: text("company_industry"),
+    employeeHeadcount: integer("employee_headcount"),
+    companyWebsite: text("company_website"),
 
     // Contract Info
-    contractValue: text("contract_value").notNull(),
-    contractTerm: text("contract_term").notNull(),
-    contractStartDate: date("contract_start_date").notNull(),
-    contractEndDate: date("contract_end_date").notNull(),
-    contractSigner: text("contract_signer").notNull(),
-    paymentTerms: text("payment_terms").notNull(),
+    contractValue: text("contract_value"),
+    contractTerm: text("contract_term"),
+    contractStartDate: date("contract_start_date"),
+    contractEndDate: date("contract_end_date"),
+    contractSigner: text("contract_signer"),
+    paymentTerms: text("payment_terms"),
 
     // Product Info
-    productName: text("product_name").notNull(),
-    productUseCases: text("product_usecases").notNull(),
+    productName: text("product_name"),
+    productUseCases: text("product_usecases"),
     painPoints: text("pain_points").notNull(),
     // Store an array of Stakeholder objects as JSONB
-    keyStakeholders: jsonb("key_stakeholders").notNull(),
+    keyStakeholders: jsonb("key_stakeholders"),
 
     // Sales Process Info
-    salesSource: text("sales_source").notNull(),
-    salesCycleLength: text("sales_cycle_length").notNull(),
+    salesSource: text("sales_source"),
+    salesCycleLength: text("sales_cycle_length"),
     // Store an array of Contributor objects as JSONB
-    dealContributors: jsonb("deal_contributors").notNull(),
+    dealContributors: jsonb("deal_contributors"),
 
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow(),
