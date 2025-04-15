@@ -36,7 +36,7 @@ export const deal = pgTable(
     // Product Info
     productName: text("product_name"),
     productUseCases: text("product_usecases"),
-    painPoints: text("pain_points").notNull(),
+    painPoints: text("pain_points"),
     // Store an array of Stakeholder objects as JSONB
     keyStakeholders: jsonb("key_stakeholders"),
 

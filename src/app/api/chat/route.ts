@@ -1,9 +1,8 @@
 import { createMessage } from "@/services/chat";
-import { createDeal } from "@/services/deal";
+import { generateDealByAI, getDealByChatId } from "@/services/deal";
 import { DealSchema } from "@/validations/deal";
 import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
-import type { z } from "zod";
 
 export const maxDuration = 60;
 
@@ -11,6 +10,9 @@ export const POST = async (req: Request) => {
   const { chatId, messages } = await req.json();
 
   await createMessage(chatId, messages.at(-1));
+  const deal = await getDealByChatId(chatId);
+
+  await generateDealByAI(chatId, messages);
 
   const result = streamText({
     model: google("gemini-1.5-flash"),
@@ -30,30 +32,13 @@ Let's help them turn this win into something they can show off.
 
 The conversation should be no more than ${maxDuration} seconds long.
 
-give user next question in a friendly way after each answer
+give user next question in a friendly way after each answer.
+
+if user asked you about his data send this data: ${JSON.stringify(deal, null, 2)} as a table not json.
 `,
     temperature: 0.3,
     maxTokens: 512,
     maxSteps: 5,
-    tools: {
-      deal: {
-        id: "deal.collect",
-        parameters: DealSchema,
-        description:
-          "Collect data about a sale, including the company name, an overview of the company, and the sale date, and ask the user about the sale.",
-        execute: async ({ company, contract, product, salesProcess }: z.infer<typeof DealSchema>) => {
-          await createDeal({
-            ...company,
-            ...contract,
-            ...product,
-            ...salesProcess,
-            chatId,
-          });
-
-          return `Deal: ${company.companyName} - ${company.companySummary} - ${salesProcess.salesSource}`;
-        },
-      },
-    },
   });
 
   return result.toDataStreamResponse();
