@@ -107,6 +107,7 @@ export async function registerAction(prevState: RegisterActionState, formData: F
         email,
         password,
         name: fullName,
+        // @ts-expect-error companyName and companyLogo are valid keys of auth.api.signUpEmail
         companyName,
         companyLogo,
         username,

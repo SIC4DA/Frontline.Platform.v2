@@ -30,7 +30,7 @@ const VoiceToTextComponent = ({
     if (transcript) {
       handleInputChange({ target: { value: transcript } } as React.ChangeEvent<HTMLInputElement>);
     }
-  }, [transcript]); // Add transcript as a dependency to the useEffect hook
+  }, [handleInputChange, transcript]); // Add transcript as a dependency to the useEffect hook
 
   return (
     <>

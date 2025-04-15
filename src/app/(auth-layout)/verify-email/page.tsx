@@ -17,7 +17,6 @@ export default async function VerifyEmailPage({
     auth.api.verifyCompanyEmailVerification({
       query: {
         token,
-        redirectTo: "/onboarding",
       },
     }),
   );

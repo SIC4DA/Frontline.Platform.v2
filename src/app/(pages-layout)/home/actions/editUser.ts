@@ -61,6 +61,7 @@ export async function editUserAction(prevState: EditUserState, formData: FormDat
       body: {
         name: fullName,
         ...(username !== session?.user.username && { username }),
+        // @ts-expect-error bio is a valid key.
         bio,
       },
     }),
