@@ -113,8 +113,6 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
     schemaDescription: "The data you will be given is about the deal that the sales rep just closed.",
   });
 
-  console.log("deal", object);
-
   await updateDealByChatId(chatId, {
     ...object.company,
     ...object.contract,
