@@ -27,7 +27,9 @@ export const auth = betterAuth({
     schema,
   }),
   advanced: {
-    generateId: () => randomUUID(),
+    database: {
+      generateId: () => randomUUID(),
+    }
   },
   emailAndPassword: emailAndPasswordOptions,
   user: userOptions,

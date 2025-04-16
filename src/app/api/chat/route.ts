@@ -1,5 +1,5 @@
 import { createMessage } from "@/services/chat";
-import { generateDealByAI, getDealByChatId } from "@/services/deal";
+import { getDealByChatId } from "@/services/deal";
 import { DealSchema } from "@/validations/deal";
 import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
@@ -11,8 +11,6 @@ export const POST = async (req: Request) => {
 
   await createMessage(chatId, messages.at(-1));
   const deal = await getDealByChatId(chatId);
-
-  await generateDealByAI(chatId, messages);
 
   const result = streamText({
     model: google("gemini-1.5-flash"),

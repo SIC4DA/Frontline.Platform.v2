@@ -1,4 +1,4 @@
-import { date, index, integer, jsonb, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { index, integer, jsonb, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 
 import { relations } from "drizzle-orm";
 import { randomUUID } from "node:crypto";
@@ -28,8 +28,8 @@ export const deal = pgTable(
     // Contract Info
     contractValue: text("contract_value"),
     contractTerm: text("contract_term"),
-    contractStartDate: date("contract_start_date"),
-    contractEndDate: date("contract_end_date"),
+    contractStartDate: text("contract_start_date"),
+    contractEndDate: text("contract_end_date"),
     contractSigner: text("contract_signer"),
     paymentTerms: text("payment_terms"),
 

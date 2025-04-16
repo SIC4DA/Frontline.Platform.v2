@@ -16,7 +16,7 @@ export const message = pgTable(
       enum: ["data", "user", "system", "assistant"],
     }).notNull(),
     content: text("content").notNull(),
-    parts: jsonb("parts").notNull(),
+    parts: jsonb("parts"),
     revisionId: text("revision_id"),
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at").notNull().defaultNow(),

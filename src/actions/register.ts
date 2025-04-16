@@ -78,8 +78,6 @@ export async function registerAction(prevState: RegisterActionState, formData: F
     };
   }
 
-  console.log({ profileImage });
-
   let imageUrl: string | undefined;
   if (profileImage.size > 0) {
     const { error: imageError, data } = await tryCatch(
@@ -89,7 +87,6 @@ export async function registerAction(prevState: RegisterActionState, formData: F
     );
 
     if (imageError) {
-      console.log("imageError", imageError.message);
       return {
         status: "error",
         errors: {
@@ -120,7 +117,6 @@ export async function registerAction(prevState: RegisterActionState, formData: F
   );
 
   if (error) {
-    console.log("error", error);
     return {
       status: "error",
       fullName,

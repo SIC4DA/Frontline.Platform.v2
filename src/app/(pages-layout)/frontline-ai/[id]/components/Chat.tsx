@@ -9,19 +9,8 @@ import Link from "next/link";
 import { useEffect } from "react";
 import ChatInput from "./ChatInput";
 import MessagesList from "./MessagesList";
-
-const createMessage = async (chatId: string, message: unknown) => {
-  await fetch("/api/chat/create-message", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      chatId,
-      message,
-    }),
-  });
-};
+import { generateDealByAI } from "@/services/deal";
+import { createMessage, getChat } from "@/services/chat";
 
 const Chat = ({ chatData }: { chatData: Chat }) => {
   const t = useTranslations("frontlineAi");
@@ -33,6 +22,12 @@ const Chat = ({ chatData }: { chatData: Chat }) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { id, createdAt, ...messageData } = message;
       await createMessage(chatData.id, messageData);
+
+      const chat = await getChat(chatData.id);
+      if (!chat) return;
+      
+      const updatedChat = await generateDealByAI(chat.id, chat.messages);
+      console.log(updatedChat);
     },
   });
   const debouncedMessages = useDebounce(messages, 100);

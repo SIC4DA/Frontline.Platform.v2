@@ -15,8 +15,7 @@ export const validatorOptions: ValidatorOptions = {
       },
       async handler(ctx) {
         const tempVerification = ctx.query?.token;
-        console.log(tempVerification);
-
+        
         if (!tempVerification) {
           throw new APIError("BAD_REQUEST", {
             message: "Invalid or expired verification token",
@@ -27,8 +26,6 @@ export const validatorOptions: ValidatorOptions = {
           model: "verification",
           where: [{ field: "identifier", value: tempVerification, operator: "eq" }],
         });
-
-        console.log(verified);
 
         if (!verified) {
           throw new APIError("BAD_REQUEST", {

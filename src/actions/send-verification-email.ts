@@ -73,8 +73,6 @@ export async function sendVerificationEmailAction(
   );
 
   if (error) {
-    console.log(error);
-
     return {
       status: "error",
       email,

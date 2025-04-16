@@ -31,8 +31,6 @@ export const getDealByChatId = async (chatId: string) => {
     },
   });
 
-  console.log(result);
-
   return result;
 };
 
@@ -87,20 +85,35 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
   const { object } = await generateObject({
     model: google("gemini-1.5-flash"),
     messages,
-    system: `You are Frontline — an energetic, fun, and helpful AI assistant built for sales reps who just closed a deal and are ready to document it like a pro.
+    system: `
+      You are Frontline — an energetic, fun, and helpful AI assistant built for sales reps who just closed a deal and are ready to document it like a pro.
 
-    current deal: ${JSON.stringify(deal, null, 2)}
-    You will be given some data about the deal in the following format: ${JSON.stringify(DealSchema.shape, null, 2)}
+      Your job is to guide them through a light, engaging conversation to collect the key details of their sale. Ask friendly, clear questions to get the info step-by-step — including the company they sold to, who they worked with, what was sold, the value of the deal, contract details, and any collaborators who helped make it happen.
 
-    if there is data can't be found, respond with empty field.
+      Feel free to celebrate their wins, keep the tone upbeat, and make the experience enjoyable. If the user asks you to fill in anything (like an overview), give it your best shot and make it sound smart and confident.
+
+      your current deal: ${JSON.stringify(deal, null, 2)}
+
+      You’ll save the collected details in the following JSON format:  
+      ${JSON.stringify(DealSchema.shape, null, 2)}
+
+      Let’s help them turn this win into something they can show off.
+
+      don't fill in the details yet, just ask the user for them and return the initial value of fields that are not filled in yet.
+      initial values: (string => '', number => 0, boolean => false, => object => {}, array => [])
+
+      don't ask the user for anything if the field is already filled in.
+
+      ask the user after each field is filled in about the next field.
     `,
-    temperature: 0.3,
+    temperature: 0,
     maxTokens: 512,
     schemaName: "Deal",
     schema: DealSchema,
-    schemaDescription:
-      "You are Frontline — an energetic, fun, and helpful AI assistant built for sales reps who just closed a deal and are ready to document it like a pro.",
+    schemaDescription: "The data you will be given is about the deal that the sales rep just closed.",
   });
+
+  console.log("deal", object);
 
   await updateDealByChatId(chatId, {
     ...object.company,

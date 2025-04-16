@@ -6,14 +6,14 @@ import { Chat } from "@/types/chat";
 import { and, eq } from "drizzle-orm";
 import { getMe } from "./user";
 
-export const getChat = async (id: string): Promise<Chat | null> => {
+export const getChat = async (id: string): Promise<Chat | undefined> => {
   const user = await getMe();
 
   const result = await db.query.chat.findFirst({
     where: and(eq(chat.id, id), eq(chat.userId, user.id)),
   });
 
-  if (!result) return null;
+  if (!result) return undefined;
 
   const messages = await db.query.message.findMany({
     where: eq(message.chatId, id),
@@ -39,7 +39,7 @@ export const createChat = async () => {
   return result[0].id;
 };
 
-export const createMessage = async (chatId: string, data: Omit<typeof message.$inferInsert, "userId" | "chatId">) => {
+export const createMessage = async (chatId: string, data: Omit<typeof message.$inferInsert, "userId" | "chatId" | "id" | "createdAt">) => {
   const user = await getMe();
 
   const result = await db
