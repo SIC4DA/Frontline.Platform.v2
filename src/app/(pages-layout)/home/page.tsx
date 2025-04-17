@@ -1,17 +1,14 @@
 import RequestError from "@/components/shared/RequestError";
-import { auth } from "@/lib/auth";
-import type { Session, User } from "@/lib/auth.types";
-import { headers } from "next/headers";
+import { getMe } from "@/services/user";
+import { tryCatch } from "@/utils/tryCatch";
 import UserCover from "./components/UserCover";
 import UserData from "./components/UserData";
 import UserSalesData from "./components/UserSalesData";
 
 export default async function HomePage() {
-  const data = (await auth.api.getSession({
-    headers: await headers(),
-  })) as { user: User; session: Session } | null;
+  const { data, error } = await tryCatch(getMe());
 
-  if (!data?.user) {
+  if (error || !data) {
     return (
       <section className="flex min-h-dvh items-center justify-center px-8 py-3.5 max-sm:px-2">
         <RequestError />
@@ -21,8 +18,8 @@ export default async function HomePage() {
 
   return (
     <section className="px-8 py-3.5 max-md:px-5 max-sm:px-4 max-sm:pb-24">
-      <UserCover user={data.user} />
-      <UserData user={data.user} />
+      <UserCover user={data} />
+      <UserData user={data} />
       <UserSalesData />
     </section>
   );

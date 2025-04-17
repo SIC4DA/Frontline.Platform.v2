@@ -47,6 +47,7 @@ export const ContractInfoSchema = z
 export const CompanyInfoSchema = z
   .object({
     companyName: z.string().optional().describe("Name of the company"),
+    companyLogo: z.string().optional().describe("Logo of the company"),
     companySummary: z.string().optional().describe("Summary of the company"),
     companyIndustry: z.string().optional().describe("Industry of the company"),
     employeeHeadcount: z.number().int().optional().describe("Employee headcount of the company"),

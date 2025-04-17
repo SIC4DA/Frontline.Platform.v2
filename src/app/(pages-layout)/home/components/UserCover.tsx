@@ -1,6 +1,5 @@
+import type { User } from "@/types/user";
 import Image from "next/image";
-
-import type { User } from "@/lib/auth.types";
 
 const UserCover = ({ user }: { user: User }) => {
   return (

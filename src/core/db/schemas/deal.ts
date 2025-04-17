@@ -20,6 +20,7 @@ export const deal = pgTable(
 
     // Company Info
     companyName: text("company_name"),
+    companyLogo: text("company_logo"),
     companySummary: text("company_summary"),
     companyIndustry: text("company_industry"),
     employeeHeadcount: integer("employee_headcount"),

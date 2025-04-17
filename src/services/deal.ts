@@ -3,6 +3,8 @@
 import { db } from "@/core/db";
 import { deal } from "@/core/db/schema";
 import type { TMessage } from "@/types/chat";
+import { getBrand } from "@/utils/brand";
+import { tryCatch } from "@/utils/tryCatch";
 import { DealSchema } from "@/validations/deal";
 import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
@@ -112,6 +114,17 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
     schema: DealSchema,
     schemaDescription: "The data you will be given is about the deal that the sales rep just closed.",
   });
+
+  if (deal?.companyName && !deal?.companyLogo) {
+    const { data: brand, error } = await tryCatch(getBrand(deal.companyName));
+
+    if (brand && !error) {
+      object.company = {
+        ...object.company,
+        companyLogo: brand.icon,
+      };
+    }
+  }
 
   await updateDealByChatId(chatId, {
     ...object.company,

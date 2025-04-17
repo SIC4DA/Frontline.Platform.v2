@@ -3,6 +3,7 @@
 import { db } from "@/core/db";
 import { user } from "@/core/db/schema";
 import { auth } from "@/lib/auth";
+import type { User } from "@/types/user";
 import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 
@@ -15,7 +16,7 @@ export const getMe = async () => {
     throw new Error("User not found");
   }
 
-  return session.user;
+  return session.user as User;
 };
 
 export const getUsers = async () => {

@@ -39,7 +39,10 @@ export const createChat = async () => {
   return result[0].id;
 };
 
-export const createMessage = async (chatId: string, data: Omit<typeof message.$inferInsert, "userId" | "chatId" | "id" | "createdAt">) => {
+export const createMessage = async (
+  chatId: string,
+  data: Omit<typeof message.$inferInsert, "userId" | "chatId" | "id" | "createdAt">,
+) => {
   const user = await getMe();
 
   const result = await db
@@ -80,4 +83,24 @@ export const deleteChat = async (id: string) => {
   const user = await getMe();
 
   await db.delete(chat).where(and(eq(chat.id, id), eq(chat.userId, user.id)));
+};
+
+export const getHistory = async () => {
+  const user = await getMe();
+
+  const result = await db.query.chat.findMany({
+    where: eq(chat.userId, user.id),
+    with: {
+      deal: {
+        columns: {
+          companyName: true,
+        },
+      },
+    },
+    columns: {
+      userId: false,
+    },
+  });
+
+  return result;
 };

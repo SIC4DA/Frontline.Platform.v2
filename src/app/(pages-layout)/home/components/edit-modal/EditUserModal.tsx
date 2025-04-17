@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import type { User } from "@/lib/auth.types";
+import type { User } from "@/types/user";
 import { LoaderCircle, Pencil, XIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useActionState, useEffect, useState } from "react";

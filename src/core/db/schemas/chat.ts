@@ -3,6 +3,7 @@ import { index, jsonb, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { randomUUID } from "node:crypto";
 import { user } from "./auth";
+import { deal } from "./deal";
 
 export const message = pgTable(
   "message",
@@ -53,5 +54,9 @@ export const chatRelations = relations(chat, ({ one, many }) => ({
   user: one(user, {
     fields: [chat.userId],
     references: [user.id],
+  }),
+  deal: one(deal, {
+    fields: [chat.id],
+    references: [deal.chatId],
   }),
 }));

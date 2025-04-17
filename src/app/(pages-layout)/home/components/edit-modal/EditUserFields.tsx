@@ -2,8 +2,8 @@
 
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { User } from "@/lib/auth.types";
 import { cn } from "@/lib/utils";
+import type { User } from "@/types/user";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { EditUserState } from "../../actions/editUser";
