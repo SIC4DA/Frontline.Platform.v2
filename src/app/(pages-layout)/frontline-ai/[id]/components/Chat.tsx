@@ -1,6 +1,8 @@
 "use client";
 
 import useDebounce from "@/hooks/shared/useDebounce";
+import { createMessage, getChat } from "@/services/chat";
+import { generateDealByAI } from "@/services/deal";
 import type { Chat } from "@/types/chat";
 import { useChat } from "@ai-sdk/react";
 import ChatPlaceholder from "@public/icons/ChatPlaceholder";
@@ -9,8 +11,6 @@ import Link from "next/link";
 import { useEffect } from "react";
 import ChatInput from "./ChatInput";
 import MessagesList from "./MessagesList";
-import { generateDealByAI } from "@/services/deal";
-import { createMessage, getChat } from "@/services/chat";
 
 const Chat = ({ chatData }: { chatData: Chat }) => {
   const t = useTranslations("frontlineAi");
@@ -25,9 +25,8 @@ const Chat = ({ chatData }: { chatData: Chat }) => {
 
       const chat = await getChat(chatData.id);
       if (!chat) return;
-      
-      const updatedChat = await generateDealByAI(chat.id, chat.messages);
-      console.log(updatedChat);
+
+      await generateDealByAI(chat.id, chat.messages);
     },
   });
   const debouncedMessages = useDebounce(messages, 100);
