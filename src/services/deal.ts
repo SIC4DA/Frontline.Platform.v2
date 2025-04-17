@@ -3,12 +3,13 @@
 import { db } from "@/core/db";
 import { deal } from "@/core/db/schema";
 import type { TMessage } from "@/types/chat";
+import type { Deal } from "@/types/deal";
 import { getBrand } from "@/utils/brand";
 import { tryCatch } from "@/utils/tryCatch";
 import { DealSchema } from "@/validations/deal";
 import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
-import { and, eq } from "drizzle-orm";
+import { and, eq, ilike } from "drizzle-orm";
 import { getMe } from "./user";
 
 export const getDeal = async (id: string) => {
@@ -36,14 +37,15 @@ export const getDealByChatId = async (chatId: string) => {
   return result;
 };
 
-export const getDeals = async () => {
+export const getDeals = async ({ limit }: { limit?: number } = {}) => {
   const user = await getMe();
 
   const result = await db.query.deal.findMany({
     where: eq(deal.userId, user.id),
+    ...(limit && { limit }),
   });
 
-  return result;
+  return result as Deal[];
 };
 
 export const createDeal = async (chatId: string) => {
@@ -115,8 +117,8 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
     schemaDescription: "The data you will be given is about the deal that the sales rep just closed.",
   });
 
-  if (deal?.companyName && !deal?.companyLogo) {
-    const { data: brand, error } = await tryCatch(getBrand(deal.companyName));
+  if (object.company?.companyName && !deal?.companyLogo) {
+    const { data: brand, error } = await tryCatch(getBrand(object.company?.companyName));
 
     if (brand && !error) {
       object.company = {
@@ -134,4 +136,36 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
   });
 
   return { success: true, deal: object };
+};
+
+export const getDealsAnalytics = async () => {
+  const user = await getMe();
+
+  const result = (await db.query.deal.findMany({
+    where: eq(deal.userId, user.id),
+  })) as Deal[];
+
+  const closedDeals = result.filter((deal) =>
+    deal.dealContributors.some((contributor) => contributor.stage === "Closing"),
+  );
+
+  const dealsCount = result.length;
+  const closedDealsCount = closedDeals.length;
+  const conversionRate = closedDealsCount > 0 ? (closedDealsCount / dealsCount) * 100 : 0;
+
+  return {
+    closedDeals: closedDealsCount,
+    conversionRate: Number(conversionRate.toFixed(2)),
+  };
+};
+
+export const searchDeal = async (query: string, { limit }: { limit?: number } = {}) => {
+  const user = await getMe();
+
+  const result = await db.query.deal.findMany({
+    where: and(eq(deal.userId, user.id), ilike(deal.companyName, `%${query}%`)),
+    ...(limit && { limit }),
+  });
+
+  return result as Deal[];
 };
