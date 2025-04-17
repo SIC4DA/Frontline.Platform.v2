@@ -5,7 +5,9 @@ import useChatHistory from "@/hooks/chat/useChatHistory";
 import HistoryTimeFrame from "./HistoryTimeFrame";
 
 const ChatHistory = () => {
-  const { isLoading, chatsHistory } = useChatHistory();
+  const { isLoading, chatsHistory, error } = useChatHistory();
+
+  if (!chatsHistory || error || !chatsHistory.length) return null;
 
   if (isLoading) return <Skeleton className="h-10 w-full rounded-xl" />;
 

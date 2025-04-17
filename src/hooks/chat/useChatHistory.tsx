@@ -65,6 +65,7 @@ const useChatHistory = () => {
   });
 
   const chatsHistory = useMemo(() => {
+    if (!result.data) return [];
     return categorizeChats(result.data || []);
   }, [result.data]);
 
