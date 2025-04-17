@@ -8,3 +8,10 @@ export type TMessage = typeof message.$inferSelect & {
 export type Chat = typeof chat.$inferSelect & {
   messages: TMessage[];
 };
+
+export type ChatHistory = typeof chat.$inferSelect & {
+  deal: {
+    companyName: string;
+    companyLogo: string;
+  };
+};
