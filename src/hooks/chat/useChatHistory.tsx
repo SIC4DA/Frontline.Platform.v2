@@ -1,21 +1,17 @@
 "use client";
 
-import { Chat } from "@/types/chat";
+import { ChatHistory } from "@/types/chat";
+import { useMemo } from "react";
 import { useGet } from "../api/useGet";
 
 export type TimeframeChats = {
   title: string;
-  chats: Chat[];
+  chats: ChatHistory[];
 };
 
-export type ChatTimeframes = {
-  today?: TimeframeChats;
-  yesterday?: TimeframeChats;
-  lastWeek?: TimeframeChats;
-  lastYear?: TimeframeChats;
-};
+function categorizeChats(chats: ChatHistory[]): TimeframeChats[] {
+  console.log(chats);
 
-function categorizeChats(chats: Chat[]): ChatTimeframes {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const yesterday = new Date(today);
@@ -25,7 +21,7 @@ function categorizeChats(chats: Chat[]): ChatTimeframes {
   const lastYearStart = new Date(today);
   lastYearStart.setFullYear(lastYearStart.getFullYear() - 1);
 
-  const result: ChatTimeframes = {};
+  const result: TimeframeChats[] = [];
 
   // Ensure updatedAt is a Date object
   const processedChats = chats.map((chat) => ({
@@ -46,32 +42,33 @@ function categorizeChats(chats: Chat[]): ChatTimeframes {
 
   // Only add timeframes that have chats
   if (todayChats.length > 0) {
-    result.today = { title: "today", chats: todayChats };
+    result.push({ title: "today", chats: todayChats });
   }
 
   if (yesterdayChats.length > 0) {
-    result.yesterday = { title: "yesterday", chats: yesterdayChats };
+    result.push({ title: "yesterday", chats: yesterdayChats });
   }
 
   if (lastWeekChats.length > 0) {
-    result.lastWeek = { title: "last7Days", chats: lastWeekChats };
+    result.push({ title: "last7Days", chats: lastWeekChats });
   }
 
   if (lastYearChats.length > 0) {
-    result.lastYear = { title: "lastYear", chats: lastYearChats };
+    result.push({ title: "lastYear", chats: lastYearChats });
   }
-
   return result;
 }
 const useChatHistory = () => {
-  const { data: chats, isLoading } = useGet<Chat[]>({
+  const result = useGet<ChatHistory[]>({
     endpoint: "/api/chat/get-history",
     queryKey: ["chats"],
   });
 
-  const chatsHistory = categorizeChats(chats || []);
+  const chatsHistory = useMemo(() => {
+    return categorizeChats(result.data || []);
+  }, [result.data]);
 
-  return { chats, isLoading, chatsHistory };
+  return { ...result, chatsHistory };
 };
 
 export default useChatHistory;
