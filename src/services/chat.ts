@@ -94,6 +94,7 @@ export const getChatHistory = async () => {
       deal: {
         columns: {
           companyName: true,
+          companyLogo: true,
         },
       },
     },
