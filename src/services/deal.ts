@@ -9,7 +9,7 @@ import { tryCatch } from "@/utils/tryCatch";
 import { DealSchema } from "@/validations/deal";
 import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
-import { and, eq } from "drizzle-orm";
+import { and, eq, like } from "drizzle-orm";
 import { getMe } from "./user";
 
 export const getDeal = async (id: string) => {
@@ -157,4 +157,14 @@ export const getDealsAnalytics = async () => {
     closedDeals: closedDealsCount,
     conversionRate: Number(conversionRate.toFixed(2)),
   };
+};
+
+export const searchDeal = async (query: string): Promise<Deal[]> => {
+  const user = await getMe();
+
+  const result = await db.query.deal.findMany({
+    where: and(eq(deal.userId, user.id), like(deal.companyName, `%${query}%`)),
+  });
+
+  return result as Deal[];
 };
