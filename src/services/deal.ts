@@ -3,6 +3,7 @@
 import { db } from "@/core/db";
 import { deal } from "@/core/db/schema";
 import type { TMessage } from "@/types/chat";
+import type { Deal } from "@/types/deal";
 import { getBrand } from "@/utils/brand";
 import { tryCatch } from "@/utils/tryCatch";
 import { DealSchema } from "@/validations/deal";
@@ -140,14 +141,12 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
 export const getDealsAnalytics = async () => {
   const user = await getMe();
 
-  const result = await db.query.deal.findMany({
+  const result = (await db.query.deal.findMany({
     where: eq(deal.userId, user.id),
-  });
+  })) as Deal[];
 
-  const closedDeals = result.filter(
-    (deal) =>
-      Array.isArray(deal.dealContributors) &&
-      deal.dealContributors.some((contributor) => contributor.stage === "Closing"),
+  const closedDeals = result.filter((deal) =>
+    deal.dealContributors.some((contributor) => contributor.stage === "Closing"),
   );
 
   const dealsCount = result.length;
