@@ -85,7 +85,7 @@ export const deleteChat = async (id: string) => {
   await db.delete(chat).where(and(eq(chat.id, id), eq(chat.userId, user.id)));
 };
 
-export const getHistory = async () => {
+export const getChatHistory = async () => {
   const user = await getMe();
 
   const result = await db.query.chat.findMany({
