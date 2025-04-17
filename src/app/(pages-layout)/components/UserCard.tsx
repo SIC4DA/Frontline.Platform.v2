@@ -35,7 +35,7 @@ const UserCard = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
           alt="google"
           width={32}
           height={32}
-          className={cn("aspect-auto w-8 object-cover max-2xl:w-6", !isSidebarActive && "w-6")}
+          className={cn("aspect-auto w-8 rounded-lg object-cover max-2xl:w-6", !isSidebarActive && "w-6")}
         />
         {isSidebarActive && (
           <div>
