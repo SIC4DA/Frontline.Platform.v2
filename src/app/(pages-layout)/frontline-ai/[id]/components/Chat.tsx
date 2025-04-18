@@ -6,6 +6,7 @@ import { generateDealByAI } from "@/services/deal";
 import type { Chat } from "@/types/chat";
 import { useChat } from "@ai-sdk/react";
 import ChatPlaceholder from "@public/icons/ChatPlaceholder";
+import { useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -14,6 +15,7 @@ import MessagesList from "./MessagesList";
 
 const Chat = ({ chatData }: { chatData: Chat }) => {
   const t = useTranslations("frontlineAi");
+  const queryClient = useQueryClient();
 
   const { messages, handleSubmit, input, handleInputChange, status } = useChat({
     initialMessages: chatData.messages,
@@ -48,6 +50,14 @@ const Chat = ({ chatData }: { chatData: Chat }) => {
 
     return () => clearTimeout(timeout);
   }, [chatData.id, debouncedMessages]);
+
+  useEffect(() => {
+    return () => {
+      queryClient.refetchQueries({
+        queryKey: ["chats"],
+      });
+    };
+  }, []);
 
   return (
     <>
