@@ -117,6 +117,10 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
     schemaDescription: "The data you will be given is about the deal that the sales rep just closed.",
   });
 
+  if (!deal && object.company?.companyName) {
+    await createDeal(chatId);
+  }
+
   if (object.company?.companyName && !deal?.companyLogo) {
     const { data: brand, error } = await tryCatch(getBrand(object.company?.companyName));
 

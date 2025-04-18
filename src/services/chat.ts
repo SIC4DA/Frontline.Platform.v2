@@ -103,5 +103,7 @@ export const getChatHistory = async () => {
     },
   });
 
-  return result;
+  const dealsWithCompanyName = result.filter((chat) => chat.deal?.companyName);
+
+  return dealsWithCompanyName;
 };

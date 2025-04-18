@@ -57,6 +57,7 @@ const Chat = ({ chatData }: { chatData: Chat }) => {
         queryKey: ["chats"],
       });
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

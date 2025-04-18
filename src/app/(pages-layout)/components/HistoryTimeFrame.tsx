@@ -26,20 +26,24 @@ const HistoryTimeFrame = ({ timeframeData }: { timeframeData: TimeframeChats }) 
           />
         </span>
       </button>
-      <div className={cn("flex max-h-0 flex-col gap-2 overflow-hidden duration-300 hidden-scrollbar", isOpen && "max-h-96 overflow-auto")}>
+      <div
+        className={cn(
+          "hidden-scrollbar flex max-h-0 flex-col gap-2 overflow-hidden duration-300",
+          isOpen && "max-h-96 overflow-auto",
+        )}>
         {timeframeData.chats.map((chat) => (
           <Link
             key={chat.id}
             href={`/frontline-ai/${chat.id}`}
             className="flex items-center gap-4 rounded-lg px-4 py-3 duration-300 hover:bg-[#F5F5F7]">
             <Image
-              src={chat.deal.companyLogo || "/images/google.webp"}
+              src={chat?.deal?.companyLogo || "/images/google.webp"}
               alt="google"
               width={20}
               height={20}
               className="aspect-square size-5 rounded"
             />
-            <p className="text-foreground text-sm max-2xl:text-xs">{chat.deal.companyName}</p>
+            <p className="text-foreground text-sm max-2xl:text-xs">{chat?.deal?.companyName}</p>
           </Link>
         ))}
       </div>
