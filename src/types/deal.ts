@@ -1,6 +1,6 @@
 import type { deal } from "@/core/db/schema";
 
-type DealContributor = {
+export type DealContributor = {
   name: string;
   title: string;
   shoutout: string;
