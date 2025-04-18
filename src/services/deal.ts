@@ -145,8 +145,10 @@ export const getDealsAnalytics = async () => {
     where: eq(deal.userId, user.id),
   })) as Deal[];
 
-  const closedDeals = result.filter((deal) =>
-    deal.dealContributors.some((contributor) => contributor.stage === "Closing"),
+  const closedDeals = result.filter(
+    (deal) =>
+      Array.isArray(deal.dealContributors) &&
+      deal.dealContributors.some((contributor) => contributor.stage === "Closing"),
   );
 
   const dealsCount = result.length;
