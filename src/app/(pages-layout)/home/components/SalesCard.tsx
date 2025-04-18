@@ -22,17 +22,18 @@ const SalesCard = ({
   }).format(Number(contractValue) || 0);
 
   const confidenceProgress =
-    dealContributors?.filter((contributor) => contributor.stage === "Closing").length / dealContributors.length;
+    dealContributors?.filter((contributor) => contributor.stage === "Closing")?.length /
+    (dealContributors?.length || 1);
 
   const salesData = [
     {
       title: t("stage"),
-      value: <StageChip stage={dealContributors.at(-1)?.stage ?? ""} />,
+      value: <StageChip stage={dealContributors?.at(-1)?.stage ?? "Prospecting"} />,
       icon: <Crosshair size={20} className="text-foreground-secondary" />,
     },
     {
       title: t("contactPerson"),
-      value: contractSigner,
+      value: contractSigner || t("notAvailable"),
       icon: <User size={20} className="text-foreground-secondary" />,
     },
     {
@@ -55,7 +56,7 @@ const SalesCard = ({
           alt={companyName || "Google"}
           width={34}
           height={34}
-          className="aspect-square w-8 object-cover"
+          className="aspect-square w-8 rounded-lg object-cover"
         />
         <div>
           <h4 className="text-sm font-medium capitalize">{companyName}</h4>

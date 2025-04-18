@@ -1,47 +1,20 @@
-"use client";
+import { getDeals, getDealsAnalytics } from "@/services/deal";
+import { getTranslations } from "next-intl/server";
+import UserSales from "./UserSales";
 
-import { searchDeal } from "@/services/deal";
-import type { Deal } from "@/types/deal";
-import Search from "@public/icons/Search";
-import { useTranslations } from "next-intl";
-import { useRef, useState } from "react";
-import SalesCard from "./SalesCard";
+const UserSalesData = async () => {
+  const t = await getTranslations("home");
+  const [deals, dealsAnalytics] = await Promise.all([getDeals(), getDealsAnalytics()]);
 
-type UserSalesDataProps = {
-  dealsAnalytics: {
-    closedDeals: number;
-    conversionRate: number;
-  };
-  initDeals: Deal[];
-};
-
-const UserSalesData = ({ dealsAnalytics, initDeals }: UserSalesDataProps) => {
-  const t = useTranslations("home");
   const conversionRateWithPercentage = new Intl.NumberFormat("en-US", {
     style: "percent",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(dealsAnalytics.conversionRate);
 
-  const [deals, setDeals] = useState<Deal[]>(initDeals);
-  const timeRef = useRef<NodeJS.Timeout>(null);
-
-  const handleOnChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (timeRef.current) {
-      clearTimeout(timeRef.current);
-    }
-
-    timeRef.current = setTimeout(async () => {
-      const query = e.target.value.trim();
-
-      if (!query) {
-        setDeals(initDeals);
-        return;
-      }
-      const result = await searchDeal(query);
-      setDeals(result);
-    }, 500);
-  };
+  if (!deals || !deals.length) {
+    return <p className="text-foreground-secondary mt-10 text-center text-lg max-2xl:text-base">{t("noSales")}</p>;
+  }
 
   return (
     <div className="mt-7 w-full px-7 max-2xl:mt-5 max-md:px-4 max-sm:px-2">
@@ -55,27 +28,8 @@ const UserSalesData = ({ dealsAnalytics, initDeals }: UserSalesDataProps) => {
           <span className="text-foreground-secondary">{t("conversionRate")}</span>
         </p>
       </div>
-      <div className="mb-6 flex items-center gap-3 rounded-lg bg-[#F5F5F5] px-6 py-2">
-        <label htmlFor="search-sales" className="stroke-foreground">
-          <Search />
-        </label>
-        <input
-          type="text"
-          id="search-sales"
-          placeholder={t("searchPlaceholder")}
-          className="placeholder:text-foreground-secondary text-foreground flex-grow bg-transparent py-1 focus:outline-0 max-2xl:text-sm"
-          onChange={handleOnChange}
-        />
-      </div>
-      <div
-        style={{
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-        }}
-        className="grid gap-4">
-        {deals.map((deal) => (
-          <SalesCard key={deal.id} {...deal} />
-        ))}
-      </div>
+
+      <UserSales initDeals={deals} />
     </div>
   );
 };
