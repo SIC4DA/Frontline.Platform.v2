@@ -6,14 +6,7 @@ import Image from "next/image";
 import ConfidenceProgress from "./ConfidenceProgress";
 import StageChip from "./StageChip";
 
-const SalesCard = ({
-  companyName,
-  companyIndustry,
-  companyLogo,
-  contractValue,
-  contractSigner,
-  dealContributors = [],
-}: Deal) => {
+const SalesCard = ({ companyName, companyIndustry, companyLogo, contractValue, dealContributors = [] }: Deal) => {
   const t = useTranslations("home");
 
   const contractValueWithCurrency = new Intl.NumberFormat("en-US", {
@@ -25,15 +18,17 @@ const SalesCard = ({
     dealContributors?.filter((contributor) => contributor.stage === "Closing")?.length /
     (dealContributors?.length || 1);
 
+  const lastDealContributor = dealContributors?.at(-1);
+
   const salesData = [
     {
       title: t("stage"),
-      value: <StageChip stage={dealContributors?.at(-1)?.stage ?? "Prospecting"} />,
+      value: <StageChip stage={lastDealContributor?.stage ?? "Prospecting"} />,
       icon: <Crosshair size={20} className="text-foreground-secondary" />,
     },
     {
       title: t("contactPerson"),
-      value: contractSigner || t("notAvailable"),
+      value: lastDealContributor?.name || t("notAvailable"),
       icon: <User size={20} className="text-foreground-secondary" />,
     },
     {

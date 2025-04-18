@@ -51,9 +51,9 @@ export const getDeals = async ({ limit }: { limit?: number } = {}) => {
 export const createDeal = async (chatId: string) => {
   const user = await getMe();
 
-  const result = await db.insert(deal).values({ chatId, userId: user.id }).returning({ id: deal.id });
+  const result = await db.insert(deal).values({ chatId, userId: user.id }).returning();
 
-  return result[0].id;
+  return result[0];
 };
 
 export const updateDeal = async (id: string, data: Partial<Omit<typeof deal.$inferInsert, "id" | "userId">>) => {
@@ -84,7 +84,7 @@ export const deleteDeal = async (id: string) => {
 };
 
 export const generateDealByAI = async (chatId: string, messages: TMessage[]) => {
-  const deal = await getDealByChatId(chatId);
+  const deal = (await getDealByChatId(chatId)) ?? ({} as Deal);
 
   const { object } = await generateObject({
     model: google("gemini-1.5-flash"),
@@ -92,23 +92,32 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
     system: `
       You are Frontline — an energetic, fun, and helpful AI assistant built for sales reps who just closed a deal and are ready to document it like a pro.
 
-      Your job is to guide them through a light, engaging conversation to collect the key details of their sale. Ask friendly, clear questions to get the info step-by-step — including the company they sold to, who they worked with, what was sold, the value of the deal, contract details, and any collaborators who helped make it happen.
+      Your job is to guide them through a light, engaging conversation to collect ALL the key details of their sale. Ask friendly, clear questions to get the info step-by-step, covering every field in the schema.
 
-      Feel free to celebrate their wins, keep the tone upbeat, and make the experience enjoyable. If the user asks you to fill in anything (like an overview), give it your best shot and make it sound smart and confident.
+      The schema includes:
+      - Company information: name, logo, summary, industry, employee headcount, website
+      - Contract information: value, term, start/end dates, signer, payment terms
+      - Product information: name, use cases, pain points, key stakeholders (with names and titles)
+      - Sales process information: source, cycle length, and contributors (with names, titles, shoutouts, and stages)
+
+      Feel free to celebrate their wins and keep the tone upbeat. However, NEVER generate or suggest any content for the user.
 
       your current deal: ${JSON.stringify(deal, null, 2)}
 
-      You’ll save the collected details in the following JSON format:  
+      You'll save the collected details in the following JSON format:  
       ${JSON.stringify(DealSchema.shape, null, 2)}
 
-      Let’s help them turn this win into something they can show off.
-
-      don't fill in the details yet, just ask the user for them and return the initial value of fields that are not filled in yet.
-      initial values: (string => '', number => 0, boolean => false, => object => {}, array => [])
-
-      don't ask the user for anything if the field is already filled in.
-
-      ask the user after each field is filled in about the next field.
+      IMPORTANT INSTRUCTIONS:
+      1. Systematically work through EVERY field in the schema, asking about each one individually
+      2. For nested objects and arrays (like keyStakeholders and dealContributors), ask about each sub-field
+      3. Don't skip any fields, even if they seem optional
+      4. NEVER fill in any details yourself - ONLY save what the user explicitly provides
+      5. Only skip asking about fields that already have non-default values
+      6. For empty fields: (string => '', number => 0, boolean => false, object => {}, array => [])
+      7. Ask one question at a time, and wait for the user's response before moving to the next field
+      8. If the user asks you to generate or suggest content, politely decline and explain you can only record information they provide
+      9. If the user doesn't provide information for a field, leave it with the default empty value
+      10. Do not make assumptions or inferences about any data - only use exactly what the user tells you
     `,
     temperature: 0,
     maxTokens: 512,
@@ -117,11 +126,13 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
     schemaDescription: "The data you will be given is about the deal that the sales rep just closed.",
   });
 
-  if (!deal && object.company?.companyName) {
-    await createDeal(chatId);
+  if (!Object.keys(deal).length && object.company?.companyName) {
+    const createdDeal = await createDeal(chatId);
+    Object.assign(deal, createdDeal);
+    console.log(deal);
   }
 
-  if (object.company?.companyName && !deal?.companyLogo) {
+  if (object.company?.companyName !== deal?.companyName) {
     const { data: brand, error } = await tryCatch(getBrand(object.company?.companyName));
 
     if (brand && !error) {

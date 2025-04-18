@@ -24,7 +24,7 @@ const Sidebar = ({
   return (
     <aside
       className={cn(
-        "sticky top-0 left-0 flex h-dvh w-[21.5%] min-w-[255px] flex-col justify-between overflow-auto border-r border-[#F5F5F7] bg-[#FAFAFA] px-4 py-7 duration-300 max-sm:hidden",
+        "sticky top-0 left-0 flex h-dvh w-[21.5%] min-w-[255px] flex-col justify-between gap-16 overflow-auto border-r border-[#F5F5F7] bg-[#FAFAFA] px-4 py-7 duration-300 max-sm:hidden",
         !isActive && "w-[5.5%] min-w-[64px] px-0",
       )}>
       <div>

@@ -24,7 +24,7 @@ const ChatInput = ({ input, handleInputChange, isLoading, placeholder }: ChatInp
         onChange={handleInputChange}
         className="placeholder:text-foreground-secondary h-6 flex-grow resize-none text-sm focus:outline-none max-md:text-xs max-md:placeholder:text-xs"
         placeholder={placeholder}
-        disabled={isLoading}
+        readOnly={isLoading}
       />
       <button
         type="submit"
