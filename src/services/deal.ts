@@ -105,6 +105,9 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
       - Do not skip any field. Every field in the schema must be present in the final JSON object.
       - If a field is already filled, confirm with the user or move to the next.
       - At the end, output a single JSON object that matches the schema exactly.
+      - Do not make assumptions or fill in any data yourself unless the user requests your help.
+      - Don't return 'null' just return an empty field value like this: { "fieldName": "", "price": 0, "date": "2023-01-01", other: [] }
+
 
       Your goal is to ensure the Deal object is fully populated and valid according to the schema above.
     `,
@@ -115,28 +118,20 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
     schemaDescription: "The data you will be given is about the deal that the sales rep just closed.",
   });
 
-  if (!Object.keys(deal).length && object.company?.companyName) {
+  if (!Object.keys(deal).length && object?.companyName) {
     const createdDeal = await createDeal(chatId);
     Object.assign(deal, createdDeal);
   }
 
-  if (object.company?.companyName !== deal?.companyName) {
-    const { data: brand, error } = await tryCatch(getBrand(object.company?.companyName));
+  if (object?.companyName !== deal?.companyName || !deal.companyLogo?.trim()) {
+    const { data: brand, error } = await tryCatch(getBrand(object?.companyName));
 
     if (brand && !error) {
-      object.company = {
-        ...object.company,
-        companyLogo: brand.icon,
-      };
+      Object.assign(object, { companyLogo: brand.icon });
     }
   }
 
-  await updateDealByChatId(chatId, {
-    ...object.company,
-    ...object.contract,
-    ...object.product,
-    ...object.salesProcess,
-  });
+  await updateDealByChatId(chatId, object);
 
   return { success: true, deal: object };
 };
