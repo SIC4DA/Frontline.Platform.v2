@@ -10,8 +10,6 @@ export type TimeframeChats = {
 };
 
 function categorizeChats(chats: ChatHistory[]): TimeframeChats[] {
-  console.log(chats);
-
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const yesterday = new Date(today);
