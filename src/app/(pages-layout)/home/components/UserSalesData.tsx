@@ -6,12 +6,6 @@ const UserSalesData = async () => {
   const t = await getTranslations("home");
   const [deals, dealsAnalytics] = await Promise.all([getDeals(), getDealsAnalytics()]);
 
-  const conversionRateWithPercentage = new Intl.NumberFormat("en-US", {
-    style: "percent",
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(dealsAnalytics.conversionRate);
-
   if (!deals || !deals.length) {
     return <p className="text-foreground-secondary mt-10 text-center text-lg max-2xl:text-base">{t("noSales")}</p>;
   }
@@ -24,7 +18,7 @@ const UserSalesData = async () => {
           <span className="text-foreground-secondary">{t("closedSales")}</span>
         </p>
         <p>
-          <span className="text-foreground me-1 font-semibold">{conversionRateWithPercentage}</span>
+          <span className="text-foreground me-1 font-semibold">{dealsAnalytics.conversionRate}%</span>
           <span className="text-foreground-secondary">{t("conversionRate")}</span>
         </p>
       </div>

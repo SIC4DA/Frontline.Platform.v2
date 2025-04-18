@@ -5,9 +5,7 @@ export async function GET() {
   try {
     const chats = await getChatHistory();
     return NextResponse.json(chats);
-  } catch (error) {
-    console.log(error);
-
+  } catch {
     return NextResponse.json({ success: false, error: "Failed to fetch chat history" }, { status: 500 });
   }
 }
