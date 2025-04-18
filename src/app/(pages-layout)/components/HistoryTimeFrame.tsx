@@ -26,7 +26,7 @@ const HistoryTimeFrame = ({ timeframeData }: { timeframeData: TimeframeChats }) 
           />
         </span>
       </button>
-      <div className={cn("flex max-h-0 flex-col gap-2 overflow-hidden duration-300", isOpen && "max-h-96")}>
+      <div className={cn("flex max-h-0 flex-col gap-2 overflow-hidden duration-300 hidden-scrollbar", isOpen && "max-h-96 overflow-auto")}>
         {timeframeData.chats.map((chat) => (
           <Link
             key={chat.id}
