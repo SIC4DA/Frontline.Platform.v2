@@ -61,6 +61,7 @@ const useChatHistory = () => {
     endpoint: "/api/chat/get-history",
     queryKey: ["chats"],
   });
+  
   const chatsHistory = useMemo(() => {
     if (!result.data) return [];
     return categorizeChats(result.data || []);
