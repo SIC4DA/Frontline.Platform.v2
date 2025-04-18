@@ -14,6 +14,7 @@ import {
 import type { User } from "@/types/user";
 import { LoaderCircle, Pencil, XIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useState } from "react";
 import { editUserAction } from "../../actions/editUser";
 import EditUserFields from "./EditUserFields";
@@ -21,6 +22,7 @@ import ImageModification from "./ImageModification";
 
 const EditUserModal = ({ user }: { user: User }) => {
   const t = useTranslations("home");
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [state, formAction, isPending] = useActionState(editUserAction, {
     status: "idle",
@@ -32,7 +34,9 @@ const EditUserModal = ({ user }: { user: User }) => {
   useEffect(() => {
     if (state.status === "success") {
       setIsOpen(false);
+      router.refresh();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.status]);
 
   return (
