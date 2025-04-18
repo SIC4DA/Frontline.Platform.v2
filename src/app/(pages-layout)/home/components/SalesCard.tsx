@@ -14,10 +14,6 @@ const SalesCard = ({ companyName, companyIndustry, companyLogo, contractValue, d
     currency: "USD",
   }).format(Number(contractValue) || 0);
 
-  const confidenceProgress =
-    dealContributors?.filter((contributor) => contributor.stage === "Closing")?.length /
-    (dealContributors?.length || 1);
-
   const lastDealContributor = dealContributors?.at(-1);
 
   const salesData = [
@@ -38,7 +34,7 @@ const SalesCard = ({ companyName, companyIndustry, companyLogo, contractValue, d
     },
     {
       title: t("confidence"),
-      value: <ConfidenceProgress confidence={confidenceProgress} />,
+      value: <ConfidenceProgress stage={lastDealContributor?.stage ?? "Prospecting"} />,
       icon: <CircleCheck size={20} className="text-foreground-secondary" />,
     },
   ];
