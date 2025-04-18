@@ -61,7 +61,10 @@
     "frontlineAI": "Frontline AI",
     "leaderboardAndBadges": "Leaderboard & Badges",
     "settings": "Settings",
-    "today": "Today"
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "last7Days": "Last 7 Days",
+    "lastYear": "Last Year"
   },
   "home": {
     "closedSales": "Closed Sales",
@@ -86,7 +89,9 @@
     "fullNameRequired": "Full name is required",
     "usernameRequired": "Username is required",
     "saving": "Saving",
-    "defaultBio": "Hey there! I love frontline"
+    "defaultBio": "Hey there! I love frontline",
+    "notAvailable": "N/A",
+    "noSales": "No sales"
   },
   "frontlineAi": {
     "newChat": "New chat",
