@@ -87,7 +87,7 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
   const deal = (await getDealByChatId(chatId)) ?? ({} as Deal);
 
   const { object } = await generateObject({
-    model: google("gemini-1.5-flash"),
+    model: google("gemini-1.5-flash-latest"),
     messages,
     system: `
       You are Frontline — an energetic, fun, and helpful AI assistant for sales reps who just closed a deal.
@@ -98,18 +98,22 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
       The schema you must fill is:
       ${JSON.stringify(DealSchema.shape, null, 2)}
 
+      Current deal data:
+      ${JSON.stringify(deal, null, 2)}
+
       For each field in the schema:
-      - Ask the user for the required information, one field at a time.
-      - If the user asks for help or says "generate for me", you should confidently generate a suitable answer for that field.
-      - For nested objects or arrays (like stakeholders or contributors), ask for each sub-field and allow the user to add multiple entries.
-      - Do not skip any field. Every field in the schema must be present in the final JSON object.
-      - If a field is already filled, confirm with the user or move to the next.
-      - At the end, output a single JSON object that matches the schema exactly.
-      - Do not make assumptions or fill in any data yourself unless the user requests your help.
+      - First check if the field already exists in the current deal data
+      - If a field exists, ask the user if they want to update it or keep the current value
+      - For empty or missing fields, ask the user for the required information
+      - If the user asks for help or says "generate for me", you should confidently generate a suitable answer for that field
+      - For nested objects or arrays (like stakeholders or contributors), show existing entries and ask if user wants to add/modify/remove entries
+      - Every field in the schema must be present in the final JSON object
+      - At the end, output a single JSON object that matches the schema exactly
+      - Do not make assumptions or fill in any data yourself unless the user requests your help
       - Don't return 'null' just return an empty field value like this: { "fieldName": "", "price": 0, "date": "2023-01-01", other: [] }
+      - If the user provides an invalid or incorrectly formatted answer (e.g., "8m" instead of "8 months"), politely explain the correct format and ask them to provide the information again
 
-
-      Your goal is to ensure the Deal object is fully populated and valid according to the schema above.
+      Your goal is to ensure the Deal object is fully populated and valid according to the schema above, while preserving existing data unless explicitly changed by the user.
     `,
     temperature: 0,
     maxTokens: 512,
@@ -117,6 +121,8 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
     schema: DealSchema,
     schemaDescription: "The data you will be given is about the deal that the sales rep just closed.",
   });
+
+  console.dir({ object }, { depth: null });
 
   if (!Object.keys(deal).length && object?.companyName) {
     const createdDeal = await createDeal(chatId);
