@@ -1,5 +1,4 @@
 import { createMessage } from "@/services/chat";
-import { DealSchema } from "@/validations/deal";
 import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
 
@@ -39,7 +38,7 @@ export const POST = async (req: Request) => {
     - Do not skip any field. Every field in the schema must be present in the final JSON object.
     - Remember today is ${new Date().toLocaleDateString()}.
     - If a field is already filled, confirm with the user or move to the next.
-    - At the end, output a single JSON object that matches the schema exactly.
+    - At the end, output a table with all the information.
     - If the user provides a date, ensure it is in a valid format (e.g., YYYY-MM-DD).
     - If the user provides a currency, ensure it is in a valid format (e.g., $100,000).
     - If the user provides a percentage, ensure it is in a valid format (e.g., 10%).
@@ -51,9 +50,6 @@ export const POST = async (req: Request) => {
     Your goal is to ensure the Deal object is fully populated and valid according to the schema above.
 
     Do not make assumptions or fill in any data yourself unless the user requests your help.
-
-    You'll save the collected details in the following JSON format:  
-    ${JSON.stringify(DealSchema.shape, null, 2)}
   `,
     temperature: 0,
     maxTokens: 512,
