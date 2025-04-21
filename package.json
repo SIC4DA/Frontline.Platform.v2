@@ -67,6 +67,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
+    "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4.1.4",
     "@tanstack/eslint-plugin-query": "^5.73.3",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",

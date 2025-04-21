@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "5mb",
     },
   },
+  turbopack: {
+    rules: {
+      "*.svg": {
+        loaders: ["@svgr/webpack"],
+        as: "*.js",
+      },
+    },
+  },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
