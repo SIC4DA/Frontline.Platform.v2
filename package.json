@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
-    "start": "next start",
+    "start": "next start --turbopack",
     "lint": "next lint",
     "format": "bun prettier -w .",
     "auth:gen": "bunx @better-auth/cli generate --config ./src/lib/auth.ts --output=./src/core/db/schemas/auth.ts --y",
