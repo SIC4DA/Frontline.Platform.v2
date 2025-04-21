@@ -1,8 +1,10 @@
 "use client";
 
+import { RefObject, useState } from "react";
+
 import { useOnboardingStore } from "@/store/onboarding";
 import { Brand } from "@/types/brands";
-import { RefObject, useState } from "react";
+
 import { useGet } from "../api/useGet";
 import useClickedOutside from "../shared/useClickedOutside";
 import useDebounce from "../shared/useDebounce";

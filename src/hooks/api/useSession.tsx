@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
+
 import { authClient } from "@/lib/auth-client";
 import type { Session, User } from "@/lib/auth.types";
-import { useEffect, useState } from "react";
 
 type SessionData = {
   data: { user: User; session: Session } | null;

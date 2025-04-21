@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
+
 import HomeCard from "./components/HomeCard";
 import OnboardingForm from "./components/OnboardingForm";
 

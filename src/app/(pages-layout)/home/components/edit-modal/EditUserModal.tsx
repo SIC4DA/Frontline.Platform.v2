@@ -1,5 +1,10 @@
 "use client";
 
+import { LoaderCircle, Pencil, XIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import { useActionState, useEffect, useState } from "react";
+
 import FormError from "@/components/shared/FormError";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,10 +17,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import type { User } from "@/types/user";
-import { LoaderCircle, Pencil, XIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
-import { useActionState, useEffect, useState } from "react";
+
 import { editUserAction } from "../../actions/editUser";
 import EditUserFields from "./EditUserFields";
 import ImageModification from "./ImageModification";

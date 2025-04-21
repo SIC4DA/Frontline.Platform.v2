@@ -1,7 +1,9 @@
-import { Providers } from "@/providers";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import { getLocale } from "next-intl/server";
+
+import { Providers } from "@/providers";
+
 import "../styles/globals.css";
 
 export const metadata: Metadata = {

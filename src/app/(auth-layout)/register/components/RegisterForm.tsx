@@ -1,13 +1,14 @@
 "use client";
 
-import { sendVerificationEmailAction } from "@/actions/send-verification-email";
-import FormError from "@/components/shared/FormError";
-import { Button } from "@/components/ui/button";
-import { InputWithIcon } from "@/components/ui/InputWithIcon";
-import { cn } from "@/lib/utils";
 import { LoaderCircle, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useActionState } from "react";
+
+import { sendVerificationEmailAction } from "@/actions/send-verification-email";
+import FormError from "@/components/shared/FormError";
+import { InputWithIcon } from "@/components/ui/InputWithIcon";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const RegisterForm = ({ formError }: { formError?: string }) => {
   const t = useTranslations("auth");

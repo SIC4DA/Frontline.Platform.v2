@@ -1,9 +1,11 @@
 "use server";
 
+import { and, eq } from "drizzle-orm";
+
 import { db } from "@/core/db";
 import { chat, message } from "@/core/db/schema";
 import { Chat } from "@/types/chat";
-import { and, eq } from "drizzle-orm";
+
 import { getMe } from "./user";
 
 export const getChat = async (id: string): Promise<Chat | undefined> => {

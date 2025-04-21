@@ -1,14 +1,15 @@
 "use server";
 
+import { eq } from "drizzle-orm";
+import { getTranslations } from "next-intl/server";
+import { redirect } from "next/navigation";
+import { z } from "zod";
+
 import env from "@/config/env";
 import { db } from "@/core/db";
 import { user } from "@/core/db/schema";
 import { auth } from "@/lib/auth";
 import { tryCatch } from "@/utils/tryCatch";
-import { eq } from "drizzle-orm";
-import { getTranslations } from "next-intl/server";
-import { redirect } from "next/navigation";
-import { z } from "zod";
 
 export type EmailVerificationActionState = {
   status: "idle" | "success" | "error";

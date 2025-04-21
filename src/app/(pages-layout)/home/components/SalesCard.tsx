@@ -1,8 +1,10 @@
 // import { Deal } from "@/types/deal";
-import type { Deal } from "@/types/deal";
 import { CircleCheck, Crosshair, User, Wallet } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+
+import type { Deal } from "@/types/deal";
+
 import ConfidenceProgress from "./ConfidenceProgress";
 import StageChip from "./StageChip";
 

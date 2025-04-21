@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { admin, genericOAuth, openAPI, username } from "better-auth/plugins";
+import { randomUUID } from "node:crypto";
 
 import {
   databaseHooksOptions,
@@ -18,7 +19,6 @@ import { companyEmail } from "@/core/auth/plugins/company-email";
 import { validator } from "@/core/auth/plugins/validator";
 import { db } from "@/core/db";
 import * as schema from "@/core/db/schema";
-import { randomUUID } from "node:crypto";
 
 export const auth = betterAuth({
   appName: "Frontline",

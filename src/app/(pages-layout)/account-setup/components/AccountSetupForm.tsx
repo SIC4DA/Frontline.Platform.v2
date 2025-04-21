@@ -1,13 +1,15 @@
 "use client";
 
+import { LoaderCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useActionState } from "react";
+
 import CompanyAutoComplete from "@/app/(auth-layout)/onboarding/components/CompanyAutoComplete";
 import FormError from "@/components/shared/FormError";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { LoaderCircle } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useActionState } from "react";
+
 import { accountSetupAction } from "../actions/accountSetup";
 
 const AccountSetupForm = () => {

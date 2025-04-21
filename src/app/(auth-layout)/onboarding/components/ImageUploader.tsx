@@ -1,12 +1,13 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { useOnboardingStore } from "@/store/onboarding";
 import { FileUp } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { useOnboardingStore } from "@/store/onboarding";
 
 interface ImageUploaderProps {
   formStatus?: "idle" | "success" | "error";

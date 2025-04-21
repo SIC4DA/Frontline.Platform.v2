@@ -1,7 +1,9 @@
+import { Suspense } from "react";
+
 import RequestError from "@/components/shared/RequestError";
 import { getMe } from "@/services/user";
 import { tryCatch } from "@/utils/tryCatch";
-import { Suspense } from "react";
+
 import SalesLoader from "./components/SalesLoader";
 import UserCover from "./components/UserCover";
 import UserData from "./components/UserData";

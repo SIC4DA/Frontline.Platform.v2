@@ -1,6 +1,8 @@
-import OauthOptions from "@/components/auth/OauthOptions";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+
+import OauthOptions from "@/components/auth/OauthOptions";
+
 import RegisterForm from "./components/RegisterForm";
 
 export default async function RegisterPage({

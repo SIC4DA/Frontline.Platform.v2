@@ -1,5 +1,6 @@
-import { chat, message } from "@/core/db/schema";
 import { Message } from "ai";
+
+import { chat, message } from "@/core/db/schema";
 
 export type TMessage = typeof message.$inferSelect & {
   parts: Message["parts"];

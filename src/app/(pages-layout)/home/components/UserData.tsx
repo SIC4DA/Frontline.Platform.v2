@@ -1,7 +1,8 @@
 import { BadgeCheck } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import type { User } from "@/types/user";
-import { useTranslations } from "next-intl";
+
 import EditUserModal from "./edit-modal/EditUserModal";
 
 const UserData = ({ user }: { user: User }) => {

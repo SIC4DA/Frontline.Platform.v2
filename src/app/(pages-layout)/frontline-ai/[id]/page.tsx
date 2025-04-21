@@ -1,9 +1,11 @@
-import RequestError from "@/components/shared/RequestError";
-import { getChat } from "@/services/chat";
 import AiStars from "@public/icons/AiStars";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+
+import RequestError from "@/components/shared/RequestError";
+import { getChat } from "@/services/chat";
+
 import Chat from "./components/Chat";
 
 export default async function FrontlineAiPage({ params }: { params: Promise<{ id: string }> }) {

@@ -1,8 +1,10 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
+
+import { cn } from "@/lib/utils";
+
 import { Input } from "./input";
 
 interface InputWithIconProps extends React.InputHTMLAttributes<HTMLInputElement> {

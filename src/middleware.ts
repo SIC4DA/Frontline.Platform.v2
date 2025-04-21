@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { authClient } from "./lib/auth-client";
 
 const PUBLIC_PATHS = ["/"];

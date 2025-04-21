@@ -1,6 +1,7 @@
-import { createMessage } from "@/services/chat";
 import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
+
+import { createMessage } from "@/services/chat";
 
 export const maxDuration = 60;
 

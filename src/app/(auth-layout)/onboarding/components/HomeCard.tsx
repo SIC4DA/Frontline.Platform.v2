@@ -1,9 +1,11 @@
 "use client";
 
-import { useOnboardingStore } from "@/store/onboarding";
 import { BadgeCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+
+import { useOnboardingStore } from "@/store/onboarding";
+
 import Search from "../../../../../public/icons/Search";
 
 const HomeCard = () => {

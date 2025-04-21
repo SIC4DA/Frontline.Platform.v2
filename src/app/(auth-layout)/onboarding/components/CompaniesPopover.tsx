@@ -1,10 +1,11 @@
-import { cn } from "@/lib/utils";
-import { useOnboardingStore } from "@/store/onboarding";
-import { Brand } from "@/types/brands";
 import { LoaderCircle } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+
+import { cn } from "@/lib/utils";
+import { useOnboardingStore } from "@/store/onboarding";
+import { Brand } from "@/types/brands";
 
 const CompaniesPopover = ({
   companies,

@@ -1,6 +1,7 @@
+import { redirect } from "next/navigation";
+
 import { auth } from "@/lib/auth";
 import { tryCatch } from "@/utils/tryCatch";
-import { redirect } from "next/navigation";
 
 export default async function VerifyEmailPage({
   searchParams,

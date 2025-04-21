@@ -1,4 +1,5 @@
 import { headers } from "next/headers";
+
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 

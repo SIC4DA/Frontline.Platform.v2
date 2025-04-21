@@ -1,5 +1,7 @@
-import env from "@/config/env";
 import { genericOAuth } from "better-auth/plugins";
+
+import env from "@/config/env";
+
 import { mapOAuthProfile } from "../utils";
 
 export const genericOAuthOptions: Parameters<typeof genericOAuth>[0] = {

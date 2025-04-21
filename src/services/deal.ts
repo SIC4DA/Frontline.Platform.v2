@@ -1,5 +1,9 @@
 "use server";
 
+import { google } from "@ai-sdk/google";
+import { generateObject } from "ai";
+import { and, eq, ilike } from "drizzle-orm";
+
 import { db } from "@/core/db";
 import { deal } from "@/core/db/schema";
 import type { TMessage } from "@/types/chat";
@@ -7,9 +11,7 @@ import type { Deal } from "@/types/deal";
 import { getBrand } from "@/utils/brand";
 import { tryCatch } from "@/utils/tryCatch";
 import { DealSchema } from "@/validations/deal";
-import { google } from "@ai-sdk/google";
-import { generateObject } from "ai";
-import { and, eq, ilike } from "drizzle-orm";
+
 import { getMe } from "./user";
 
 export const getDeal = async (id: string) => {
@@ -117,7 +119,6 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
     schema: DealSchema,
     schemaDescription: "The data you will be given is about the deal that the sales rep just closed.",
   });
-
 
   if (!Object.keys(deal).length && object?.companyName) {
     const createdDeal = await createDeal(chatId);

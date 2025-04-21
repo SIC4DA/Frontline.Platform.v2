@@ -1,11 +1,13 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { RegisterActionState } from "@/actions/register";
-import { Input } from "@/components/ui/input";
 import { InputWithIcon } from "@/components/ui/InputWithIcon";
+import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useOnboardingStore } from "@/store/onboarding";
-import { useTranslations } from "next-intl";
+
 import CompanyAutoComplete from "./CompanyAutoComplete";
 
 const formElements = [

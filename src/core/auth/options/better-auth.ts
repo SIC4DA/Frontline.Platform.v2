@@ -1,9 +1,9 @@
 import { BetterAuthOptions } from "better-auth";
 
-import { mapOAuthProfile } from "../utils";
-
 import env from "@/config/env";
 import { redisClient } from "@/config/redis";
+
+import { mapOAuthProfile } from "../utils";
 
 export const emailAndPasswordOptions: BetterAuthOptions["emailAndPassword"] = {
   enabled: true,

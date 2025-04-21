@@ -1,13 +1,14 @@
 "use client";
 
-import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
-
-import { useSession } from "@/hooks/api/useSession";
-import { cn } from "@/lib/utils";
 import { LoaderCircle } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+import { useSession } from "@/hooks/api/useSession";
+import { authClient } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
+
 import Logout from "../../../../public/icons/Logout";
 
 const UserCard = ({ isSidebarActive }: { isSidebarActive: boolean }) => {

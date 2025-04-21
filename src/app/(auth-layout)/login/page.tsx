@@ -1,6 +1,8 @@
-import OauthOptions from "@/components/auth/OauthOptions";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+
+import OauthOptions from "@/components/auth/OauthOptions";
+
 import LoginForm from "./components/LoginForm";
 
 export default function LoginPage() {

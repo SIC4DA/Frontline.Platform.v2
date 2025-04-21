@@ -1,11 +1,12 @@
 "use server";
 
-import { auth } from "@/lib/auth";
-import { uploadFile } from "@/services/cloudnary";
-import { tryCatch } from "@/utils/tryCatch";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+
+import { auth } from "@/lib/auth";
+import { uploadFile } from "@/services/cloudnary";
+import { tryCatch } from "@/utils/tryCatch";
 
 // Define the return type for the register action
 export type RegisterActionState = {

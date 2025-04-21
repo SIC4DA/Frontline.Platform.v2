@@ -1,7 +1,8 @@
-import { InputWithIcon } from "@/components/ui/InputWithIcon";
 import { Mail } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
+
+import { InputWithIcon } from "@/components/ui/InputWithIcon";
 
 export default async function CheckEmailPage({
   searchParams,

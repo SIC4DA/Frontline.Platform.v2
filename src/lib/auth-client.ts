@@ -3,6 +3,7 @@ import { adminClient, genericOAuthClient, inferAdditionalFields, usernameClient 
 
 import env from "@/config/env";
 import { companyEmailClient } from "@/core/auth/plugins/company-email/client";
+
 import { auth } from "./auth";
 
 export const authClient = createAuthClient({

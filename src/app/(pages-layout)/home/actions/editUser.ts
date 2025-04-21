@@ -1,11 +1,12 @@
 "use server";
 
-import { auth } from "@/lib/auth";
-import { tryCatch } from "@/utils/tryCatch";
 import { getTranslations } from "next-intl/server";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { z } from "zod";
+
+import { auth } from "@/lib/auth";
+import { tryCatch } from "@/utils/tryCatch";
 
 export type EditUserState = {
   status: "idle" | "success" | "error";

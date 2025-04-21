@@ -1,12 +1,13 @@
 "use client";
 
-import { TimeframeChats } from "@/hooks/chat/useChatHistory";
-import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+
+import { TimeframeChats } from "@/hooks/chat/useChatHistory";
+import { cn } from "@/lib/utils";
 
 const HistoryTimeFrame = ({ timeframeData }: { timeframeData: TimeframeChats }) => {
   const t = useTranslations("sidebar");

@@ -1,5 +1,6 @@
-import { cn } from "@/lib/utils";
 import Image from "next/image";
+
+import { cn } from "@/lib/utils";
 
 const Loader = ({ size = 200, className }: { size?: number; className?: string }) => {
   return (

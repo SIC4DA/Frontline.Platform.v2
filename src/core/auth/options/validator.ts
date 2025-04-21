@@ -1,9 +1,9 @@
 import { APIError } from "better-auth/api";
 import { z } from "zod";
 
-import type { ValidatorOptions } from "../plugins/validator/types";
-
 import { signUpEmailValidation } from "@/validations/auth";
+
+import type { ValidatorOptions } from "../plugins/validator/types";
 
 export const validatorOptions: ValidatorOptions = {
   middlewares: [

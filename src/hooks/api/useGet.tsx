@@ -1,4 +1,5 @@
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
+
 import { UseGet } from "./types";
 import { requestHandler } from "./utils";
 

@@ -1,6 +1,6 @@
-import type { CompanyEmailOptions } from "../plugins/company-email/types";
-
 import { sendEmail } from "@/services/mailer";
+
+import type { CompanyEmailOptions } from "../plugins/company-email/types";
 
 export const companyEmailOptions: CompanyEmailOptions = {
   expiresIn: 60 * 60,

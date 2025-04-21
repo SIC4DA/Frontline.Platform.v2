@@ -1,8 +1,8 @@
 import { type BetterAuthPlugin } from "better-auth";
 import { APIError } from "better-auth/api";
 import { createAuthMiddleware } from "better-auth/plugins";
-
 import { type ZodSchema } from "zod";
+
 import type { ValidatorOptions } from "./types";
 
 const standardValidate = async <T>(schema: ZodSchema, data: T) => {

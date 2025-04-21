@@ -1,10 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { FileUp } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState } from "react";
+
+import { Button } from "@/components/ui/button";
 
 const ImageModification = ({ userImage }: { userImage: string | null | undefined }) => {
   const t = useTranslations("home");

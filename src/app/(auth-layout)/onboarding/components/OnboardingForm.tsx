@@ -1,12 +1,14 @@
 "use client";
 
+import { LoaderCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useActionState, useEffect } from "react";
+
 import { registerAction } from "@/actions/register";
 import FormError from "@/components/shared/FormError";
 import { Button } from "@/components/ui/button";
 import { useOnboardingStore } from "@/store/onboarding";
-import { LoaderCircle } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useActionState, useEffect } from "react";
+
 import FormFields from "./FormFields";
 import ImageUploader from "./ImageUploader";
 

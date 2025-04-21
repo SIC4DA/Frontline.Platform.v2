@@ -1,7 +1,9 @@
 "use client";
 
-import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
+
+import { cn } from "@/lib/utils";
+
 import ChatHistory from "./ChatHistory";
 import SidebarHeader from "./SidebarHeader";
 import SidebarLinks from "./SidebarLinks";

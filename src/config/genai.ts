@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI, type GenerationConfig } from "@google/generative-ai";
+import { type GenerationConfig, GoogleGenerativeAI } from "@google/generative-ai";
 
 import env from "@/config/env";
 

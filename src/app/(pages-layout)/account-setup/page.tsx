@@ -1,4 +1,5 @@
 import Header from "@/app/(auth-layout)/components/Header";
+
 import AccountSetupForm from "./components/AccountSetupForm";
 
 export default function AccountSetup() {

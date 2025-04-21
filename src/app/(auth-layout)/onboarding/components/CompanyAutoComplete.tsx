@@ -1,10 +1,12 @@
+import { useTranslations } from "next-intl";
+import { useRef } from "react";
+
 import { RegisterActionState } from "@/actions/register";
 import { Input } from "@/components/ui/input";
 import useCompanyName from "@/hooks/auth/useCompanyName";
 import { cn } from "@/lib/utils";
 import { useOnboardingStore } from "@/store/onboarding";
-import { useTranslations } from "next-intl";
-import { useRef } from "react";
+
 import CompaniesPopover from "./CompaniesPopover";
 
 const CompanyAutoComplete = ({ state }: { state: RegisterActionState }) => {

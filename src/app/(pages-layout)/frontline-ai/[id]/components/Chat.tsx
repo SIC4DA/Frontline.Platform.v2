@@ -1,15 +1,17 @@
 "use client";
 
-import useDebounce from "@/hooks/shared/useDebounce";
-import { createMessage, getChat } from "@/services/chat";
-import { generateDealByAI } from "@/services/deal";
-import type { Chat } from "@/types/chat";
 import { useChat } from "@ai-sdk/react";
 import ChatPlaceholder from "@public/icons/ChatPlaceholder";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useEffect } from "react";
+
+import useDebounce from "@/hooks/shared/useDebounce";
+import { createMessage, getChat } from "@/services/chat";
+import { generateDealByAI } from "@/services/deal";
+import type { Chat } from "@/types/chat";
+
 import ChatInput from "./ChatInput";
 import MessagesList from "./MessagesList";
 

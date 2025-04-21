@@ -1,5 +1,6 @@
-import { getChatHistory } from "@/services/chat";
 import { NextResponse } from "next/server";
+
+import { getChatHistory } from "@/services/chat";
 
 export async function GET() {
   try {

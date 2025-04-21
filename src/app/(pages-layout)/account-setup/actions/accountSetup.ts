@@ -1,11 +1,12 @@
 "use server";
 
-import { auth } from "@/lib/auth";
-import { tryCatch } from "@/utils/tryCatch";
 import { getTranslations } from "next-intl/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+
+import { auth } from "@/lib/auth";
+import { tryCatch } from "@/utils/tryCatch";
 
 export type AccountSetupState = {
   status: "idle" | "success" | "error";

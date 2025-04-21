@@ -1,10 +1,12 @@
 "use client";
 
-import { searchDeal } from "@/services/deal";
-import { Deal } from "@/types/deal";
 import Search from "@public/icons/Search";
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
+
+import { searchDeal } from "@/services/deal";
+import { Deal } from "@/types/deal";
+
 import SalesCard from "./SalesCard";
 
 const UserSales = ({ initDeals }: { initDeals: Deal[] }) => {

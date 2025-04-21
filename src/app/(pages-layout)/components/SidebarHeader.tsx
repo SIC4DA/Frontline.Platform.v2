@@ -1,6 +1,8 @@
-import { cn } from "@/lib/utils";
 // import { PanelLeft } from "lucide-react";
 import Image from "next/image";
+
+import { cn } from "@/lib/utils";
+
 import PanelLeft from "../../../../public/icons/PanelLeft";
 
 const SidebarHeader = ({

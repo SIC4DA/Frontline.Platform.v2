@@ -1,7 +1,9 @@
 "use client";
 
-import { ChatHistory } from "@/types/chat";
 import { useMemo } from "react";
+
+import { ChatHistory } from "@/types/chat";
+
 import { useGet } from "../api/useGet";
 
 export type TimeframeChats = {
@@ -61,7 +63,7 @@ const useChatHistory = () => {
     endpoint: "/api/chat/get-history",
     queryKey: ["chats"],
   });
-  
+
   const chatsHistory = useMemo(() => {
     if (!result.data) return [];
     return categorizeChats(result.data || []);

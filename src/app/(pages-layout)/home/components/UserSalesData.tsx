@@ -1,5 +1,7 @@
-import { getDeals, getDealsAnalytics } from "@/services/deal";
 import { getTranslations } from "next-intl/server";
+
+import { getDeals, getDealsAnalytics } from "@/services/deal";
+
 import UserSales from "./UserSales";
 
 const UserSalesData = async () => {
