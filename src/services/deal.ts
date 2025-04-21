@@ -89,7 +89,7 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
   const deal = (await getDealByChatId(chatId)) ?? ({} as Deal);
 
   const { object } = await generateObject({
-    model: google("gemini-1.5-flash-latest"),
+    model: google("gemini-2.0-flash-001"),
     messages,
     system: `
       You are Frontline — an energetic, fun, and helpful AI assistant for sales reps who just closed a deal.
@@ -110,6 +110,10 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
       - For currency values, ensure they are in number format without symbols
       - For percentages, ensure they are in number format without the % symbol
       - Never generate or assume any data - always ask the user
+      - Try to calculate end date from duration and start date if both are provided
+      - If start date and duration are available, add the duration (in months) to the start date to determine the end date
+      - Validate that the calculated end date is after the start date
+      - If either start date or duration is missing, prompt the user for the end date directly
 
       Your goal is to ensure the Deal object is fully populated and valid according to the schema above, while preserving existing data unless explicitly changed by the user. Always require explicit user input for any data changes or additions.
     `,

@@ -11,7 +11,7 @@ export const POST = async (req: Request) => {
   await createMessage(chatId, messages.at(-1));
 
   const result = streamText({
-    model: google("gemini-1.5-flash"),
+    model: google("gemini-2.0-flash-001"),
     messages,
     onError: (error) => console.dir(error, { depth: null }),
     system: `
@@ -24,7 +24,8 @@ export const POST = async (req: Request) => {
     2. Contract details (value, duration, important dates, signatories, payment arrangements)
     3. Product information (name, use cases, pain points addressed)
     4. Key people involved (stakeholders with their roles)
-    5. Sales process information (source, cycle duration, team contributions)
+    5. Sales process information (source, cycle duration, team contributions including their stage involvement)
+    6. Stages (Prospecting", Discovery, Demo, Negotiation, Contracting, Closing), Don't ask user about stage that he filled
 
     For each category, formulate relevant questions to collect comprehensive information. Ask one question at a time and wait for the user's response before proceeding. If the user requests assistance in generating an answer, you may provide suggestions. Otherwise, only record the information the user provides.
 
