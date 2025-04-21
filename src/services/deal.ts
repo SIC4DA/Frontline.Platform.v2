@@ -21,7 +21,7 @@ export const getDeal = async (id: string) => {
     where: and(eq(deal.id, id), eq(deal.userId, user.id)),
   });
 
-  return result;
+  return result as Deal | undefined;
 };
 
 export const getDealByChatId = async (chatId: string) => {
@@ -36,7 +36,7 @@ export const getDealByChatId = async (chatId: string) => {
     },
   });
 
-  return result;
+  return result as Deal | undefined;
 };
 
 export const getDeals = async ({ limit }: { limit?: number } = {}) => {
