@@ -4,7 +4,7 @@ import { db } from "@/core/db";
 import { deal, user } from "@/core/db/schema";
 
 export const getTopUserWithClosedDeals = async () => {
-  const [userWithClosedDeals] = await db
+  const [topUserWithClosedDeals] = await db
     .select({
       closedDealsCount: sql<number>`COUNT(
         CASE 
@@ -54,5 +54,5 @@ export const getTopUserWithClosedDeals = async () => {
     )
     .limit(1);
 
-  return userWithClosedDeals;
+  return topUserWithClosedDeals;
 };
