@@ -165,4 +165,8 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+
+  .ellipsis {
+    @apply overflow-hidden overflow-ellipsis whitespace-nowrap;
+  }
 }
