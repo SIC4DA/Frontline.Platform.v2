@@ -1,5 +1,6 @@
 import { cookies, headers } from "next/headers";
 
+import ContentWrapper from "./components/ContentWrapper";
 import MobileToolbar from "./components/MobileToolbar";
 import Sidebar from "./components/Sidebar";
 
@@ -15,14 +16,14 @@ export default async function PagesLayout({ children }: { children: React.ReactN
   };
 
   return (
-    <main className="flex">
+    <main>
       {currentPathname !== "/account-setup" && (
         <>
           <MobileToolbar />
           <Sidebar isSidebarActive={isSidebarActive} updateSidebarState={updateSidebarState} />
         </>
       )}
-      <div className="h-fit flex-grow">{children}</div>
+      <ContentWrapper>{children}</ContentWrapper>
     </main>
   );
 }

@@ -32,7 +32,9 @@ export default async function LeaderboardPage() {
   return (
     <section className="min-h-dvh px-8 py-3.5 max-md:px-5 max-sm:px-4 max-sm:pb-24">
       <AchieverSwitcher users={data} currentCompanyLogo={me?.companyLogo} />
-      <UsersTable users={data} />
+      <div className="w-full max-w-full overflow-x-auto">
+        <UsersTable users={data} />
+      </div>
     </section>
   );
 }
