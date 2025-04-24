@@ -103,5 +103,23 @@
     "stopListening": "Stop listening",
     "startListening": "Start listening",
     "toggleListening": "Toggle listening"
+  },
+  "leaderboard": {
+    "closedDeals": "Closed Deals",
+    "conversionRate": "Conversion Rate",
+    "profile": "Profile",
+    "rank": "Rank",
+    "name": "Name",
+    "username": "Username",
+    "commissionEarned": "Commission Earned",
+    "newDeals": "New Deals",
+    "generatedRevenue": "Generated Revenue",
+    "kilo": "k",
+    "million": "m",
+    "billion": "b",
+    "biggestClosedDeal": "Biggest Closed Won Deal of the Month",
+    "largestConversionRate": "Largest Conversion Rate",
+    "bestSalesPerson": "Best sales person of the month",
+    "noDataFound": "No data found"
   }
 }
