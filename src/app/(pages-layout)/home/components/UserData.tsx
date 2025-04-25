@@ -1,16 +1,17 @@
 import { BadgeCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
 
+import { cn } from "@/lib/utils";
 import type { User } from "@/types/user";
 
 import EditUserModal from "./edit-modal/EditUserModal";
 
-const UserData = ({ user }: { user: User }) => {
+const UserData = ({ user, isMe }: { user: User; isMe?: boolean }) => {
   const t = useTranslations("home");
 
   return (
-    <div className="mt-4 w-full px-7 max-md:px-4 max-sm:px-2">
-      <EditUserModal user={user} />
+    <div className={cn("mt-4 w-full px-7 max-md:px-4 max-sm:px-2", !isMe && "mt-20 max-2xl:mt-14")}>
+      {isMe && <EditUserModal user={user} />}
       <div className="mt-6 max-2xl:mt-3">
         <div className="mb-2 flex items-center gap-1">
           <h1 className="-mt-0.5 text-2xl font-medium max-2xl:text-lg">{user.name}</h1>

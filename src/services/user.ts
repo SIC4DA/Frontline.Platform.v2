@@ -26,9 +26,12 @@ export const getUsers = async () => {
   return users;
 };
 
-export const getUser = async (id: string) => {
+export const getUserById = async (id: string) => {
   const result = await db.query.user.findFirst({
     where: eq(user.id, id),
+    with: {
+      deals: true,
+    },
   });
 
   return result;

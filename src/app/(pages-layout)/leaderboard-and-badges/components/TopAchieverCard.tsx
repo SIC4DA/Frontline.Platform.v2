@@ -1,6 +1,7 @@
 import { BadgeCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -43,9 +44,11 @@ const TopAchieverCard = ({ topAchieverData }: { topAchieverData: UserWithClosedD
         </div>
         <div className="mt-7 flex items-center justify-between">
           <LatestDeals deals={topAchieverData.deals} />
-          <Button size="sm" variant="primary" className="w-full max-w-[140px]">
-            {t("profile")}
-          </Button>
+          <Link className="block w-full max-w-[140px]" href={`/profile/${topAchieverData.user.id}`}>
+            <Button size="sm" variant="primary" className="w-full max-w-[140px]">
+              {t("profile")}
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
