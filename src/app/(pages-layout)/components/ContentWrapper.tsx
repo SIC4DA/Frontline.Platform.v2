@@ -8,9 +8,14 @@ import { useSidebarStore } from "@/store/sidebar";
 const ContentWrapper = ({ children }: { children: React.ReactNode }) => {
   const { isOpen } = useSidebarStore();
 
+  console.log(isOpen);
+
   return (
     <div
-      className={cn("ml-[clamp(255px,21.5%,21.5%)] duration-300 max-sm:ml-0", !isOpen && "ml-[clamp(64px,5.5%,5.5%)]")}>
+      className={cn(
+        "duration-300 max-sm:ml-0",
+        isOpen ? "ml-[clamp(255px,21.5%,21.5%)]" : "ml-[clamp(64px,5.5%,5.5%)]",
+      )}>
       {children}
     </div>
   );

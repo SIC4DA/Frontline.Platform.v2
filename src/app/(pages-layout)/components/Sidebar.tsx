@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
+import { useSidebarStore } from "@/store/sidebar";
 
 import ChatHistory from "./ChatHistory";
 import SidebarHeader from "./SidebarHeader";
@@ -17,9 +18,12 @@ const Sidebar = ({
   updateSidebarState: (state: "active" | "inactive") => void;
 }) => {
   const [isActive, setIsActive] = useState(isSidebarActive);
+  const { setSidebarState } = useSidebarStore();
 
   useEffect(() => {
     updateSidebarState(isActive ? "active" : "inactive");
+    if (typeof window === "undefined") return;
+    setSidebarState(isActive);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isActive]);
 
