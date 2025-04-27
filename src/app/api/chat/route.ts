@@ -41,7 +41,7 @@ export const POST = async (req: Request) => {
     - Remember today is ${new Date().toLocaleDateString()}.
     - If a field is already filled, confirm with the user or move to the next.
     - At the end, output a table with all the information.
-    - If the user provides a date, ensure it is in a valid format (e.g., YYYY-MM-DD).
+    - If the user provides a date, ensure it is in a valid format (e.g., MM-DD-YYYY).
     - If the user provides a currency, ensure it is in a valid format (e.g., $100,000).
     - If the user provides a percentage, ensure it is in a valid format (e.g., 10%).
     - When user want to see data show in the table, please use the following format:

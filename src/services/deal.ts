@@ -106,7 +106,7 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
       - At the end, output a single JSON object that matches the schema exactly
       - Don't return 'null' just return an empty field value like this: { "fieldName": "", "price": 0, "date": "2023-01-01", other: [] }
       - If the user provides an invalid or incorrectly formatted answer (e.g., "8m" instead of "8 months"), politely explain the correct format and ask them to provide the information again
-      - For dates, ensure they are in YYYY-MM-DD format
+      - For dates, ensure they are in MM-DD-YYYY format
       - For currency values, ensure they are in number format without symbols
       - For percentages, ensure they are in number format without the % symbol
       - Never generate or assume any data - always ask the user
