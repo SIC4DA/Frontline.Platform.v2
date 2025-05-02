@@ -51,7 +51,7 @@ export const getUsersWithClosedDeals = async () => {
 		.from(deal)
 		.innerJoin(user, sql`${deal.userId} = ${user.id}`)
 		.where(
-			sql`${deal.updatedAt} >= now() - interval '30 days' AND ${deal.updatedAt} <= now()`,
+			sql`${deal.updatedAt} >= date_trunc('month', now()) AND ${deal.updatedAt} < date_trunc('month', now()) + interval '1 month'`,
 		)
 		.groupBy(
 			user.id,
