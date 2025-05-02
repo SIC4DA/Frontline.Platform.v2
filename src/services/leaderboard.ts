@@ -77,8 +77,6 @@ export const getUsersWithClosedDeals = async () => {
 		usersWithClosedDealsFn,
 	]);
 
-	console.dir(usersWithClosedDeals, { depth: null });
-
 	const filteredUsers = usersWithClosedDeals.filter((deal) =>
 		compareEmailsDomain(deal.user.email, userData.email),
 	);

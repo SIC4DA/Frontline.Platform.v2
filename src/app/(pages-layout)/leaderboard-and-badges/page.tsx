@@ -13,8 +13,6 @@ export default async function LeaderboardPage() {
 	const { data, error } = await tryCatch(getUsersWithClosedDeals());
 	const { data: me } = await tryCatch(getMe());
 
-	console.log(data);
-
 	if (error || !data) {
 		return (
 			<section className="flex min-h-dvh items-center justify-center px-8 py-3.5 max-sm:px-2">
