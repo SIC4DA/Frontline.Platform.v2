@@ -78,7 +78,7 @@ const Chat = ({ chatData }: { chatData: Chat }) => {
           input={input}
           handleInputChange={handleInputChange}
         />
-        <p className="text-foreground-secondary mt-5 text-center text-sm">
+        <p className="text-foreground-secondary mt-5 text-center text-sm max-sm:hidden">
           {t("pleaseDoubleCheck")}
           {"  "}
           <Link className="text-foreground underline" href="/terms-of-services">
