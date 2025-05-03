@@ -23,7 +23,7 @@ export default async function PagesLayout({ children }: { children: React.ReactN
           <Sidebar isSidebarActive={isSidebarActive} updateSidebarState={updateSidebarState} />
         </>
       )}
-      <ContentWrapper>{children}</ContentWrapper>
+      <ContentWrapper isMarginVisible={currentPathname !== "/account-setup"}>{children}</ContentWrapper>
     </main>
   );
 }
