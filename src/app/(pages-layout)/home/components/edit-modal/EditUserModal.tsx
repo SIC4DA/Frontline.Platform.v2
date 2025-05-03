@@ -43,8 +43,8 @@ const EditUserModal = ({ user }: { user: User }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button variant="default" className="flex self-end justify-self-end rounded-md p-4 max-2xl:p-3">
+      <DialogTrigger asChild className="flex justify-end items-center w-full">
+        <Button variant="default" className="flex self-end justify-self-end rounded-md p-4 max-2xl:p-3 w-fit">
           <Pencil className="text-foreground size-[18px] max-2xl:size-4" />
         </Button>
       </DialogTrigger>
