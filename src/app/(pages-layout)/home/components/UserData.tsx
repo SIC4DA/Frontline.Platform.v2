@@ -11,7 +11,12 @@ const UserData = ({ user, isMe }: { user: User; isMe?: boolean }) => {
 
   return (
     <div className={cn("mt-4 w-full px-7 max-md:px-4 max-sm:px-2", !isMe && "mt-20 max-2xl:mt-14")}>
-      {isMe && <EditUserModal user={user} />}
+      {isMe && (
+        <div className="flex w-full items-center justify-between">
+          <div />
+          <EditUserModal user={user} />
+        </div>
+      )}
       <div className="mt-6 max-2xl:mt-3">
         <div className="mb-2 flex items-center gap-1">
           <h1 className="-mt-0.5 text-2xl font-medium max-2xl:text-lg">{user.name}</h1>
