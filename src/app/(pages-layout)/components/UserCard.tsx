@@ -1,32 +1,14 @@
 "use client";
 
-import { LoaderCircle } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 import { useSession } from "@/hooks/api/useSession";
-import { authClient } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 
-import Logout from "../../../../public/icons/Logout";
+import LogoutButton from "./LogoutButton";
 
 const UserCard = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
   const { data } = useSession();
-
-  const signOut = async () => {
-    setIsLoading(true);
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          router.push("/login");
-        },
-      },
-    });
-    setIsLoading(false);
-  };
 
   return (
     <div className={cn("flex items-center justify-between duration-300", !isSidebarActive && "flex-col gap-5")}>
@@ -45,17 +27,7 @@ const UserCard = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
           </div>
         )}
       </div>
-      {isSidebarActive && (
-        <button className="stroke-[#EF4444] text-[#EF4444]" onClick={signOut} disabled={isLoading}>
-          {isLoading ? (
-            <LoaderCircle size={24} className="animate-spin" />
-          ) : (
-            <span className="size-6 max-2xl:size-5">
-              <Logout />
-            </span>
-          )}
-        </button>
-      )}
+      {isSidebarActive && <LogoutButton />}
     </div>
   );
 };
