@@ -6,13 +6,7 @@ import { useSidebarStore } from "@/store/sidebar";
 
 import PanelLeft from "../../../../public/icons/PanelLeft";
 
-const SidebarHeader = ({
-  isSidebarActive,
-  setIsSidebarActive,
-}: {
-  isSidebarActive: boolean;
-  setIsSidebarActive: (isSidebarActive: boolean) => void;
-}) => {
+const SidebarHeader = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
   const { toggle } = useSidebarStore();
 
   return (
@@ -32,7 +26,6 @@ const SidebarHeader = ({
       <button
         className="stroke-foreground-secondary w-[24px] max-2xl:w-[18px]"
         onClick={() => {
-          setIsSidebarActive(!isSidebarActive);
           toggle();
         }}>
         <PanelLeft />

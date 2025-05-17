@@ -4,26 +4,31 @@ import ContentWrapper from "./components/ContentWrapper";
 import MobileToolbar from "./components/MobileToolbar";
 import Sidebar from "./components/Sidebar";
 
+const invisibleSidebarPaths = ["account-setup", "deal"];
+
+export const isSidebarVisible = (pathname: string) => {
+  const pathnameCleaned = pathname.split("/")[1];
+  if (invisibleSidebarPaths.includes(pathnameCleaned)) return false;
+
+  return true;
+};
+
 export default async function PagesLayout({ children }: { children: React.ReactNode }) {
   const isSidebarActive = (await cookies()).get("sidebarState")?.value === "active";
   const headersList = await headers();
   const currentPathname = headersList.get("current-pathname");
 
-  const updateSidebarState = async (state: "active" | "inactive") => {
-    "use server";
-
-    (await cookies()).set("sidebarState", state);
-  };
-
   return (
     <main>
-      {currentPathname !== "/account-setup" && (
+      {isSidebarVisible(currentPathname ?? "") && (
         <>
           <MobileToolbar />
-          <Sidebar isSidebarActive={isSidebarActive} updateSidebarState={updateSidebarState} />
+          <Sidebar isSidebarActive={isSidebarActive} />
         </>
       )}
-      <ContentWrapper isMarginVisible={currentPathname !== "/account-setup"}>{children}</ContentWrapper>
+      <ContentWrapper isSidebarActive={isSidebarActive} isMarginVisible={isSidebarVisible(currentPathname ?? "")}>
+        {children}
+      </ContentWrapper>
     </main>
   );
 }

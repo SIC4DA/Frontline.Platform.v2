@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo } from "react";
 
 import { cn } from "@/lib/utils";
+import { updateSidebarState } from "@/services/sidebar";
 import { useSidebarStore } from "@/store/sidebar";
 
 import ChatHistory from "./ChatHistory";
@@ -10,35 +11,35 @@ import SidebarHeader from "./SidebarHeader";
 import SidebarLinks from "./SidebarLinks";
 import UserCard from "./UserCard";
 
-const Sidebar = ({
-  isSidebarActive,
-  updateSidebarState,
-}: {
-  isSidebarActive: boolean;
-  updateSidebarState: (state: "active" | "inactive") => void;
-}) => {
-  const [isActive, setIsActive] = useState(isSidebarActive);
+const Sidebar = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
   const { setSidebarState } = useSidebarStore();
+  const { isOpen, isUpdated } = useSidebarStore();
+
+  const isSidebarOpen = useMemo(() => {
+    if (isUpdated) return isOpen;
+
+    return isSidebarActive;
+  }, [isUpdated, isOpen, isSidebarActive]);
 
   useEffect(() => {
-    updateSidebarState(isActive ? "active" : "inactive");
+    updateSidebarState(isSidebarOpen ? "active" : "inactive");
     if (typeof window === "undefined") return;
-    setSidebarState(isActive);
+    setSidebarState(isSidebarOpen);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isActive]);
+  }, [isSidebarOpen]);
 
   return (
     <aside
       className={cn(
         "fixed top-0 left-0 flex h-dvh w-[21.5%] min-w-[255px] flex-col justify-between gap-16 overflow-auto border-r border-[#F5F5F7] bg-[#FAFAFA] px-4 py-7 duration-300 max-sm:hidden",
-        !isActive && "w-[5.5%] min-w-[64px] px-0",
+        !isSidebarOpen && "w-[5.5%] min-w-[64px] px-0",
       )}>
       <div>
-        <SidebarHeader isSidebarActive={isActive} setIsSidebarActive={setIsActive} />
-        <SidebarLinks isSidebarActive={isActive} />
-        {isActive && <ChatHistory />}
+        <SidebarHeader isSidebarActive={isSidebarOpen} />
+        <SidebarLinks isSidebarActive={isSidebarOpen} />
+        {isSidebarOpen && <ChatHistory />}
       </div>
-      <UserCard isSidebarActive={isActive} />
+      <UserCard isSidebarActive={isSidebarOpen} />
     </aside>
   );
 };
