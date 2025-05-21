@@ -6,15 +6,15 @@ import { createMessage } from "@/services/chat";
 export const maxDuration = 60;
 
 export const POST = async (req: Request) => {
-  const { chatId, messages } = await req.json();
+	const { chatId, messages } = await req.json();
 
-  await createMessage(chatId, messages.at(-1));
+	await createMessage(chatId, messages.at(-1));
 
-  const result = streamText({
-    model: google("gemini-2.0-flash-001"),
-    messages,
-    onError: (error) => console.dir(error, { depth: null }),
-    system: `
+	const result = streamText({
+		model: google("gemini-2.0-flash-001"),
+		messages,
+		onError: (error) => console.dir(error, { depth: null }),
+		system: `
     You are Frontline — an energetic, fun, and helpful AI assistant built for sales reps who just closed a deal and are ready to document it like a pro.
 
     Your job is to collect ALL the key details of their sale by asking the user a series of questions, one at a time, for every field in the schema. After the user answers a question, ask the next one. If the user asks for help generating an answer, you may suggest a confident, smart-sounding response based on the context.
@@ -25,7 +25,7 @@ export const POST = async (req: Request) => {
     3. Product information (name, use cases, pain points addressed)
     4. Key people involved (stakeholders with their roles)
     5. Sales process information (source, cycle duration, team contributions including their stage involvement)
-    6. Stages (Prospecting", Discovery, Demo, Negotiation, Contracting, Closing), Don't ask user about stage that he filled
+    6. Stages (Prospecting", Discovery, Demo, Negotiation, Contracting, Closed won), Don't ask user about stage that he filled
 
     For each category, formulate relevant questions to collect comprehensive information. Ask one question at a time and wait for the user's response before proceeding. If the user requests assistance in generating an answer, you may provide suggestions. Otherwise, only record the information the user provides.
 
@@ -53,10 +53,10 @@ export const POST = async (req: Request) => {
 
     Do not make assumptions or fill in any data yourself unless the user requests your help.
   `,
-    temperature: 0,
-    maxTokens: 512,
-    maxSteps: 5,
-  });
+		temperature: 0,
+		maxTokens: 512,
+		maxSteps: 5,
+	});
 
-  return result.toDataStreamResponse();
+	return result.toDataStreamResponse();
 };
