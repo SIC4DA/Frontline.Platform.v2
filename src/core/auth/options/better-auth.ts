@@ -51,6 +51,7 @@ export const socialProvidersOptions: BetterAuthOptions["socialProviders"] = {
 		clientSecret: env.LINKEDIN_CLIENT_SECRET,
 		mapProfileToUser: (profile) =>
 			mapOAuthProfile({
+				id: profile.sub,
 				email: profile.email,
 				name: profile.name,
 				image: profile.picture,
@@ -62,16 +63,19 @@ export const socialProvidersOptions: BetterAuthOptions["socialProviders"] = {
 		tenantId: env.MICROSOFT_TENANT,
 		mapProfileToUser: (profile) =>
 			mapOAuthProfile({
+				id: profile.sub,
 				email: profile.email,
 				name: profile.name,
 				image: profile.picture,
 			}),
 	},
 	google: {
+		prompt: "select_account",
 		clientId: env.GOOGLE_CLIENT_ID,
 		clientSecret: env.GOOGLE_CLIENT_SECRET,
 		mapProfileToUser: (profile) =>
 			mapOAuthProfile({
+				id: profile.sub,
 				email: profile.email,
 				name: profile.name,
 				image: profile.picture,
