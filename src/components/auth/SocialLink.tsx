@@ -11,11 +11,6 @@ const SocialLink = ({ option }: { option: SocialLinkOption }) => {
 	const router = useRouter();
 
 	const signIn = async () => {
-		// // Clear the existing session
-		// try {
-		// 	await authClient.signOut();
-		// } catch {}
-
 		if (option.isOAuth2) {
 			const { data } = await authClient.signIn.oauth2({
 				providerId: option.provider,
@@ -24,17 +19,18 @@ const SocialLink = ({ option }: { option: SocialLinkOption }) => {
 			if (data?.url) {
 				router.push(data.url);
 			}
-		} else {
-			const { data } = await authClient.signIn.social({
-				provider: option.provider as Exclude<
-					SocialLinkOption["provider"],
-					"slack"
-				>,
-				callbackURL: "/home",
-			});
-			if (data?.url) {
-				router.push(data.url);
-			}
+			return;
+		}
+
+		const { data } = await authClient.signIn.social({
+			provider: option.provider as Exclude<
+				SocialLinkOption["provider"],
+				"slack"
+			>,
+			callbackURL: "/home",
+		});
+		if (data?.url) {
+			router.push(data.url);
 		}
 	};
 
