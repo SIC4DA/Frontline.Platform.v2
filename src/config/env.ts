@@ -1,42 +1,61 @@
-type Env = {
-  NODE_ENV: "development" | "production" | "test";
+import { createEnv } from "@t3-oss/env-nextjs";
+import { z } from "zod";
 
-  APP_ORIGIN: string;
-  PUBLIC_APP_ORIGIN: string;
+const env = createEnv({
+  server: {
+    NODE_ENV: z.enum(["development", "production", "test"]),
+    APP_ORIGIN: z.string().url(),
+    NEXT_BASE_URL: z.string().url(),
+    DATABASE_URL: z.string().url(),
+    BETTER_AUTH_SECRET: z.string().min(1),
+    BETTER_AUTH_URL: z.string().url(),
+    SMTP_URL: z.string().url(),
+    SMTP_FROM: z.string(),
+    REDIS_URL: z.string().url(),
+    LINKEDIN_CLIENT_ID: z.string().min(1),
+    LINKEDIN_CLIENT_SECRET: z.string().min(1),
+    MICROSOFT_CLIENT_ID: z.string().min(1),
+    MICROSOFT_CLIENT_SECRET: z.string().min(1),
+    MICROSOFT_TENANT: z.string().min(1),
+    GOOGLE_CLIENT_ID: z.string().min(1),
+    GOOGLE_CLIENT_SECRET: z.string().min(1),
+    SLACK_CLIENT_ID: z.string().min(1),
+    SLACK_CLIENT_SECRET: z.string().min(1),
+    SLACK_SIGNING_SECRET: z.string().min(1),
+    GOOGLE_GENERATIVE_AI_API_KEY: z.string().min(1),
+    CLOUDINARY_NAME: z.string().min(1),
+    CLOUDINARY_API_KEY: z.string().min(1),
+    CLOUDINARY_API_SECRET: z.string().min(1),
+  },
+  client: {
+    NEXT_PUBLIC_BASE_URL: z.string().url(),
+  },
+  runtimeEnv: {
+    NODE_ENV: process.env.NODE_ENV,
+    APP_ORIGIN: process.env.APP_ORIGIN,
+    NEXT_BASE_URL: process.env.NEXT_BASE_URL,
+    NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+    DATABASE_URL: process.env.DATABASE_URL,
+    BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
+    BETTER_AUTH_URL: process.env.BETTER_AUTH_URL,
+    SMTP_URL: process.env.SMTP_URL,
+    SMTP_FROM: process.env.SMTP_FROM,
+    REDIS_URL: process.env.REDIS_URL,
+    LINKEDIN_CLIENT_ID: process.env.LINKEDIN_CLIENT_ID,
+    LINKEDIN_CLIENT_SECRET: process.env.LINKEDIN_CLIENT_SECRET,
+    MICROSOFT_CLIENT_ID: process.env.MICROSOFT_CLIENT_ID,
+    MICROSOFT_CLIENT_SECRET: process.env.MICROSOFT_CLIENT_SECRET,
+    MICROSOFT_TENANT: process.env.MICROSOFT_TENANT,
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+    SLACK_CLIENT_ID: process.env.SLACK_CLIENT_ID,
+    SLACK_CLIENT_SECRET: process.env.SLACK_CLIENT_SECRET,
+    SLACK_SIGNING_SECRET: process.env.SLACK_SIGNING_SECRET,
+    GOOGLE_GENERATIVE_AI_API_KEY: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+    CLOUDINARY_NAME: process.env.CLOUDINARY_NAME,
+    CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+    CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
+  },
+});
 
-  NEXT_BASE_URL: string;
-  NEXT_PUBLIC_BASE_URL: string;
-
-  DATABASE_URL: string;
-
-  BETTER_AUTH_SECRET: string;
-  BETTER_AUTH_URL: string;
-
-  SMTP_URL: string;
-  SMTP_FROM: string;
-
-  REDIS_URL: string;
-
-  LINKEDIN_CLIENT_ID: string;
-  LINKEDIN_CLIENT_SECRET: string;
-
-  MICROSOFT_CLIENT_ID: string;
-  MICROSOFT_CLIENT_SECRET: string;
-  MICROSOFT_TENANT: string;
-
-  GOOGLE_CLIENT_ID: string;
-  GOOGLE_CLIENT_SECRET: string;
-
-  SLACK_CLIENT_ID: string;
-  SLACK_CLIENT_SECRET: string;
-  SLACK_SIGNING_SECRET: string;
-
-  GEMINI_API_KEY: string;
-
-  CLOUDINARY_NAME: string;
-  CLOUDINARY_API_KEY: string;
-  CLOUDINARY_API_SECRET: string;
-};
-
-const env = process?.env as Env;
 export default env;
