@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { authClient } from "@/lib/auth-client";
 
 import type { SocialLinkOption } from "./OauthOptions";
+import env from "@/config/env";
 
 const SocialLink = ({ option }: { option: SocialLinkOption }) => {
 	const router = useRouter();
@@ -15,6 +16,7 @@ const SocialLink = ({ option }: { option: SocialLinkOption }) => {
 			const { data } = await authClient.signIn.oauth2({
 				providerId: option.provider,
 				callbackURL: "/home",
+				errorCallbackURL: `${env.NEXT_PUBLIC_BASE_URL}/register`
 			});
 			if (data?.url) {
 				router.push(data.url);
@@ -28,6 +30,7 @@ const SocialLink = ({ option }: { option: SocialLinkOption }) => {
 				"slack"
 			>,
 			callbackURL: "/home",
+			errorCallbackURL: `${env.NEXT_PUBLIC_BASE_URL}/register`
 		});
 		if (data?.url) {
 			router.push(data.url);

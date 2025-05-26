@@ -1,9 +1,11 @@
 import type { BetterAuthOptions } from "better-auth";
+import { APIError, } from "better-auth/api";
 
 import env from "@/config/env";
 import { redisClient } from "@/config/redis";
 
 import { mapOAuthProfile } from "../utils";
+import { validateCompanyEmail } from "@/validations/email";
 
 export const emailAndPasswordOptions: BetterAuthOptions["emailAndPassword"] = {
 	enabled: true,
@@ -86,6 +88,14 @@ export const socialProvidersOptions: BetterAuthOptions["socialProviders"] = {
 export const databaseHooksOptions: BetterAuthOptions["databaseHooks"] = {
 	user: {
 		create: {
+			before: async (user) => {
+				const isCompanyEmailValid = validateCompanyEmail(user.email)
+				if (!isCompanyEmailValid) {
+					throw new APIError("BAD_REQUEST", {
+						message: "Only company emails are allowed for OAuth signIn.",
+					});
+				}
+			},
 			after: async (user, ctx) => {
 				await ctx?.context.internalAdapter.updateUser(user.id, {
 					emailVerified: true,
