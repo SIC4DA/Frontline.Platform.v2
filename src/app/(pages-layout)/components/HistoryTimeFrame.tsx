@@ -38,7 +38,7 @@ const HistoryTimeFrame = ({ timeframeData }: { timeframeData: TimeframeChats }) 
             href={`/frontline-ai/${chat.id}`}
             className="flex items-center gap-4 rounded-lg px-4 py-3 duration-300 hover:bg-[#F5F5F7]">
             <Image
-              src={chat?.deal?.companyLogo || "/images/google.webp"}
+              src={chat?.deal?.companyLogo || "/images/company-placeholder.webp"}
               alt="google"
               width={20}
               height={20}

@@ -14,7 +14,7 @@ const UserCard = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
     <div className={cn("flex items-center justify-between duration-300", !isSidebarActive && "flex-col gap-5")}>
       <div className="flex items-center gap-2">
         <Image
-          src={data?.user?.companyLogo ?? "/images/google.webp"}
+          src={data?.user?.companyLogo ?? "/images/company-placeholder.webp"}
           alt="google"
           width={32}
           height={32}

@@ -24,7 +24,7 @@ const LatestDeals = ({
             `z-[${index + 1}]`,
           )}>
           <Image
-            src={deal?.companyLogo || "/images/google.webp"}
+            src={deal?.companyLogo || "/images/company-placeholder.webp"}
             alt="deal logo"
             width={20}
             height={20}
