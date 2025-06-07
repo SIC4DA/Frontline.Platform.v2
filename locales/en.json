@@ -121,5 +121,22 @@
     "largestConversionRate": "Largest Conversion Rate",
     "bestSalesPerson": "Best sales person of the month",
     "noDataFound": "No data found"
+  },
+  "deal": {
+    "poweredBy": "Powered by",
+    "dealSummary": "deal summary",
+    "dealClosed": "deal closed",
+    "dealsClosed": "Deals Closed",
+    "earned": "Earned",
+    "avgDealSize": "AVG Deal Size",
+    "avgSalesCycle": "AVG Sales Cycle",
+    "connect": "Connect",
+    "contractInfo": "Contract Info",
+    "value": "Value",
+    "terms": "Terms",
+    "months": "months",
+    "contractSigner": "Contract Signer",
+    "yearAgreement": "Year Agreement",
+    "netInvoice": "Net {value} Invoice"
   }
 }
