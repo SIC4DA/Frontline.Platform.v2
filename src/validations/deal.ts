@@ -44,14 +44,18 @@ export const DealSchema = z
     dealContributors: z
       .array(
         z.object({
-          name: z.string().optional().default("").describe("Name of the contributor"),
-          title: z.string().optional().default("").describe("Title of the contributor"),
-          shoutout: z.string().optional().default("").describe("Shoutout for the contributor"),
           stage: z
             .enum(["Prospecting", "Discovery", "Demo", "Negotiation", "Contracting", "Closing"])
             .optional()
             .default("Prospecting")
             .describe("Stage of the deal"),
+          contributors: z.array(
+            z.object({
+              name: z.string().optional().default("").describe("Name of the contributor"),
+              title: z.string().optional().default("").describe("Title of the contributor"),
+              shoutout: z.string().optional().default("").describe("Shoutout for the contributor"),
+            }),
+          ),
         }),
       )
       .optional()
