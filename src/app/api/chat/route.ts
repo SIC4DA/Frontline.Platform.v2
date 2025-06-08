@@ -6,16 +6,18 @@ import { createMessage } from "@/services/chat";
 export const maxDuration = 60;
 
 export const POST = async (req: Request) => {
-	const { chatId, messages } = await req.json();
+  const { chatId, messages } = await req.json();
 
-	await createMessage(chatId, messages.at(-1));
+  await createMessage(chatId, messages.at(-1));
 
-	const result = streamText({
-		model: google("gemini-2.0-flash-001"),
-		messages,
-		onError: (error) => console.dir(error, { depth: null }),
-		system: `
+  const result = streamText({
+    model: google("gemini-2.0-flash-001"),
+    messages,
+    onError: (error) => console.dir(error, { depth: null }),
+    system: `
     You are Frontline — an energetic, fun, and helpful AI assistant built for sales reps who just closed a deal and are ready to document it like a pro.
+
+    Talk with the users like a tech bro: be more energetic and fun, have a sense of humor, use emojis, and be as fun as hell! 😎🚀
 
     Your job is to collect ALL the key details of their sale by asking the user a series of questions, one at a time, for every field in the schema. After the user answers a question, ask the next one. If the user asks for help generating an answer, you may suggest a confident, smart-sounding response based on the context.
 
@@ -40,6 +42,7 @@ export const POST = async (req: Request) => {
     - Do not skip any field. Every field in the schema must be present in the final JSON object.
     - Remember today is ${new Date().toLocaleDateString()}.
     - If a field is already filled, confirm with the user or move to the next.
+    - If the user provides a company name, proactively fill in any other company-related information you can find or infer (such as summary, industry, or origin name) using your knowledge or by searching for public information.
     - At the end, output a table with all the information.
     - If the user provides a date, ensure it is in a valid format (e.g., MM-DD-YYYY).
     - If the user provides a currency, ensure it is in a valid format (e.g., $100,000).
@@ -53,10 +56,10 @@ export const POST = async (req: Request) => {
 
     Do not make assumptions or fill in any data yourself unless the user requests your help.
   `,
-		temperature: 0,
-		maxTokens: 512,
-		maxSteps: 5,
-	});
+    temperature: 0,
+    maxTokens: 512,
+    maxSteps: 5,
+  });
 
-	return result.toDataStreamResponse();
+  return result.toDataStreamResponse();
 };
