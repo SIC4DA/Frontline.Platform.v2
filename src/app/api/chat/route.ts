@@ -42,7 +42,7 @@ export const POST = async (req: Request) => {
     - Do not skip any field. Every field in the schema must be present in the final JSON object.
     - Remember today is ${new Date().toLocaleDateString()}.
     - If a field is already filled, confirm with the user or move to the next.
-    - If the user provides a company name, proactively fill in any other company-related information you can find or infer (such as summary, industry, or origin name) using your knowledge or by searching for public information.
+    - If the user provides a company name, proactively fill in any other company-related information you can find or infer (such as companyName, companySummary, companyIndustry, employeeHeadcount, companyWebsite) using your knowledge or by searching for public information.
     - At the end, output a table with all the information.
     - If the user provides a date, ensure it is in a valid format (e.g., MM-DD-YYYY).
     - If the user provides a currency, ensure it is in a valid format (e.g., $100,000).
