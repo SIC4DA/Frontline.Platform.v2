@@ -25,8 +25,8 @@ export const DealSchema = z
 
     // Product Info
     productName: z.string().optional().default("").describe("Name of the product"),
-    productUseCases: z.string().optional().default("").describe("UseCases of the product"),
-    painPoints: z.string().optional().default("").describe("Pain points of the product"),
+    productUseCases: z.array(z.string()).optional().default([]).describe("UseCases of the product"),
+    painPoints: z.array(z.string()).optional().default([]).describe("Pain points of the product"),
     keyStakeholders: z
       .array(
         z.object({
