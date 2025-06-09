@@ -54,7 +54,10 @@
     "yourUsername": "yourusername",
     "searchPlaceholder": "Search your sales",
     "letsSetupYourAccount": "Let’s set you up",
-    "settingUp": "Setting up"
+    "settingUp": "Setting up",
+    "jobTitle": "Job Title",
+    "jobTitlePlaceholder": "Enter your job title",
+    "jobTitleRequired": "Job title is required"
   },
   "sidebar": {
     "home": "Home",
@@ -137,6 +140,13 @@
     "months": "months",
     "contractSigner": "Contract Signer",
     "yearAgreement": "Year Agreement",
-    "netInvoice": "Net {value} Invoice"
+    "netInvoice": "Net {value} Invoice",
+    "productInfo": "Product Info",
+    "keyStakeholders": "Key Stakeholders",
+    "painPoints": "Pain Points",
+    "useCases": "Use Cases",
+    "noUseCases": "No use cases found",
+    "noPainPoints": "No pain points found",
+    "noKeyStakeholders": "No key stakeholders found"
   }
 }

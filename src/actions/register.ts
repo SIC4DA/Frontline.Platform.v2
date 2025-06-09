@@ -14,12 +14,14 @@ export type RegisterActionState = {
   fullName?: string;
   username?: string;
   companyName?: string;
+  jobTitle?: string;
   password?: string;
   email?: string;
   profileImage?: string;
   errors?: {
     fullName?: string[];
     username?: string[];
+    jobTitle?: string[];
     companyName?: string[];
     password?: string[];
     form?: string[];
@@ -34,6 +36,7 @@ export async function registerAction(prevState: RegisterActionState, formData: F
   const registerSchema = z.object({
     fullName: z.string().min(1, { message: t("fullNameRequired") }),
     username: z.string().min(1, { message: t("usernameRequired") }),
+    jobTitle: z.string().min(1, { message: t("jobTitleRequired") }),
     companyName: z.string().min(1, { message: t("companyNameRequired") }),
     password: z
       .string()
@@ -46,6 +49,7 @@ export async function registerAction(prevState: RegisterActionState, formData: F
   // Extract form data
   const fullName = formData.get("fullName") as string;
   const username = formData.get("username") as string;
+  const jobTitle = formData.get("jobTitle") as string;
   const companyName = formData.get("companyName") as string;
   const companyLogo = formData.get("companyLogo") as string;
   const email = formData.get("email") as string;
@@ -57,6 +61,7 @@ export async function registerAction(prevState: RegisterActionState, formData: F
   const validationResult = registerSchema.safeParse({
     fullName,
     username,
+    jobTitle,
     companyName,
     password,
   });
@@ -69,10 +74,12 @@ export async function registerAction(prevState: RegisterActionState, formData: F
       fullName,
       username,
       companyName,
+      jobTitle,
       password,
       errors: {
         fullName: errors.fullName,
         username: errors.username,
+        jobTitle: errors.jobTitle,
         companyName: errors.companyName,
         password: errors.password,
       },
@@ -106,6 +113,7 @@ export async function registerAction(prevState: RegisterActionState, formData: F
         password,
         name: fullName,
         // @ts-expect-error companyName and companyLogo are valid keys of auth.api.signUpEmail
+        jobTitle,
         companyName,
         companyLogo,
         username,
@@ -123,6 +131,7 @@ export async function registerAction(prevState: RegisterActionState, formData: F
       fullName,
       username,
       companyName,
+      jobTitle,
       password,
       errors: {
         form: [error.message || "An unexpected error occurred. Please try again."],

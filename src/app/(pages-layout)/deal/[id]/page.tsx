@@ -9,6 +9,7 @@ import { tryCatch } from "@/utils/tryCatch";
 import DealSummary from "./components/DealSummary";
 import Header from "./components/Header";
 import ContractInfo from "./components/contract-info/ContractInfo";
+import ProductInfo from "./components/product-info/ProductInfo";
 import UserCardWrapper from "./components/user-card/UserCardWrapper";
 
 export default async function DealPage({ params }: { params: Promise<{ id: string }> }) {
@@ -38,6 +39,7 @@ export default async function DealPage({ params }: { params: Promise<{ id: strin
         <DealSummary userCompanyLogo={user?.companyLogo} dealCompanyLogo={deal?.companyLogo} />
         <UserCardWrapper user={user} />
         <ContractInfo deal={deal} />
+        <ProductInfo deal={deal} />
         {/* <div className="bg-red-400 h-[2000px]"></div> */}
       </div>
     </section>
