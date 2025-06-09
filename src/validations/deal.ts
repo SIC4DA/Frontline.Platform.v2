@@ -25,8 +25,8 @@ export const DealSchema = z
 
     // Product Info
     productName: z.string().optional().default("").describe("Name of the product"),
-    productUseCases: z.string().optional().default("").describe("UseCases of the product"),
-    painPoints: z.string().optional().default("").describe("Pain points of the product"),
+    productUseCases: z.array(z.string()).optional().default([]).describe("UseCases of the product"),
+    painPoints: z.array(z.string()).optional().default([]).describe("Pain points of the product"),
     keyStakeholders: z
       .array(
         z.object({
@@ -44,14 +44,18 @@ export const DealSchema = z
     dealContributors: z
       .array(
         z.object({
-          name: z.string().optional().default("").describe("Name of the contributor"),
-          title: z.string().optional().default("").describe("Title of the contributor"),
-          shoutout: z.string().optional().default("").describe("Shoutout for the contributor"),
           stage: z
             .enum(["Prospecting", "Discovery", "Demo", "Negotiation", "Contracting", "Closing"])
             .optional()
             .default("Prospecting")
             .describe("Stage of the deal"),
+          contributors: z.array(
+            z.object({
+              name: z.string().optional().default("").describe("Name of the contributor"),
+              title: z.string().optional().default("").describe("Title of the contributor"),
+              shoutout: z.string().optional().default("").describe("Shoutout for the contributor"),
+            }),
+          ),
         }),
       )
       .optional()

@@ -15,6 +15,7 @@ export const user = pgTable("user", {
   username: text("username").unique(),
   displayUsername: text("display_username"),
   bio: text("bio"),
+  jobTitle: text("job_title").notNull(),
   companyName: text("company_name").notNull(),
   companyLogo: text("company_logo"),
 });

@@ -72,4 +72,15 @@ export const signUpEmailValidation = z.object({
         message: "Image URL should be a valid URL",
       }),
   ),
+  jobTitle: z
+    .string({
+      required_error: "Job title is required",
+      invalid_type_error: "Job title should be a string",
+    })
+    .min(2, {
+      message: "Job title should be between 2 and 100 characters long",
+    })
+    .max(100, {
+      message: "Job title should be between 2 and 100 characters long",
+    }),
 });
