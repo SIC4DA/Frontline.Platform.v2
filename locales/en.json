@@ -137,6 +137,13 @@
     "months": "months",
     "contractSigner": "Contract Signer",
     "yearAgreement": "Year Agreement",
-    "netInvoice": "Net {value} Invoice"
+    "netInvoice": "Net {value} Invoice",
+    "productInfo": "Product Info",
+    "keyStakeholders": "Key Stakeholders",
+    "painPoints": "Pain Points",
+    "useCases": "Use Cases",
+    "noUseCases": "No use cases found",
+    "noPainPoints": "No pain points found",
+    "noKeyStakeholders": "No key stakeholders found"
   }
 }
