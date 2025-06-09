@@ -54,7 +54,10 @@
     "yourUsername": "yourusername",
     "searchPlaceholder": "Search your sales",
     "letsSetupYourAccount": "Let’s set you up",
-    "settingUp": "Setting up"
+    "settingUp": "Setting up",
+    "jobTitle": "Job Title",
+    "jobTitlePlaceholder": "Enter your job title",
+    "jobTitleRequired": "Job title is required"
   },
   "sidebar": {
     "home": "Home",

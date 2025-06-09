@@ -19,6 +19,7 @@ const OnboardingForm = ({ email, token }: { email: string; token: string }) => {
     status: "idle",
     fullName: "",
     username: "",
+    jobTitle: "",
     companyName: "",
     password: "",
   });
