@@ -13,8 +13,9 @@ import ProductDataCard from "./ProductDataCard";
 
 const ProductInfo = ({ deal }: { deal: Deal | null | undefined }) => {
   const t = useTranslations("deal");
-  const useCases = deal?.productUseCases ? deal?.productUseCases.split(",") : [t("noUseCases")];
-  const painPoints = deal?.painPoints ? deal?.painPoints.split(",") : [t("noPainPoints")];
+  const useCases =
+    deal?.productUseCases && deal?.productUseCases.length > 0 ? deal?.productUseCases : [t("noUseCases")];
+  const painPoints = deal?.painPoints && deal?.painPoints.length > 0 ? deal?.painPoints : [t("noPainPoints")];
   const keyStakeholders =
     deal?.keyStakeholders && deal?.keyStakeholders.length > 0
       ? deal?.keyStakeholders.map((stakeholder) => `${stakeholder.name}, ${stakeholder.title}`)
