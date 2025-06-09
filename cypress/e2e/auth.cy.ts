@@ -1,0 +1,34 @@
+describe("Registration Flow", () => {
+  it("should register a new user and redirect to dashboard", () => {
+    cy.visit("http://localhost:3000/register");
+
+    const testEmail = `test_user_${Date.now()}@business.com`;
+
+    cy.intercept("POST", "**/register").as("register");
+
+    cy.get('input[type="email"]').type(testEmail);
+    cy.get('button[type="submit"]').click();
+
+    cy.wait("@register");
+
+    cy.url().should("include", `/check-email?email=${testEmail}`);
+
+    cy.visit(`http://localhost:3000/onboarding?email=${testEmail}&token=frontline_test-token`);
+
+    cy.intercept("GET", "https://api.brandfetch.io/v2/search/*").as("brandfetchSearch");
+
+    cy.get('input[name="fullName"]').type("Test User");
+    cy.get('input[name="username"]').type(`test_user_${Date.now()}`);
+    cy.get('input[name="jobTitle"]').type("Software Engineer");
+    cy.get('input[name="companyName"]').type("Mastercard").wait("@brandfetchSearch");
+    cy.get("button[data-testid='company-item']").first().click({ force: true });
+    cy.get('input[name="password"]').type("123456aA");
+    cy.intercept("POST", "**/onboarding*").as("onboarding");
+
+    cy.get('button[type="submit"]').click();
+
+    cy.wait("@onboarding");
+
+    cy.url().should("include", "/login");
+  });
+});

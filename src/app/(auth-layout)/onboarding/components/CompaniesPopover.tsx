@@ -41,6 +41,7 @@ const CompaniesPopover = ({
             <button
               key={brand.brandId}
               onClick={() => handleCompanySelect(brand)}
+              data-testid="company-item"
               className="hover:bg-background-secondary flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 duration-300">
               <Image
                 src={brand.icon}

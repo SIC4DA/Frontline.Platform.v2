@@ -23,6 +23,12 @@ const formElements = [
     placeholder: "usernamePlaceholder",
     type: "text",
   },
+  {
+    label: "jobTitle",
+    id: "jobTitle",
+    placeholder: "jobTitlePlaceholder",
+    type: "text",
+  },
 ];
 
 const FormFields = ({ state }: { state: RegisterActionState }) => {

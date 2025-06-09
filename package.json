@@ -12,7 +12,13 @@
     "db:push": "bun drizzle-kit push",
     "db:generate": "bun drizzle-kit generate",
     "db:migrate": "bun drizzle-kit migrate",
-    "db:studio": "bun drizzle-kit studio"
+    "db:studio": "bun drizzle-kit studio",
+    "cy:open": "cypress open",
+    "ci": "start-server-and-test start http://localhost:3000 cy:open",
+    "e2e": "start-server-and-test dev http://localhost:3000 \"cypress open --e2e\"",
+    "e2e:headless": "start-server-and-test dev http://localhost:3000 \"cypress run --e2e\"",
+    "component": "cypress open --component",
+    "component:headless": "cypress run --component"
   },
   "prettier": {
     "plugins": [
@@ -77,11 +83,13 @@
     "@types/pg": "^8.11.13",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
+    "cypress": "^14.4.1",
     "drizzle-kit": "^0.31.0",
     "eslint": "^9.25.0",
     "eslint-config-next": "15.3.1",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
+    "start-server-and-test": "^2.0.12",
     "tailwindcss": "^4.1.4",
     "typescript": "^5.8.3"
   }

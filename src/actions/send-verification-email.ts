@@ -84,9 +84,4 @@ export async function sendVerificationEmailAction(
   }
 
   redirect(`/check-email?email=${email}`);
-
-  // return {
-  //   status: "success",
-  //   email,
-  // };
 }

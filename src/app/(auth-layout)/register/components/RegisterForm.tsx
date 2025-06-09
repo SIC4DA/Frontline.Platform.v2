@@ -36,7 +36,8 @@ const RegisterForm = ({ formError }: { formError?: string }) => {
         disabled={isPending}
         variant="primary"
         // size="lg"
-        className="mt-4 w-full text-base capitalize">
+        className="mt-4 w-full text-base capitalize"
+        type="submit">
         {isPending ? (
           <>
             <LoaderCircle size={21} className="animate-spin" />
