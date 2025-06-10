@@ -1,18 +1,10 @@
+import { z } from "zod";
+
 import type { deal } from "@/core/db/schema";
+import type { DealSchema } from "@/validations/deal";
 
-export type DealContributor = {
-  name: string;
-  title: string;
-  shoutout: string;
-  stage: "Prospecting" | "Discovery" | "Demo" | "Negotiation" | "Contracting" | "Closing";
-};
+export type Deal = z.infer<typeof DealSchema> & typeof deal.$inferSelect;
 
-type KeyStakeholder = {
-  name: string;
-  title: string;
-};
+export type DealContributors = Deal["dealContributors"];
 
-export type Deal = typeof deal.$inferSelect & {
-  dealContributors: DealContributor[];
-  keyStakeholders: KeyStakeholder[];
-};
+export type KeyStakeholder = Deal["keyStakeholders"];

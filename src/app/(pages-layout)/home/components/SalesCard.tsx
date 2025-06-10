@@ -8,7 +8,15 @@ import type { Deal } from "@/types/deal";
 import ConfidenceProgress from "./ConfidenceProgress";
 import StageChip from "./StageChip";
 
-const SalesCard = ({ id, companyName, companyIndustry, companyLogo, contractValue, dealContributors = [] }: Deal) => {
+const SalesCard = ({
+  id,
+  companyName,
+  companyIndustry,
+  companyLogo,
+  contractValue,
+  dealContributors = [],
+  contractSigner,
+}: Deal) => {
   const t = useTranslations("home");
 
   const contractValueWithCurrency = new Intl.NumberFormat("en-US", {
@@ -26,7 +34,7 @@ const SalesCard = ({ id, companyName, companyIndustry, companyLogo, contractValu
     },
     {
       title: t("contactPerson"),
-      value: lastDealContributor?.name || t("notAvailable"),
+      value: contractSigner || t("notAvailable"),
       icon: <User size={20} className="text-foreground-secondary" />,
     },
     {

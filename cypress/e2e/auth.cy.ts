@@ -1,6 +1,6 @@
 describe("Registration Flow", () => {
   it("should register a new user and redirect to dashboard", () => {
-    cy.visit("http://localhost:3000/register");
+    cy.visit("/register");
 
     const testEmail = `test_user_${Date.now()}@business.com`;
     const testPassword = "123456aA";
@@ -14,7 +14,7 @@ describe("Registration Flow", () => {
 
     cy.url().should("include", `/check-email?email=${testEmail}`);
 
-    cy.visit(`http://localhost:3000/onboarding?email=${testEmail}&token=frontline_test-token`);
+    cy.visit(`/onboarding?email=${testEmail}&token=frontline_test-token`);
 
     cy.intercept("GET", "https://api.brandfetch.io/v2/search/*").as("brandfetchSearch");
 
@@ -40,5 +40,7 @@ describe("Registration Flow", () => {
     cy.wait("@login");
 
     cy.url().should("include", "/home");
+
+    cy.task("removeRegisteredUser", testEmail);
   });
 });
