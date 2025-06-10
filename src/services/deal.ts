@@ -175,3 +175,62 @@ export const searchDeal = async (query: string, { limit }: { limit?: number } = 
 
   return result as Deal[];
 };
+
+export const getDealWithUserAnalytics = async (id: string) => {
+  const result = await db.query.deal.findFirst({
+    where: eq(deal.id, id),
+    with: {
+      user: {
+        with: {
+          accounts: true,
+          deals: true,
+        },
+      },
+    },
+  });
+
+  if (!result) {
+    return null;
+  }
+
+  const {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    user: { accounts, deals, ...userData },
+    ...dealData
+  } = result;
+
+  const userAccountProviders = accounts.map((account) => account.providerId);
+
+  const closedUserDeals = result.user.deals.filter(
+    (deal) =>
+      Array.isArray(deal.dealContributors) &&
+      deal.dealContributors.some((contributor) => contributor.stage === "Closing"),
+  );
+
+  // Deal Analytics
+  const closedDealsCount = closedUserDeals.length;
+  const totalEarned = closedUserDeals.reduce((total, deal) => total + Number(deal.contractValue), 0);
+  const averageDealSize = closedDealsCount > 0 ? totalEarned / closedDealsCount : 0;
+  const averageDealCycle = closedUserDeals.reduce((total, deal) => {
+    const regexNumbersMatch = /\d+/g;
+    const match = deal.salesCycleLength?.match(regexNumbersMatch) ?? 0;
+    const cycleLength = match ? Number(match[0]) : 0;
+    return total + cycleLength;
+  }, 0);
+
+  const analytics = {
+    closedDealsCount,
+    totalEarned,
+    averageDealSize,
+    averageDealCycle,
+  };
+
+  return {
+    user: {
+      ...userData,
+      userAccountProviders,
+    },
+    deal: dealData as Deal,
+    analytics,
+  };
+};
