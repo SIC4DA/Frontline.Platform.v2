@@ -3,6 +3,7 @@ describe("Registration Flow", () => {
     cy.visit("http://localhost:3000/register");
 
     const testEmail = `test_user_${Date.now()}@business.com`;
+    const testPassword = "123456aA";
 
     cy.intercept("POST", "**/register").as("register");
 
@@ -22,7 +23,7 @@ describe("Registration Flow", () => {
     cy.get('input[name="jobTitle"]').type("Software Engineer");
     cy.get('input[name="companyName"]').type("Mastercard").wait("@brandfetchSearch");
     cy.get("button[data-testid='company-item']").first().click({ force: true });
-    cy.get('input[name="password"]').type("123456aA");
+    cy.get('input[name="password"]').type(testPassword);
     cy.intercept("POST", "**/onboarding*").as("onboarding");
 
     cy.get('button[type="submit"]').click();
@@ -30,5 +31,14 @@ describe("Registration Flow", () => {
     cy.wait("@onboarding");
 
     cy.url().should("include", "/login");
+
+    cy.get('input[type="email"]').type(testEmail);
+    cy.get('input[type="password"]').type(testPassword);
+
+    cy.intercept("POST", "**/login").as("login");
+    cy.get('button[type="submit"]').click();
+    cy.wait("@login");
+
+    cy.url().should("include", "/home");
   });
 });

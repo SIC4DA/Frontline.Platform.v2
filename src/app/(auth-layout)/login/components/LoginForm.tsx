@@ -53,6 +53,7 @@ function LoginForm() {
       {/* Submit button */}
       <Button
         // size="lg"
+        type="submit"
         variant="primary"
         disabled={isPending}
         className="mt-4 w-full text-base capitalize">

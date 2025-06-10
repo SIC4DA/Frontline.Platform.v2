@@ -38,7 +38,7 @@ const UserCard = ({ user }: { user: UserType | null }) => {
         <div className="mt-6">
           <p className="flex items-center gap-1 text-[#2F2F2F]">
             <User className="size-4 fill-[#2F2F2F]" />
-            <span className="text-sm capitalize">Sales executive</span>
+            <span className="text-sm capitalize">{user?.jobTitle}</span>
           </p>
           <p className="text-foreground-secondary mt-2 text-sm">{user?.bio}</p>
         </div>
