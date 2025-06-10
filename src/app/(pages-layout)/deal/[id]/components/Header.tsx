@@ -11,7 +11,7 @@ const Header = async ({ user }: { user: UserType | null }) => {
   if (!user) return null;
 
   return (
-    <div className="bg-background flex items-center justify-between rounded-full px-5 py-4 max-w-[1344px]">
+    <div className="bg-background flex max-w-[1344px] items-center justify-between rounded-full px-5 py-4">
       <div className="flex items-center gap-2">
         <Image src={user.image || ""} className="aspect-square w-14 rounded-full" alt="Avatar" width={52} height={52} />
         <div>
@@ -20,7 +20,7 @@ const Header = async ({ user }: { user: UserType | null }) => {
             <span className="fill-foreground-secondary text-foreground-secondary">
               <User className="fill-foreground-secondary size-4" />
             </span>
-            <span>{user.companyName}</span>
+            <span>{user?.jobTitle}</span>
           </p>
         </div>
       </div>
