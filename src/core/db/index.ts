@@ -13,7 +13,7 @@ export const checkDatabaseConnection = async () => {
   await db.$client.connect((err) => {
     if (err) {
       isConnected = false;
-      logger.error("Could not connect to database", err);
+      logger.error("Could not connect to database", { ...err });
       process.exit(1);
     }
   });
