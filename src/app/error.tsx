@@ -1,5 +1,6 @@
 "use client";
 
+import * as Sentry from "@sentry/nextjs";
 import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -7,9 +8,8 @@ import logger from "@/services/logger";
 
 export default function GlobalError({ error, reset }: { error: Error; reset: () => void }) {
   useEffect(() => {
-    logger.error("Global error boundary:", {
-      error,
-    });
+    logger.error("Global error boundary:", { error });
+    Sentry.captureException(error);
   }, [error]);
 
   return (
