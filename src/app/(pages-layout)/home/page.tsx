@@ -1,6 +1,6 @@
+import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
-import RequestError from "@/components/shared/RequestError";
 import { getMe } from "@/services/user";
 import { tryCatch } from "@/utils/tryCatch";
 
@@ -13,11 +13,8 @@ export default async function HomePage() {
   const { data, error } = await tryCatch(getMe());
 
   if (error || !data) {
-    return (
-      <section className="flex min-h-dvh items-center justify-center px-8 py-3.5 max-sm:px-2">
-        <RequestError />
-      </section>
-    );
+    // return redirect("/login");
+    return;
   }
 
   return (

@@ -1,6 +1,8 @@
 import { type RedisClientType, createClient } from "redis";
 
 import env from "@/config/env";
+import logger from "@/services/logger";
+import { tryCatch } from "@/utils/tryCatch";
 
 export const redisClient: RedisClientType = createClient({
   url: env.REDIS_URL,
@@ -12,11 +14,13 @@ export const checkRedisConnection = async () => {
 };
 
 const connectToRedis = async () => {
-  try {
-    await redisClient.connect();
-  } catch (error) {
-    console.error("Could not connect to Redis", error);
-    process.exit(1);
+  const { error } = await tryCatch(redisClient.connect());
+
+  if (error) {
+    logger.error("Could not connect to Redis", {
+      service: "redis-server",
+      error,
+    });
   }
 };
 

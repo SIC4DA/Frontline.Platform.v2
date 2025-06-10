@@ -4,6 +4,7 @@ import { z } from "zod";
 const env = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "production", "test"]),
+    SENTRY_AUTH_TOKEN: z.string().min(1),
     APP_ORIGIN: z.string().url(),
     NEXT_BASE_URL: z.string().url(),
     DATABASE_URL: z.string().url(),
@@ -32,6 +33,7 @@ const env = createEnv({
   },
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    SENTRY_AUTH_TOKEN: process.env.SENTRY_AUTH_TOKEN,
     APP_ORIGIN: process.env.APP_ORIGIN,
     NEXT_BASE_URL: process.env.NEXT_BASE_URL,
     NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,

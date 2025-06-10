@@ -43,3 +43,6 @@ next-env.d.ts
 
 pgdata
 .env*.local
+
+# Sentry Config File
+.env.sentry-build-plugin

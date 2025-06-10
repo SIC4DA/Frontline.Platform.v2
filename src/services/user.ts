@@ -6,64 +6,75 @@ import { headers } from "next/headers";
 import { db } from "@/core/db";
 import { user } from "@/core/db/schema";
 import { auth } from "@/lib/auth";
+import { authClient } from "@/lib/auth-client";
 import { tryCatch } from "@/utils/tryCatch";
 
+import logger from "./logger";
+
 export const getMe = async () => {
-	const { error: sessionError, data: session } = await tryCatch(
-		auth.api.getSession({
-			headers: await headers(),
-		}),
-	);
+  const { error: sessionError, data: session } = await tryCatch(
+    auth.api.getSession({
+      headers: await headers(),
+    }),
+  );
 
-	if (sessionError || !session) {
-		throw new Error("User not found");
-	}
+  if (sessionError || !session) {
+    logger.error("Session not found", {
+      sessionUserId: session?.user.id,
+      error: sessionError,
+      service: "getMe",
+    });
+    throw new Error("Session not found");
+  }
 
-	const { error: authUserError, data: authUser } = await tryCatch(
-		db.query.user.findFirst({
-			where: eq(user.id, session.user.id),
-		}),
-	);
+  const { error: authUserError, data: authUser } = await tryCatch(
+    db.query.user.findFirst({
+      where: eq(user.id, session.user.id),
+    }),
+  );
 
-	if (authUserError || !authUser) {
-		throw new Error("User not found");
-	}
+  if (authUserError || !authUser) {
+    await authClient.signOut();
+    logger.error("User not found", {
+      sessionUserId: session.user.id,
+      dbUser: authUser,
+      error: authUserError,
+      service: "getMe",
+    });
 
-	return authUser;
+    throw new Error("User not found");
+  }
+
+  return authUser;
 };
 
 export const getUsers = async () => {
-	const users = await db.query.user.findMany();
+  const users = await db.query.user.findMany();
 
-	return users;
+  return users;
 };
 
 export const getUserById = async (id: string) => {
-	const result = await db.query.user.findFirst({
-		where: eq(user.id, id),
-		with: {
-			deals: true,
-		},
-	});
+  const result = await db.query.user.findFirst({
+    where: eq(user.id, id),
+    with: {
+      deals: true,
+    },
+  });
 
-	return result;
+  return result;
 };
 
-export const updateUser = async (
-	id: string,
-	data: Partial<Omit<typeof user.$inferInsert, "id">>,
-) => {
-	return auth.api.updateUser({
-		headers: await headers(),
-		body: data,
-	});
+export const updateUser = async (id: string, data: Partial<Omit<typeof user.$inferInsert, "id">>) => {
+  return auth.api.updateUser({
+    headers: await headers(),
+    body: data,
+  });
 };
 
-export const deleteUser = async (
-	data: { password?: string; token?: string; callbackURL?: string } = {},
-) => {
-	await auth.api.deleteUser({
-		headers: await headers(),
-		body: data,
-	});
+export const deleteUser = async (data: { password?: string; token?: string; callbackURL?: string } = {}) => {
+  await auth.api.deleteUser({
+    headers: await headers(),
+    body: data,
+  });
 };

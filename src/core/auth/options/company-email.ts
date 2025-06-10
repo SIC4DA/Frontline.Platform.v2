@@ -4,8 +4,6 @@ import { sendEmail } from "@/services/mailer";
 
 import type { CompanyEmailOptions } from "../plugins/company-email/types";
 
-console.log(env.NODE_ENV);
-
 export const companyEmailOptions: CompanyEmailOptions = {
   expiresIn: 60 * 60,
   allowedEmails: ["technozone019@gmail.com", "voka5050@gmail.com", "abdelsalammohamed31@outlook.com"],
