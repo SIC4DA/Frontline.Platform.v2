@@ -11,11 +11,11 @@ Sentry.init({
   tracesSampleRate: 1,
 
   enabled: process.env.NODE_ENV === "production",
-  _experiments: {
-    enableLogs: process.env.NODE_ENV === "development",
-  },
+  // _experiments: {
+  //   enableLogs: process.env.NODE_ENV === "development",
+  // },
 
   // Setting this option to true will print useful information to the console while you're setting up Sentry.
-  debug: process.env.NODE_ENV === "development",
+  // debug: process.env.NODE_ENV === "development",
 });
 
