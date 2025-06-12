@@ -39,7 +39,7 @@ describe("Registration Flow", () => {
     cy.get('button[type="submit"]').click();
     cy.wait("@login");
 
-    cy.url().should("include", "/home");
+    cy.url().should("include", "/");
 
     cy.task("removeRegisteredUser", testEmail);
   });

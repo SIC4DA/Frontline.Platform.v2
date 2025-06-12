@@ -75,7 +75,7 @@ export async function accountSetupAction(
 		};
 	}
 
-	redirect("/home");
+	redirect("/");
 
 	// return {
 	//   status: "success",

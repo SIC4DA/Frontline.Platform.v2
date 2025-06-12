@@ -14,7 +14,7 @@ import Star from "../../../../public/icons/Star";
 const links = [
   {
     label: "home",
-    href: "/home",
+    href: "/",
     icon: <House />,
   },
   {

@@ -6,6 +6,7 @@ import { headers } from "next/headers";
 import { z } from "zod";
 
 import { auth } from "@/lib/auth";
+import { uploadFile } from "@/services/cloudnary";
 import { tryCatch } from "@/utils/tryCatch";
 
 export type EditUserState = {
@@ -35,6 +36,7 @@ export async function editUserAction(prevState: EditUserState, formData: FormDat
 
   const username = formData.get("username") as string;
   const fullName = formData.get("fullName") as string;
+  const profileImage = formData.get("profileImage") as File;
   const bio = formData.get("bio") as string;
 
   const validationResult = loginSchema.safeParse({ username, fullName, bio });
@@ -54,6 +56,26 @@ export async function editUserAction(prevState: EditUserState, formData: FormDat
     };
   }
 
+  let imageUrl: string | undefined;
+  if (profileImage.size > 0) {
+    const { error: imageError, data } = await tryCatch(
+      uploadFile(profileImage, {
+        folder: "profile",
+      }),
+    );
+
+    if (imageError) {
+      return {
+        status: "error",
+        errors: {
+          form: [imageError.message],
+        },
+      };
+    }
+
+    imageUrl = data?.secure_url;
+  }
+
   const session = await auth.api.getSession({ headers: await headers() });
 
   const { error } = await tryCatch(
@@ -62,6 +84,7 @@ export async function editUserAction(prevState: EditUserState, formData: FormDat
       body: {
         name: fullName,
         ...(username !== session?.user.username && { username }),
+        ...(imageUrl && { image: imageUrl }),
         // @ts-expect-error bio is a valid key.
         bio,
       },
@@ -80,7 +103,7 @@ export async function editUserAction(prevState: EditUserState, formData: FormDat
     };
   }
 
-  revalidatePath("/home");
+  revalidatePath("/");
 
   return {
     status: "success",

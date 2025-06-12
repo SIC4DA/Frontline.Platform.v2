@@ -4,7 +4,7 @@ import Search from "@public/icons/Search";
 import { useTranslations } from "next-intl";
 import React from "react";
 
-import SalesCard from "@/app/(pages-layout)/home/components/SalesCard";
+import SalesCard from "@/app/(pages-layout)/(home)/components/SalesCard";
 import useDebounce from "@/hooks/shared/useDebounce";
 import { Deal } from "@/types/deal";
 

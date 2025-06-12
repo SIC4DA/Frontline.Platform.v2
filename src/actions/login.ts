@@ -52,7 +52,7 @@ export async function loginAction(prevState: LoginActionState, formData: FormDat
       body: {
         email,
         password,
-        callbackURL: "/home",
+        callbackURL: "/",
       },
     }),
   );
@@ -68,7 +68,7 @@ export async function loginAction(prevState: LoginActionState, formData: FormDat
     };
   }
 
-  redirect("/home");
+  redirect("/");
 
   // return {
   //   status: "success",

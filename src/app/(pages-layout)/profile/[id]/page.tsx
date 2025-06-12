@@ -5,8 +5,8 @@ import { getUserById } from "@/services/user";
 import { Deal } from "@/types/deal";
 import { tryCatch } from "@/utils/tryCatch";
 
-import UserCover from "../../home/components/UserCover";
-import UserData from "../../home/components/UserData";
+import UserCover from "../../(home)/components/UserCover";
+import UserData from "../../(home)/components/UserData";
 import SalesData from "./components/SalesData";
 
 export default async function UserProfilePage({ params }: { params: Promise<{ id: string }> }) {

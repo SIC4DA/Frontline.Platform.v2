@@ -15,7 +15,7 @@ const SocialLink = ({ option }: { option: SocialLinkOption }) => {
 		if (option.isOAuth2) {
 			const { data } = await authClient.signIn.oauth2({
 				providerId: option.provider,
-				callbackURL: "/home",
+				callbackURL: "/",
 				errorCallbackURL: `${env.NEXT_PUBLIC_BASE_URL}/register`
 			});
 			if (data?.url) {
@@ -29,7 +29,7 @@ const SocialLink = ({ option }: { option: SocialLinkOption }) => {
 				SocialLinkOption["provider"],
 				"slack"
 			>,
-			callbackURL: "/home",
+			callbackURL: "/",
 			errorCallbackURL: `${env.NEXT_PUBLIC_BASE_URL}/register`
 		});
 		if (data?.url) {
