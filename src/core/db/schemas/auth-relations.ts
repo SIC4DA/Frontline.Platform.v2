@@ -9,3 +9,10 @@ export const userRelations = relations(user, ({ many }) => ({
   chats: many(chat),
   accounts: many(account),
 }));
+
+export const accountRelations = relations(account, ({ one }) => ({
+  user: one(user, {
+    fields: [account.userId],
+    references: [user.id],
+  }),
+}));
