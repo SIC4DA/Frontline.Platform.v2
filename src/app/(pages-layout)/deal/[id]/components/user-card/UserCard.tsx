@@ -3,11 +3,12 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
+import { DealAnalytics } from "@/types/deal";
 import type { User as UserType } from "@/types/user";
 
 import UserAnalytics from "./UserAnalytics";
 
-const UserCard = ({ user }: { user: UserType | null }) => {
+const UserCard = ({ user, analytics }: { user: UserType | null; analytics: DealAnalytics | null }) => {
   const t = useTranslations("deal");
 
   return (
@@ -22,7 +23,7 @@ const UserCard = ({ user }: { user: UserType | null }) => {
         />
       </div>
       <div className="mt-10 p-6">
-        <div className="flex justify-between flex-wrap gap-2">
+        <div className="flex flex-wrap justify-between gap-2">
           <div>
             <div className="flex items-center gap-1">
               <p className="text-xl font-medium">{user?.name}</p>
@@ -42,8 +43,8 @@ const UserCard = ({ user }: { user: UserType | null }) => {
           </p>
           <p className="text-foreground-secondary mt-2 text-sm">{user?.bio}</p>
         </div>
-        <UserAnalytics />
-        <Button className="mt-9 w-full h-10" variant="primary">
+        <UserAnalytics analytics={analytics} />
+        <Button className="mt-9 h-10 w-full" variant="primary">
           {t("connect")}
         </Button>
       </div>
