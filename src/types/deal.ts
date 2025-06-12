@@ -8,3 +8,10 @@ export type Deal = z.infer<typeof DealSchema> & typeof deal.$inferSelect;
 export type DealContributors = Deal["dealContributors"];
 
 export type KeyStakeholder = Deal["keyStakeholders"];
+
+export type DealAnalytics = {
+  closedDealsCount: number;
+  totalEarned: number;
+  averageDealSize: number;
+  averageDealCycle: number;
+};
