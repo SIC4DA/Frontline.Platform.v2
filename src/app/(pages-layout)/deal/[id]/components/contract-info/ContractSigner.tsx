@@ -2,7 +2,11 @@ import { DollarSign, FileText } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-const ContractSigner = ({ contractSigner }: { contractSigner: string | undefined | null }) => {
+import { Deal } from "@/types/deal";
+
+import InfoChip from "../InfoChip";
+
+const ContractSigner = ({ deal }: { deal: Deal | null | undefined }) => {
   const t = useTranslations("deal");
 
   return (
@@ -12,24 +16,19 @@ const ContractSigner = ({ contractSigner }: { contractSigner: string | undefined
           {t("contractSigner")}
         </div>
         <p className="mt-5 text-4xl text-[#00326B] capitalize max-md:text-2xl">
-          {contractSigner || "Contract Signer, Signer Role"}
+          {deal?.contractSigner || "Contract Signer, Signer Role"}
         </p>
         <div className="mt-9 flex flex-wrap items-center gap-3">
-          <div className="bg-background flex items-center gap-2 rounded-lg px-3 py-2">
-            <span className="text-foreground-secondary">
-              <FileText className="size-[18px] stroke-[1.5px]" />
-            </span>
-            <div className="flex flex-wrap items-center gap-1 text-[13px] font-medium">
-              <span>{1}</span>
-              <span>{t("yearAgreement")}</span>
-            </div>
-          </div>
-          <div className="bg-background flex items-center gap-2 rounded-lg px-3 py-2">
-            <span className="text-foreground-secondary">
-              <DollarSign className="size-[18px] stroke-[1.5px]" />
-            </span>
-            <p className="text-[13px] font-medium">{t("netInvoice", { value: "30 days" })}</p>
-          </div>
+          <InfoChip
+            icon={<FileText className="size-[18px] stroke-[1.5px]" />}
+            value={deal?.contractTerm}
+            label={t("agreement")}
+          />
+          <InfoChip
+            icon={<DollarSign className="size-[18px] stroke-[1.5px]" />}
+            value={deal?.paymentTerms}
+            label={t("invoice")}
+          />
         </div>
       </div>
       <Image

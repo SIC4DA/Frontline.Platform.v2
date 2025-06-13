@@ -4,6 +4,8 @@ import React from "react";
 
 import { DealAnalytics } from "@/types/deal";
 
+import InfoChip from "../InfoChip";
+
 const UserAnalytics = ({ analytics }: { analytics: DealAnalytics | null }) => {
   const t = useTranslations("deal");
 
@@ -33,13 +35,7 @@ const UserAnalytics = ({ analytics }: { analytics: DealAnalytics | null }) => {
   return (
     <div className="mt-9 flex flex-wrap items-center gap-3">
       {analyticsData.map((item) => (
-        <div key={item.label} className="bg-background flex items-center gap-2 rounded-lg px-3 py-2">
-          <span className="text-foreground-secondary">{item.icon}</span>
-          <div className="flex flex-wrap items-center gap-1 text-[13px] font-medium">
-            <span>{item.value}</span>
-            <span>{item.label}</span>
-          </div>
-        </div>
+        <InfoChip key={item.label} icon={item.icon} value={item.value} label={item.label} />
       ))}
     </div>
   );
