@@ -18,7 +18,7 @@ export default async function DealPage({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const { data, error } = await tryCatch(getDealWithUserAnalytics(id));
 
-  if (error || !data) {
+  if (error || !data || data?.deal?.dealContributors?.at(-1)?.stage !== "Closing") {
     return (
       <section className="flex min-h-dvh items-center justify-center px-8 py-3.5 max-sm:px-2">
         <RequestError />

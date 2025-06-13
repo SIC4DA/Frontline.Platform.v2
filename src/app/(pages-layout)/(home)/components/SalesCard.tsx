@@ -50,7 +50,7 @@ const SalesCard = ({
   ];
 
   return (
-    <a href={`/deal/${id}`}>
+    <a href={lastDealContributor?.stage === "Closing" ? `/deal/${id}` : undefined}>
       <div className="border-border rounded-lg border px-5 py-6 max-sm:px-4">
         <div className="mb-10 flex items-center gap-3">
           <Image
