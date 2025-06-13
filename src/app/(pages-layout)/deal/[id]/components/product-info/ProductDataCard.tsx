@@ -7,7 +7,7 @@ const ProductDataCard = ({ title, data, icon }: { title: string; data: string[];
         <span>{icon}</span>
         <h3 className="font-medium text-[#00326B]">{title}</h3>
       </div>
-      <div className="flex w-max flex-col gap-6 text-center">
+      <div className="flex w-max flex-col gap-6 text-center max-lg:text-left">
         {data.map((item) => (
           <p className="text-[15px] text-[#2A87F7]" key={item}>
             {item}

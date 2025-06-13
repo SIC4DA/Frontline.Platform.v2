@@ -54,7 +54,7 @@ const ProductInfo = ({ deal }: { deal: Deal | null | undefined }) => {
               <div className="max-lg:hidden">
                 <RightCubeLink />
               </div>
-              <div className="absolute -right-[200px] -mt-4 max-lg:static max-lg:mt-0">
+              <div className="absolute -right-[240px] -mt-6 max-lg:static max-lg:mt-0">
                 <ProductDataCard title={t("keyStakeholders")} data={keyStakeholders} icon={<Stakeholder />} />
               </div>
             </div>
