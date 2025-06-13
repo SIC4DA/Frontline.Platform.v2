@@ -36,7 +36,7 @@ const links = [
 
 const MobileToolbar = () => {
   const pathname = usePathname();
-  const isActive = (href: string) => pathname.includes(href);
+  const isActive = (href: string) => pathname === href;
 
   return (
     <div className="bg-background border-border fixed bottom-0 left-0 z-40 hidden w-full justify-between border-t px-10 py-4 max-sm:flex">

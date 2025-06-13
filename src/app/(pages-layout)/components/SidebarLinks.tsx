@@ -39,7 +39,7 @@ const links = [
 const SidebarLinks = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
   const t = useTranslations("sidebar");
   const pathname = usePathname();
-  const isActive = (href: string) => pathname.includes(href);
+  const isActive = (href: string) => pathname === href;
 
   return (
     <nav className={cn("mb-14 flex flex-col gap-3", !isSidebarActive && "items-center")}>
