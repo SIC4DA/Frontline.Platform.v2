@@ -16,7 +16,7 @@ const ContractInfo = ({ deal }: { deal: Deal | null | undefined }) => {
       <div className="mt-20 grid grid-cols-2 gap-14 max-md:grid-cols-1 max-md:gap-x-0">
         <ContractValue contractValue={deal?.contractValue} />
         <ContractTerms contractTerm={deal?.contractTerm} />
-        <ContractSigner contractSigner={deal?.contractSigner} />
+        <ContractSigner deal={deal} />
       </div>
     </div>
   );
