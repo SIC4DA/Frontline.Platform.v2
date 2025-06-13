@@ -9,6 +9,7 @@ import DealSummary from "./components/DealSummary";
 import Header from "./components/Header";
 import ContractInfo from "./components/contract-info/ContractInfo";
 import ProductInfo from "./components/product-info/ProductInfo";
+import SalesProcessInfo from "./components/sales-process-info/SalesProcessInfo";
 import UserCard from "./components/user-card/UserCard";
 import UserCardWrapper from "./components/user-card/UserCardWrapper";
 
@@ -44,6 +45,7 @@ export default async function DealPage({ params }: { params: Promise<{ id: strin
         </UserCardWrapper>
         <ContractInfo deal={deal} />
         <ProductInfo deal={deal} />
+        <SalesProcessInfo deal={deal} />
         {/* <div className="bg-red-400 h-[2000px]"></div> */}
       </div>
     </section>
