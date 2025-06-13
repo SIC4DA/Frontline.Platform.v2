@@ -7,6 +7,7 @@ import { tryCatch } from "@/utils/tryCatch";
 
 import DealSummary from "./components/DealSummary";
 import Header from "./components/Header";
+import SignupCard from "./components/SignupCard";
 import ContractInfo from "./components/contract-info/ContractInfo";
 import ProductInfo from "./components/product-info/ProductInfo";
 import SalesProcessInfo from "./components/sales-process-info/SalesProcessInfo";
@@ -36,6 +37,7 @@ export default async function DealPage({ params }: { params: Promise<{ id: strin
         className="absolute -top-52 left-0 h-auto w-full min-w-[1950px]"
         width={10000}
         height={10000}
+        priority
       />
       <div className="relative z-[1] mx-auto max-w-[1055px]">
         <Header user={user} />
@@ -46,7 +48,7 @@ export default async function DealPage({ params }: { params: Promise<{ id: strin
         <ContractInfo deal={deal} />
         <ProductInfo deal={deal} />
         <SalesProcessInfo deal={deal} />
-        {/* <div className="bg-red-400 h-[2000px]"></div> */}
+        <SignupCard />
       </div>
     </section>
   );
