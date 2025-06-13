@@ -8,6 +8,13 @@ const LeftCubeLink = () => {
         stroke="#D9EAFF"
         strokeWidth="2"
       />
+      <path d="M190 1H149" stroke="url(#paint0_linear_162_455)" strokeWidth="2" />
+      <defs>
+        <linearGradient id="paint0_linear_162_455" x1="149" y1="1.5" x2="190" y2="1.5" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#D9EAFF" />
+          <stop offset="1" stopColor="#4396FC" />
+        </linearGradient>
+      </defs>
     </svg>
   );
 };
