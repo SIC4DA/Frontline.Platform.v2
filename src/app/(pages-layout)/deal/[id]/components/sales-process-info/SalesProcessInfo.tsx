@@ -5,8 +5,9 @@ import React from "react";
 import type { Deal } from "@/types/deal";
 
 import InfoChip from "../InfoChip";
+import StagesList from "./StagesList";
 
-const SalesProcessInfo = ({ deal }: { deal: Deal | null | undefined }) => {
+const SalesProcessInfo = ({ deal }: { deal: Deal }) => {
   const t = useTranslations("deal");
 
   return (
@@ -20,6 +21,7 @@ const SalesProcessInfo = ({ deal }: { deal: Deal | null | undefined }) => {
         />
         <InfoChip icon={<Compass className="size-[18px] stroke-[1.5px]" />} value={deal?.salesSource} />
       </div>
+      <StagesList stages={deal?.dealContributors} />
     </div>
   );
 };
