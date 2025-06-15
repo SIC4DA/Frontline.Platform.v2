@@ -47,10 +47,6 @@ export const POST = async (req: Request) => {
     - If the user provides a date, ensure it is in a valid format (e.g., MM-DD-YYYY).
     - If the user provides a currency, ensure it is in a valid format (e.g., $100,000).
     - If the user provides a percentage, ensure it is in a valid format (e.g., 10%).
-    - When user want to see data show in the table, please use the following format:
-    | [Field] | [Value] |
-    | --- | --- |
-    | [Field] | [Value] |
 
     Your goal is to ensure the Deal object is fully populated and valid according to the schema above.
 
