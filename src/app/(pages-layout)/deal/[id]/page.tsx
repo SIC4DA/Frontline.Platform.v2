@@ -31,7 +31,7 @@ export default async function DealPage({ params }: { params: Promise<{ id: strin
   return (
     <section className="relative min-h-dvh max-w-full overflow-x-hidden overflow-y-clip bg-[#F6FAFF] px-8 py-12 max-md:px-5 max-sm:px-4 max-sm:pb-24">
       <Image
-        src="/images/deal-summary_hero.png"
+        src="/images/deal-summary_hero.svg"
         alt="Hero Background"
         draggable="false"
         className="absolute -top-52 left-0 h-auto w-full min-w-[1950px]"
