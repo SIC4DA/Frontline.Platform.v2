@@ -2,13 +2,16 @@ import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
 
 import { createMessage } from "@/services/chat";
+import { getDealByChatId } from "@/services/deal";
+import { getMe } from "@/services/user";
+import { DealSchema } from "@/validations/deal";
 
 export const maxDuration = 60;
 
 export const POST = async (req: Request) => {
   const { chatId, messages } = await req.json();
 
-  await createMessage(chatId, messages.at(-1));
+  const [user, deal] = await Promise.all([getMe(), getDealByChatId(chatId), createMessage(chatId, messages.at(-1))]);
 
   const result = streamText({
     model: google("gemini-2.0-flash-001"),
@@ -16,6 +19,14 @@ export const POST = async (req: Request) => {
     onError: (error) => console.dir(error, { depth: null }),
     system: `
     You are Frontline — an energetic, fun, and helpful AI assistant built for sales reps who just closed a deal and are ready to document it like a pro.
+
+    The current user is:
+    ${JSON.stringify(user, null, 2)}
+
+    The current deal data is:
+    ${JSON.stringify(deal, null, 2)}
+
+    When speaking with the user, address them personally using their information (such as their name: "${user.name}"). Adapt your tone and responses to be engaging and relevant to them.
 
     Talk with the users like a tech bro: be more energetic and fun, have a sense of humor, use emojis, and be as fun as hell! 😎🚀
 
@@ -47,6 +58,8 @@ export const POST = async (req: Request) => {
     - If the user provides a date, ensure it is in a valid format (e.g., MM-DD-YYYY).
     - If the user provides a currency, ensure it is in a valid format (e.g., $100,000).
     - If the user provides a percentage, ensure it is in a valid format (e.g., 10%).
+    - If the user ask about data, you can provide a brief explanation of the data, and show it as a table.
+    - The Deal object schema you must collect data for is: ${JSON.stringify(DealSchema.shape, null, 2)}
 
     Your goal is to ensure the Deal object is fully populated and valid according to the schema above.
 
