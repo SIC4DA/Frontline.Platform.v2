@@ -39,8 +39,8 @@ export default async function DealPage({ params }: { params: Promise<{ id: strin
         height={10000}
         priority
       />
+      <Header user={user} />
       <div className="relative z-[1] mx-auto max-w-[1055px]">
-        <Header user={user} />
         <DealSummary userCompanyLogo={user?.companyLogo} dealCompanyLogo={deal?.companyLogo} />
         <UserCardWrapper>
           <UserCard user={user} analytics={analytics} />

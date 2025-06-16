@@ -11,16 +11,22 @@ const Header = async ({ user }: { user: UserType | null }) => {
   if (!user) return null;
 
   return (
-    <div className="bg-background flex max-w-[1344px] items-center justify-between rounded-full px-5 py-4">
+    <div className="bg-background relative z-[1] mx-auto flex max-w-10/12 items-center justify-between rounded-full px-5 max-sm:px-3 py-4 max-sm:max-w-full">
       <div className="flex items-center gap-2">
-        <Image src={user.image || ""} className="aspect-square w-14 rounded-full" alt="Avatar" width={52} height={52} />
+        <Image
+          src={user.image || ""}
+          className="aspect-square w-14 rounded-full max-sm:w-10"
+          alt="Avatar"
+          width={52}
+          height={52}
+        />
         <div>
-          <p className="text-lg max-md:text-base">{user.username}</p>
+          <p className="text-lg max-md:text-base max-sm:text-sm">{user.username}</p>
           <p className="text-foreground-secondary flex items-center gap-1 text-sm max-md:text-xs">
             <span className="fill-foreground-secondary text-foreground-secondary">
-              <User className="fill-foreground-secondary size-4" />
+              <User className="fill-foreground-secondary size-4 max-sm:size-3" />
             </span>
-            <span>{user?.jobTitle}</span>
+            <span className="max-sm:text-xs">{user?.jobTitle}</span>
           </p>
         </div>
       </div>
