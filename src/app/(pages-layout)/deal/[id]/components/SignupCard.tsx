@@ -13,31 +13,31 @@ const SignupCard = () => {
         src="/images/compass.svg"
         alt="Compass image"
         className="absolute top-1/6 right-1/5 z-[1]"
-        width={60}
-        height={60}
-        draggable={false}
-        loading="lazy"
-      />
-      <Image
-        src="/images/doc.svg"
-        alt="Doc image"
-        className="absolute top-1/5 left-1/5 z-[1]"
         width={70}
         height={70}
         draggable={false}
         loading="lazy"
       />
       <Image
-        src="/images/cube.svg"
-        alt="Cube image"
-        className="absolute bottom-1/6 left-1/5 z-[1]"
-        width={45}
-        height={45}
+        src="/images/doc.svg"
+        alt="Doc image"
+        className="absolute top-1/16 left-1/5 z-[1]"
+        width={80}
+        height={80}
         draggable={false}
         loading="lazy"
       />
-      <div className="relative z-[2] my-20 flex flex-col gap-5">
-        <h4 className="mx-auto max-w-sm text-center text-3xl leading-10 font-medium text-[#00326B]">{t("signup")}</h4>
+      <Image
+        src="/images/cube.svg"
+        alt="Cube image"
+        className="absolute bottom-1/4 left-1/4 z-[1]"
+        width={50}
+        height={50}
+        draggable={false}
+        loading="lazy"
+      />
+      <div className="relative z-[2] my-24 flex flex-col gap-5">
+        <h4 className="mx-auto max-w-lg text-center text-4xl leading-10 font-medium text-[#00326B]">{t("signup")}</h4>
         <Button variant="primary" className="mx-auto h-10 w-fit px-10">
           {t("getStarted")}
         </Button>

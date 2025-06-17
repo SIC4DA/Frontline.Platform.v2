@@ -12,7 +12,7 @@ const DealSummary = ({
   const t = useTranslations("deal");
 
   return (
-    <div className="mt-28">
+    <div className="my-40">
       <p className="text-accent mx-auto flex w-fit items-center gap-2 capitalize">
         <span className="h-2.5 w-2.5 rounded-full bg-[#AFF300]" />
         <span>{t("dealSummary")}</span>

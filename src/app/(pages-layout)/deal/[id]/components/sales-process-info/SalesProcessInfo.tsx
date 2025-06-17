@@ -12,7 +12,7 @@ const SalesProcessInfo = ({ deal }: { deal: Deal }) => {
 
   return (
     <div className="my-60">
-      <h2 className="mb-20 text-center text-4xl text-[#00326B] capitalize">{t("salesProcessInfo")}</h2>
+      <h2 className="mb-16 text-center text-[45px] text-[#00326B] capitalize">{t("salesProcessInfo")}</h2>
       <div className="flex flex-wrap items-center justify-center gap-4">
         <InfoChip
           icon={<Calendar className="size-[18px] stroke-[1.5px]" />}

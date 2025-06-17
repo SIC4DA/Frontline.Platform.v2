@@ -12,7 +12,7 @@ const ContractInfo = ({ deal }: { deal: Deal | null | undefined }) => {
 
   return (
     <div className="mt-60">
-      <h2 className="text-center text-4xl text-[#00326B]">{t("contractInfo")}</h2>
+      <h2 className="text-center text-[45px] text-[#00326B]">{t("contractInfo")}</h2>
       <div className="mt-20 grid grid-cols-2 gap-14 max-md:grid-cols-1 max-md:gap-x-0">
         <ContractValue contractValue={deal?.contractValue} />
         <ContractTerms contractTerm={deal?.contractTerm} />
