@@ -34,7 +34,7 @@ export default async function DealPage({ params }: { params: Promise<{ id: strin
         src="/images/deal-summary_hero.svg"
         alt="Hero Background"
         draggable="false"
-        className="absolute -top-52 left-0 h-auto w-full min-w-[1950px]"
+        className="absolute -top-52 left-0 h-auto w-full min-w-[1950px] select-none"
         width={10000}
         height={10000}
         priority
