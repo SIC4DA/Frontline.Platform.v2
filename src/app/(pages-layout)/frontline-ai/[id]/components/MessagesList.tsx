@@ -5,7 +5,7 @@ import Markdown from "react-markdown";
 
 const MessagesList = ({ messages }: { messages: UIMessage[] }) => {
   return (
-    <div className="mx-auto flex w-full max-w-[1000px] flex-grow flex-col gap-10 pb-18">
+    <div className="mx-auto flex w-full max-w-[1000px] flex-grow flex-col gap-10 overflow-x-hidden pb-18">
       {messages.map((message) => {
         if (message.role === "user") {
           return (
