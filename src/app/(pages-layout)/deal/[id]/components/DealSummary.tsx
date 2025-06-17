@@ -14,10 +14,10 @@ const DealSummary = ({
   return (
     <div className="mt-28">
       <p className="text-accent mx-auto flex w-fit items-center gap-2 capitalize">
-        <span className="h-2.5 w-2.5 rounded-full bg-green-500" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#AFF300]" />
         <span>{t("dealSummary")}</span>
       </p>
-      <h1 className="text-accent max-2xl:text-7xl mt-5 text-center text-8xl font-light capitalize max-sm:text-5xl">
+      <h1 className="text-accent mt-5 text-center text-8xl font-light capitalize max-2xl:text-7xl max-sm:text-5xl">
         {t("dealClosed")}!
       </h1>
       <div className="mt-14 flex items-center justify-center gap-9">
