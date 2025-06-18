@@ -8,7 +8,7 @@ const ContractValue = ({ contractValue }: { contractValue: number | undefined | 
   const t = useTranslations("deal");
 
   return (
-    <div className="border-border outline-border flex flex-col justify-between rounded-xl border bg-gradient-to-b from-[#FCFCFC] to-[#e2eefe] p-4 outline outline-offset-8">
+    <div className="border-border outline-border flex flex-col justify-between rounded-[32px] border bg-gradient-to-b from-[#FCFCFC] to-[#e2eefe] p-4 pb-[51px] outline outline-offset-8">
       <Image src="/images/money.svg" alt="company logo" className="mx-auto max-h-[230px]" width={400} height={400} />
       <div className="mt-5 flex flex-col gap-2">
         <div className="text-accent mx-auto w-fit rounded-lg bg-gradient-to-b from-[#3BBBF6] to-[#266DF0] px-8 py-1.5 text-center text-[15px] max-md:text-sm">

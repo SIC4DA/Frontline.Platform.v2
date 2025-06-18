@@ -29,7 +29,7 @@ export default async function DealPage({ params }: { params: Promise<{ id: strin
   const { user, deal, analytics } = data;
 
   return (
-    <section className="relative min-h-dvh max-w-full overflow-x-hidden overflow-y-clip bg-[#F6FAFF] px-8 py-12 max-md:px-5 max-sm:px-4 max-sm:pb-24">
+    <section className="relative min-h-dvh max-w-full overflow-x-hidden overflow-y-clip bg-[#F6FAFF] px-8 py-16 max-md:px-5 max-sm:px-4 max-sm:pb-24">
       <Image
         src="/images/deal-summary_hero.svg"
         alt="Hero Background"
@@ -40,7 +40,7 @@ export default async function DealPage({ params }: { params: Promise<{ id: strin
         priority
       />
       <Header user={user} />
-      <div className="relative z-[1] mx-auto max-w-[1055px]">
+      <div className="relative z-[1] mx-auto max-w-[1069px]">
         <DealSummary userCompanyLogo={user?.companyLogo} dealCompanyLogo={deal?.companyLogo} />
         <UserCardWrapper>
           <UserCard user={user} analytics={analytics} />

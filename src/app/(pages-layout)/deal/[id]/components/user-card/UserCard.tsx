@@ -13,7 +13,7 @@ const UserCard = ({ user, analytics }: { user: UserType | null; analytics: DealA
 
   return (
     <div className="relative z-[3] rounded-xl bg-gradient-to-b from-[#F5F5F5] to-[#D6E8FF]">
-      <div className="relative h-36 w-full rounded-xl bg-gradient-to-b from-[#94dcff] to-transparent">
+      <div className="relative h-36 w-full rounded-xl">
         <Image
           src={user?.image || "/images/company-placeholder.webp"}
           alt="user-image"

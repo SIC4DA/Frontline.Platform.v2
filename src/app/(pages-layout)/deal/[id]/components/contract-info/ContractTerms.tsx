@@ -6,7 +6,7 @@ const ContractTerms = ({ contractTerm }: { contractTerm: string | undefined | nu
   const t = useTranslations("deal");
 
   return (
-    <div className="border-border outline-border flex flex-col justify-between rounded-xl border bg-gradient-to-b from-[#FCFCFC] to-[#e2eefe] p-4 outline outline-offset-8">
+    <div className="border-border outline-border flex flex-col justify-between rounded-[32px] border bg-gradient-to-b from-[#FCFCFC] to-[#e2eefe] p-4 pb-[51px] outline outline-offset-8">
       <Image
         src="/images/terms.svg"
         alt="company logo"
