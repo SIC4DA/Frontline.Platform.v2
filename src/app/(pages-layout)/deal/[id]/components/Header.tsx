@@ -11,7 +11,7 @@ const Header = async ({ user }: { user: UserType | null }) => {
   if (!user) return null;
 
   return (
-    <div className="bg-background relative z-[1] mx-auto flex max-w-10/12 items-center justify-between rounded-full px-5 py-4 max-sm:max-w-full max-sm:px-3">
+    <div className="bg-background relative z-[1] mx-auto flex max-w-10/12 items-center justify-between rounded-full px-5 py-4 pr-[30px] max-sm:max-w-full max-sm:px-3">
       <div className="flex items-center gap-2">
         <Image
           src={user.image || ""}
