@@ -21,7 +21,7 @@ const DealSummary = ({
         {t("dealClosed")}!
       </h1>
       <div className="mt-16 flex items-center justify-center gap-[42px]">
-        <div className="bg-background flex aspect-square w-20 items-center justify-center rounded-[22px]">
+        <div className="flex aspect-square w-20 items-center justify-center rounded-[22px] bg-gradient-to-b from-[#FFFFFF] to-[#D3E6FF]">
           <Image
             src={userCompanyLogo || ""}
             alt="User Company Logo"
@@ -38,7 +38,7 @@ const DealSummary = ({
           draggable="false"
           className="select-none"
         />
-        <div className="bg-background flex aspect-square w-20 items-center justify-center rounded-[22px]">
+        <div className="flex aspect-square w-20 items-center justify-center rounded-[22px] bg-gradient-to-b from-[#FFFFFF] to-[#D3E6FF]">
           <Image
             src={dealCompanyLogo || ""}
             alt="Deal Company Logo"
