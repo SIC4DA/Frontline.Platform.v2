@@ -8,7 +8,7 @@ const SignupCard = () => {
   const t = useTranslations("deal");
 
   return (
-    <div className="relative mt-40 rounded-xl bg-gradient-to-b from-[#F6FAFF] to-[#D3E6FF] p-6">
+    <div className="relative mt-40 rounded-[32px] bg-gradient-to-b from-[#F6FAFF] to-[#D3E6FF] p-6">
       <Image
         src="/images/compass.svg"
         alt="Compass image"
