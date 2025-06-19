@@ -11,7 +11,7 @@ const SalesProcessInfo = ({ deal }: { deal: Deal }) => {
   const t = useTranslations("deal");
 
   return (
-    <div className="my-60">
+    <div className="my-80">
       <h2 className="mb-12 text-center text-[45px] text-[#00326B] capitalize">{t("salesProcessInfo")}</h2>
       <div className="flex flex-wrap items-center justify-center gap-5">
         <InfoChip

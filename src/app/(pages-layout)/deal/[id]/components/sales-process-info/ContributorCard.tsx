@@ -26,7 +26,7 @@ const ContributorCard = ({ contributor, isSwitching }: { contributor: Contributo
           {contributor.shoutout}
         </p>
       </div>
-      <Button className="h-10 w-full" variant="primary">
+      <Button className="h-10 w-full rounded-[7px] bg-[#369FEA] duration-300 hover:bg-[#369FEA]" variant="primary">
         {t("connect")}
       </Button>
     </div>

@@ -20,7 +20,7 @@ const DealSummary = ({
       <h1 className="text-accent mt-9 text-center text-[100px] font-light tracking-[-4px] capitalize max-2xl:text-7xl max-sm:text-5xl">
         {t("dealClosed")}!
       </h1>
-      <div className="mt-16 flex items-center justify-center gap-[42px]">
+      <div className="mt-12 flex items-center justify-center gap-[42px]">
         <div className="flex aspect-square w-20 items-center justify-center rounded-[22px] bg-gradient-to-b from-[#FFFFFF] to-[#D3E6FF]">
           <Image
             src={userCompanyLogo || ""}

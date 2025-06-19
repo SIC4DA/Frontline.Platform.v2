@@ -44,7 +44,9 @@ const UserCard = ({ user, analytics }: { user: UserType | null; analytics: DealA
           <p className="text-foreground-secondary mt-2 text-sm">{user?.bio}</p>
         </div>
         <UserAnalytics analytics={analytics} />
-        <Button className="mt-9 h-10 w-full" variant="primary">
+        <Button
+          className="mt-9 h-10 w-full rounded-[7px] bg-[#369FEA] duration-300 hover:bg-[#369FEA]/90"
+          variant="primary">
           {t("connect")}
         </Button>
       </div>

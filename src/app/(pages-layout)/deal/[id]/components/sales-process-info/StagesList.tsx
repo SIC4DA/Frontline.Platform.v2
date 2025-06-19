@@ -123,6 +123,8 @@ import ContributorsList from "./ContributorsList";
 //   },
 // ];
 
+// const StagesList = () => {
+
 const StagesList = ({ stages }: { stages: DealContributors }) => {
   return (
     <div className="mt-64 flex flex-col px-10 max-lg:mt-40 max-lg:px-5">
