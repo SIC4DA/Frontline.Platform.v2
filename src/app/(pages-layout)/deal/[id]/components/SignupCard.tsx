@@ -1,8 +1,14 @@
 import { useTranslations } from "next-intl";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import Image from "next/image";
 import React from "react";
 
 import { Button } from "@/components/ui/button";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: "500",
+});
 
 const SignupCard = () => {
   const t = useTranslations("deal");
@@ -37,7 +43,10 @@ const SignupCard = () => {
         loading="lazy"
       />
       <div className="relative z-[2] my-24 flex flex-col gap-5">
-        <h4 className="mx-auto max-w-lg text-center text-4xl leading-10 font-medium text-[#00326B]">{t("signup")}</h4>
+        <h4
+          className={`mx-auto max-w-lg text-center text-4xl leading-10 font-medium text-[#00326B] ${plusJakartaSans.className}`}>
+          {t("signup")}
+        </h4>
         <Button variant="primary" className="mx-auto h-10 w-fit px-10">
           {t("getStarted")}
         </Button>
