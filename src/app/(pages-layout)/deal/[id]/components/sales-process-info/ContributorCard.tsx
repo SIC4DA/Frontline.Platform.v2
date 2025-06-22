@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Contributor } from "@/types/deal";
 
-const ContributorCard = ({ contributor, isSwitching }: { contributor: Contributor; isSwitching: boolean }) => {
+const ContributorCard = ({ contributor }: { contributor: Contributor }) => {
   const t = useTranslations("deal");
 
   return (
@@ -14,7 +14,6 @@ const ContributorCard = ({ contributor, isSwitching }: { contributor: Contributo
       dir="ltr"
       className={cn(
         "flex flex-col justify-between gap-10 rounded-xl bg-gradient-to-b from-[#FFFFFF] to-[#D6E8FF] p-6 opacity-100 duration-500 ease-in-out",
-        isSwitching && "opacity-0",
       )}>
       <p className="text-2xl font-medium text-[#2F2F2F]">{contributor.name}</p>
       <div>
@@ -22,7 +21,7 @@ const ContributorCard = ({ contributor, isSwitching }: { contributor: Contributo
           <User className="size-[18px] fill-[#2F2F2F] stroke-[1.5px]" />
           <span>{contributor.title || "Contributor Title"}</span>
         </p>
-        <p className="text-foreground-secondary mt-3 line-clamp-2 text-sm" title={contributor.shoutout}>
+        <p className="text-foreground-secondary mt-3 line-clamp-2 h-10 text-sm" title={contributor.shoutout}>
           {contributor.shoutout}
         </p>
       </div>
