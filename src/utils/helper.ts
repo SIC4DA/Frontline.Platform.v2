@@ -42,3 +42,9 @@ export function formatCurrency(num: number): string {
     maximumFractionDigits: 0,
   }).format(num);
 }
+
+export function compactCurrency(num: number): string {
+  return new Intl.NumberFormat("en-US", {
+    notation: "compact",
+  }).format(num);
+}
