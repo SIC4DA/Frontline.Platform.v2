@@ -14,7 +14,7 @@ const ContractSigner = ({ deal }: { deal: Deal | null | undefined }) => {
       <div className="absolute top-[-9px] left-[-9px] z-[1] h-[calc(100%+18px)] w-[calc(100%+18px)] bg-gradient-to-b from-[#f6faff] via-[#f6faff]/50 to-transparent" />
       <div className="border-border outline-border flex items-center justify-between rounded-[32px] border bg-gradient-to-b from-[#FCFCFC] to-[#e2eefe] px-8 py-4 pl-[42px] outline outline-offset-8 max-md:flex-col">
         <div className="relative z-[2] max-md:order-2">
-          <div className="text-accent w-fit rounded-lg bg-gradient-to-b from-[#3BBBF6] to-[#266DF0] px-6 py-1.5 text-center text-[15px] max-md:text-sm">
+          <div className="text-accent w-fit rounded-lg bg-gradient-to-b from-[#3BBBF6] from-20% to-[#266DF0] to-95% px-6 py-1.5 text-center text-[15px] max-md:text-sm">
             {t("contractSigner")}
           </div>
           <p className="mt-5 text-4xl text-[#00326B] capitalize max-md:text-2xl">

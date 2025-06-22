@@ -130,7 +130,7 @@ const StagesList = ({ stages }: { stages: DealContributors }) => {
     <div className="mt-64 flex flex-col px-10 max-lg:mt-40 max-lg:px-5">
       {stages.map((stage, index) => (
         <div dir={index % 2 === 0 ? "ltr" : "rtl"} key={stage.stage} className="relative">
-          <div className="text-accent absolute -top-20 w-fit rounded-full bg-gradient-to-b from-[#3BBBF6] to-[#266DF0] px-10 py-2 capitalize">
+          <div className="text-accent absolute -top-20 w-fit rounded-full bg-gradient-to-b from-[#3BBBF6] from-20% to-[#266DF0] to-95% px-10 py-2 capitalize">
             <h3>{stage.stage}</h3>
           </div>
           <ContributorsList contributors={stage.contributors} />
