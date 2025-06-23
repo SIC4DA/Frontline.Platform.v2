@@ -38,8 +38,8 @@ const ContributorsList = ({ contributors }: { contributors: Contributor[] }) => 
           exit="exit"
           transition={{ type: "spring", stiffness: 320, damping: 30 }}
           className="grid grid-cols-2 gap-12 max-lg:grid-cols-1">
-          {contributors.slice((page - 1) * 2, page * 2).map((contributor) => (
-            <ContributorCard key={contributor.name} contributor={contributor} />
+          {contributors.slice((page - 1) * 2, page * 2).map((contributor, index) => (
+            <ContributorCard key={`${contributor.name}-${index}-${contributor.title}`} contributor={contributor} />
           ))}
         </motion.div>
       </AnimatePresence>
