@@ -1,6 +1,7 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import React from "react";
 
 import useContributorsSwitcher from "@/hooks/deal/useContributorsSwitcher";
@@ -9,11 +10,17 @@ import { Contributor } from "@/types/deal";
 import ContributorCard from "./ContributorCard";
 
 const ContributorsList = ({ contributors }: { contributors: Contributor[] }) => {
-  const { handleNext, handlePrev, page, isNextVisible, isPrevVisible } =
+  const { handleNext, handlePrev, page, isNextVisible, isPrevVisible, direction } =
     useContributorsSwitcher(contributors);
 
+  const variants = {
+    enter: (dir: number) => ({ x: dir * 100, opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (dir: number) => ({ x: dir * -100, opacity: 0 }),
+  };
+
   return (
-    <div className="relative grid grid-cols-2 gap-12 max-lg:grid-cols-1">
+    <div className="relative">
       {isPrevVisible && (
         <button
           onClick={handlePrev}
@@ -21,9 +28,21 @@ const ContributorsList = ({ contributors }: { contributors: Contributor[] }) => 
           <ChevronLeft className="size-4" stroke="#fff" strokeWidth={3} />
         </button>
       )}
-      {contributors.slice((page - 1) * 2, page * 2).map((contributor) => (
-        <ContributorCard key={contributor.name} contributor={contributor} />
-      ))}
+      <AnimatePresence custom={direction} initial={false} mode="wait">
+        <motion.div
+          key={page}
+          custom={direction}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ type: "spring", stiffness: 320, damping: 30 }}
+          className="grid grid-cols-2 gap-12 max-lg:grid-cols-1">
+          {contributors.slice((page - 1) * 2, page * 2).map((contributor) => (
+            <ContributorCard key={contributor.name} contributor={contributor} />
+          ))}
+        </motion.div>
+      </AnimatePresence>
       {isNextVisible && (
         <button
           onClick={handleNext}
