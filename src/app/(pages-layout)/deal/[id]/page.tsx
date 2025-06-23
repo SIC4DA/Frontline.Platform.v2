@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
+import FadeInView from "@/components/shared/FadeInView";
 import RequestError from "@/components/shared/RequestError";
 import { getDealWithUserAnalytics } from "@/services/deal";
 import { tryCatch } from "@/utils/tryCatch";
@@ -41,14 +42,26 @@ export default async function DealPage({ params }: { params: Promise<{ id: strin
       />
       <Header user={user} />
       <div className="relative z-[1] mx-auto max-w-[1069px]">
-        <DealSummary userCompanyLogo={user?.companyLogo} dealCompanyLogo={deal?.companyLogo} />
-        <UserCardWrapper>
-          <UserCard user={user} analytics={analytics} />
-        </UserCardWrapper>
-        <ContractInfo deal={deal} />
-        <ProductInfo deal={deal} />
-        <SalesProcessInfo deal={deal} />
-        <SignupCard />
+        <FadeInView direction="none">
+          <DealSummary userCompanyLogo={user?.companyLogo} dealCompanyLogo={deal?.companyLogo} />
+        </FadeInView>
+        <FadeInView direction="down" movement={50}>
+          <UserCardWrapper>
+            <UserCard user={user} analytics={analytics} />
+          </UserCardWrapper>
+        </FadeInView>
+        <FadeInView>
+          <ContractInfo deal={deal} />
+        </FadeInView>
+        <FadeInView>
+          <ProductInfo deal={deal} />
+        </FadeInView>
+        <FadeInView>
+          <SalesProcessInfo deal={deal} />
+        </FadeInView>
+        <FadeInView>
+          <SignupCard />
+        </FadeInView>
       </div>
     </section>
   );
