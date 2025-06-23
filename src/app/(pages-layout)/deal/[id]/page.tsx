@@ -1,6 +1,8 @@
+// import dynamic from "next/dynamic";
 import Image from "next/image";
 import React from "react";
 
+import Confetti from "@/components/shared/Confetti";
 import FadeInView from "@/components/shared/FadeInView";
 import RequestError from "@/components/shared/RequestError";
 import { getDealWithUserAnalytics } from "@/services/deal";
@@ -31,13 +33,14 @@ export default async function DealPage({ params }: { params: Promise<{ id: strin
 
   return (
     <section className="relative min-h-dvh max-w-full overflow-x-hidden overflow-y-clip bg-[#F6FAFF] px-8 py-16 max-md:px-5 max-sm:px-4 max-sm:pb-24">
+      <Confetti />
       <Image
         src="/images/deal-summary_hero.svg"
         alt="Hero Background"
         draggable="false"
         className="absolute -top-52 left-0 h-auto w-full min-w-[1950px] select-none"
-        width={10000}
-        height={10000}
+        width={1920}
+        height={1080}
         priority
       />
       <Header user={user} />
