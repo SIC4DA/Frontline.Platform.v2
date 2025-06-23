@@ -8,7 +8,7 @@ const FadeInView = ({
   className,
   direction = "up",
   movement = 100,
-  delay = 0.3,
+  delay = 0.2,
 }: {
   children: React.ReactNode;
   className?: string;
