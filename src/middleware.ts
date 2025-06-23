@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from "next/server";
 
 import { authClient } from "./lib/auth-client";
 
-const PUBLIC_PATHS: string[] = [];
+const PUBLIC_PATHS: string[] = ["/mock-deal"];
 const AUTH_PATHS = ["/register", "/login", "/onboarding", "/verify-email", "/check-email"];
 
 export default async function middleware(request: NextRequest): Promise<NextResponse> {
