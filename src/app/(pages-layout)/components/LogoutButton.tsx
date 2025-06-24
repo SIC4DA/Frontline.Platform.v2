@@ -29,6 +29,7 @@ const LogoutButton = () => {
 			onClick={signOut}
 			disabled={isLoading}
 			type="button"
+			aria-label="logout button"
 		>
 			{isLoading ? (
 				<LoaderCircle size={24} className="animate-spin" />

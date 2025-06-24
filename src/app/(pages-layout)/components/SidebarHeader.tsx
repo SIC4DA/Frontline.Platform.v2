@@ -25,6 +25,7 @@ const SidebarHeader = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
       />
       <button
         className="stroke-foreground-secondary w-[24px] max-2xl:w-[18px]"
+        aria-label="toggle sidebar"
         onClick={() => {
           toggle();
         }}>
