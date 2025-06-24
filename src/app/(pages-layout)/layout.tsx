@@ -1,8 +1,10 @@
+import dynamic from "next/dynamic";
 import { cookies, headers } from "next/headers";
 
 import ContentWrapper from "./components/ContentWrapper";
-import MobileToolbar from "./components/MobileToolbar";
-import Sidebar from "./components/Sidebar";
+
+const MobileToolbar = dynamic(() => import("./components/MobileToolbar"));
+const Sidebar = dynamic(() => import("./components/Sidebar"));
 
 const invisibleSidebarPaths = ["account-setup", "deal"];
 

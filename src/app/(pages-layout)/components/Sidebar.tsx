@@ -1,15 +1,20 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useMemo } from "react";
 
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { updateSidebarState } from "@/services/sidebar";
 import { useSidebarStore } from "@/store/sidebar";
 
-import ChatHistory from "./ChatHistory";
 import SidebarHeader from "./SidebarHeader";
 import SidebarLinks from "./SidebarLinks";
 import UserCard from "./UserCard";
+
+const ChatHistory = dynamic(() => import("./ChatHistory"), {
+  loading: () => <Skeleton className="h-12 w-full rounded-lg" />,
+});
 
 const Sidebar = ({ isSidebarActive }: { isSidebarActive: boolean }) => {
   const { setSidebarState } = useSidebarStore();

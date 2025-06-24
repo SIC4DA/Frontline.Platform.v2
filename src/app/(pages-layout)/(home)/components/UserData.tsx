@@ -1,10 +1,14 @@
 import { BadgeCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
 
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import type { User } from "@/types/user";
 
-import EditUserModal from "./edit-modal/EditUserModal";
+const EditUserModal = dynamic(() => import("./edit-modal/EditUserModal"), {
+  loading: () => <Skeleton className="h-9 w-10 rounded-lg" />,
+});
 
 const UserData = ({ user, isMe }: { user: User; isMe?: boolean }) => {
   const t = useTranslations("home");
