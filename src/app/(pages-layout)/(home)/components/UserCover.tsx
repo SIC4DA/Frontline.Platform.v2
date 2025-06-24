@@ -12,6 +12,7 @@ const UserCover = ({ user }: { user: User }) => {
         alt="user Image"
         width={144}
         height={144}
+        priority
       />
     </div>
   );
