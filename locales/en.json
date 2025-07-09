@@ -94,7 +94,9 @@
     "saving": "Saving",
     "defaultBio": "Hey there! I love frontline",
     "notAvailable": "N/A",
-    "noSales": "No sales"
+    "noSales": "No sales",
+    "product": "Product",
+    "terms": "Terms"
   },
   "frontlineAi": {
     "newChat": "New chat",
