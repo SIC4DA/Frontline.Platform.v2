@@ -1,12 +1,9 @@
 // import { Deal } from "@/types/deal";
-import { CircleCheck, Crosshair, User, Wallet } from "lucide-react";
+import { Calendar, Package, User, Wallet } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 import type { Deal } from "@/types/deal";
-
-import ConfidenceProgress from "./ConfidenceProgress";
-import StageChip from "./StageChip";
 
 const SalesCard = ({
   id,
@@ -16,6 +13,8 @@ const SalesCard = ({
   contractValue,
   dealContributors = [],
   contractSigner,
+  productName,
+  contractTerm,
 }: Deal) => {
   const t = useTranslations("home");
 
@@ -28,9 +27,9 @@ const SalesCard = ({
 
   const salesData = [
     {
-      title: t("stage"),
-      value: <StageChip stage={lastDealContributor?.stage ?? "Prospecting"} />,
-      icon: <Crosshair size={20} className="text-foreground-secondary" />,
+      title: t("contract"),
+      value: contractValueWithCurrency,
+      icon: <Wallet size={20} className="text-foreground-secondary" />,
     },
     {
       title: t("contactPerson"),
@@ -38,14 +37,14 @@ const SalesCard = ({
       icon: <User size={20} className="text-foreground-secondary" />,
     },
     {
-      title: t("contract"),
-      value: contractValueWithCurrency,
-      icon: <Wallet size={20} className="text-foreground-secondary" />,
+      title: t("product"),
+      value: productName || t("notAvailable"),
+      icon: <Package size={20} className="text-foreground-secondary" />,
     },
     {
-      title: t("confidence"),
-      value: <ConfidenceProgress stage={lastDealContributor?.stage ?? "Prospecting"} />,
-      icon: <CircleCheck size={20} className="text-foreground-secondary" />,
+      title: t("terms"),
+      value: contractTerm || t("notAvailable"),
+      icon: <Calendar size={20} className="text-foreground-secondary" />,
     },
   ];
 
