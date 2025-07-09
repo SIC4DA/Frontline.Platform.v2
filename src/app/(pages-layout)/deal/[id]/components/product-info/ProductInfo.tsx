@@ -24,7 +24,7 @@ const ProductInfo = ({ deal }: { deal: Deal | null | undefined }) => {
   return (
     <div className="my-60 mb-[650px] max-lg:mb-16">
       <h2 className="text-center text-[45px] text-[#00326B]">{t("productInfo")}</h2>
-      <div className="text-accent mx-auto mt-[102px] w-fit rounded-full bg-gradient-to-b from-[#3BBBF6] from-20% to-[#266DF0] to-95% px-14 py-1.5 capitalize max-lg:mt-20">
+      <div className="text-accent mx-auto mt-[102px] w-fit rounded-full bg-[#3ba3ee] px-14 py-1.5 capitalize max-lg:mt-20">
         {deal?.productName}
       </div>
       <div className="mt-16">

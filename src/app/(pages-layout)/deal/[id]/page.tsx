@@ -32,7 +32,7 @@ export default async function DealPage({ params }: { params: Promise<{ id: strin
   const { user, deal, analytics } = data;
 
   return (
-    <section className="relative min-h-dvh max-w-full overflow-x-hidden overflow-y-clip bg-[#F6FAFF] px-8 py-16 max-md:px-5 max-sm:px-4 max-sm:pb-24">
+    <section className="relative min-h-dvh max-w-full overflow-x-hidden overflow-y-clip bg-[#F6FAFF] px-8 py-16 pb-64 max-md:px-5 max-sm:px-4 max-sm:pb-32">
       <Confetti />
       <Image
         src="/images/deal-summary_hero.svg"

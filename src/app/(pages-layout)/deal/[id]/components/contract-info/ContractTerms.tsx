@@ -16,7 +16,7 @@ const ContractTerms = ({ contractTerm }: { contractTerm: string | undefined | nu
         height={400}
       />
       <div className="mt-5 flex flex-col gap-4">
-        <div className="text-accent mx-auto w-fit rounded-lg bg-gradient-to-b from-[#3BBBF6] from-20% to-[#266DF0] to-95% px-8 py-1.5 text-center text-[15px] max-md:text-sm">
+        <div className="text-accent mx-auto w-fit rounded-lg bg-[#3ba3ee] px-8 py-1.5 text-center text-[15px] max-md:text-sm">
           {t("terms")}
         </div>
         <p className="mt-3 text-center text-4xl text-[#00326B] capitalize max-md:text-2xl">{contractTerm || 0}</p>
