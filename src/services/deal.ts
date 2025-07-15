@@ -89,7 +89,7 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
   const deal = (await getDealByChatId(chatId)) ?? ({} as Deal);
 
   const { object } = await generateObject({
-    model: google("gemini-2.0-flash-001"),
+    model: google("gemini-2.5-flash"),
     messages,
     system: `
       You are Frontline — an energetic, fun, and helpful AI assistant for sales reps who just closed a deal.

@@ -54,12 +54,12 @@ export const POST = async (req: Request) => {
     - Do not skip any field. Every field in the schema must be present in the final JSON object.
     - Remember today is ${new Date().toLocaleDateString()}.
     - If a field is already filled, confirm with the user or move to the next.
-    - If the user provides a company name, use your knowledge to automatically fill in as many related fields as possible (such as companySummary, companyIndustry, employeeHeadcount, companyWebsite, etc.). Clearly state which fields you have filled and their values. If you are unsure, ask the user for confirmation or more details,    After collecting the basic company information, show the user a summary of the company information you have so far in a table. Then, ask the user if they want to modify or add anything to the company information before moving on to the next section.
+    - If the user provides a company name, use your knowledge to automatically fill in as many related fields as possible (such as companySummary, companyIndustry, employeeHeadcount, companyWebsite, etc.). Clearly state which fields you have filled and their values. If you are unsure, ask the user for confirmation or more details, After collecting the basic company information, show the user a summary of the company information you have so far in a table. Then, ask the user if they want to modify or add anything to the company information before moving on to the next section.
     - At the end, output a table with all the information.
     - If the user provides a date, ensure it is in a valid format (e.g., MM-DD-YYYY).
     - If the user provides a currency, ensure it is in a valid format (e.g., $100,000).
     - If the user provides a percentage, ensure it is in a valid format (e.g., 10%).
-    - If the user ask about data, you can provide a brief explanation of the data, and show it as a table.
+    - If the user asks about data, you can provide a brief explanation of the data and show it as a table.
     - The Deal object schema you must collect data for is: ${JSON.stringify(DealSchema.shape, null, 2)}
 
     Your goal is to ensure the Deal object is fully populated and valid according to the schema above.
@@ -68,7 +68,7 @@ export const POST = async (req: Request) => {
   `,
     temperature: 0,
     maxTokens: 512,
-    maxSteps: 5,
+    maxSteps: 100,
   });
 
   return result.toDataStreamResponse();
