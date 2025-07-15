@@ -3,6 +3,7 @@ import { streamText } from "ai";
 
 import { createMessage } from "@/services/chat";
 import { getDealByChatId } from "@/services/deal";
+import logger from "@/services/logger";
 import { getMe } from "@/services/user";
 import { DealSchema } from "@/validations/deal";
 
@@ -14,9 +15,9 @@ export const POST = async (req: Request) => {
   const [user, deal] = await Promise.all([getMe(), getDealByChatId(chatId), createMessage(chatId, messages.at(-1))]);
 
   const result = streamText({
-    model: google("gemini-2.0-flash-001"),
+    model: google("gemini-2.5-flash"),
     messages,
-    onError: (error) => console.dir(error, { depth: null }),
+    onError: ({ error }) => logger.error(String(error), { chatId, userId: user.id }),
     system: `
     You are Frontline — an energetic, fun, and helpful AI assistant built for sales reps who just closed a deal and are ready to document it like a pro.
 
