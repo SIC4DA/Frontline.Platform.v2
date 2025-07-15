@@ -1,7 +1,7 @@
 import { google } from "@ai-sdk/google";
 import { streamText } from "ai";
 
-import { createMessage } from "@/services/chat";
+import { updateChatMessages } from "@/services/chat";
 import { getDealByChatId } from "@/services/deal";
 import logger from "@/services/logger";
 import { getMe } from "@/services/user";
@@ -12,7 +12,9 @@ export const maxDuration = 60;
 export const POST = async (req: Request) => {
   const { chatId, messages } = await req.json();
 
-  const [user, deal] = await Promise.all([getMe(), getDealByChatId(chatId), createMessage(chatId, messages.at(-1))]);
+  console.log("Chat Route", { chatId, messages });
+
+  const [user, deal] = await Promise.all([getMe(), getDealByChatId(chatId), updateChatMessages(chatId, messages)]);
 
   const result = streamText({
     model: google("gemini-2.5-flash"),

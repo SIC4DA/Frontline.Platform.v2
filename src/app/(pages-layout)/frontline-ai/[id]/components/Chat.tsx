@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 
 import useDebounce from "@/hooks/shared/useDebounce";
-import { createMessage, getChat } from "@/services/chat";
+import { getChat, updateChatMessages } from "@/services/chat";
 import { generateDealByAI } from "@/services/deal";
 import type { Chat } from "@/types/chat";
 
@@ -23,14 +23,12 @@ const Chat = ({ chatData }: { chatData: Chat }) => {
     initialMessages: chatData.messages,
     body: { chatId: chatData.id },
     onFinish: async (message) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { id, createdAt, ...messageData } = message;
-      await createMessage(chatData.id, messageData);
-
       const chat = await getChat(chatData.id);
       if (!chat) return;
 
-      await generateDealByAI(chat.id, chat.messages);
+      chat.messages.push(message);
+
+      await Promise.all([updateChatMessages(chatData.id, chat.messages), generateDealByAI(chat.id, chat.messages)]);
     },
   });
   const debouncedMessages = useDebounce(messages, 100);
