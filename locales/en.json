@@ -154,6 +154,12 @@
     "salesCycle": "Sales Cycle",
     "invoice": "Invoice",
     "signup": "Want to Share Your Deals? Sign Up for Frontline",
-    "getStarted": "Get Started"
+    "getStarted": "Get Started",
+    "shareDeal": "Share Deal",
+    "share": "Share",
+    "privateLink": "Private Link",
+    "publicLink": "Public Link",
+    "copyLink": "Copy Link",
+    "copied": "Copied"
   }
 }
