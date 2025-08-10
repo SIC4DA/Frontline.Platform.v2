@@ -8,7 +8,7 @@ import HistoryTimeFrame from "./HistoryTimeFrame";
 const ChatHistory = () => {
   const { isLoading, chatsHistory, error } = useChatHistory();
 
-  if (!chatsHistory || error || !chatsHistory.length) return null;
+  if (!chatsHistory || error || chatsHistory.length < 1) return null;
 
   if (isLoading) return <Skeleton className="h-10 w-full rounded-xl" />;
 

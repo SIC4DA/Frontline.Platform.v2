@@ -24,7 +24,7 @@ function categorizeChats(chats: ChatHistory[]): TimeframeChats[] {
   const result: TimeframeChats[] = [];
 
   // Ensure updatedAt is a Date object
-  const processedChats = chats.map((chat) => ({
+  const processedChats = chats?.map((chat) => ({
     ...chat,
     updatedAt: chat.updatedAt instanceof Date ? chat.updatedAt : new Date(chat.updatedAt),
   }));
@@ -65,7 +65,7 @@ const useChatHistory = () => {
   });
 
   const chatsHistory = useMemo(() => {
-    if (!result.data) return [];
+    if (!result?.data) return [];
     return categorizeChats(result.data || []);
   }, [result.data]);
 
