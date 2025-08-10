@@ -5,13 +5,15 @@ import React from "react";
 
 import type { User as UserType } from "@/types/user";
 
-const Header = async ({ user }: { user: UserType | null }) => {
+import ShareDealModal from "./share-deal/ShareDealModal";
+
+const Header = async ({ user, isShared = false }: { user: UserType | null; isShared?: boolean }) => {
   const t = await getTranslations("deal");
 
   if (!user) return null;
 
   return (
-    <div className="bg-background relative z-[1] mx-auto flex max-w-10/12 items-center justify-between rounded-full px-5 py-4 pr-[30px] max-sm:max-w-full max-sm:px-3">
+    <div className="relative z-[1] mx-auto flex max-w-10/12 items-center justify-between rounded-full bg-gradient-to-b from-[#FFFFFF] to-[#D7E8FF] px-5 py-4 pr-[30px] max-sm:max-w-full max-sm:px-3">
       <div className="flex items-center gap-2">
         <Image
           src={user.image || ""}
@@ -31,7 +33,8 @@ const Header = async ({ user }: { user: UserType | null }) => {
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <p className="text-sm max-md:text-xs">{t("poweredBy")}</p>
+        {!isShared && <ShareDealModal />}
+        <p className="text-sm max-md:text-xs max-sm:hidden">{t("poweredBy")}</p>
         <Image src="/images/logo.webp" alt="Logo" width={38} height={35} />
       </div>
     </div>

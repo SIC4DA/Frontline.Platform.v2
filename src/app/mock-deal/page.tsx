@@ -216,7 +216,7 @@ export default function MockDealPage() {
         height={1080}
         priority
       />
-      <Header user={user} />
+      <Header user={user} isShared />
       <div className="relative z-[1] mx-auto max-w-[1069px]">
         <FadeInView direction="none">
           <DealSummary userCompanyLogo={user?.companyLogo} dealCompanyLogo={deal?.companyLogo} />
