@@ -7,17 +7,13 @@ import logger from "@/services/logger";
 import { getMe } from "@/services/user";
 import { DealSchema } from "@/validations/deal";
 
-export const maxDuration = 60;
-
 export const POST = async (req: Request) => {
   const { chatId, messages } = await req.json();
-
-  console.log("Chat Route", { chatId, messages });
 
   const [user, deal] = await Promise.all([getMe(), getDealByChatId(chatId), updateChatMessages(chatId, messages)]);
 
   const result = streamText({
-    model: google("gemini-2.5-flash"),
+    model: google("gemini-2.5-pro"),
     messages,
     onError: ({ error }) => logger.error(String(error), { chatId, userId: user.id }),
     system: `
@@ -68,8 +64,7 @@ export const POST = async (req: Request) => {
 
     Do not make assumptions or fill in any data yourself unless the user requests your help.
   `,
-    temperature: 0,
-    maxTokens: 512,
+    temperature: 0.1,
     maxSteps: 100,
   });
 

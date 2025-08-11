@@ -4,16 +4,15 @@ import Markdown from "react-markdown";
 
 import type { TMessage } from "@/types/chat";
 
-const generateRandomId = () => Math.random().toString(36).substring(2, 15);
 
 const MessagesList = ({ messages }: { messages: TMessage[] }) => {
   return (
     <div className="mx-auto flex w-full max-w-[1000px] flex-grow flex-col gap-10 overflow-x-hidden pb-18">
-      {messages.map((message) => {
+      {messages.map((message, i) => {
         if (message.role === "user") {
           return (
             <motion.div
-              key={generateRandomId()}
+              key={i.toString()}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.3, delay: 0.1 }}
@@ -23,7 +22,7 @@ const MessagesList = ({ messages }: { messages: TMessage[] }) => {
           );
         } else {
           return (
-            <div key={generateRandomId()} className="grid grid-cols-[auto_1fr] gap-4">
+            <div key={i.toString()} className="grid grid-cols-[auto_1fr] gap-4">
               <div className="flex size-11 items-center justify-center rounded-full bg-black max-md:size-9">
                 <Image
                   src="/images/logo.webp"

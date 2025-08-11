@@ -14,6 +14,7 @@ export const deal = pgTable(
     userId: text("user_id")
       .notNull()
       .references(() => user.id, { onDelete: "cascade" }),
+    privateId: uuid("private_id").defaultRandom().notNull(),
 
     // Company Info
     companyName: text("company_name"),

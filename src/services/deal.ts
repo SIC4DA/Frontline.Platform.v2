@@ -14,14 +14,28 @@ import { DealSchema } from "@/validations/deal";
 
 import { getMe } from "./user";
 
-export const getDeal = async (id: string) => {
+export const getDeal = async (id: string): Promise<Partial<Deal> | null> => {
   const user = await getMe();
 
-  const result = await db.query.deal.findFirst({
-    where: and(eq(deal.id, id), eq(deal.userId, user.id)),
-  });
+  const result = (await db.query.deal.findFirst({
+    where: eq(deal.id, id),
+  })) as Partial<Deal | undefined>;
 
-  return result as Deal | undefined;
+  if (!result) {
+    return null;
+  }
+
+  // Check if the deal id is private or belongs to the user
+  if (result.userId === user.id || result.privateId === id) {
+    return result;
+  }
+
+  // return a limited set of fields for public deals
+  return {
+    id: result.id,
+    companyName: result.companyName,
+    // Add any other fields you want to include
+  };
 };
 
 export const getDealByChatId = async (chatId: string) => {
@@ -89,7 +103,7 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
   const deal = (await getDealByChatId(chatId)) ?? ({} as Deal);
 
   const { object } = await generateObject({
-    model: google("gemini-2.5-flash"),
+    model: google("gemini-2.5-pro"),
     messages,
     system: `
       You are Frontline — an energetic, fun, and helpful AI assistant for sales reps who just closed a deal.
@@ -117,8 +131,7 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
 
       Your goal is to ensure the Deal object is fully populated and valid according to the schema above, while preserving existing data unless explicitly changed by the user. Always require explicit user input for any data changes or additions.
     `,
-    temperature: 0,
-    maxTokens: 512,
+    temperature: 0.1,
     schemaName: "Deal",
     schema: DealSchema,
     schemaDescription: "The data you will be given is about the deal that the sales rep just closed.",
