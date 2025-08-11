@@ -42,6 +42,7 @@ const data: DealWithUserAnalytics = {
     id: "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
     chatId: "098fe7d6-c5b4-a321-0fed-cba987654321",
     userId: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    privateId: "mock-deal-12345",
     companyName: "Accenture",
     companyLogo:
       "https://cdn.brandfetch.io/idGJDqQ72Q/w/128/h/128/fallback/lettermark/icon.webp?c=1ax1749599426641bfumLaCV7mV5yHeWlI",
