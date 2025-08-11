@@ -14,7 +14,7 @@ import { DealSchema } from "@/validations/deal";
 
 import { getMe } from "./user";
 
-export const getDeal = async (id: string): Promise<Partial<Deal> | null> => {
+export const getDeal = async (id: string): Promise<Partial<Deal & { isPublic: boolean }> | null> => {
   const user = await getMe();
 
   const result = (await db.query.deal.findFirst({
@@ -27,7 +27,10 @@ export const getDeal = async (id: string): Promise<Partial<Deal> | null> => {
 
   // Check if the deal id is private or belongs to the user
   if (result.userId === user.id || result.privateId === id) {
-    return result;
+    return {
+      ...result,
+      isPublic: false,
+    };
   }
 
   // return a limited set of fields for public deals
@@ -35,6 +38,7 @@ export const getDeal = async (id: string): Promise<Partial<Deal> | null> => {
     id: result.id,
     companyName: result.companyName,
     // Add any other fields you want to include
+    isPublic: true,
   };
 };
 
@@ -47,6 +51,7 @@ export const getDealByChatId = async (chatId: string) => {
       id: false,
       chatId: false,
       userId: false,
+      privateId: false,
     },
   });
 
@@ -57,6 +62,9 @@ export const getDeals = async ({ limit }: { limit?: number } = {}) => {
   const user = await getMe();
 
   const result = await db.query.deal.findMany({
+    columns: {
+      privateId: false,
+    },
     where: eq(deal.userId, user.id),
     ...(limit && { limit }),
   });
@@ -75,7 +83,7 @@ export const createDeal = async (chatId: string) => {
 export const updateDeal = async (id: string, data: Partial<Omit<typeof deal.$inferInsert, "id" | "userId">>) => {
   const user = await getMe();
 
-  return db
+  await db
     .update(deal)
     .set(data)
     .where(and(eq(deal.id, id), eq(deal.userId, user.id)));
@@ -87,7 +95,7 @@ export const updateDealByChatId = async (
 ) => {
   const user = await getMe();
 
-  return db
+  await db
     .update(deal)
     .set(data)
     .where(and(eq(deal.chatId, chatId), eq(deal.userId, user.id)));

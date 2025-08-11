@@ -40,7 +40,7 @@ export const createChat = async () => {
 export const updateChatMessages = async (id: string, messages: TMessage[]) => {
   const user = await getMe();
 
-  return db
+  await db
     .update(chat)
     .set({ messages })
     .where(and(eq(chat.id, id), eq(chat.userId, user.id)));
