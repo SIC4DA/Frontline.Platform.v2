@@ -3,6 +3,7 @@ import { APIError } from "better-auth/api";
 
 import env from "@/config/env";
 import { redisClient } from "@/config/redis";
+import { sendEmail } from "@/services/mailer";
 import { validateCompanyEmail } from "@/validations/email";
 
 import { mapOAuthProfile } from "../utils";
@@ -12,6 +13,14 @@ export const emailAndPasswordOptions: BetterAuthOptions["emailAndPassword"] = {
   autoSignIn: true,
   requireEmailVerification: true,
   minPasswordLength: 8,
+  sendResetPassword: async ({ user, url, token }) => {
+    await sendEmail("resetPassword", {
+      to: user.email,
+      name: user.name || "",
+      url: ` ${url}?token=${token}`,
+    });
+  },
+  resetPasswordTokenExpiresIn: 60 * 60, // 1 hour,
 };
 
 export const userOptions: BetterAuthOptions["user"] = {
