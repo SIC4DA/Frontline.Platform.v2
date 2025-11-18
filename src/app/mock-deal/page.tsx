@@ -1,18 +1,32 @@
 import Image from "next/image";
 import React from "react";
+import dynamic from "next/dynamic";
 
-import Confetti from "@/components/shared/Confetti";
-import FadeInView from "@/components/shared/FadeInView";
+// import Confetti from "@/components/shared/Confetti";
+// import FadeInView from "@/components/shared/FadeInView";
+
+const FadeInView = dynamic(() => import("@/components/shared/FadeInView"));
+const Confetti = dynamic(() => import("@/components/shared/Confetti"));
 import { getDealWithUserAnalytics } from "@/services/deal";
 
-import DealSummary from "../(pages-layout)/deal/[id]/components/DealSummary";
-import Header from "../(pages-layout)/deal/[id]/components/Header";
-import SignupCard from "../(pages-layout)/deal/[id]/components/SignupCard";
-import ContractInfo from "../(pages-layout)/deal/[id]/components/contract-info/ContractInfo";
-import ProductInfo from "../(pages-layout)/deal/[id]/components/product-info/ProductInfo";
-import SalesProcessInfo from "../(pages-layout)/deal/[id]/components/sales-process-info/SalesProcessInfo";
-import UserCard from "../(pages-layout)/deal/[id]/components/user-card/UserCard";
-import UserCardWrapper from "../(pages-layout)/deal/[id]/components/user-card/UserCardWrapper";
+// import DealSummary from "../(pages-layout)/deal/[id]/components/DealSummary";
+// import Header from "../(pages-layout)/deal/[id]/components/Header";
+// import SignupCard from "../(pages-layout)/deal/[id]/components/SignupCard";
+// import ContractInfo from "../(pages-layout)/deal/[id]/components/contract-info/ContractInfo";
+// import ProductInfo from "../(pages-layout)/deal/[id]/components/product-info/ProductInfo";
+// import SalesProcessInfo from "../(pages-layout)/deal/[id]/components/sales-process-info/SalesProcessInfo";
+// import UserCard from "../(pages-layout)/deal/[id]/components/user-card/UserCard";
+// import UserCardWrapper from "../(pages-layout)/deal/[id]/components/user-card/UserCardWrapper";
+
+const DealSummary = dynamic(() => import("../(pages-layout)/deal/[id]/components/DealSummary"));
+const Header = dynamic(() => import("../(pages-layout)/deal/[id]/components/Header"));
+const SignupCard = dynamic(() => import("../(pages-layout)/deal/[id]/components/SignupCard"));
+const ContractInfo = dynamic(() => import("../(pages-layout)/deal/[id]/components/contract-info/ContractInfo"));
+const ProductInfo = dynamic(() => import("../(pages-layout)/deal/[id]/components/product-info/ProductInfo"));
+const SalesProcessInfo = dynamic(() => import("../(pages-layout)/deal/[id]/components/sales-process-info/SalesProcessInfo"));
+const UserCard = dynamic(() => import("../(pages-layout)/deal/[id]/components/user-card/UserCard"));
+const UserCardWrapper = dynamic(() => import("../(pages-layout)/deal/[id]/components/user-card/UserCardWrapper"));
+
 
 type DealWithUserAnalytics = Awaited<ReturnType<typeof getDealWithUserAnalytics>>;
 

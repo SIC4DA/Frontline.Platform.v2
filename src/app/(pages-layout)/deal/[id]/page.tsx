@@ -2,20 +2,33 @@
 import Image from "next/image";
 import React from "react";
 
-import Confetti from "@/components/shared/Confetti";
-import FadeInView from "@/components/shared/FadeInView";
+import dynamic from "next/dynamic";
+// import Confetti from "@/components/shared/Confetti";
+// import FadeInView from "@/components/shared/FadeInView";
+const Confetti = dynamic(() => import("@/components/shared/Confetti"));
+const FadeInView = dynamic(() => import("@/components/shared/FadeInView"));
+
 import RequestError from "@/components/shared/RequestError";
 import { getDealWithUserAnalytics } from "@/services/deal";
 import { tryCatch } from "@/utils/tryCatch";
 
-import DealSummary from "./components/DealSummary";
-import Header from "./components/Header";
-import SignupCard from "./components/SignupCard";
-import ContractInfo from "./components/contract-info/ContractInfo";
-import ProductInfo from "./components/product-info/ProductInfo";
-import SalesProcessInfo from "./components/sales-process-info/SalesProcessInfo";
-import UserCard from "./components/user-card/UserCard";
-import UserCardWrapper from "./components/user-card/UserCardWrapper";
+// import DealSummary from "./components/DealSummary";
+// import Header from "./components/Header";
+// import SignupCard from "./components/SignupCard";
+// import ContractInfo from "./components/contract-info/ContractInfo";
+// import ProductInfo from "./components/product-info/ProductInfo";
+// import SalesProcessInfo from "./components/sales-process-info/SalesProcessInfo";
+// import UserCard from "./components/user-card/UserCard";
+// import UserCardWrapper from "./components/user-card/UserCardWrapper";
+
+const DealSummary = dynamic(() => import("./components/DealSummary"));
+const Header = dynamic(() => import("./components/Header"));
+const SignupCard = dynamic(() => import("./components/SignupCard"));
+const ContractInfo = dynamic(() => import("./components/contract-info/ContractInfo"));
+const ProductInfo = dynamic(() => import("./components/product-info/ProductInfo"));
+const SalesProcessInfo = dynamic(() => import("./components/sales-process-info/SalesProcessInfo"));
+const UserCard = dynamic(() => import("./components/user-card/UserCard"));
+const UserCardWrapper = dynamic(() => import("./components/user-card/UserCardWrapper"));
 
 export default async function DealPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
