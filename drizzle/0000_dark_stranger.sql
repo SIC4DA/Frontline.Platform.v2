@@ -1,6 +1,6 @@
 -- Current sql file was generated after introspecting the database
 -- If you want to run this migration please uncomment this code before executing migrations
-/*
+
 CREATE TABLE "verification" (
 	"id" text PRIMARY KEY NOT NULL,
 	"identifier" text NOT NULL,
@@ -104,4 +104,3 @@ CREATE INDEX "chat_id_idx" ON "message" USING btree ("chat_id" uuid_ops);--> sta
 CREATE INDEX "deal_chat_id_idx" ON "deal" USING btree ("chat_id" uuid_ops);--> statement-breakpoint
 CREATE INDEX "deal_company_name_idx" ON "deal" USING btree ("company_name" text_ops);--> statement-breakpoint
 CREATE INDEX "deal_user_id_idx" ON "deal" USING btree ("user_id" text_ops);
-*/
