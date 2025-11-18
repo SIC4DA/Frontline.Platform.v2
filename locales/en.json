@@ -57,7 +57,23 @@
     "settingUp": "Setting up",
     "jobTitle": "Job Title",
     "jobTitlePlaceholder": "Enter your job title",
-    "jobTitleRequired": "Job title is required"
+    "jobTitleRequired": "Job title is required",
+    "forgotPassword": "Forgot password",
+    "forgotPasswordDescription": "Enter your work email and we'll send you a reset link.",
+    "sendResetLink": "Send reset link",
+    "sendingResetLink": "Sending reset link",
+    "backToLogin": "Back to login",
+    "forgotPasswordLink": "Forgot password?",
+    "resetPassword": "Reset password",
+    "resetPasswordDescription": "Create a new password to access your account.",
+    "newPasswordPlaceholder": "Enter your new password",
+    "confirmPasswordPlaceholder": "Confirm your password",
+    "confirmPasswordRequired": "Please confirm your password",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "resetPasswordButton": "Reset password",
+    "resettingPassword": "Resetting password",
+    "resetTokenMissing": "Reset token is missing or invalid. Please request a new link.",
+    "resetTokenInvalid": "Your reset link has expired or is invalid. Please request a new one."
   },
   "sidebar": {
     "home": "Home",
@@ -96,7 +112,9 @@
     "notAvailable": "N/A",
     "noSales": "No sales",
     "product": "Product",
-    "terms": "Terms"
+    "terms": "Terms",
+    "update": "Update",
+    "updating": "Updating"
   },
   "frontlineAi": {
     "newChat": "New chat",

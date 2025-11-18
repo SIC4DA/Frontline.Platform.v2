@@ -1,6 +1,7 @@
 "use client";
 
 import { KeyRound, LoaderCircle, Mail } from "lucide-react";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useActionState } from "react";
 
@@ -47,6 +48,11 @@ function LoginForm() {
             className={cn("h-10 text-sm", state.errors?.password && "border-error")}
           />
           {state.errors?.password && <p className="text-error mt-1 text-sm">{state.errors.password[0]}</p>}
+        </div>
+        <div className="flex justify-end">
+          <Link className="text-primary text-sm underline" href="/forgot-password">
+            {t("forgotPasswordLink")}
+          </Link>
         </div>
       </div>
 
