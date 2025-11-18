@@ -8,6 +8,13 @@
       "when": 1748007980250,
       "tag": "0000_dark_stranger",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1763482937377,
+      "tag": "0001_curved_hellcat",
+      "breakpoints": true
     }
   ]
 }

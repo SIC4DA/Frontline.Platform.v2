@@ -20,5 +20,9 @@
     "typeschema",
     "Usecases"
   ],
-  "typescript.tsdk": "node_modules\\typescript\\lib"
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "debug.javascript.defaultRuntimeExecutable": {
+    "pwa-node": "c:\\users\\notebook\\appdata\\local\\mise\\shims\\node"
+  },
+  "python.defaultInterpreterPath": "C:\\Users\\NoteBook\\AppData\\Local\\mise\\installs\\python\\3.14.0\\python.exe"
 }
