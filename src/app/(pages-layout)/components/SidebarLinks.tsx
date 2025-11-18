@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import House from "../../../../public/icons/House";
 import MagicPen from "../../../../public/icons/MagicPen";
 import Setting from "../../../../public/icons/Setting";
-import Star from "../../../../public/icons/Star";
+// import Star from "../../../../public/icons/Star";
 
 const links = [
   {
@@ -24,11 +24,11 @@ const links = [
     href: "/frontline-ai",
     icon: <MagicPen />,
   },
-  {
-    label: "leaderboardAndBadges",
-    href: "/leaderboard-and-badges",
-    icon: <Star />,
-  },
+  // {
+  //   label: "leaderboardAndBadges",
+  //   href: "/leaderboard-and-badges",
+  //   icon: <Star />,
+  // },
   {
     label: "settings",
     href: "/settings",
