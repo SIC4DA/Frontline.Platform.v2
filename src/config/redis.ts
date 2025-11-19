@@ -60,7 +60,4 @@ const connectToRedis = async () => {
   }
 };
 
-// Only connect if not in a serverless environment where connect-on-demand is better.
-if (process.env.VERCEL_ENV === undefined) {
-  connectToRedis();
-}
+connectToRedis();
