@@ -1,6 +1,11 @@
 import CompanyEmailValidator from "company-email-validator";
 
-const ALLOWED_EMAILS = ["technozone019@gmail.com", "voka5050@gmail.com", "abdelsalammohamed31@outlook.com"];
+const ALLOWED_EMAILS = [
+  "technozone019@gmail.com",
+  "voka5050@gmail.com",
+  "abdelsalammohamed31@outlook.com",
+  "dhyon06@gmail.com",
+];
 
 export const validateCompanyEmail = (email: string): boolean => {
   if (ALLOWED_EMAILS.includes(email)) {
