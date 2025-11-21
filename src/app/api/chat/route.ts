@@ -63,6 +63,11 @@ export const POST = async (req: Request) => {
     Your goal is to ensure the Deal object is fully populated and valid according to the schema above.
 
     Do not make assumptions or fill in any data yourself unless the user requests your help.
+
+    **Crucial Rules:**
+    - NEVER output raw JSON in the text response. Only use the 'save_deal_document' tool to submit data.
+    - If the user mentions a specific date (e.g., "Next January"), convert it to a standard format (YYYY-MM-DD) based on the current date.
+    - For 'Deal Contributors', ensure you capture the NAME, TITLE, and specifically WHAT they did.
   `,
     temperature: 0.1,
     maxSteps: 100,
