@@ -19,11 +19,12 @@ export default async function middleware(request: NextRequest): Promise<NextResp
 
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const cspHeader = `
-    default-src 'self';
-    script-src 'self' 'unsafe-eval' 'nonce-${nonce}';
+    default-src 'none';
+    script-src 'self' 'nonce-${nonce}';
     style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data: https://res.cloudinary.com https://lh3.googleusercontent.com https://media.licdn.com https://cdn.brandfetch.io;
     font-src 'self';
+    connect-src 'self';
     object-src 'none';
     base-uri 'self';
     form-action 'self';
