@@ -21,7 +21,7 @@ export default async function middleware(request: NextRequest): Promise<NextResp
   const cspHeader = `
     default-src 'none';
     script-src 'self' 'nonce-${nonce}';
-    style-src 'self' 'unsafe-inline';
+    style-src 'self' 'nonce-${nonce}';
     img-src 'self' blob: data: https://res.cloudinary.com https://lh3.googleusercontent.com https://media.licdn.com https://cdn.brandfetch.io;
     font-src 'self';
     connect-src 'self';
