@@ -9,7 +9,7 @@ import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle, DialogTr
 
 import CopyLinkButton from "./CopyLinkButton";
 
-const ShareDealModal = () => {
+const ShareDealModal = ({ privateId }: { privateId?: string }) => {
   const t = useTranslations("deal");
   const { id } = useParams();
 
@@ -39,8 +39,8 @@ const ShareDealModal = () => {
           <div>
             <p className="text-foreground-secondary mb-2 text-sm">{t("privateLink")}</p>
             <div className="border-border flex items-center justify-between gap-2 overflow-hidden rounded-lg border-2 px-4 py-2 max-sm:flex-col">
-              <p className="max-w-[300px] overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap max-sm:max-w-[220px]">{`${appUrl}/deal/${id}`}</p>
-              <CopyLinkButton link={`${appUrl}/deal/${id}`} />
+              <p className="max-w-[300px] overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap max-sm:max-w-[220px]">{`${appUrl}/deal/${privateId}`}</p>
+              <CopyLinkButton link={`${appUrl}/deal/${privateId}`} />
             </div>
           </div>
           <div>

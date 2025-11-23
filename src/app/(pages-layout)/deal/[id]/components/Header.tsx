@@ -6,11 +6,16 @@ import React from "react";
 import type { User as UserType } from "@/types/user";
 
 import ShareDealModal from "./share-deal/ShareDealModal";
+import { tryCatch } from "@/utils/tryCatch";
+import { getMe } from "@/services/user";
 
-const Header = async ({ user, isShared = false }: { user: UserType | null; isShared?: boolean }) => {
+const Header = async ({ user, privateId, isShared = false }: { user: UserType | null; privateId?: string; isShared?: boolean }) => {
   const t = await getTranslations("deal");
+  const { data, error } = await tryCatch(getMe());
 
   if (!user) return null;
+
+  const isOwner = !error && data.id === user.id;
 
   return (
     <div className="relative z-[1] mx-auto flex max-w-10/12 items-center justify-between rounded-full bg-gradient-to-b from-[#FFFFFF] to-[#D7E8FF] px-5 py-4 pr-[30px] max-sm:max-w-full max-sm:px-3">
@@ -33,7 +38,7 @@ const Header = async ({ user, isShared = false }: { user: UserType | null; isSha
         </div>
       </div>
       <div className="flex items-center gap-2">
-        {!isShared && <ShareDealModal />}
+        {!isShared && isOwner && <ShareDealModal privateId={privateId} />}
         <p className="text-sm max-md:text-xs max-sm:hidden">{t("poweredBy")}</p>
         <Image src="/images/logo.webp" alt="Logo" width={38} height={35} />
       </div>
