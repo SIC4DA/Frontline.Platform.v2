@@ -2,7 +2,7 @@
 
 import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
-import { and, eq, ilike } from "drizzle-orm";
+import { and, eq, ilike, or } from "drizzle-orm";
 
 import { db } from "@/core/db";
 import { deal } from "@/core/db/schema";
@@ -18,7 +18,7 @@ export const getDeal = async (id: string): Promise<Partial<Deal & { isPublic: bo
   const user = await getMe();
 
   const result = (await db.query.deal.findFirst({
-    where: eq(deal.id, id),
+    where: or(eq(deal.id, id), eq(deal.privateId, id)),
   })) as Partial<Deal | undefined>;
 
   if (!result) {
