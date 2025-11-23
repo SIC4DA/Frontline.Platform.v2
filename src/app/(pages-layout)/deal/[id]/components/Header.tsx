@@ -9,7 +9,7 @@ import ShareDealModal from "./share-deal/ShareDealModal";
 import { tryCatch } from "@/utils/tryCatch";
 import { getMe } from "@/services/user";
 
-const Header = async ({ user, isShared = false }: { user: UserType | null; isShared?: boolean }) => {
+const Header = async ({ user, privateId, isShared = false }: { user: UserType | null; privateId?: string; isShared?: boolean }) => {
   const t = await getTranslations("deal");
   const { data, error } = await tryCatch(getMe());
 
@@ -38,7 +38,7 @@ const Header = async ({ user, isShared = false }: { user: UserType | null; isSha
         </div>
       </div>
       <div className="flex items-center gap-2">
-        {!isShared && isOwner && <ShareDealModal />}
+        {!isShared && isOwner && <ShareDealModal privateId={privateId} />}
         <p className="text-sm max-md:text-xs max-sm:hidden">{t("poweredBy")}</p>
         <Image src="/images/logo.webp" alt="Logo" width={38} height={35} />
       </div>
