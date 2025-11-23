@@ -28,7 +28,11 @@ const Chat = ({ chatData }: { chatData: Chat }) => {
 
       chat.messages.push(message);
 
-      await Promise.all([updateChatMessages(chatData.id, chat.messages), generateDealByAI(chat.id, chat.messages)]);
+      try {
+        await Promise.all([updateChatMessages(chatData.id, chat.messages), generateDealByAI(chat.id, chat.messages)]);
+      } catch (error) {
+        console.error("Error generating deal by AI:", error);
+      }
     },
   });
   const debouncedMessages = useDebounce(messages, 100);
@@ -89,3 +93,4 @@ const Chat = ({ chatData }: { chatData: Chat }) => {
 };
 
 export default Chat;
+

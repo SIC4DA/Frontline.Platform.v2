@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import type { User } from "@/types/user";
 
-import { EditUserState } from "../../actions/editUser";
+import type { EditUserState } from "../actions/editUser";
 
 const EditUserFields = ({ user, state }: { user: User; state: EditUserState }) => {
   const t = useTranslations("home");
@@ -76,3 +76,4 @@ const EditUserFields = ({ user, state }: { user: User; state: EditUserState }) =
 };
 
 export default EditUserFields;
+
