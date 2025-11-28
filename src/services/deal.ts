@@ -113,6 +113,7 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
   const { object } = await generateObject({
     model: openai("gpt-4o-mini"),
     messages,
+    maxRetries: 5,
     system: `
       You are Frontline — an energetic, fun, and helpful AI assistant for sales reps who just closed a deal.
 

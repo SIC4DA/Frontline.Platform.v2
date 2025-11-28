@@ -15,6 +15,7 @@ export const POST = async (req: Request) => {
   const result = streamText({
     model: openai("gpt-4o-mini"),
     messages,
+    maxRetries: 5,
     onError: ({ error }) => logger.error(String(error), { chatId, userId: user.id }),
     system: `
     You are Frontline — an energetic, fun, and helpful AI assistant built for sales reps who just closed a deal and are ready to document it like a pro.
