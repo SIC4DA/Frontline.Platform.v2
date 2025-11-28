@@ -1,6 +1,6 @@
 "use server";
 
-import { google } from "@ai-sdk/google";
+import { openai } from "@ai-sdk/openai";
 import { generateObject } from "ai";
 import { and, eq, ilike, or } from "drizzle-orm";
 
@@ -111,7 +111,7 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
   const deal = (await getDealByChatId(chatId)) ?? ({} as Deal);
 
   const { object } = await generateObject({
-    model: google("gemini-2.5-flash"),
+    model: openai("gpt-4o-mini"),
     messages,
     system: `
       You are Frontline — an energetic, fun, and helpful AI assistant for sales reps who just closed a deal.
@@ -144,8 +144,6 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
     schema: DealSchema,
     schemaDescription: "The data you will be given is about the deal that the sales rep just closed.",
   });
-
-  console.log({ deal, object });
 
   if (!Object.keys(deal).length && object?.companyName) {
     const createdDeal = await createDeal(chatId);

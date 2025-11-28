@@ -1,4 +1,4 @@
-import { google } from "@ai-sdk/google";
+import { openai } from "@ai-sdk/openai";
 import { streamText } from "ai";
 
 import { updateChatMessages } from "@/services/chat";
@@ -13,7 +13,7 @@ export const POST = async (req: Request) => {
   const [user, deal] = await Promise.all([getMe(), getDealByChatId(chatId), updateChatMessages(chatId, messages)]);
 
   const result = streamText({
-    model: google("gemini-2.5-flash"),
+    model: openai("gpt-4o-mini"),
     messages,
     onError: ({ error }) => logger.error(String(error), { chatId, userId: user.id }),
     system: `
@@ -53,6 +53,7 @@ export const POST = async (req: Request) => {
     - Remember today is ${new Date().toLocaleDateString()}.
     - If a field is already filled, confirm with the user or move to the next.
     - If the user provides a company name, use your knowledge to automatically fill in as many related fields as possible (such as companySummary, companyIndustry, employeeHeadcount, companyWebsite, etc.). Clearly state which fields you have filled and their values. If you are unsure, ask the user for confirmation or more details, After collecting the basic company information, show the user a summary of the company information you have so far in a table. Then, ask the user if they want to modify or add anything to the company information before moving on to the next section.
+    - When the user provides a company name, IMMEDIATELY use your internal knowledge to research and populate ALL possible fields related to that company (industry, summary, headcount, website, etc.) BEFORE asking the user for them. Present the found data to the user for confirmation.
     - At the end, output a table with all the information.
     - If the user provides a date, ensure it is in a valid format (e.g., MM-DD-YYYY).
     - If the user provides a currency, ensure it is in a valid format (e.g., $100,000).
