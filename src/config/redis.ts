@@ -50,14 +50,7 @@ const connectToRedis = async () => {
     return;
   }
 
-  try {
-    await redisClient.connect();
-  } catch (error) {
-    logger.error("Could not connect to Redis", {
-      service: "redis-server",
-      error,
-    });
-  }
+  await redisClient.connect();
 };
 
 connectToRedis();
