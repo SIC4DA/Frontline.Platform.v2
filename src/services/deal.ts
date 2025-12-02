@@ -6,6 +6,7 @@ import { and, eq, ilike, or } from "drizzle-orm";
 import { db } from "@/core/db";
 import { deal } from "@/core/db/schema";
 import { xai } from "@/lib/ai";
+import { uploadImageFromUrl } from "@/services/cloudnary";
 import type { TMessage } from "@/types/chat";
 import type { Deal } from "@/types/deal";
 import { getBrand } from "@/utils/brand";
@@ -111,8 +112,8 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
   const deal = (await getDealByChatId(chatId)) ?? ({} as Deal);
 
   const { object } = await generateObject({
-    model: xai("grok-4-0709"),
-    messages,
+    model: xai("grok-3-latest"),
+    messages: messages,
     maxRetries: 5,
     system: `
       You are Frontline — an energetic, fun, and helpful AI assistant for sales reps who just closed a deal.
@@ -155,7 +156,8 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
     const { data: brand, error } = await tryCatch(getBrand(object?.companyName));
 
     if (brand && !error) {
-      Object.assign(object, { companyLogo: brand.icon });
+      const { secure_url } = await uploadImageFromUrl(brand.icon, { folder: "deals" });
+      Object.assign(object, { companyLogo: secure_url });
     }
   }
 

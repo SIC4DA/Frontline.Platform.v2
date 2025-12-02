@@ -4,10 +4,9 @@ import Markdown from "react-markdown";
 
 import type { TMessage } from "@/types/chat";
 
-
 const MessagesList = ({ messages }: { messages: TMessage[] }) => {
   return (
-    <div className="mx-auto flex w-full max-w-[1000px] flex-grow flex-col gap-10 overflow-x-hidden pb-18">
+    <div className="mx-auto flex w-full max-w-[1000px] grow flex-col gap-10 overflow-x-hidden pb-18">
       {messages.map((message, i) => {
         if (message.role === "user") {
           return (

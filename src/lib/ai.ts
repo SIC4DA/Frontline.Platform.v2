@@ -1,8 +1,13 @@
 import { createOpenAI } from "@ai-sdk/openai";
+import { createXai } from "@ai-sdk/xai";
 
-export const xai = createOpenAI({
-  name: "xai",
-  baseURL: "https://api.x.ai/v1",
-  apiKey: process.env.XAI_API_KEY,
+import env from "@/config/env";
+
+export const xai = createXai({
+  apiKey: env.XAI_API_KEY,
+});
+
+export const openai = createOpenAI({
+  apiKey: env.OPENAI_API_KEY,
 });
 
