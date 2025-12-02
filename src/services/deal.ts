@@ -112,9 +112,8 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
   const deal = (await getDealByChatId(chatId)) ?? ({} as Deal);
 
   const { object } = await generateObject({
-    model: xai("grok-3-latest"),
-    messages: messages,
-    maxRetries: 5,
+    model: xai("grok-2-latest"),
+    messages,
     system: `
       You are Frontline — an energetic, fun, and helpful AI assistant for sales reps who just closed a deal.
 
@@ -149,6 +148,7 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
 
   if (!Object.keys(deal).length && object?.companyName) {
     const createdDeal = await createDeal(chatId);
+
     Object.assign(deal, createdDeal);
   }
 
