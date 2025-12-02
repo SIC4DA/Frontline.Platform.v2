@@ -1,11 +1,11 @@
 "use server";
 
-import { openai } from "@ai-sdk/openai";
 import { generateObject } from "ai";
 import { and, eq, ilike, or } from "drizzle-orm";
 
 import { db } from "@/core/db";
 import { deal } from "@/core/db/schema";
+import { xai } from "@/lib/ai";
 import type { TMessage } from "@/types/chat";
 import type { Deal } from "@/types/deal";
 import { getBrand } from "@/utils/brand";
@@ -111,7 +111,7 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
   const deal = (await getDealByChatId(chatId)) ?? ({} as Deal);
 
   const { object } = await generateObject({
-    model: openai("gpt-4o-mini"),
+    model: xai("grok-4-0709"),
     messages,
     maxRetries: 5,
     system: `

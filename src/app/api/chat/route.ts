@@ -1,6 +1,6 @@
-import { openai } from "@ai-sdk/openai";
 import { streamText } from "ai";
 
+import { xai } from "@/lib/ai";
 import { updateChatMessages } from "@/services/chat";
 import { getDealByChatId } from "@/services/deal";
 import logger from "@/services/logger";
@@ -13,7 +13,7 @@ export const POST = async (req: Request) => {
   const [user, deal] = await Promise.all([getMe(), getDealByChatId(chatId), updateChatMessages(chatId, messages)]);
 
   const result = streamText({
-    model: openai("gpt-4o-mini"),
+    model: xai("grok-4-0709"),
     messages,
     maxRetries: 5,
     onError: ({ error }) => logger.error(String(error), { chatId, userId: user.id }),
