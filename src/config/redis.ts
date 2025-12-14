@@ -4,7 +4,6 @@ import env from "@/config/env";
 import logger from "@/services/logger";
 
 declare global {
-  // eslint-disable-next-line no-var
   var redisClient: RedisClientType | undefined;
 }
 
@@ -50,14 +49,7 @@ const connectToRedis = async () => {
     return;
   }
 
-  try {
-    await redisClient.connect();
-  } catch (error) {
-    logger.error("Could not connect to Redis", {
-      service: "redis-server",
-      error,
-    });
-  }
+  await redisClient.connect();
 };
 
 connectToRedis();

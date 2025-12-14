@@ -1,11 +1,12 @@
 "use server";
 
-import { google } from "@ai-sdk/google";
 import { generateObject } from "ai";
-import { and, eq, ilike } from "drizzle-orm";
+import { and, eq, ilike, or } from "drizzle-orm";
 
 import { db } from "@/core/db";
 import { deal } from "@/core/db/schema";
+import { xai } from "@/lib/ai";
+import { uploadImageFromUrl } from "@/services/cloudnary";
 import type { TMessage } from "@/types/chat";
 import type { Deal } from "@/types/deal";
 import { getBrand } from "@/utils/brand";
@@ -18,7 +19,7 @@ export const getDeal = async (id: string): Promise<Partial<Deal & { isPublic: bo
   const user = await getMe();
 
   const result = (await db.query.deal.findFirst({
-    where: eq(deal.id, id),
+    where: or(eq(deal.id, id), eq(deal.privateId, id)),
   })) as Partial<Deal | undefined>;
 
   if (!result) {
@@ -111,7 +112,7 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
   const deal = (await getDealByChatId(chatId)) ?? ({} as Deal);
 
   const { object } = await generateObject({
-    model: google("gemini-2.5-flash"),
+    model: xai("grok-2-latest"),
     messages,
     system: `
       You are Frontline — an energetic, fun, and helpful AI assistant for sales reps who just closed a deal.
@@ -145,10 +146,9 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
     schemaDescription: "The data you will be given is about the deal that the sales rep just closed.",
   });
 
-  console.log({ deal, object });
-
   if (!Object.keys(deal).length && object?.companyName) {
     const createdDeal = await createDeal(chatId);
+
     Object.assign(deal, createdDeal);
   }
 
@@ -156,7 +156,8 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
     const { data: brand, error } = await tryCatch(getBrand(object?.companyName));
 
     if (brand && !error) {
-      Object.assign(object, { companyLogo: brand.icon });
+      const { secure_url } = await uploadImageFromUrl(brand.icon, { folder: "deals" });
+      Object.assign(object, { companyLogo: secure_url });
     }
   }
 

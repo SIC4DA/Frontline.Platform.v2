@@ -29,6 +29,23 @@ export const uploadFile = async (file: File, options: { folder: string }) => {
   return uploadedResponse;
 };
 
+export const uploadImageFromUrl = async (url: string, options: { folder: string }) => {
+  const uploadedResponse = await cloudinary.uploader.upload(url, {
+    folder: options.folder,
+    resource_type: "auto",
+    format: "jpg",
+    transformation: {
+      fetch_format: "auto",
+      quality: "auto",
+      width: 500,
+      height: 500,
+      crop: "limit",
+    },
+  });
+
+  return uploadedResponse;
+};
+
 export const deleteFile = async (publicId: string) => {
   const deletedResponse = await cloudinary.uploader.destroy(publicId);
   return deletedResponse;

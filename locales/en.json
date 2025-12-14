@@ -125,7 +125,8 @@
     "enterYourMessage": "Enter your message",
     "stopListening": "Stop listening",
     "startListening": "Start listening",
-    "toggleListening": "Toggle listening"
+    "toggleListening": "Toggle listening",
+    "error": "Error"
   },
   "leaderboard": {
     "closedDeals": "Closed Deals",
@@ -181,3 +182,4 @@
     "copied": "Copied"
   }
 }
+

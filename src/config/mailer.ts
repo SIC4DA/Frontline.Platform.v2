@@ -3,8 +3,13 @@ import nodemailer from "nodemailer";
 import env from "@/config/env";
 
 const transporter = nodemailer.createTransport({
-  url: env.SMTP_URL,
-  secure: true,
+  host: env.SMTP_HOST,
+  port: Number(env.SMTP_PORT),
+  secure: env.SMTP_SECURE === "true",
+  auth: {
+    user: env.SMTP_USER,
+    pass: env.SMTP_PASSWORD,
+  },
 });
 
 export default transporter;

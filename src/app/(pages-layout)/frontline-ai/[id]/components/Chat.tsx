@@ -24,6 +24,7 @@ const Chat = ({ chatData }: { chatData: Chat }) => {
     body: { chatId: chatData.id },
     onFinish: async (message) => {
       const chat = await getChat(chatData.id);
+
       if (!chat) return;
 
       chat.messages.push(message);
