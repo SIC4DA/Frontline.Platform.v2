@@ -1,9 +1,10 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import Markdown from "react-markdown";
+import rehypeHighlight from "rehype-highlight";
+import remarkGfm from "remark-gfm";
 
 import type { TMessage } from "@/types/chat";
-
 
 const MessagesList = ({ messages }: { messages: TMessage[] }) => {
   return (
@@ -37,7 +38,9 @@ const MessagesList = ({ messages }: { messages: TMessage[] }) => {
                 animate={{ opacity: 1, filter: "blur(0px)" }}
                 transition={{ duration: 0.3 }}
                 className="text-foreground markdown-wrapper mt-2 max-md:text-sm">
-                <Markdown>{message.content}</Markdown>
+                <Markdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
+                  {message.content}
+                </Markdown>
               </motion.div>
             </div>
           );
