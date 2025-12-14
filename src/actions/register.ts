@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { auth } from "@/lib/auth";
-import { uploadFile } from "@/services/cloudnary";
+import { uploadFile, uploadImageFromUrl } from "@/services/cloudnary";
 import { tryCatch } from "@/utils/tryCatch";
 
 // Define the return type for the register action
@@ -104,6 +104,18 @@ export async function registerAction(prevState: RegisterActionState, formData: F
     }
 
     imageUrl = data?.secure_url;
+  }
+
+  if (companyLogo) {
+    const { error: logoError } = await tryCatch(uploadImageFromUrl(companyLogo, { folder: "users" }));
+    if (logoError) {
+      return {
+        status: "error",
+        errors: {
+          form: [logoError.message],
+        },
+      };
+    }
   }
 
   const { error } = await tryCatch(
