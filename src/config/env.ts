@@ -15,7 +15,7 @@ const env = createEnv({
     SMTP_USER: z.string().min(1),
     SMTP_PASSWORD: z.string().min(1),
     SMTP_SECURE: z.enum(["true", "false"]).optional(),
-    SMTP_FROM: z.string().email(),
+    SMTP_FROM: z.string(),
     REDIS_URL: z.string().url(),
     LINKEDIN_CLIENT_ID: z.string().min(1),
     LINKEDIN_CLIENT_SECRET: z.string().min(1),
