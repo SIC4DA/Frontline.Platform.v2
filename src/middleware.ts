@@ -24,7 +24,7 @@ export default async function middleware(request: NextRequest): Promise<NextResp
     style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data: https://res.cloudinary.com https://lh3.googleusercontent.com https://media.licdn.com https://cdn.brandfetch.io;
     font-src 'self';
-    connect-src 'self' https://*.sentry.io;
+    connect-src 'self' https://*.sentry.io https://api.brandfetch.io;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
