@@ -5,7 +5,7 @@ import { and, eq, ilike, or } from "drizzle-orm";
 
 import { db } from "@/core/db";
 import { deal } from "@/core/db/schema";
-import { xai } from "@/lib/ai";
+import { gemini } from "@/lib/ai";
 import { uploadImageFromUrl } from "@/services/cloudnary";
 import type { TMessage } from "@/types/chat";
 import type { Deal } from "@/types/deal";
@@ -112,7 +112,7 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
   const deal = (await getDealByChatId(chatId)) ?? ({} as Deal);
 
   const { object } = await generateObject({
-    model: xai("grok-2-latest"),
+    model: gemini("gemini-2.5-flash"),
     messages,
     system: `
       You are Frontline — an energetic, fun, and helpful AI assistant for sales reps who just closed a deal.
@@ -145,8 +145,6 @@ export const generateDealByAI = async (chatId: string, messages: TMessage[]) => 
     schema: DealSchema,
     schemaDescription: "The data you will be given is about the deal that the sales rep just closed.",
   });
-
-  console.log({ object, deal });
 
   if (!Object.keys(deal).length && object?.companyName) {
     const createdDeal = await createDeal(chatId);

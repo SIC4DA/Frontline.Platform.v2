@@ -1,3 +1,4 @@
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { createOpenAI } from "@ai-sdk/openai";
 import { createXai } from "@ai-sdk/xai";
 
@@ -11,3 +12,6 @@ export const openai = createOpenAI({
   apiKey: env.OPENAI_API_KEY,
 });
 
+export const gemini = createGoogleGenerativeAI({
+  apiKey: env.GOOGLE_GENERATIVE_AI_API_KEY,
+});
