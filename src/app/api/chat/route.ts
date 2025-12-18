@@ -13,7 +13,7 @@ export const POST = async (req: Request) => {
   const [user, deal] = await Promise.all([getMe(), getDealByChatId(chatId), updateChatMessages(chatId, messages)]);
 
   const result = streamText({
-    model: xai("grok-3-latest"),
+    model: xai("grok-3-latest", { user: user.id }),
     messages,
     maxRetries: 5,
     onError: ({ error }) => logger.error(String(error), { chatId, userId: user.id }),
